@@ -35,6 +35,21 @@ npm i npm@4 -g
 
 ```
 
-# DB SETUP #
-## Login to mysql ##
+# RUN #
+## Start server on command line ##
 
+```
+#!shell
+
+PORT=8111 NODE_ENV=development DEBUG=digiapt-prism-johnson-backend:* npm start
+
+```
+
+## Start server on command line as a background process ##
+
+```
+#!shell
+
+PORT=8111 NODE_ENV=development DEBUG=digiapt-prism-johnson-backend:* forever start bin/www 
+
+```
