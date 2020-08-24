@@ -50,7 +50,48 @@ var updatePagesContent = (req,res) => {
     log.info(`${FUN_LABEL} OUT`);
     res.status(200).send("DONE");
 }
+
+var getPlatformBrief = (req,res) => {
+    const FUN_LABEL = `\n\t getPlatformBrief ${FILE_INFO} \n\t`; 
+    let response = {};
+    log.info(`${FUN_LABEL} IN`);
+    log.debug(`${FUN_LABEL} req params ${JSON.stringify(req.params)}`);
+    
+    response = {
+        "product_categories":[
+            {
+                "name":"Cements",
+                "banner_image_url":"https://www.prismcement.com/images/prod-1.png"
+            },
+            {
+                "name":"Tiles",
+                "banner_image_url":"https://www.prismcement.com/images/prod-2.png"
+            },
+            {
+                "name":"Bath Fittings",
+                "banner_image_url":"https://www.prismcement.com/images/prod-3.png"
+            }
+        ],
+        "construction_tips":["https://www.prismcement.com/images/sol-1.jpg", "https://www.prismcement.com/images/sol-2.jpg", "https://www.prismcement.com/images/sol-3.jpg"],
+        "testimonials":[
+            {
+                "customer_name":"Manoj",
+                "description":"Long lasting"
+            },
+            {
+                "customer_name":"Babu",
+                "description":"Worth for the cost"
+            }
+        ],
+        "media_centre":["https://www.prismcement.com/images/sol-6.jpg", "https://www.youtube.com/watch?v=whvihpvXOiI", "https://www.youtube.com/watch?v=whvihpvXOiI"]
+    }
+
+    log.info(`${FUN_LABEL} OUT`);
+    res.status(200).send(response);
+}
+
 module.exports = {
     getPagesContent,
-    updatePagesContent
+    updatePagesContent,
+    getPlatformBrief
 };
