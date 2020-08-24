@@ -4,7 +4,6 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 const log = require('./utils/logger').get();
-var cors = require('cors')
 var allowlist = ['http://localhost:3000', 'http://prism-johnson.digiapt.com']
 
 var indexRouter = require('./routes/index');
@@ -20,15 +19,22 @@ log.trace("trace");
 log.debug("debug");
 log.info("info");
 
-// Enable All CORS Requests
-app.use(cors());
-
-// TODO:: for production launch
-/**
-  Remove "app.use(cors())"
-  Permit only for allowed origins
-  Refer: https://expressjs.com/en/resources/middleware/cors.html
- */
+app.use(function(req, res, next) {
+    var allowedOrigins = ['https://192.168.0.38:3000', 'http://192.168.43.37:4200', 'http://localhost:4200'];
+    var origin = req.headers.origin;
+    origin = "*";
+    // Commented temporarily for any frotend with IP address can point to remote backend
+    //if (allowedOrigins.indexOf(origin) > -1) {
+        res.setHeader('Access-Control-Allow-Origin', origin);
+    //}
+    res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
+    res.header('Access-Control-Allow-Headers', 'Origin, Content-Type, Authorization, Accept,Content-Length, X-Requested-With, X-PINGOTHER');
+    if ('OPTIONS' === req.method) {
+        res.sendStatus(200);
+    } else {
+        next();
+    }
+});
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
