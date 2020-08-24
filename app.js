@@ -4,6 +4,8 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 const log = require('./utils/logger').get();
+var cors = require('cors')
+var allowlist = ['http://localhost:3000', 'http://prism-johnson.digiapt.com']
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
@@ -12,12 +14,21 @@ var constructionTipsRouter = require('./routes/construction_tips');
 var dealersRouter = require('./routes/dealers');
 
 var config = require('config');
-
 var app = express();
 
 log.trace("trace");
 log.debug("debug");
 log.info("info");
+
+// Enable All CORS Requests
+app.use(cors());
+
+// TODO:: for production launch
+/**
+  Remove "app.use(cors())"
+  Permit only for allowed origins
+  Refer: https://expressjs.com/en/resources/middleware/cors.html
+ */
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
