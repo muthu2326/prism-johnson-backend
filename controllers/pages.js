@@ -7,24 +7,24 @@ var getPagesContent = (req,res) => {
         "home_page":{
             "carousel":[
                 {
-                    "title":"title-1",
-                    "description":"desc-1",
-                    "banner_image":"image-1"
+                    "title":"Building a Better Tomorrow",
+                    "description":"Naini bridge , Prayagraj.",
+                    "banner_image":"https://www.prismcement.com/images/v2-new-bnr-1.jpg"
                 },
                 {
-                    "title":"title-2",
-                    "description":"desc-2",
-                    "banner_image":"mage-2"
+                    "title":"Building a Green Future",
+                    "description":"Prism Cement, Satna Plant, Madhya Pradesh.",
+                    "banner_image":"https://www.prismcement.com/images/v2-new-bnr-2.jpg"
                 },
                 {
-                    "title":"title-3",
-                    "description":"desc-3",
-                    "banner_image":"image-3"
+                    "title":"Building a New India",
+                    "description":"Airport Road, Varanasi",
+                    "banner_image":"https://www.prismcement.com/images/v2-new-bnr-3.jpg"
                 },
                 {
-                    "title":"title-4",
-                    "description":"desc-4",
-                    "banner_image":"image-4"
+                    "title":"Building a Better Tomorrow",
+                    "description":"Devine Hospital, Lucknow",
+                    "banner_image":"https://www.prismcement.com/images/v2-new-bnr-4.jpg"
                 }
             ],
             "introduction":{
