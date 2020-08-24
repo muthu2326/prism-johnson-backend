@@ -131,7 +131,7 @@ var deleteConstructionTips = (req,res) => {
     log.info(`${FUN_LABEL} OUT`);
     response = {
         "code":"deleted_construction_tip",
-        "message":"deleted construction tips id"
+        "message":"Deleted construction tip"
     }
     res.status(200).send(response);
 }
