@@ -26,6 +26,28 @@ var getUsers = (req,res) => {
     log.info(`${FUN_LABEL} OUT`);
     res.status(200).send(response);
 }
+
+var createUser = (req,res) => {
+    const FUN_LABEL = `\n\t createUser ${FILE_INFO} \n\t`; 
+    let response = {};
+    log.info(`${FUN_LABEL} IN`);
+    log.info(`${FUN_LABEL} req body ${JSON.stringify(req.body)}`);
+    log.debug(`${FUN_LABEL} req params ${JSON.stringify(req.params)}`);
+    if(!req.body.email) {
+        response.code = 'email_missing';
+        response.message = 'email is mandatory';
+        log.info(`${FUN_LABEL} OUT`);
+        return res.status(400).send(response);
+        
+    }
+    log.info(`${FUN_LABEL} OUT`);
+    response = {
+        "name": req.body.name,
+        "email": req.body.email
+    }
+    res.status(200).send(response);
+}
 module.exports = {
-    getUsers
+    getUsers,
+    createUser
 };
