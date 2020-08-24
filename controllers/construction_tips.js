@@ -120,8 +120,25 @@ var updateConstructionTips = (req,res) => {
     res.status(200).send(response);
 }
 
+var deleteConstructionTips = (req,res) => {
+    const FUN_LABEL = `\n\t deleteConstructionTips ${FILE_INFO} \n\t`; 
+    let response = {};
+    log.info(`${FUN_LABEL} IN`);
+    log.info(`${FUN_LABEL} req body ${JSON.stringify(req.body)}`);
+    log.debug(`${FUN_LABEL} req params ${JSON.stringify(req.params)}`);
+    log.debug(`${FUN_LABEL} req query ${JSON.stringify(req.query)}`);
+    
+    log.info(`${FUN_LABEL} OUT`);
+    response = {
+        "code":"deleted_construction_tip",
+        "message":"deleted construction tips id"
+    }
+    res.status(200).send(response);
+}
+
 module.exports = {
     getAllConstructionTips,
     createConstructionTips,
-    updateConstructionTips
+    updateConstructionTips,
+    deleteConstructionTips
 };

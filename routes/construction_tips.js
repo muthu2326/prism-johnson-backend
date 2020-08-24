@@ -11,4 +11,7 @@ router.post('/', constructionTipsController.createConstructionTips);
 /* Update a construction tip */
 router.put('/:id', constructionTipsController.updateConstructionTips);
 
+/* Delete a construction tip */
+router.delete('/:id', constructionTipsController.deleteConstructionTips);
+
 module.exports = router;
