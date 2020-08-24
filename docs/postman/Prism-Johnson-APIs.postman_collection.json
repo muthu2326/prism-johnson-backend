@@ -1,0 +1,470 @@
+{
+	"info": {
+		"_postman_id": "18815ad6-5985-41d8-88a9-bb19114ae09a",
+		"name": "Prism-Johnson-APIs",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Get pages content for HTML pages",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/pages",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"pages"
+					]
+				},
+				"description": "will return text labels, description, image & video URLs"
+			},
+			"response": []
+		},
+		{
+			"name": "Update page content",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"carousel\":[\n        {\n            \"title\":\"title-1\",\n            \"description\":\"desc-1\",\n            \"banner_image\":\"image-1\"\n        },\n        {\n            \"title\":\"title-2\",\n            \"description\":\"desc-2\",\n            \"banner_image\":\"mage-2\"\n        },\n        {\n            \"title\":\"title-3\",\n            \"description\":\"desc-3\",\n            \"banner_image\":\"image-3\"\n        },\n        {\n            \"title\":\"title-4\",\n            \"description\":\"desc-4\",\n            \"banner_image\":\"image-4\"\n        }\n    ],\n    \"introduction\":{\n        \"title\":\"Amongst India's largest integrated Building Materials Company\",\n        \"video\":\"https://www.youtube.com/watch?v=nMo4S70oNBk\",\n        \"description\":\"Established in 1997 promoted by the Rajan Raheja Group, Prism Cement is one of the largest cement plant at a single location in the country at Satna. Starting from 2.6 million tons in 1996, the production capacity has expanded to 7 million tons today. We manufacture Portland Pozzolana Cement (PPC) under three brand names - ‘Prism Champion’, ‘Prism Champion Plus’ and ‘Prism Duratech’ and full range of Ordinary Portland Cement (OPC) for specialized cement concrete applications. We have consolidated our position as one of the premium cement manufacturer in India.\"\n    },\n    \"dealer_locater\":{\n        \"description\":\"Prism Cement has a 3,700+ strong dealers network serviced from 200 stocking points, spread across UP, MP and Bihar. Prism has its corporate office in Mumbai, with CMO in Varanasi and eight regional offices located across UP, MP and Bihar.\"\n    },\n    \"help\":{\n        \"tol_free_number\":\"1800 572 1444\"\n    }\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/pages/home-page",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"pages",
+						"home-page"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create User",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\":\"Manoj\",\n    \"email\":\"manoj@digiapt.com\",\n    \"phone_number\":\"9898989898\",\n    \"state\":\"AP\",\n    \"town\":\"AP town\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/users",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"users"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Valid request",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\":\"Manoj\",\n    \"email\":\"manoj@digiapt.com\",\n    \"phone_number\":\"9898989898\",\n    \"state\":\"AP\",\n    \"town\":\"AP town\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/users",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"users"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "44"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"2c-h67UYHNYQ7fRkhGUd5M05l5CFwQ\""
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 24 Aug 2020 02:20:14 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"name\": \"Manoj\",\n    \"email\": \"manoj@digiapt.com\"\n}"
+				},
+				{
+					"name": "Email missing",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\":\"Manoj\",\n    \"phone_number\":\"9898989898\",\n    \"state\":\"AP\",\n    \"town\":\"AP town\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/users",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"users"
+							]
+						}
+					},
+					"status": "Bad Request",
+					"code": 400,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "55"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"37-sq43Wrb7Cs/ULIClDXarEVFCMRU\""
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 24 Aug 2020 02:19:44 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"code\": \"email_missing\",\n    \"message\": \"email is mandatory\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Get all users",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/users",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add a construction tip",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"title\":\"title1\",\n    \"description\":\"tip description\",\n    \"category_id\":1\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/construction-tips",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"construction-tips"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get all construction tips",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/construction-tips",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"construction-tips"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get all construction tips of a specific category",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/construction-tips?ctcid={{construction_tips_category_id}}",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"construction-tips"
+					],
+					"query": [
+						{
+							"key": "ctcid",
+							"value": "{{construction_tips_category_id}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update a construction tip",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"title\":\"title1\",\n    \"description\":\"tip description\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/construction-tips/{{construction_tips_id}}",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"construction-tips",
+						"{{construction_tips_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete a construction tip",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/construction-tips/{{construction_tips_id}}",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"construction-tips",
+						"{{construction_tips_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add a dealer",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\":\"Shiv Traders\",\n    \"address\":\"Kunauli Bazar, Suttar Pradeshaul - 847451\",\n    \"phone\":[\"9771391953\", \"882527409\"],\n    \"state\":\"Bihar\",\n    \"town\":\"Suttar Pradeshaul\",\n    \"pin_code\":\"847451\",\n    \"lat\":12.8723647,\n    \"lang\":0.77237467624\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/dealers",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"dealers"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get all dealers",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/dealers",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"dealers"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get all dealers based on address",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/dealers?pin_code=560102",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"dealers"
+					],
+					"query": [
+						{
+							"key": "pin_code",
+							"value": "560102"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update a dealer",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\":\"Shiv Traders\",\n    \"address\":\"Kunauli Bazar, Suttar Pradeshaul - 847451\",\n    \"phone\":[\"9771391953\", \"882527409\"],\n    \"state\":\"Bihar\",\n    \"town\":\"Suttar Pradeshaul\",\n    \"pin_code\":\"847451\",\n    \"lat\":12.8723647,\n    \"lang\":0.77237467624\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/dealers/{{dealer_id}}",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"dealers",
+						"{{dealer_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete a dealer",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/dealers/{{dealer_id}}",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"dealers",
+						"{{dealer_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get platform brief",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/pages/platform-brief",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"pages",
+						"platform-brief"
+					]
+				},
+				"description": "GET platform brief like tips summary, testimonial etc., for home page"
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}
