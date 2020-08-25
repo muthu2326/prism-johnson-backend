@@ -93,43 +93,49 @@ var getAllDealers = (req,res) => {
 var createDealer = (req,res) => {
     const FUN_LABEL = `\n\t createDealer ${FILE_INFO} \n\t`; 
     let response = {};
+    let dealerObject = {};
     log.info(`${FUN_LABEL} IN`);
     log.info(`${FUN_LABEL} req body ${JSON.stringify(req.body)}`);
     log.debug(`${FUN_LABEL} req params ${JSON.stringify(req.params)}`);
     log.debug(`${FUN_LABEL} req query ${JSON.stringify(req.query)}`);
-    if(!req.body.name) {
-        response.code = 'name_missing';
-        response.message = 'name is mandatory';
-        log.info(`${FUN_LABEL} OUT`);
-        return res.status(400).send(response);
-        
-    }
-    let dealerObject = {};
-    dealerObject.name = req.body.name;
-    dealerObject.address = req.body.address;
-    dealerObject.phone = req.body.phone;
-    dealerObject.city_id = Number(req.body.city_id);
 
-    log.debug(`${FUN_LABEL} dealerObject: ${dealerObject}`);
-    dealerModel.create(dealerObject).then(result => {
-        log.info(`${FUN_LABEL} dealer inserted`);
-        log.info(result);
+    let payloadValidationResult = hasMandatoryFieldsToCreateDealer(req.body);
+    log.debug(`${FUN_LABEL} payloadValidationResult: ${JSON.stringify(payloadValidationResult)}`);
+    if(payloadValidationResult.valid) {
+        dealerObject.name = req.body.name;
+        dealerObject.address = req.body.address;
+        dealerObject.phone = req.body.phone[0];
+        dealerObject.alternate_phone_1 = req.body.phone[1];
+        dealerObject.lat = req.body.lat;
+        dealerObject.lang = req.body.lang;
+        dealerObject.city_id = Number(req.body.city_id);
+        log.debug(`${FUN_LABEL} dealerObject: ${dealerObject}`);
+        dealerModel.create(dealerObject).then(result => {
+            log.info(`${FUN_LABEL} dealer inserted`);
+            log.info(result);
+            response = {
+                "name": req.body.name,
+                "address": req.body.address
+            }
+            log.info(`${FUN_LABEL} OUT`);
+            res.status(200).send(response);
+        }).catch(err => {
+            log.error(`${FUN_LABEL} error in creating dealer`);
+            log.error(err);
+            response = {
+                'code': 'create_dealer_failed',
+                'message': 'Unable to create dealer'
+            }
+            log.info(`${FUN_LABEL} OUT`);
+            res.status(200).send(response);
+        })
+    } else {
         response = {
-            "name": req.body.name,
-            "address": req.body.address
+            'code': payloadValidationResult.code,
+            'message': payloadValidationResult.message
         }
-        log.info(`${FUN_LABEL} OUT`);
-        res.status(200).send(response);
-    }).catch(err => {
-        log.error(`${FUN_LABEL} error in creating dealer`);
-        log.error(err);
-        response = {
-            'code': 'create_dealer_failed',
-            'message': 'Unable to create dealer'
-        }
-        log.info(`${FUN_LABEL} OUT`);
-        res.status(200).send(response);
-    })
+        res.status(400).send(response);
+    }
 }
 
 var updateDealer = (req,res) => {
@@ -169,6 +175,27 @@ var deleteDealer = (req,res) => {
         "message":"Deleted dealer Mahaveer Traders"
     }
     res.status(200).send(response);
+}
+
+var hasMandatoryFieldsToCreateDealer = (dealerObject) => {
+    const FUN_LABEL = `\n\t hasMandatoryFieldsToCreateDealer ${FILE_INFO} \n\t`; 
+    log.info(`${FUN_LABEL} IN`);
+    let response = {};
+    if(!dealerObject.name || !dealerObject.city_id) {
+        response.valid = false;
+        response.code = 'mandatory_fields_missing';
+        response.message = 'Missing mandatory fields: '
+        if(!dealerObject.name) {
+            response.message = response.message + 'name';
+        }
+        if(!dealerObject.city_id) {
+            response.message = response.message + ', city_id';
+        }
+    } else {
+        response.valid = true;
+    }
+    log.info(`${FUN_LABEL} OUT`);
+    return response;
 }
 
 module.exports = {
