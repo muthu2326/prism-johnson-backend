@@ -78,8 +78,8 @@ var createDealer = (req,res) => {
     if(payloadValidationResult.valid) {
         dealerObject.name = req.body.name;
         dealerObject.address = req.body.address;
-        dealerObject.phone = req.body.phone[0];
-        dealerObject.alternate_phone_1 = req.body.phone[1];
+        dealerObject.phone = req.body.phone_numbers[0];
+        dealerObject.alternate_phone_1 = req.body.phone_numbers[1];
         dealerObject.lat = req.body.lat;
         dealerObject.lang = req.body.lang;
         dealerObject.pin_code = req.body.pin_code;
@@ -125,8 +125,8 @@ var updateDealer = (req,res) => {
     dealerId = req.params.id;
     dealerObjectToBeUpdated.name = req.body.name ? req.body.name : undefined;
     dealerObjectToBeUpdated.address = req.body.address ? req.body.address : undefined;
-    dealerObjectToBeUpdated.phone = req.body.phone ? (req.body.phone[0] ? req.body.phone[0] : undefined) : undefined;
-    dealerObjectToBeUpdated.alternate_phone_1 = req.body.phone ? (req.body.phone[1] ? req.body.phone[1] : undefined)  : undefined;
+    dealerObjectToBeUpdated.phone = req.body.phone_numbers ? (req.body.phone_numbers[0] ? req.body.phone_numbers[0] : undefined) : undefined;
+    dealerObjectToBeUpdated.alternate_phone_1 = req.body.phone_numbers ? (req.body.phone_numbers[1] ? req.body.phone_numbers[1] : undefined)  : undefined;
     dealerObjectToBeUpdated.city_id = req.body.city_id ? req.body.city_id : undefined;
     dealerObjectToBeUpdated.pin_code = req.body.pin_code ? req.body.pin_code : undefined;
     dealerObjectToBeUpdated.lat = req.body.lat ? req.body.lat : undefined;
