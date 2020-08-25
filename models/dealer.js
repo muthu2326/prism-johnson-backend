@@ -42,6 +42,10 @@ module.exports = function(sequelize, DataTypes) {
         key: 'id'
       }
     },
+    pin_code: {
+      type: DataTypes.INTEGER(6),
+      allowNull: true
+    },
     created: {
       type: DataTypes.DATE,
       allowNull: true,

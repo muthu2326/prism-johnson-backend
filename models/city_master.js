@@ -14,10 +14,6 @@ module.exports = function(sequelize, DataTypes) {
     state: {
       type: DataTypes.STRING(128),
       allowNull: true
-    },
-    pin_code: {
-      type: DataTypes.INTEGER(6),
-      allowNull: true
     }
   }, {
     sequelize,

@@ -26,11 +26,9 @@ CREATE TABLE `city_master` (
   `id` int(11) NOT NULL,
   `city` varchar(128) DEFAULT NULL,
   `state` varchar(128) DEFAULT NULL,
-  `pin_code` int(6) DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `id_UNIQUE` (`id`),
   KEY `idx_city_master_state` (`state`),
-  KEY `idx_city_master_pin_code` (`pin_code`),
   KEY `idx_city_master_city` (`city`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -51,13 +49,15 @@ CREATE TABLE `dealer` (
   `lat` varchar(45) DEFAULT NULL,
   `lang` varchar(45) DEFAULT NULL,
   `city_id` int(11) NOT NULL,
+  `pin_code` int(6) DEFAULT NULL,
   `created` datetime DEFAULT CURRENT_TIMESTAMP,
   `updated` datetime DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `id_UNIQUE` (`id`),
   KEY `fk_dealer_city_master_id_idx` (`city_id`),
+  KEY `idx_dealer_pin_code` (`pin_code`),
   CONSTRAINT `fk_dealer_city_id` FOREIGN KEY (`city_id`) REFERENCES `city_master` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -145,4 +145,4 @@ CREATE TABLE `user` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-08-25 12:49:52
+-- Dump completed on 2020-08-25 15:46:19
