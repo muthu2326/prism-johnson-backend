@@ -3,6 +3,11 @@ config = require('config');
 log.setLevel(config.log_level);
 const FILE_INFO = 'Dealers Controller';
 
+const db = require('../models');
+const dealerModel = db.dealer;
+const Op = db.Sequelize.Op;
+
+
 var getAllDealers = (req,res) => {
     const FUN_LABEL = `\n\t getAllDealers ${FILE_INFO} \n\t`; 
     let response = {};
@@ -100,12 +105,36 @@ var createDealer = (req,res) => {
         return res.status(400).send(response);
         
     }
-    log.info(`${FUN_LABEL} OUT`);
-    response = {
-        "name": req.body.name,
-        "address": req.body.address
-    }
-    res.status(200).send(response);
+    let dealerObject = {};
+    dealerObject.name = req.body.name;
+    dealerObject.address = req.body.address;
+    dealerObject.phone = req.body.phone;
+    dealerObject.city_id = Number(req.body.city_id);
+    dealerObject.created = new Date();
+    dealerObject.updated = null;
+    delete dealerObject.createdAt;
+    delete dealerObject.updatedAt;
+
+    log.debug(`${FUN_LABEL} dealerObject: ${dealerObject}`);
+    dealerModel.create(dealerObject).then(result => {
+        log.info(`${FUN_LABEL} dealer inserted`);
+        log.info(result);
+        response = {
+            "name": req.body.name,
+            "address": req.body.address
+        }
+        log.info(`${FUN_LABEL} OUT`);
+        res.status(200).send(response);
+    }).catch(err => {
+        log.error(`${FUN_LABEL} error in creating dealer`);
+        log.error(err);
+        response = {
+            'code': 'create_dealer_failed',
+            'message': 'Unable to create dealer'
+        }
+        log.info(`${FUN_LABEL} OUT`);
+        res.status(200).send(response);
+    })
 }
 
 var updateDealer = (req,res) => {

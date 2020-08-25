@@ -10,7 +10,7 @@ mysql version 5.7
 #!shell
 
 nvm use 12.18.2
-npm install -g mysql
+npm install -g mysql2
 npm install -g sequelize-auto
 
 ```
@@ -77,6 +77,6 @@ GRANT ALL ON prism_johnson.* TO 'prism_johnson'@'localhost';
 ```
 #!shell
 
-sequelize-auto -o "./models" -d prism_johnson -h localhost -u prism_johnson -p 3306 -x prism_johnson -e mysql
+sequelize-auto -o "./models" -d prism_johnson -h localhost -u prism_johnson -p 3306 -x <password> -e mysql
 
 ```
