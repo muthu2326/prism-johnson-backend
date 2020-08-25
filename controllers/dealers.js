@@ -76,6 +76,7 @@ var createDealer = (req,res) => {
         dealerObject.alternate_phone_1 = req.body.phone[1];
         dealerObject.lat = req.body.lat;
         dealerObject.lang = req.body.lang;
+        dealerObject.pin_code = req.body.pin_code;
         dealerObject.city_id = Number(req.body.city_id);
         log.debug(`${FUN_LABEL} dealerObject: ${dealerObject}`);
         dealerModel.create(dealerObject).then(result => {
