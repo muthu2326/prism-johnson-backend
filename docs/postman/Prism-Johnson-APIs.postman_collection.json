@@ -30,7 +30,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"carousel\":[\n        {\n            \"title\":\"title-1\",\n            \"description\":\"desc-1\",\n            \"banner_image\":\"image-1\"\n        },\n        {\n            \"title\":\"title-2\",\n            \"description\":\"desc-2\",\n            \"banner_image\":\"mage-2\"\n        },\n        {\n            \"title\":\"title-3\",\n            \"description\":\"desc-3\",\n            \"banner_image\":\"image-3\"\n        },\n        {\n            \"title\":\"title-4\",\n            \"description\":\"desc-4\",\n            \"banner_image\":\"image-4\"\n        }\n    ],\n    \"introduction\":{\n        \"title\":\"Amongst India's largest integrated Building Materials Company\",\n        \"video\":\"https://www.youtube.com/watch?v=nMo4S70oNBk\",\n        \"description\":\"Established in 1997 promoted by the Rajan Raheja Group, Prism Cement is one of the largest cement plant at a single location in the country at Satna. Starting from 2.6 million tons in 1996, the production capacity has expanded to 7 million tons today. We manufacture Portland Pozzolana Cement (PPC) under three brand names - ‘Prism Champion’, ‘Prism Champion Plus’ and ‘Prism Duratech’ and full range of Ordinary Portland Cement (OPC) for specialized cement concrete applications. We have consolidated our position as one of the premium cement manufacturer in India.\"\n    },\n    \"dealer_locater\":{\n        \"description\":\"Prism Cement has a 3,700+ strong dealers network serviced from 200 stocking points, spread across UP, MP and Bihar. Prism has its corporate office in Mumbai, with CMO in Varanasi and eight regional offices located across UP, MP and Bihar.\"\n    },\n    \"help\":{\n        \"tol_free_number\":\"1800 572 1444\"\n    }\n}",
+					"raw": " {\n        \"carousel\": [\n            {\n                \"title\": \"Building a Better Tomorrow-1\",\n                \"description\": \"Naini bridge , Prayagraj.\",\n                \"banner_image\": \"https://www.prismcement.com/images/v2-new-bnr-1.jpg\"\n            },\n            {\n                \"title\": \"Building a Green Future\",\n                \"description\": \"Prism Cement, Satna Plant, Madhya Pradesh.\",\n                \"banner_image\": \"https://www.prismcement.com/images/v2-new-bnr-2.jpg\"\n            },\n            {\n                \"title\": \"Building a New India\",\n                \"description\": \"Airport Road, Varanasi\",\n                \"banner_image\": \"https://www.prismcement.com/images/v2-new-bnr-3.jpg\"\n            },\n            {\n                \"title\": \"Building a Better Tomorrow\",\n                \"description\": \"Devine Hospital, Lucknow\",\n                \"banner_image\": \"https://www.prismcement.com/images/v2-new-bnr-4.jpg\"\n            }\n        ],\n        \"introduction\": {\n            \"title\": \"Amongst India's largest integrated Building Materials Company\",\n            \"video\": \"https://www.youtube.com/watch?v=nMo4S70oNBk\",\n            \"description\": \"Established in 1997 promoted by the Rajan Raheja Group, Prism Cement is one of the largest cement plant at a single location in the country at Satna. Starting from 2.6 million tons in 1996, the production capacity has expanded to 7 million tons today. We manufacture Portland Pozzolana Cement (PPC) under three brand names - ‘Prism Champion’, ‘Prism Champion Plus’ and ‘Prism Duratech’ and full range of Ordinary Portland Cement (OPC) for specialized cement concrete applications. We have consolidated our position as one of the premium cement manufacturer in India.\"\n        },\n        \"dealer_locater\": {\n            \"description\": \"Prism Cement has a 3,700+ strong dealers network serviced from 200 stocking points, spread across UP, MP and Bihar. Prism has its corporate office in Mumbai, with CMO in Varanasi and eight regional offices located across UP, MP and Bihar.\"\n        },\n        \"help\": {\n            \"tol_free_number\": \"1800 572 1444\"\n        }\n    }",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -333,7 +333,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"name\":\"Shiv Traders\",\n    \"address\":\"Kunauli Bazar, Suttar Pradeshaul - 847451\",\n    \"phone\":[\"9771391953\", \"882527409\"],\n    \"state\":\"Bihar\",\n    \"town\":\"Suttar Pradeshaul\",\n    \"pin_code\":\"847451\",\n    \"lat\":12.8723647,\n    \"lang\":0.77237467624\n}",
+					"raw": "{\n    \"name\":\"Shweta Traders-9\",\n    \"address\":\"Road Infront Of Vardhman Comadhya Pradeshlex,si,guna - 473101\",\n    \"phone_numbers\":[\"9425022312\", \"9425022313\"],\n    \"city_id\":4,\n    \"pin_code\":473666,\n    \"lat\":12.8723647,\n    \"lang\":0.77237467624\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -370,12 +370,39 @@
 			"response": []
 		},
 		{
-			"name": "Get all dealers based on address",
+			"name": "Get all dealers based on state & city",
 			"request": {
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{base_url}}/dealers?pin_code=560102",
+					"raw": "{{base_url}}/dealers?state={{state}}&city={{city}}",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"dealers"
+					],
+					"query": [
+						{
+							"key": "state",
+							"value": "{{state}}"
+						},
+						{
+							"key": "city",
+							"value": "{{city}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get all dealers based on pin code",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/dealers?pin_code={{pin_code}}",
 					"host": [
 						"{{base_url}}"
 					],
@@ -385,7 +412,7 @@
 					"query": [
 						{
 							"key": "pin_code",
-							"value": "560102"
+							"value": "{{pin_code}}"
 						}
 					]
 				}
@@ -399,7 +426,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"name\":\"Shiv Traders\",\n    \"address\":\"Kunauli Bazar, Suttar Pradeshaul - 847451\",\n    \"phone\":[\"9771391953\", \"882527409\"],\n    \"state\":\"Bihar\",\n    \"town\":\"Suttar Pradeshaul\",\n    \"pin_code\":\"847451\",\n    \"lat\":12.8723647,\n    \"lang\":0.77237467624\n}",
+					"raw": "{\n    \"name\": \"Shiv Traders - 91\",\n    \"address\": \"Kunauli Bazar, Suttar Pradeshaul - 847451\",\n    \"phone_numbers\":[\"9425022311\", \"9425022312\"],\n    \"city_id\": 4,\n    \"pin_code\": 847451,\n    \"lat\": 12.8723647,\n    \"lang\": 0.77237467624\n}",
 					"options": {
 						"raw": {
 							"language": "json"
