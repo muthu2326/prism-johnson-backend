@@ -72,7 +72,7 @@ DROP DATABASE prism_johnson;
 
 CREATE DATABASE prism_johnson;
 
-CREATE USER 'prism_johnson'@'localhost' IDENTIFIED BY 'password';
+CREATE USER 'prism_johnson'@'localhost' IDENTIFIED BY 'pr!5wj0hns0N';
 
 GRANT ALL ON prism_johnson.* TO 'prism_johnson'@'localhost';
 
@@ -85,7 +85,7 @@ sequelize-auto -o "./models" -d prism_johnson -h localhost -u prism_johnson -p 3
 
 ```
 
-## Generate Schema from Databse ##
+## Generate Schema from Database ##
 
 ```
 #!shell
@@ -94,11 +94,29 @@ mysqldump -u prism_johnson -p -h localhost --no-data prism_johnson> db/schema.sq
 
 ```
 
-## Generate Databse Dump ##
+## Generate Database Dump ##
 
 ```
 #!shell
 
 mysqldump -u prism_johnson -p -h localhost --no-create-info prism_johnson> db/data_dump.sql
+
+```
+
+## Restore Database Schema ##
+
+```
+#!shell
+
+mysql -u prism_johnson -p -h localhost prism_johnson < db/schema.sql
+
+```
+
+## Restore Database Dump ##
+
+```
+#!shell
+
+mysql -u prism_johnson -p -h localhost prism_johnson < db/data_dump.sql
 
 ```
