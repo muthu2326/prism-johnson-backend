@@ -9,7 +9,7 @@
         "password": "pri5wj0hns0N"
     },
     "sequelize": {
-        "options": {
+        "operatorsAliases": {
             "timestamps": false,
             "freezeTableName": true
         }

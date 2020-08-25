@@ -1,6 +1,5 @@
 const log = require('../utils/logger').get();
 config = require('config');
-log.setLevel(config.log_level);
 const FILE_INFO = 'Dealers Controller';
 
 const db = require('../models');
@@ -110,10 +109,6 @@ var createDealer = (req,res) => {
     dealerObject.address = req.body.address;
     dealerObject.phone = req.body.phone;
     dealerObject.city_id = Number(req.body.city_id);
-    dealerObject.created = new Date();
-    dealerObject.updated = null;
-    delete dealerObject.createdAt;
-    delete dealerObject.updatedAt;
 
     log.debug(`${FUN_LABEL} dealerObject: ${dealerObject}`);
     dealerModel.create(dealerObject).then(result => {
