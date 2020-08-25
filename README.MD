@@ -64,11 +64,15 @@ mysql -h host -u <user> -p
 or
 mysql -u <user> -p
 
+```
+
+## Creating Database ##
+
 DROP DATABASE prism_johnson;
 
 CREATE DATABASE prism_johnson;
 
-CREATE USER 'prism_johnson'@'localhost' IDENTIFIED BY 'pri5wj0hns0N';
+CREATE USER 'prism_johnson'@'localhost' IDENTIFIED BY 'password';
 
 GRANT ALL ON prism_johnson.* TO 'prism_johnson'@'localhost';
 
@@ -78,5 +82,23 @@ GRANT ALL ON prism_johnson.* TO 'prism_johnson'@'localhost';
 #!shell
 
 sequelize-auto -o "./models" -d prism_johnson -h localhost -u prism_johnson -p 3306 -x <password> -e mysql
+
+```
+
+## Generate Schema from Databse ##
+
+```
+#!shell
+
+mysqldump -u prism_johnson -p -h localhost --no-data prism_johnson> db/schema.sql
+
+```
+
+## Generate Databse Dump ##
+
+```
+#!shell
+
+mysqldump -u prism_johnson -p -h localhost --no-create-info prism_johnson> db/data_dump.sql
 
 ```
