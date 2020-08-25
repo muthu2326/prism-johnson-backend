@@ -164,11 +164,30 @@ var deleteDealer = (req,res) => {
     log.debug(`${FUN_LABEL} req query ${JSON.stringify(req.query)}`);
     
     log.info(`${FUN_LABEL} OUT`);
-    response = {
-        "code":"deleted_dealer",
-        "message":"Deleted dealer Mahaveer Traders"
-    }
-    res.status(200).send(response);
+    dealerModel.destroy( { where : { id: Number(req.params.id)} } )
+    .then(result => {
+        log.info(`${FUN_LABEL} Executed dealerModel.destroy query`);
+        log.debug(result);
+        if(result) {
+            response.message = 'Deleted the dealer';
+            log.info(`${FUN_LABEL} OUT`);
+            res.status(200).send(response);
+        } else {
+            response.message = 'Dealer does not exists to delete';
+            log.info(`${FUN_LABEL} OUT`);
+            res.status(400).send(response);
+        }
+    })
+    .catch(error => {
+        log.error(`${FUN_LABEL} Error in dealerModel.destroy query`);
+        log.error(error);
+        response.code = 'delete_dealer_error';
+        response.message = 'Unable to delete the requested dealer';
+        log.info(`${FUN_LABEL} OUT`);
+        res.status(500).send(response);
+    })
+    
+    
 }
 
 var hasMandatoryFieldsToCreateDealer = (dealerObject) => {
