@@ -10,6 +10,7 @@ const Op = db.Sequelize.Op;
 var getAllDealers = (req,res) => {
     const FUN_LABEL = `\n\t getAllDealers ${FILE_INFO} \n\t`; 
     let response = {};
+    let queryCondition = {};
     log.info(`${FUN_LABEL} IN`);
     log.info(`${FUN_LABEL} req params ${JSON.stringify(req.params)}`);
     log.info(`${FUN_LABEL} req query ${JSON.stringify(req.query)}`);
@@ -39,55 +40,22 @@ var getAllDealers = (req,res) => {
                 }
             ]
         }
-    } else {
-        response = {
-            "type":"all",
-            "dealers":[
-                {
-                    "name":"Shiv Traders",
-                    "address":"Kunauli Bazar, Suttar Pradeshaul - 847451",
-                    "phone":["9771391953", "882527409"],
-                    "state":"Bihar",
-                    "town":"Suttar Pradeshaul",
-                    "pin_code":"847451",
-                    "lat":12.8723647,
-                    "lang":0.77237467624
-                },
-                {
-                    "name":"Abhay Hardware",
-                    "address":"Nirmali, Nirmali, Nirmali, Suttar Pradeshaul, Bihar - 847452",
-                    "phone":["9939524730"],
-                    "state":"Bihar",
-                    "town":"Suttar Pradeshaul",
-                    "pin_code":"847451",
-                    "lat":12.8723647,
-                    "lang":0.77237467624
-                },
-                {
-                    "name":"Om Khad Store",
-                    "address":"Mill Road Nawada, Arrah, Bhojpur - 802301",
-                    "phone":["9431027133"],
-                    "state":"Bihar",
-                    "town":"Arrah",
-                    "pin_code":"802301",
-                    "lat":12.8723647,
-                    "lang":0.77237467624
-                },
-                {
-                    "name":"Mahaveer Traders",
-                    "address":"Village Acchroni,distt Shivpuri,shivpuri - 473665",
-                    "phone":["9893149907"],
-                    "state":"Madhya Pradesh",
-                    "town":"Acchroni",
-                    "pin_code":"473665",
-                    "lat":12.8723647,
-                    "lang":0.77237467624
-                }
-            ]
-        }
     }
-    log.info(`${FUN_LABEL} OUT`);
-    res.status(200).send(response);
+    dealerModel.findAll().then(result=> {
+        log.info(`${FUN_LABEL} got result for dealerModel.findAll`);
+        log.debug(result);
+        response.type = 'all';
+        response.dealers = result;
+        log.info(`${FUN_LABEL} OUT`);
+        res.status(200).send(response);
+    }).catch(err=>{
+        log.error(`${FUN_LABEL} error in dealerModel.findAll`);
+        log.error(err);
+        log.info(`${FUN_LABEL} OUT`);
+        response.code = 'error_fetch_dealers';
+        response.message = 'Unable to fetch dealers';
+        response.error_details = err;
+    })
 }
 
 var createDealer = (req,res) => {
