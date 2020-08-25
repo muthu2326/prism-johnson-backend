@@ -4,6 +4,7 @@ const FILE_INFO = 'Dealers Controller';
 
 const db = require('../models');
 const dealerModel = db.dealer;
+const cityMasterModel = db.city_master;
 const Op = db.Sequelize.Op;
 
 
@@ -15,36 +16,40 @@ var getAllDealers = (req,res) => {
     log.info(`${FUN_LABEL} req params ${JSON.stringify(req.params)}`);
     log.info(`${FUN_LABEL} req query ${JSON.stringify(req.query)}`);
     if(req.query && (req.query.state || req.query.pin_code)) {
-        response = {
-            "type":"address specific",
-            "address_specific_dealers":[
-                {
-                    "name":"Shiv Traders",
-                    "address":"Kunauli Bazar, Suttar Pradeshaul - 847451",
-                    "phone":["9771391953", "882527409"],
-                    "state":"Bihar",
-                    "town":"Suttar Pradeshaul",
-                    "pin_code":"847451",
-                    "lat":12.8723647,
-                    "lang":0.77237467624
-                },
-                {
-                    "name":"Abhay Hardware",
-                    "address":"Nirmali, Nirmali, Nirmali, Suttar Pradeshaul, Bihar - 847452",
-                    "phone":["9939524730"],
-                    "state":"Bihar",
-                    "town":"Suttar Pradeshaul",
-                    "pin_code":"847451",
-                    "lat":12.8723647,
-                    "lang":0.77237467624
+        try {
+            if(req.query.pin_code) {
+                queryCondition = {
+                    where:{
+                        pin_code:Number(req.query.pin_code)
+                    }
                 }
-            ]
+            } else if(req.query.state){
+                queryCondition = {
+                    include:[{
+                        model:cityMasterModel,
+                        attributes:['city', 'state'],
+                        where:{
+                            state:req.query.state
+                        }
+                    }]
+                }
+                if(req.query.city) {
+                    queryCondition.include[0].where.city = req.query.city;
+                }
+            }
+            response.type = 'address specific dealers';
+            log.debug(`${FUN_LABEL} constructed query constraints`);
+            log.debug(queryCondition);
+        } catch(e) {
+            log.error(`${FUN_LABEL} error while constructing query constraints`);
+            log.error(e)
         }
+    } else {
+        response.type = 'all';
     }
-    dealerModel.findAll().then(result=> {
+    dealerModel.findAll(queryCondition).then(result=> {
         log.info(`${FUN_LABEL} got result for dealerModel.findAll`);
         log.debug(result);
-        response.type = 'all';
         response.dealers = result;
         log.info(`${FUN_LABEL} OUT`);
         res.status(200).send(response);
@@ -55,6 +60,7 @@ var getAllDealers = (req,res) => {
         response.code = 'error_fetch_dealers';
         response.message = 'Unable to fetch dealers';
         response.error_details = err;
+        return res.status(500).send(response);
     })
 }
 
