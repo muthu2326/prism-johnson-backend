@@ -116,24 +116,43 @@ var createDealer = (req,res) => {
 var updateDealer = (req,res) => {
     const FUN_LABEL = `\n\t updateDealer ${FILE_INFO} \n\t`; 
     let response = {};
+    let dealerObjectToBeUpdated = {};
+    let dealerId = null;
     log.info(`${FUN_LABEL} IN`);
     log.info(`${FUN_LABEL} req body ${JSON.stringify(req.body)}`);
     log.debug(`${FUN_LABEL} req params ${JSON.stringify(req.params)}`);
     log.debug(`${FUN_LABEL} req query ${JSON.stringify(req.query)}`);
-    if(!req.body.name) {
-        response.code = 'name_missing';
-        response.message = 'name is mandatory';
+    dealerId = req.params.id;
+    dealerObjectToBeUpdated.name = req.body.name ? req.body.name : undefined;
+    dealerObjectToBeUpdated.address = req.body.address ? req.body.address : undefined;
+    dealerObjectToBeUpdated.phone = req.body.phone ? (req.body.phone[0] ? req.body.phone[0] : undefined) : undefined;
+    dealerObjectToBeUpdated.alternate_phone_1 = req.body.phone ? (req.body.phone[1] ? req.body.phone[1] : undefined)  : undefined;
+    dealerObjectToBeUpdated.city_id = req.body.city_id ? req.body.city_id : undefined;
+    dealerObjectToBeUpdated.pin_code = req.body.pin_code ? req.body.pin_code : undefined;
+    dealerObjectToBeUpdated.lat = req.body.lat ? req.body.lat : undefined;
+    dealerObjectToBeUpdated.lang = req.body.lang ? req.body.lang : undefined;
+    log.debug(`${FUN_LABEL} object to be updated:`);
+    log.debug(dealerObjectToBeUpdated)
+    dealerModel.update(dealerObjectToBeUpdated, { where : { id:dealerId } })
+    .then(result => {
+        log.info(`${FUN_LABEL} executed dealerModel.update query`);
+        log.debug(result);
+        response = {
+            "id": req.params.id,
+            "name": req.body.name,
+            "description": req.body.address
+        }
         log.info(`${FUN_LABEL} OUT`);
-        return res.status(400).send(response);
-        
-    }
-    log.info(`${FUN_LABEL} OUT`);
-    response = {
-        "id": req.params.id,
-        "name": req.body.name,
-        "description": req.body.address
-    }
-    res.status(200).send(response);
+        res.status(200).send(response);
+    })
+    .catch(error => {
+        log.error(`${FUN_LABEL} failed dealerModel.update query`);
+        log.error(error);
+        response.code = 'update_dealer_failed';
+        response.message = 'Server error, unable to update dealer. Please try again later';
+        response.error_details = error;
+        res.status(500).send(response);
+    })
 }
 
 var deleteDealer = (req,res) => {
