@@ -26,6 +26,7 @@ db.testimonial = require('./testimonial.js')(sequelize, Sequelize);
 db.user = require('./user.js')(sequelize, Sequelize);
 
 db.dealer.belongsTo(db.city_master, {foreignKey: 'city_id'});
+db.user.belongsTo(db.city_master, {foreignKey: 'city_id'});
 db.city_master.hasMany(db.dealer, {foreignKey: 'city_id'});
 
 module.exports = db;

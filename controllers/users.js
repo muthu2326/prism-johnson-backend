@@ -3,6 +3,7 @@ config = require('config');
 log.setLevel(config.log_level);
 const db = require('../models');
 const userModel = db.user;
+const cityMasterModel = db.city_master;
 
 const FILE_INFO = 'Users Controller';
 
@@ -11,23 +12,41 @@ var getUsers = (req,res) => {
     let response = {};
     log.info(`${FUN_LABEL} IN`);
     log.debug(`${FUN_LABEL} req params ${JSON.stringify(req.params)}`);
-    response = {
-         "users":[{
-             "name":"Manoj",
-             "email":"manoj@digiapt.com",
-             "phone_number":"9898989898",
-             "state":"AP",
-             "town":"AP town"
-         },{
-             "name":"Babu",
-             "email":"babu@digiapt.com",
-             "phone_number":"9898989897",
-             "state":"TN",
-             "town":"TN town"
-         }]
-    }
-    log.info(`${FUN_LABEL} OUT`);
-    res.status(200).send(response);
+    userModel.findAndCountAll({
+        include:[{
+            model:cityMasterModel,
+            attributes:['city', 'state']
+        }]
+    }).then(result=> {
+        log.info(`${FUN_LABEL} got result for userModel.findAll`);
+        log.debug(result);
+        response.users = []
+        response.count = result.count;
+        if(result.count > 0) {
+            let user = {};
+            result.rows.forEach((element, index) => {
+                user.id = element.id;
+                user.name = element.name;
+                user.email = element.email;
+                user.phone_number = element.phone_number;
+                user.city_id = element.city_id;
+                user.city = element.city_master.city;
+                user.state = element.city_master.state; 
+                response.users.push(user);
+                user = {};
+            });
+        }
+        log.info(`${FUN_LABEL} OUT`);
+        res.status(200).send(response);
+    }).catch(err=>{
+        log.error(`${FUN_LABEL} error in userModel.findAll`);
+        log.error(err);
+        log.info(`${FUN_LABEL} OUT`);
+        response.code = 'error_fetch_users';
+        response.message = 'Unable to fetch users';
+        response.error_details = err;
+        return res.status(500).send(response);
+    })
 }
 
 var createUser = (req,res) => {
