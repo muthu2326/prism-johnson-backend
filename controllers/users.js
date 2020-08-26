@@ -9,7 +9,7 @@ const FILE_INFO = 'Users Controller';
 
 var getUsers = (req,res) => {
     const FUN_LABEL = `\n\t getUsers ${FILE_INFO} \n\t`; 
-    let response = null;
+    let response = {};
     log.info(`${FUN_LABEL} IN`);
     log.debug(`${FUN_LABEL} req params ${JSON.stringify(req.params)}`);
     userModel.findAndCountAll({
@@ -20,8 +20,8 @@ var getUsers = (req,res) => {
     }).then(result=> {
         log.info(`${FUN_LABEL} got result for userModel.findAll`);
         log.debug(result);
-        let users = []
-        // response.count = result.count;
+        response.data = []
+        response.count = result.count;
         if(result.count > 0) {
             let user = {};
             result.rows.forEach((element, index) => {
@@ -32,10 +32,9 @@ var getUsers = (req,res) => {
                 user.city_id = element.city_id;
                 user.city = element.city_master.city;
                 user.state = element.city_master.state; 
-                users.push(user);
+                response.data.push(user);
                 user = {};
             });
-            response = users;
         }
         log.info(`${FUN_LABEL} OUT`);
         res.header('X-Total-Count', Number(response.count));
@@ -44,7 +43,6 @@ var getUsers = (req,res) => {
         log.error(`${FUN_LABEL} error in userModel.findAll`);
         log.error(err);
         log.info(`${FUN_LABEL} OUT`);
-        response = {};
         response.code = 'error_fetch_users';
         response.message = 'Unable to fetch users';
         response.error_details = err;
