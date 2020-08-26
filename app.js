@@ -29,7 +29,7 @@ app.use(function(req, res, next) {
     //}
     res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
     res.header('Access-Control-Allow-Headers', 'Origin, Content-Type, Authorization, Accept,Content-Length, X-Requested-With, X-PINGOTHER');
-    res.header('Access-Control-Expose-Headers', 'Content-Range');
+    res.header('Access-Control-Expose-Headers', 'Content-Range, ');
     
     if ('OPTIONS' === req.method) {
         res.sendStatus(200);
@@ -64,6 +64,9 @@ app.use(function(err, req, res, next) {
   // set locals, only providing error in development
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};
+  
+  // set additional headers
+  res.setHeader('X-Total-Count', 234);
 
   // render the error page
   res.status(err.status || 500);
