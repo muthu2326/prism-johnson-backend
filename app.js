@@ -23,13 +23,13 @@ app.use(function(req, res, next) {
     var allowedOrigins = ['https://192.168.0.38:3000', 'http://192.168.43.37:4200', 'http://localhost:4200'];
     var origin = req.headers.origin;
     origin = "*";
-    res.setHeader('Access-Control-Expose-Headers', "*");
     // Commented temporarily for any frotend with IP address can point to remote backend
     //if (allowedOrigins.indexOf(origin) > -1) {
         res.setHeader('Access-Control-Allow-Origin', origin);
     //}
     res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
     res.header('Access-Control-Allow-Headers', 'Origin, Content-Type, Authorization, Accept,Content-Length, X-Requested-With, X-PINGOTHER');
+    res.header('Access-Control-Expose-Headers', 'Content-Range');
     
     if ('OPTIONS' === req.method) {
         res.sendStatus(200);
