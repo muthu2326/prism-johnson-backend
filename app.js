@@ -30,7 +30,7 @@ app.use(function(req, res, next) {
     res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
     res.header('Access-Control-Allow-Headers', 'Origin, Content-Type, Authorization, Accept,Content-Length, X-Requested-With, X-PINGOTHER');
     res.header('Access-Control-Expose-Headers', 'Content-Range');
-    res.header('X-Total-Count', 234);
+    res.header('X-Total-Count', 5000);
     
     if ('OPTIONS' === req.method) {
         res.sendStatus(200);
