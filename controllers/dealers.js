@@ -52,6 +52,7 @@ var getAllDealers = (req,res) => {
         log.debug(result);
         response.dealers = result.rows;
         response.count = result.count;
+        res.header('X-Total-Count', Number(response.count));
         log.info(`${FUN_LABEL} OUT`);
         res.status(200).send(response);
     }).catch(err=>{

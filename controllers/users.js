@@ -37,6 +37,7 @@ var getUsers = (req,res) => {
             });
         }
         log.info(`${FUN_LABEL} OUT`);
+        res.header('X-Total-Count', Number(response.count));
         res.status(200).send(response);
     }).catch(err=>{
         log.error(`${FUN_LABEL} error in userModel.findAll`);
