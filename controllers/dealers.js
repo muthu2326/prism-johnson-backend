@@ -47,10 +47,11 @@ var getAllDealers = (req,res) => {
     } else {
         response.type = 'all';
     }
-    dealerModel.findAll(queryCondition).then(result=> {
+    dealerModel.findAndCountAll(queryCondition).then(result=> {
         log.info(`${FUN_LABEL} got result for dealerModel.findAll`);
         log.debug(result);
-        response.dealers = result;
+        response.dealers = result.rows;
+        response.count = result.count;
         log.info(`${FUN_LABEL} OUT`);
         res.status(200).send(response);
     }).catch(err=>{
