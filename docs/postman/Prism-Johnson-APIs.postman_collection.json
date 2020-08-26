@@ -57,7 +57,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"name\":\"Manoj\",\n    \"email\":\"manoj@digiapt.com\",\n    \"phone_number\":\"9898989898\",\n    \"state\":\"AP\",\n    \"town\":\"AP town\"\n}",
+					"raw": "{\n    \"name\":\"Manoj\",\n    \"email\":\"manoj1@digiapt.com\",\n    \"phone_number\":\"9898989898\",\n    \"city_id\":4\n}",
 					"options": {
 						"raw": {
 							"language": "json"
