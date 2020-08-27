@@ -20,8 +20,7 @@ var getUsers = (req,res) => {
     }).then(result=> {
         log.info(`${FUN_LABEL} got result for userModel.findAll`);
         log.debug(result);
-        response.data = []
-        response.count = result.count;
+        let users = [];
         if(result.count > 0) {
             let user = {};
             result.rows.forEach((element, index) => {
@@ -32,12 +31,13 @@ var getUsers = (req,res) => {
                 user.city_id = element.city_id;
                 user.city = element.city_master.city;
                 user.state = element.city_master.state; 
-                response.data.push(user);
+                users.push(user);
                 user = {};
             });
         }
         log.info(`${FUN_LABEL} OUT`);
-        res.header('X-Total-Count', Number(response.count));
+        response = users;
+        res.header('X-Total-Count', Number(result.count));
         res.status(200).send(response);
     }).catch(err=>{
         log.error(`${FUN_LABEL} error in userModel.findAll`);
