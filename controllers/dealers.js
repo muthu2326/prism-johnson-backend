@@ -78,15 +78,25 @@ var createDealer = (req,res) => {
     let payloadValidationResult = hasMandatoryFieldsToCreateDealer(req.body);
     log.debug(`${FUN_LABEL} payloadValidationResult: ${JSON.stringify(payloadValidationResult)}`);
     if(payloadValidationResult.valid) {
-        dealerObject.name = req.body.name;
-        dealerObject.address = req.body.address;
-        dealerObject.phone = req.body.phone_numbers[0];
-        dealerObject.alternate_phone_1 = req.body.phone_numbers[1];
-        dealerObject.lat = req.body.lat;
-        dealerObject.lang = req.body.lang;
-        dealerObject.pin_code = req.body.pin_code;
-        dealerObject.city_id = Number(req.body.city_id);
-        log.debug(`${FUN_LABEL} dealerObject: ${dealerObject}`);
+        try {
+            dealerObject.name = req.body.name;
+            dealerObject.address = req.body.address;
+            dealerObject.phone = req.body.phone_numbers[0];
+            dealerObject.alternate_phone_1 = req.body.phone_numbers[1];
+            dealerObject.lat = req.body.lat;
+            dealerObject.lang = req.body.lang;
+            dealerObject.pin_code = req.body.pin_code;
+            dealerObject.city_id = Number(req.body.city_id);
+            log.debug(`${FUN_LABEL} dealerObject: ${dealerObject}`);
+        } catch(e) {
+            log.error(`${FUN_LABEL} error on constructing dealer object based`);
+            response = {
+                'code': 'invalid_input_format',
+                'address': 'Data format is not matching'
+            }
+            return res.status(400).send(response);
+        }
+        
         dealerModel.create(dealerObject).then(result => {
             log.info(`${FUN_LABEL} dealer inserted`);
             log.info(result);
@@ -99,12 +109,17 @@ var createDealer = (req,res) => {
         }).catch(err => {
             log.error(`${FUN_LABEL} error in creating dealer`);
             log.error(err);
+            res.status(500);
             response = {
                 'code': 'create_dealer_failed',
                 'message': 'Unable to create dealer'
             }
+            if(err.parent && err.parent.code === 'ER_NO_REFERENCED_ROW_2') {
+                response.message = "Provided city is invalid";
+                res.status(400);
+            }
             log.info(`${FUN_LABEL} OUT`);
-            res.status(200).send(response);
+            res.send(response);
         })
     } else {
         response = {

@@ -79,16 +79,18 @@ var createUser = (req,res) => {
         }).catch(err => {
             log.error(`${FUN_LABEL} error in creating user`);
             log.error(err);
+            res.status(500);
             response = {
                 'code': 'create_user_failed',
                 'message': 'Unable to create user',
                 'error_details': err
             }
             if(err.parent && err.parent.code === 'ER_NO_REFERENCED_ROW_2') {
-                response.message = "Provided city is invalid"
+                response.message = "Provided city is invalid";
+                res.status(400);
             }
             log.info(`${FUN_LABEL} OUT`);
-            res.status(200).send(response);
+            res.send(response);
         })
     } else {
         response = {
