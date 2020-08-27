@@ -37,7 +37,7 @@ var getAllDealers = (req,res) => {
                     queryCondition.include[0].where.city = req.query.city;
                 }
             }
-            response.type = 'address specific dealers';
+            // response.type = 'address specific dealers';
             log.debug(`${FUN_LABEL} constructed query constraints`);
             log.debug(queryCondition);
         } catch(e) {
@@ -45,15 +45,16 @@ var getAllDealers = (req,res) => {
             log.error(e)
         }
     } else {
-        response.type = 'all';
+        // response.type = 'all';
     }
     dealerModel.findAndCountAll(queryCondition).then(result=> {
         log.info(`${FUN_LABEL} got result for dealerModel.findAll`);
         log.debug(result);
-        response.dealers = result.rows;
-        response.count = result.count;
-        res.header('X-Total-Count', Number(response.count));
+        response = [];
+        response = result.rows;
+        res.header('X-Total-Count', Number(result.count));
         log.info(`${FUN_LABEL} OUT`);
+        res.header('X-Total-Count', Number(result.count));
         res.status(200).send(response);
     }).catch(err=>{
         log.error(`${FUN_LABEL} error in dealerModel.findAll`);
