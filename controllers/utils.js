@@ -15,10 +15,46 @@ var getAllCities = (req,res) => {
     cityMasterModel.findAndCountAll().then(result=> {
         log.info(`${FUN_LABEL} got result for cityMasterModel.findAndCountAll`);
         log.debug(result);
-        response.cities = result.rows;
-        response.count = result.count;
+        let all_state_cities = []
+        let state = {};
+        let city = {};
+        let cities = [];
+        result.rows.forEach((element, index) => {
+            if(index !== 0) {
+                if(element.state === result.rows[index-1].state){
+                    city = {};
+                    city.name = element.city;
+                    city.id = element.id;
+                    state.cities.push(city);
+                } else if(element.state !== result.rows[index-1].state){
+                    // log.debug(`\n\n >>>>>>>> State: ${JSON.stringify(state)} >>>>>>>>`)
+                    all_state_cities.push(state);
+                    state = {};
+                    state.name = element.state;
+                    state.cities = [];
+                    city = {};
+                    city.name = element.city;
+                    city.id = element.id;
+                    state.cities.push(city);
+                }
+            } else if(index === 0){
+                state.name = element.state;
+                state.cities = [];
+                city.name = element.city;
+                city.id = element.id;
+                state.cities.push(city);
+                if(result.count === 1) {
+                    all_state_cities.push(state);
+                }
+            }
+            if(result.count-1 === index) {
+                all_state_cities.push(state);
+            }
+        });
+        response = [];
+        response = all_state_cities;
         log.info(`${FUN_LABEL} OUT`);
-        res.header('X-Total-Count', Number(response.count));
+        res.header('X-Total-Count', Number(result.count));
         res.status(200).send(response);
     }).catch(err=>{
         log.error(`${FUN_LABEL} error in cityMasterModel.findAndCountAll`);
