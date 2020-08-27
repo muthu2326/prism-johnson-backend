@@ -67,6 +67,50 @@ var getAllDealers = (req,res) => {
     })
 }
 
+var getOneDealerDetails = (req, res) => {
+    const FUN_LABEL = `\n\t getOneDealerDetails ${FILE_INFO} \n\t`; 
+    let response = {};
+    log.info(`${FUN_LABEL} IN`);
+    log.info(`${FUN_LABEL} req params ${JSON.stringify(req.params)}`);
+    log.info(`${FUN_LABEL} req query ${JSON.stringify(req.query)}`);
+    dealerModel.findOne({
+        where:{ id: Number(req.params.id)},
+        include:[{
+            model:cityMasterModel,
+            attributes:['city', 'state']
+        }]
+    }).then(result=> {
+        log.info(`${FUN_LABEL} got result for dealerModel.findOne`);
+        log.debug(result);
+        response.id = result.id;
+        response.name = result.name;
+        response.address = result.address;
+        response.phone_numbers = [];
+        result.phone ? response.phone_numbers.push(result.phone): '';
+        result.alternate_phone_1 ? response.phone_numbers.push(result.alternate_phone_1) : '';
+        response.phone =  result.phone;
+        response.alternate_phone_1 = result.alternate_phone_1;
+        response.lat = result.lat;
+        response.lang = result.lang;
+        response.pin_code = result.pin_code;
+        response.city_id = result.city_id;
+        response.city = result.city_master.city;
+        response.state = result.city_master.state;
+        response.created = result.created;
+        response.updated = result.updated;
+        log.info(`${FUN_LABEL} OUT`);
+        res.status(200).send(response);
+    }).catch(err=>{
+        log.error(`${FUN_LABEL} error in dealerModel.findOne`);
+        log.error(err);
+        log.info(`${FUN_LABEL} OUT`);
+        response.code = 'error_fetch_one_dealer';
+        response.message = 'Unable to fetch this dealer details';
+        response.error_details = err;
+        return res.status(500).send(response);
+    })
+}
+
 var createDealer = (req,res) => {
     const FUN_LABEL = `\n\t createDealer ${FILE_INFO} \n\t`; 
     let response = {};
@@ -231,6 +275,7 @@ var hasMandatoryFieldsToCreateDealer = (dealerObject) => {
 
 module.exports = {
     getAllDealers,
+    getOneDealerDetails,
     createDealer,
     updateDealer,
     deleteDealer
