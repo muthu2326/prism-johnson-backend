@@ -6,83 +6,214 @@
 	},
 	"item": [
 		{
-			"name": "Get pages content for HTML pages",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "{{base_url}}/pages",
-					"host": [
-						"{{base_url}}"
-					],
-					"path": [
-						"pages"
-					]
-				},
-				"description": "will return text labels, description, image & video URLs"
-			},
-			"response": []
-		},
-		{
-			"name": "Update page content",
-			"request": {
-				"method": "PUT",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": " {\n        \"carousel\": [\n            {\n                \"title\": \"Building a Better Tomorrow-1\",\n                \"description\": \"Naini bridge , Prayagraj.\",\n                \"banner_image\": \"https://www.prismcement.com/images/v2-new-bnr-1.jpg\"\n            },\n            {\n                \"title\": \"Building a Green Future\",\n                \"description\": \"Prism Cement, Satna Plant, Madhya Pradesh.\",\n                \"banner_image\": \"https://www.prismcement.com/images/v2-new-bnr-2.jpg\"\n            },\n            {\n                \"title\": \"Building a New India\",\n                \"description\": \"Airport Road, Varanasi\",\n                \"banner_image\": \"https://www.prismcement.com/images/v2-new-bnr-3.jpg\"\n            },\n            {\n                \"title\": \"Building a Better Tomorrow\",\n                \"description\": \"Devine Hospital, Lucknow\",\n                \"banner_image\": \"https://www.prismcement.com/images/v2-new-bnr-4.jpg\"\n            }\n        ],\n        \"introduction\": {\n            \"title\": \"Amongst India's largest integrated Building Materials Company\",\n            \"video\": \"https://www.youtube.com/watch?v=nMo4S70oNBk\",\n            \"description\": \"Established in 1997 promoted by the Rajan Raheja Group, Prism Cement is one of the largest cement plant at a single location in the country at Satna. Starting from 2.6 million tons in 1996, the production capacity has expanded to 7 million tons today. We manufacture Portland Pozzolana Cement (PPC) under three brand names - ‘Prism Champion’, ‘Prism Champion Plus’ and ‘Prism Duratech’ and full range of Ordinary Portland Cement (OPC) for specialized cement concrete applications. We have consolidated our position as one of the premium cement manufacturer in India.\"\n        },\n        \"dealer_locater\": {\n            \"description\": \"Prism Cement has a 3,700+ strong dealers network serviced from 200 stocking points, spread across UP, MP and Bihar. Prism has its corporate office in Mumbai, with CMO in Varanasi and eight regional offices located across UP, MP and Bihar.\"\n        },\n        \"help\": {\n            \"tol_free_number\": \"1800 572 1444\"\n        }\n    }",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "{{base_url}}/pages/home-page",
-					"host": [
-						"{{base_url}}"
-					],
-					"path": [
-						"pages",
-						"home-page"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Create User",
-			"request": {
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\n    \"name\":\"Manoj\",\n    \"email\":\"manoj1@digiapt.com\",\n    \"phone_number\":\"9898989898\",\n    \"city_id\":4\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "{{base_url}}/users",
-					"host": [
-						"{{base_url}}"
-					],
-					"path": [
-						"users"
-					]
-				}
-			},
-			"response": [
+			"name": "Archives",
+			"item": [
 				{
-					"name": "Valid request",
-					"originalRequest": {
+					"name": "Get all dealers based on state & city",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/dealers?state={{state}}&city={{city}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"dealers"
+							],
+							"query": [
+								{
+									"key": "state",
+									"value": "{{state}}"
+								},
+								{
+									"key": "city",
+									"value": "{{city}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add a construction tip",
+					"request": {
 						"method": "POST",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"name\":\"Manoj\",\n    \"email\":\"manoj@digiapt.com\",\n    \"phone_number\":\"9898989898\",\n    \"state\":\"AP\",\n    \"town\":\"AP town\"\n}",
+							"raw": "{\n    \"title\":\"title1\",\n    \"description\":\"tip description\",\n    \"category_id\":1\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/construction-tips",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"construction-tips"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update a construction tip",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"title\":\"title1\",\n    \"description\":\"tip description\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/construction-tips/{{construction_tips_id}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"construction-tips",
+								"{{construction_tips_id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete a construction tip",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/construction-tips/{{construction_tips_id}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"construction-tips",
+								"{{construction_tips_id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get all construction tips of a specific category",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/construction-tips?ctcid={{construction_tips_category_id}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"construction-tips"
+							],
+							"query": [
+								{
+									"key": "ctcid",
+									"value": "{{construction_tips_category_id}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get all construction tips",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/construction-tips",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"construction-tips"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "WiP",
+			"item": [
+				{
+					"name": "Get pages content for HTML pages",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/pages",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"pages"
+							]
+						},
+						"description": "will return text labels, description, image & video URLs"
+					},
+					"response": []
+				},
+				{
+					"name": "Update page content",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": " {\n        \"carousel\": [\n            {\n                \"title\": \"Building a Better Tomorrow-1\",\n                \"description\": \"Naini bridge , Prayagraj.\",\n                \"banner_image\": \"https://www.prismcement.com/images/v2-new-bnr-1.jpg\"\n            },\n            {\n                \"title\": \"Building a Green Future\",\n                \"description\": \"Prism Cement, Satna Plant, Madhya Pradesh.\",\n                \"banner_image\": \"https://www.prismcement.com/images/v2-new-bnr-2.jpg\"\n            },\n            {\n                \"title\": \"Building a New India\",\n                \"description\": \"Airport Road, Varanasi\",\n                \"banner_image\": \"https://www.prismcement.com/images/v2-new-bnr-3.jpg\"\n            },\n            {\n                \"title\": \"Building a Better Tomorrow\",\n                \"description\": \"Devine Hospital, Lucknow\",\n                \"banner_image\": \"https://www.prismcement.com/images/v2-new-bnr-4.jpg\"\n            }\n        ],\n        \"introduction\": {\n            \"title\": \"Amongst India's largest integrated Building Materials Company\",\n            \"video\": \"https://www.youtube.com/watch?v=nMo4S70oNBk\",\n            \"description\": \"Established in 1997 promoted by the Rajan Raheja Group, Prism Cement is one of the largest cement plant at a single location in the country at Satna. Starting from 2.6 million tons in 1996, the production capacity has expanded to 7 million tons today. We manufacture Portland Pozzolana Cement (PPC) under three brand names - ‘Prism Champion’, ‘Prism Champion Plus’ and ‘Prism Duratech’ and full range of Ordinary Portland Cement (OPC) for specialized cement concrete applications. We have consolidated our position as one of the premium cement manufacturer in India.\"\n        },\n        \"dealer_locater\": {\n            \"description\": \"Prism Cement has a 3,700+ strong dealers network serviced from 200 stocking points, spread across UP, MP and Bihar. Prism has its corporate office in Mumbai, with CMO in Varanasi and eight regional offices located across UP, MP and Bihar.\"\n        },\n        \"help\": {\n            \"tol_free_number\": \"1800 572 1444\"\n        }\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/pages/home-page",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"pages",
+								"home-page"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create User",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\":\"Manoj\",\n    \"email\":\"manoj1@digiapt.com\",\n    \"phone_number\":\"9898989898\",\n    \"city_id\":4\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -96,6 +227,704 @@
 							],
 							"path": [
 								"users"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Valid request",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"name\":\"Manoj\",\n    \"email\":\"manoj@digiapt.com\",\n    \"phone_number\":\"9898989898\",\n    \"state\":\"AP\",\n    \"town\":\"AP town\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/users",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"users"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "44"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"2c-h67UYHNYQ7fRkhGUd5M05l5CFwQ\""
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 24 Aug 2020 02:20:14 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"name\": \"Manoj\",\n    \"email\": \"manoj@digiapt.com\"\n}"
+						},
+						{
+							"name": "Email missing",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"name\":\"Manoj\",\n    \"phone_number\":\"9898989898\",\n    \"state\":\"AP\",\n    \"town\":\"AP town\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/users",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"users"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "55"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"37-sq43Wrb7Cs/ULIClDXarEVFCMRU\""
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 24 Aug 2020 02:19:44 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"code\": \"email_missing\",\n    \"message\": \"email is mandatory\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Get all users",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/users",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add a dealer",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\":\"Shweta Traders-9\",\n    \"address\":\"Road Infront Of Vardhman Comadhya Pradeshlex,si,guna - 473101\",\n    \"phone_numbers\":[\"9425022312\", \"9425022313\"],\n    \"city_id\":4,\n    \"pin_code\":473666,\n    \"lat\":12.8723647,\n    \"lang\":0.77237467624\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/dealers",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"dealers"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update a dealer",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Shiv Traders - 91\",\n    \"address\": \"Kunauli Bazar, Suttar Pradeshaul - 847451\",\n    \"phone_numbers\":[\"9425022311\", \"9425022312\"],\n    \"city_id\": 4,\n    \"pin_code\": 847451,\n    \"lat\": 12.8723647,\n    \"lang\": 0.77237467624\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/dealers/{{dealer_id}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"dealers",
+								"{{dealer_id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete a dealer",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/dealers/{{dealer_id}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"dealers",
+								"{{dealer_id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get all dealers",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/dealers",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"dealers"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get platform brief",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/pages/platform-brief",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"pages",
+								"platform-brief"
+							]
+						},
+						"description": "GET platform brief like tips summary, testimonial etc., for home page"
+					},
+					"response": []
+				},
+				{
+					"name": "Get deatails of one dealer",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/dealers/{{dealer_id}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"dealers",
+								"{{dealer_id}}"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Get Grih Nirman Sections",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/grih-nirman-sections",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"grih-nirman-sections"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Get Grih Nirman Sections",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/grih-nirman-sections",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"grih-nirman-sections"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Sat, 26 Sep 2020 04:53:39 GMT"
+						},
+						{
+							"key": "Server",
+							"value": "Apache/2.4.29 (Ubuntu)"
+						},
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Methods",
+							"value": "GET,PUT,POST,DELETE,OPTIONS"
+						},
+						{
+							"key": "Access-Control-Allow-Headers",
+							"value": "Origin, Content-Type, Authorization, Accept,Content-Length, X-Requested-With, X-PINGOTHER"
+						},
+						{
+							"key": "Access-Control-Expose-Headers",
+							"value": "X-Total-Count"
+						},
+						{
+							"key": "X-Total-Count",
+							"value": "5000"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "828"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"33c-Ck6+WqUX6QsujnPmB2IUy17jD1M\""
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5, max=100"
+						},
+						{
+							"key": "Connection",
+							"value": "Keep-Alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"stages\": [\n        {\n            \"id\": 1,\n            \"name\": \"Planning:\",\n            \"sections\": [\n                {\n                    \"id\": 1,\n                    \"name\": \"Budget\"\n                },\n                {\n                    \"id\": 2,\n                    \"name\": \"Purchasing/Identifying a plot\"\n                },\n                {\n                    \"id\": 3,\n                    \"name\": \"Team Selection\"\n                },\n                {\n                    \"id\": 4,\n                    \"name\": \"Map Preparation and necessary Approvals\"\n                }\n            ]\n        },\n        {\n            \"id\": 2,\n            \"name\": \"Constructing\",\n            \"sections\": [\n                {\n                    \"id\": 101,\n                    \"name\": \"Selection of construction Material\"\n                },\n                {\n                    \"id\": 102,\n                    \"name\": \"Layout\"\n                },\n                {\n                    \"id\": 103,\n                    \"name\": \"Excavation\"\n                },\n                {\n                    \"id\": 104,\n                    \"name\": \"Laying the Foundation\"\n                },\n                {\n                    \"id\": 105,\n                    \"name\": \"Brickwork\"\n                },\n                {\n                    \"id\": 106,\n                    \"name\": \"Formwork\"\n                },\n                {\n                    \"id\": 107,\n                    \"name\": \"Slab Casting & Curing\"\n                },\n                {\n                    \"id\": 108,\n                    \"name\": \"Electric Work\"\n                },\n                {\n                    \"id\": 109,\n                    \"name\": \"Plumbing Work\"\n                },\n                {\n                    \"id\": 110,\n                    \"name\": \"Points to Remember\"\n                }\n            ]\n        },\n        {\n            \"id\": 3,\n            \"name\": \"Finishing:\",\n            \"sections\": [\n                {\n                    \"id\": 201,\n                    \"name\": \"Plastering\"\n                },\n                {\n                    \"id\": 202,\n                    \"name\": \"Wall & Floor Tiling\"\n                },\n                {\n                    \"id\": 203,\n                    \"name\": \"Bath/Sanitary Fitting Work\"\n                },\n                {\n                    \"id\": 204,\n                    \"name\": \"Painting and Decoration\"\n                }\n            ]\n        }\n    ]\n}"
+				}
+			]
+		},
+		{
+			"name": "Get articles of a section",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/articles?section={{section_id}}",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"articles"
+					],
+					"query": [
+						{
+							"key": "section",
+							"value": "{{section_id}}"
+						}
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Get articles of a section",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/articles?section={{section_id}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"articles"
+							],
+							"query": [
+								{
+									"key": "section",
+									"value": "{{section_id}}"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Sat, 26 Sep 2020 04:53:57 GMT"
+						},
+						{
+							"key": "Server",
+							"value": "Apache/2.4.29 (Ubuntu)"
+						},
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Methods",
+							"value": "GET,PUT,POST,DELETE,OPTIONS"
+						},
+						{
+							"key": "Access-Control-Allow-Headers",
+							"value": "Origin, Content-Type, Authorization, Accept,Content-Length, X-Requested-With, X-PINGOTHER"
+						},
+						{
+							"key": "Access-Control-Expose-Headers",
+							"value": "X-Total-Count"
+						},
+						{
+							"key": "X-Total-Count",
+							"value": "5000"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "1017"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"3f9-kxTCmecBlROr6d4KrlK05E6PXfU\""
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5, max=100"
+						},
+						{
+							"key": "Connection",
+							"value": "Keep-Alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"articles\": [\n        {\n            \"id\": 1002,\n            \"name\": \"New Direction: PRISM JOHNSON LIMITED \",\n            \"media_asset_url\": \"https://www.youtube.com/watch?v=whvihpvXOiI\",\n            \"media_asset_type\": \"video\",\n            \"summary\": \"summary of the article\"\n        },\n        {\n            \"id\": 1003,\n            \"name\": \"Prism Products\",\n            \"media_asset_url\": \"https://www.prismcement.com/images/product-banner.jpg\",\n            \"media_asset_type\": \"image\",\n            \"summary\": \"Prism offers a range of products for variety of construction applications from foundation to finish\"\n        },\n        {\n            \"id\": 1004,\n            \"name\": \"1004 New Direction: PRISM JOHNSON LIMITED \",\n            \"media_asset_url\": \"https://www.youtube.com/watch?v=whvihpvXOiI\",\n            \"media_asset_type\": \"video\",\n            \"summary\": \"1004 Prism offers a range of products for variety of construction applications from foundation to finish\"\n        },\n        {\n            \"id\": 1005,\n            \"name\": \"1005 New Direction: PRISM JOHNSON LIMITED \",\n            \"media_asset_url\": \"https://www.youtube.com/watch?v=whvihpvXOiI\",\n            \"media_asset_type\": \"video\",\n            \"summary\": \"1005 Prism offers a range of products for variety of construction applications from foundation to finish\"\n        }\n    ],\n    \"section_id\": 1,\n    \"count\": 4\n}"
+				}
+			]
+		},
+		{
+			"name": "Get one article",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/articles/{{article_id}}",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"articles",
+						"{{article_id}}"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Get one article",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/articles/{{article_id}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"articles",
+								"{{article_id}}"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Sat, 26 Sep 2020 04:54:10 GMT"
+						},
+						{
+							"key": "Server",
+							"value": "Apache/2.4.29 (Ubuntu)"
+						},
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Methods",
+							"value": "GET,PUT,POST,DELETE,OPTIONS"
+						},
+						{
+							"key": "Access-Control-Allow-Headers",
+							"value": "Origin, Content-Type, Authorization, Accept,Content-Length, X-Requested-With, X-PINGOTHER"
+						},
+						{
+							"key": "Access-Control-Expose-Headers",
+							"value": "X-Total-Count"
+						},
+						{
+							"key": "X-Total-Count",
+							"value": "5000"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "485"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"1e5-QKfxfujrchAQvnCAnt1fky+DeiE\""
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5, max=100"
+						},
+						{
+							"key": "Connection",
+							"value": "Keep-Alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"id\": 1002,\n    \"name\": \"New Direction: PRISM JOHNSON LIMITED \",\n    \"media_asset_url\": \"https://www.youtube.com/watch?v=whvihpvXOiI\",\n    \"media_asset_type\": \"video\",\n    \"summary\": \"Prism offers a range of products for variety of construction applications from foundation to finish\",\n    \"content\": \"<div> <h1>Name of the article</h1> <h2>Section-1 of the article </h2> <p>Paragraph Section-1 of the article </p> <h2>Section-2 of the article </h2> <p>Paragraph Section-2 of the article </p> <div>\",\n    \"section_id\": 1\n}"
+				}
+			]
+		},
+		{
+			"name": "Get all cities",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/cities",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"cities"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Get all cities",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/cities",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"cities"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Sat, 26 Sep 2020 04:55:16 GMT"
+						},
+						{
+							"key": "Server",
+							"value": "Apache/2.4.29 (Ubuntu)"
+						},
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Methods",
+							"value": "GET,PUT,POST,DELETE,OPTIONS"
+						},
+						{
+							"key": "Access-Control-Allow-Headers",
+							"value": "Origin, Content-Type, Authorization, Accept,Content-Length, X-Requested-With, X-PINGOTHER"
+						},
+						{
+							"key": "Access-Control-Expose-Headers",
+							"value": "X-Total-Count"
+						},
+						{
+							"key": "X-Total-Count",
+							"value": "6"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "219"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"db-K6+G9S8yfbvNhmYKFw9IaltBEtA\""
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5, max=100"
+						},
+						{
+							"key": "Connection",
+							"value": "Keep-Alive"
+						}
+					],
+					"cookie": [],
+					"body": "[\n    {\n        \"name\": \"Bihar\",\n        \"cities\": [\n            {\n                \"name\": \"Araria\",\n                \"id\": 1\n            },\n            {\n                \"name\": \"Arrah\",\n                \"id\": 2\n            },\n            {\n                \"name\": \"Aurangabad\",\n                \"id\": 3\n            }\n        ]\n    },\n    {\n        \"name\": \"Madhya Pradesh\",\n        \"cities\": [\n            {\n                \"name\": \"Aron\",\n                \"id\": 4\n            },\n            {\n                \"name\": \"Achhroni\",\n                \"id\": 5\n            },\n            {\n                \"name\": \"Amayan\",\n                \"id\": 6\n            }\n        ]\n    }\n]"
+				}
+			]
+		},
+		{
+			"name": "Get all dealers based on city id",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/dealers?city_id={{city_id}}",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"dealers"
+					],
+					"query": [
+						{
+							"key": "city_id",
+							"value": "{{city_id}}"
+						}
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Get all dealers based on city id",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/dealers?city_id={{city_id}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"dealers"
+							],
+							"query": [
+								{
+									"key": "city_id",
+									"value": "{{city_id}}"
+								}
 							]
 						}
 					},
@@ -108,60 +937,24 @@
 							"value": "Express"
 						},
 						{
-							"key": "Content-Type",
-							"value": "application/json; charset=utf-8"
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
 						},
 						{
-							"key": "Content-Length",
-							"value": "44"
+							"key": "Access-Control-Allow-Methods",
+							"value": "GET,PUT,POST,DELETE,OPTIONS"
 						},
 						{
-							"key": "ETag",
-							"value": "W/\"2c-h67UYHNYQ7fRkhGUd5M05l5CFwQ\""
+							"key": "Access-Control-Allow-Headers",
+							"value": "Origin, Content-Type, Authorization, Accept,Content-Length, X-Requested-With, X-PINGOTHER"
 						},
 						{
-							"key": "Date",
-							"value": "Mon, 24 Aug 2020 02:20:14 GMT"
+							"key": "Access-Control-Expose-Headers",
+							"value": "X-Total-Count"
 						},
 						{
-							"key": "Connection",
-							"value": "keep-alive"
-						}
-					],
-					"cookie": [],
-					"body": "{\n    \"name\": \"Manoj\",\n    \"email\": \"manoj@digiapt.com\"\n}"
-				},
-				{
-					"name": "Email missing",
-					"originalRequest": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n    \"name\":\"Manoj\",\n    \"phone_number\":\"9898989898\",\n    \"state\":\"AP\",\n    \"town\":\"AP town\"\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "{{base_url}}/users",
-							"host": [
-								"{{base_url}}"
-							],
-							"path": [
-								"users"
-							]
-						}
-					},
-					"status": "Bad Request",
-					"code": 400,
-					"_postman_previewlanguage": "json",
-					"header": [
-						{
-							"key": "X-Powered-By",
-							"value": "Express"
+							"key": "X-Total-Count",
+							"value": "10"
 						},
 						{
 							"key": "Content-Type",
@@ -169,15 +962,15 @@
 						},
 						{
 							"key": "Content-Length",
-							"value": "55"
+							"value": "2732"
 						},
 						{
 							"key": "ETag",
-							"value": "W/\"37-sq43Wrb7Cs/ULIClDXarEVFCMRU\""
+							"value": "W/\"aac-re6gk0kvkmDTijCm7B/clhnE4WA\""
 						},
 						{
 							"key": "Date",
-							"value": "Mon, 24 Aug 2020 02:19:44 GMT"
+							"value": "Sat, 26 Sep 2020 04:06:17 GMT"
 						},
 						{
 							"key": "Connection",
@@ -185,216 +978,9 @@
 						}
 					],
 					"cookie": [],
-					"body": "{\n    \"code\": \"email_missing\",\n    \"message\": \"email is mandatory\"\n}"
+					"body": "[\n    {\n        \"id\": 3,\n        \"name\": \"Shweta Traders-3\",\n        \"address\": \"Road Infront Of Vardhman Comadhya Pradeshlex,si,guna - 473101\",\n        \"phone\": \"9425022395\",\n        \"alternate_phone_1\": null,\n        \"lat\": null,\n        \"lang\": null,\n        \"city_id\": 4,\n        \"pin_code\": 473665,\n        \"created\": \"2020-08-25T08:01:16.000Z\",\n        \"updated\": null\n    },\n    {\n        \"id\": 4,\n        \"name\": \"Shweta Traders-4\",\n        \"address\": \"Road Infront Of Vardhman Comadhya Pradeshlex,si,guna - 473101\",\n        \"phone\": \"9425022395\",\n        \"alternate_phone_1\": null,\n        \"lat\": null,\n        \"lang\": null,\n        \"city_id\": 4,\n        \"pin_code\": 473665,\n        \"created\": \"2020-08-25T08:03:02.000Z\",\n        \"updated\": null\n    },\n    {\n        \"id\": 5,\n        \"name\": \"Shweta Traders-5\",\n        \"address\": \"Road Infront Of Vardhman Comadhya Pradeshlex,si,guna - 473101\",\n        \"phone\": \"9425022395\",\n        \"alternate_phone_1\": null,\n        \"lat\": null,\n        \"lang\": null,\n        \"city_id\": 4,\n        \"pin_code\": 473665,\n        \"created\": \"2020-08-25T08:33:50.000Z\",\n        \"updated\": null\n    },\n    {\n        \"id\": 6,\n        \"name\": \"Shiv Traders 6-1-1\",\n        \"address\": \"Road Infront Of Vardhman Comadhya Pradeshlex,si,guna - 473101\",\n        \"phone\": \"9771391953\",\n        \"alternate_phone_1\": \"882527409\",\n        \"lat\": \"12.8723647\",\n        \"lang\": \"0.77237467624\",\n        \"city_id\": 4,\n        \"pin_code\": 847451,\n        \"created\": \"2020-08-25T08:37:07.000Z\",\n        \"updated\": null\n    },\n    {\n        \"id\": 7,\n        \"name\": \"Shweta Traders-6\",\n        \"address\": \"Road Infront Of Vardhman Comadhya Pradeshlex,si,guna - 473101\",\n        \"phone\": \"0.77237467624\",\n        \"alternate_phone_1\": null,\n        \"lat\": \"12.8723647\",\n        \"lang\": null,\n        \"city_id\": 4,\n        \"pin_code\": 473665,\n        \"created\": \"2020-08-25T08:37:45.000Z\",\n        \"updated\": null\n    },\n    {\n        \"id\": 8,\n        \"name\": \"Shweta Traders-7\",\n        \"address\": \"Road Infront Of Vardhman Comadhya Pradeshlex,si,guna - 473101\",\n        \"phone\": \"9425022395\",\n        \"alternate_phone_1\": null,\n        \"lat\": \"12.8723647\",\n        \"lang\": \"0.77237467624\",\n        \"city_id\": 4,\n        \"pin_code\": 473665,\n        \"created\": \"2020-08-25T08:38:59.000Z\",\n        \"updated\": null\n    },\n    {\n        \"id\": 9,\n        \"name\": \"Shweta Traders-7\",\n        \"address\": \"Road Infront Of Vardhman Comadhya Pradeshlex,si,guna - 473101\",\n        \"phone\": \"9425022395\",\n        \"alternate_phone_1\": \"9425022396\",\n        \"lat\": \"12.8723647\",\n        \"lang\": \"0.77237467624\",\n        \"city_id\": 4,\n        \"pin_code\": 473665,\n        \"created\": \"2020-08-25T08:40:51.000Z\",\n        \"updated\": null\n    },\n    {\n        \"id\": 10,\n        \"name\": \"Shweta Traders-8\",\n        \"address\": \"Road Infront Of Vardhman Comadhya Pradeshlex,si,guna - 473101\",\n        \"phone\": \"9425022395\",\n        \"alternate_phone_1\": \"9425022396\",\n        \"lat\": \"12.8723647\",\n        \"lang\": \"0.77237467624\",\n        \"city_id\": 4,\n        \"pin_code\": 473666,\n        \"created\": \"2020-08-25T10:23:36.000Z\",\n        \"updated\": null\n    },\n    {\n        \"id\": 11,\n        \"name\": \"Shiv Traders - 91\",\n        \"address\": \"Kunauli Bazar, Suttar Pradeshaul - 847451\",\n        \"phone\": \"9425022312\",\n        \"alternate_phone_1\": \"9425022313\",\n        \"lat\": \"12.8723647\",\n        \"lang\": \"0.77237467624\",\n        \"city_id\": 4,\n        \"pin_code\": 847451,\n        \"created\": \"2020-08-25T13:49:56.000Z\",\n        \"updated\": null\n    },\n    {\n        \"id\": 12,\n        \"name\": \"Shweta Traders-9\",\n        \"address\": \"Road Infront Of Vardhman Comadhya Pradeshlex,si,guna - 473101\",\n        \"phone\": \"9425022312\",\n        \"alternate_phone_1\": \"9425022313\",\n        \"lat\": null,\n        \"lang\": null,\n        \"city_id\": 4,\n        \"pin_code\": 473666,\n        \"created\": \"2020-08-27T00:50:24.000Z\",\n        \"updated\": null\n    }\n]"
 				}
 			]
-		},
-		{
-			"name": "Get all users",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "{{base_url}}/users",
-					"host": [
-						"{{base_url}}"
-					],
-					"path": [
-						"users"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Add a construction tip",
-			"request": {
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\n    \"title\":\"title1\",\n    \"description\":\"tip description\",\n    \"category_id\":1\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "{{base_url}}/construction-tips",
-					"host": [
-						"{{base_url}}"
-					],
-					"path": [
-						"construction-tips"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Get all construction tips",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "{{base_url}}/construction-tips",
-					"host": [
-						"{{base_url}}"
-					],
-					"path": [
-						"construction-tips"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Get all construction tips of a specific category",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "{{base_url}}/construction-tips?ctcid={{construction_tips_category_id}}",
-					"host": [
-						"{{base_url}}"
-					],
-					"path": [
-						"construction-tips"
-					],
-					"query": [
-						{
-							"key": "ctcid",
-							"value": "{{construction_tips_category_id}}"
-						}
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Update a construction tip",
-			"request": {
-				"method": "PUT",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\n    \"title\":\"title1\",\n    \"description\":\"tip description\"\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "{{base_url}}/construction-tips/{{construction_tips_id}}",
-					"host": [
-						"{{base_url}}"
-					],
-					"path": [
-						"construction-tips",
-						"{{construction_tips_id}}"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Delete a construction tip",
-			"request": {
-				"method": "DELETE",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "{{base_url}}/construction-tips/{{construction_tips_id}}",
-					"host": [
-						"{{base_url}}"
-					],
-					"path": [
-						"construction-tips",
-						"{{construction_tips_id}}"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Add a dealer",
-			"request": {
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\n    \"name\":\"Shweta Traders-9\",\n    \"address\":\"Road Infront Of Vardhman Comadhya Pradeshlex,si,guna - 473101\",\n    \"phone_numbers\":[\"9425022312\", \"9425022313\"],\n    \"city_id\":4,\n    \"pin_code\":473666,\n    \"lat\":12.8723647,\n    \"lang\":0.77237467624\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "{{base_url}}/dealers",
-					"host": [
-						"{{base_url}}"
-					],
-					"path": [
-						"dealers"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Get all dealers",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "{{base_url}}/dealers",
-					"host": [
-						"{{base_url}}"
-					],
-					"path": [
-						"dealers"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Get all dealers based on state & city",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "{{base_url}}/dealers?state={{state}}&city={{city}}",
-					"host": [
-						"{{base_url}}"
-					],
-					"path": [
-						"dealers"
-					],
-					"query": [
-						{
-							"key": "state",
-							"value": "{{state}}"
-						},
-						{
-							"key": "city",
-							"value": "{{city}}"
-						}
-					]
-				}
-			},
-			"response": []
 		},
 		{
 			"name": "Get all dealers based on pin code",
@@ -417,97 +1003,81 @@
 					]
 				}
 			},
-			"response": []
-		},
-		{
-			"name": "Update a dealer",
-			"request": {
-				"method": "PUT",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\n    \"name\": \"Shiv Traders - 91\",\n    \"address\": \"Kunauli Bazar, Suttar Pradeshaul - 847451\",\n    \"phone_numbers\":[\"9425022311\", \"9425022312\"],\n    \"city_id\": 4,\n    \"pin_code\": 847451,\n    \"lat\": 12.8723647,\n    \"lang\": 0.77237467624\n}",
-					"options": {
-						"raw": {
-							"language": "json"
+			"response": [
+				{
+					"name": "Get all dealers based on pin code",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/dealers?pin_code={{pin_code}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"dealers"
+							],
+							"query": [
+								{
+									"key": "pin_code",
+									"value": "{{pin_code}}"
+								}
+							]
 						}
-					}
-				},
-				"url": {
-					"raw": "{{base_url}}/dealers/{{dealer_id}}",
-					"host": [
-						"{{base_url}}"
-					],
-					"path": [
-						"dealers",
-						"{{dealer_id}}"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Delete a dealer",
-			"request": {
-				"method": "DELETE",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "",
-					"options": {
-						"raw": {
-							"language": "json"
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Methods",
+							"value": "GET,PUT,POST,DELETE,OPTIONS"
+						},
+						{
+							"key": "Access-Control-Allow-Headers",
+							"value": "Origin, Content-Type, Authorization, Accept,Content-Length, X-Requested-With, X-PINGOTHER"
+						},
+						{
+							"key": "Access-Control-Expose-Headers",
+							"value": "X-Total-Count"
+						},
+						{
+							"key": "X-Total-Count",
+							"value": "6"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "1618"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"652-B7fudZG7obRImVatkb0FbyFSlcM\""
+						},
+						{
+							"key": "Date",
+							"value": "Sat, 26 Sep 2020 04:31:29 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
 						}
-					}
-				},
-				"url": {
-					"raw": "{{base_url}}/dealers/{{dealer_id}}",
-					"host": [
-						"{{base_url}}"
 					],
-					"path": [
-						"dealers",
-						"{{dealer_id}}"
-					]
+					"cookie": [],
+					"body": "[\n    {\n        \"id\": 3,\n        \"name\": \"Shweta Traders-3\",\n        \"address\": \"Road Infront Of Vardhman Comadhya Pradeshlex,si,guna - 473101\",\n        \"phone\": \"9425022395\",\n        \"alternate_phone_1\": null,\n        \"lat\": null,\n        \"lang\": null,\n        \"city_id\": 4,\n        \"pin_code\": 473665,\n        \"created\": \"2020-08-25T08:01:16.000Z\",\n        \"updated\": null\n    },\n    {\n        \"id\": 4,\n        \"name\": \"Shweta Traders-4\",\n        \"address\": \"Road Infront Of Vardhman Comadhya Pradeshlex,si,guna - 473101\",\n        \"phone\": \"9425022395\",\n        \"alternate_phone_1\": null,\n        \"lat\": null,\n        \"lang\": null,\n        \"city_id\": 4,\n        \"pin_code\": 473665,\n        \"created\": \"2020-08-25T08:03:02.000Z\",\n        \"updated\": null\n    },\n    {\n        \"id\": 5,\n        \"name\": \"Shweta Traders-5\",\n        \"address\": \"Road Infront Of Vardhman Comadhya Pradeshlex,si,guna - 473101\",\n        \"phone\": \"9425022395\",\n        \"alternate_phone_1\": null,\n        \"lat\": null,\n        \"lang\": null,\n        \"city_id\": 4,\n        \"pin_code\": 473665,\n        \"created\": \"2020-08-25T08:33:50.000Z\",\n        \"updated\": null\n    },\n    {\n        \"id\": 7,\n        \"name\": \"Shweta Traders-6\",\n        \"address\": \"Road Infront Of Vardhman Comadhya Pradeshlex,si,guna - 473101\",\n        \"phone\": \"0.77237467624\",\n        \"alternate_phone_1\": null,\n        \"lat\": \"12.8723647\",\n        \"lang\": null,\n        \"city_id\": 4,\n        \"pin_code\": 473665,\n        \"created\": \"2020-08-25T08:37:45.000Z\",\n        \"updated\": null\n    },\n    {\n        \"id\": 8,\n        \"name\": \"Shweta Traders-7\",\n        \"address\": \"Road Infront Of Vardhman Comadhya Pradeshlex,si,guna - 473101\",\n        \"phone\": \"9425022395\",\n        \"alternate_phone_1\": null,\n        \"lat\": \"12.8723647\",\n        \"lang\": \"0.77237467624\",\n        \"city_id\": 4,\n        \"pin_code\": 473665,\n        \"created\": \"2020-08-25T08:38:59.000Z\",\n        \"updated\": null\n    },\n    {\n        \"id\": 9,\n        \"name\": \"Shweta Traders-7\",\n        \"address\": \"Road Infront Of Vardhman Comadhya Pradeshlex,si,guna - 473101\",\n        \"phone\": \"9425022395\",\n        \"alternate_phone_1\": \"9425022396\",\n        \"lat\": \"12.8723647\",\n        \"lang\": \"0.77237467624\",\n        \"city_id\": 4,\n        \"pin_code\": 473665,\n        \"created\": \"2020-08-25T08:40:51.000Z\",\n        \"updated\": null\n    }\n]"
 				}
-			},
-			"response": []
-		},
-		{
-			"name": "Get platform brief",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "{{base_url}}/pages/platform-brief",
-					"host": [
-						"{{base_url}}"
-					],
-					"path": [
-						"pages",
-						"platform-brief"
-					]
-				},
-				"description": "GET platform brief like tips summary, testimonial etc., for home page"
-			},
-			"response": []
-		},
-		{
-			"name": "Get all cities",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "{{base_url}}/cities",
-					"host": [
-						"{{base_url}}"
-					],
-					"path": [
-						"cities"
-					]
-				}
-			},
-			"response": []
+			]
 		}
 	],
 	"protocolProfileBehavior": {}
