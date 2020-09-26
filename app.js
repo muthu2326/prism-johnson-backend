@@ -11,6 +11,7 @@ var usersRouter = require('./routes/users');
 var pagesRouter = require('./routes/pages');
 var constructionTipsRouter = require('./routes/construction_tips');
 var dealersRouter = require('./routes/dealers');
+var articlesRouter = require('./routes/articles');
 
 var config = require('config');
 var app = express();
@@ -54,6 +55,7 @@ app.use('/users', usersRouter);
 app.use('/pages', pagesRouter);
 app.use('/construction-tips', constructionTipsRouter);
 app.use('/dealers', dealersRouter);
+app.use('/articles', articlesRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -65,6 +67,10 @@ app.use(function(err, req, res, next) {
   // set locals, only providing error in development
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};
+  if(err) {
+    log.error(`\n\nError in API request, below is the details of error \n`);
+    log.error(err);
+  }
   // render the error page
   res.status(err.status || 500);
   res.render('error');

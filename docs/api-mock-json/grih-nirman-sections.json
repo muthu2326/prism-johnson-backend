@@ -1,0 +1,89 @@
+{
+    "stages": [{
+            "id": 1,
+            "name": "Planning:",
+            "sections": [{
+                    "id": 1,
+                    "name": "Budget"
+                },
+                {
+                    "id": 2,
+                    "name": "Purchasing/Identifying a plot"
+                },
+                {
+                    "id":3,
+                    "name": "Team Selection"
+                },
+                {
+                    "id": 4,
+                    "name":"Map Preparation and necessary Approvals"
+                }
+            ]
+        },
+        {
+            "id": 2,
+            "name": "Constructing",
+            "sections": [{
+                    "id": 101,
+                    "name": "Selection of construction Material"
+                },
+                {
+                    "id": 102,
+                    "name": "Layout"
+                },
+                {
+                    "id": 103,
+                    "name": "Excavation"
+                },
+                {
+                    "id": 104,
+                    "name": "Laying the Foundation"
+                },
+                {
+                    "id": 105,
+                    "name": "Brickwork"
+                },
+                {
+                    "id": 106,
+                    "name": "Formwork"
+                },
+                {
+                    "id": 107,
+                    "name": "Slab Casting & Curing"
+                },
+                {
+                    "id": 108, 
+                    "name": "Electric Work"
+                },
+                {
+                    "id": 109,
+                    "name": "Plumbing Work"
+                },
+                {
+                    "id": 110,
+                    "name": "Points to Remember"
+                }
+            ]
+        },{
+            "id": 3,
+            "name": "Finishing:",
+            "sections": [{
+                    "id": 201,
+                    "name": "Plastering"
+                },
+                {
+                    "id": 202,
+                    "name": "Wall & Floor Tiling"
+                },
+                {
+                    "id":203,
+                    "name": "Bath/Sanitary Fitting Work"
+                },
+                {
+                    "id": 204,
+                    "name":"Painting and Decoration"
+                }
+            ]
+        }
+    ]
+}

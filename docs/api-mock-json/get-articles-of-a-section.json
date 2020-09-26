@@ -1,0 +1,34 @@
+{
+    "articles":[
+        {
+            "id":1002,
+            "name":"New Direction: PRISM JOHNSON LIMITED ",
+            "media_asset_url":"https://www.youtube.com/watch?v=whvihpvXOiI",
+            "media_asset_type":"video",
+            "summary":"summary of the article"
+        },
+        {
+            "id":1003,
+            "name":"Prism Products",
+            "media_asset_url":"https://www.prismcement.com/images/product-banner.jpg",
+            "media_asset_type":"image",
+            "summary":"Prism offers a range of products for variety of construction applications from foundation to finish"
+        },
+        {
+            "id":1004,
+            "name":"1004 New Direction: PRISM JOHNSON LIMITED ",
+            "media_asset_url":"https://www.youtube.com/watch?v=whvihpvXOiI",
+            "media_asset_type":"video",
+            "summary":"1004 Prism offers a range of products for variety of construction applications from foundation to finish"
+        },
+        {
+            "id":1005,
+            "name":"1005 New Direction: PRISM JOHNSON LIMITED ",
+            "media_asset_url":"https://www.youtube.com/watch?v=whvihpvXOiI",
+            "media_asset_type":"video",
+            "summary":"1005 Prism offers a range of products for variety of construction applications from foundation to finish"
+        }
+    ],
+    "section_id":1,
+    "count": 4
+}

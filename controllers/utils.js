@@ -4,7 +4,7 @@ const FILE_INFO = 'Utils Controller';
 
 const db = require('../models');
 const cityMasterModel = db.city_master;
-
+const GRIH_NIRMAN =   require('../docs/api-mock-json/grih-nirman-sections.json')
 
 var getAllCities = (req,res) => {
     const FUN_LABEL = `\n\t getAllCities ${FILE_INFO} \n\t`; 
@@ -67,6 +67,16 @@ var getAllCities = (req,res) => {
     })
 }
 
+var getGrihNirmanDetails = (req, res) => {
+    const FUN_LABEL = `\n\t getGrihNirmanDetails ${FILE_INFO} \n\t`; 
+    // let response = {};
+    log.info(`${FUN_LABEL} IN`);
+    log.info(`${FUN_LABEL} req params ${JSON.stringify(req.params)}`);
+    log.info(`${FUN_LABEL} req query ${JSON.stringify(req.query)}`);
+    log.info(`${FUN_LABEL} OUT`);
+    res.status(200).send(GRIH_NIRMAN);
+}
 module.exports = {
-    getAllCities
+    getAllCities,
+    getGrihNirmanDetails
 };

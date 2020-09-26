@@ -10,4 +10,8 @@ router.get('/', function(req, res, next) {
 /* GET all cities */
 router.get('/cities', utilController.getAllCities);
 
+
+/* GET Grih Nirman stages & sections */
+router.get('/grih-nirman-sections', utilController.getGrihNirmanDetails);
+
 module.exports = router;
