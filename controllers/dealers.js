@@ -24,18 +24,29 @@ var getAllDealers = (req,res) => {
                     }
                 }
             } else if(req.query.state){
+                // Below is to fetch based on city id
                 queryCondition = {
                     include:[{
                         model:cityMasterModel,
                         attributes:['city', 'state'],
                         where:{
-                            state:req.query.state
+                            id:req.query.city_id
                         }
                     }]
                 }
-                if(req.query.city) {
-                    queryCondition.include[0].where.city = req.query.city;
-                }
+                // Below is to fetch based on city & state name 
+                // queryCondition = {
+                //     include:[{
+                //         model:cityMasterModel,
+                //         attributes:['city', 'state'],
+                //         where:{
+                //             state:req.query.state
+                //         }
+                //     }]
+                // }
+                // if(req.query.city) {
+                //     queryCondition.include[0].where.city = req.query.city;
+                // }
             }
             // response.type = 'address specific dealers';
             log.debug(`${FUN_LABEL} constructed query constraints`);
