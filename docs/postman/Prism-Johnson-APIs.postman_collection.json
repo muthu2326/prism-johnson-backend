@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "18815ad6-5985-41d8-88a9-bb19114ae09a",
+		"_postman_id": "2839acc4-64db-4acb-9f0e-082bff1538d1",
 		"name": "Prism-Johnson-APIs",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -205,145 +205,6 @@
 						}
 					},
 					"response": []
-				},
-				{
-					"name": "Create User",
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n    \"name\":\"Manoj\",\n    \"email\":\"manoj1@digiapt.com\",\n    \"phone_number\":\"9898989898\",\n    \"city_id\":4\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "{{base_url}}/users",
-							"host": [
-								"{{base_url}}"
-							],
-							"path": [
-								"users"
-							]
-						}
-					},
-					"response": [
-						{
-							"name": "Valid request",
-							"originalRequest": {
-								"method": "POST",
-								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": "{\n    \"name\":\"Manoj\",\n    \"email\":\"manoj@digiapt.com\",\n    \"phone_number\":\"9898989898\",\n    \"state\":\"AP\",\n    \"town\":\"AP town\"\n}",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "{{base_url}}/users",
-									"host": [
-										"{{base_url}}"
-									],
-									"path": [
-										"users"
-									]
-								}
-							},
-							"status": "OK",
-							"code": 200,
-							"_postman_previewlanguage": "json",
-							"header": [
-								{
-									"key": "X-Powered-By",
-									"value": "Express"
-								},
-								{
-									"key": "Content-Type",
-									"value": "application/json; charset=utf-8"
-								},
-								{
-									"key": "Content-Length",
-									"value": "44"
-								},
-								{
-									"key": "ETag",
-									"value": "W/\"2c-h67UYHNYQ7fRkhGUd5M05l5CFwQ\""
-								},
-								{
-									"key": "Date",
-									"value": "Mon, 24 Aug 2020 02:20:14 GMT"
-								},
-								{
-									"key": "Connection",
-									"value": "keep-alive"
-								}
-							],
-							"cookie": [],
-							"body": "{\n    \"name\": \"Manoj\",\n    \"email\": \"manoj@digiapt.com\"\n}"
-						},
-						{
-							"name": "Email missing",
-							"originalRequest": {
-								"method": "POST",
-								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": "{\n    \"name\":\"Manoj\",\n    \"phone_number\":\"9898989898\",\n    \"state\":\"AP\",\n    \"town\":\"AP town\"\n}",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "{{base_url}}/users",
-									"host": [
-										"{{base_url}}"
-									],
-									"path": [
-										"users"
-									]
-								}
-							},
-							"status": "Bad Request",
-							"code": 400,
-							"_postman_previewlanguage": "json",
-							"header": [
-								{
-									"key": "X-Powered-By",
-									"value": "Express"
-								},
-								{
-									"key": "Content-Type",
-									"value": "application/json; charset=utf-8"
-								},
-								{
-									"key": "Content-Length",
-									"value": "55"
-								},
-								{
-									"key": "ETag",
-									"value": "W/\"37-sq43Wrb7Cs/ULIClDXarEVFCMRU\""
-								},
-								{
-									"key": "Date",
-									"value": "Mon, 24 Aug 2020 02:19:44 GMT"
-								},
-								{
-									"key": "Connection",
-									"value": "keep-alive"
-								}
-							],
-							"cookie": [],
-							"body": "{\n    \"code\": \"email_missing\",\n    \"message\": \"email is mandatory\"\n}"
-						}
-					]
 				},
 				{
 					"name": "Get all users",
@@ -1076,6 +937,229 @@
 					],
 					"cookie": [],
 					"body": "[\n    {\n        \"id\": 3,\n        \"name\": \"Shweta Traders-3\",\n        \"address\": \"Road Infront Of Vardhman Comadhya Pradeshlex,si,guna - 473101\",\n        \"phone\": \"9425022395\",\n        \"alternate_phone_1\": null,\n        \"lat\": null,\n        \"lang\": null,\n        \"city_id\": 4,\n        \"pin_code\": 473665,\n        \"created\": \"2020-08-25T08:01:16.000Z\",\n        \"updated\": null\n    },\n    {\n        \"id\": 4,\n        \"name\": \"Shweta Traders-4\",\n        \"address\": \"Road Infront Of Vardhman Comadhya Pradeshlex,si,guna - 473101\",\n        \"phone\": \"9425022395\",\n        \"alternate_phone_1\": null,\n        \"lat\": null,\n        \"lang\": null,\n        \"city_id\": 4,\n        \"pin_code\": 473665,\n        \"created\": \"2020-08-25T08:03:02.000Z\",\n        \"updated\": null\n    },\n    {\n        \"id\": 5,\n        \"name\": \"Shweta Traders-5\",\n        \"address\": \"Road Infront Of Vardhman Comadhya Pradeshlex,si,guna - 473101\",\n        \"phone\": \"9425022395\",\n        \"alternate_phone_1\": null,\n        \"lat\": null,\n        \"lang\": null,\n        \"city_id\": 4,\n        \"pin_code\": 473665,\n        \"created\": \"2020-08-25T08:33:50.000Z\",\n        \"updated\": null\n    },\n    {\n        \"id\": 7,\n        \"name\": \"Shweta Traders-6\",\n        \"address\": \"Road Infront Of Vardhman Comadhya Pradeshlex,si,guna - 473101\",\n        \"phone\": \"0.77237467624\",\n        \"alternate_phone_1\": null,\n        \"lat\": \"12.8723647\",\n        \"lang\": null,\n        \"city_id\": 4,\n        \"pin_code\": 473665,\n        \"created\": \"2020-08-25T08:37:45.000Z\",\n        \"updated\": null\n    },\n    {\n        \"id\": 8,\n        \"name\": \"Shweta Traders-7\",\n        \"address\": \"Road Infront Of Vardhman Comadhya Pradeshlex,si,guna - 473101\",\n        \"phone\": \"9425022395\",\n        \"alternate_phone_1\": null,\n        \"lat\": \"12.8723647\",\n        \"lang\": \"0.77237467624\",\n        \"city_id\": 4,\n        \"pin_code\": 473665,\n        \"created\": \"2020-08-25T08:38:59.000Z\",\n        \"updated\": null\n    },\n    {\n        \"id\": 9,\n        \"name\": \"Shweta Traders-7\",\n        \"address\": \"Road Infront Of Vardhman Comadhya Pradeshlex,si,guna - 473101\",\n        \"phone\": \"9425022395\",\n        \"alternate_phone_1\": \"9425022396\",\n        \"lat\": \"12.8723647\",\n        \"lang\": \"0.77237467624\",\n        \"city_id\": 4,\n        \"pin_code\": 473665,\n        \"created\": \"2020-08-25T08:40:51.000Z\",\n        \"updated\": null\n    }\n]"
+				}
+			]
+		},
+		{
+			"name": "Create User",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\":\"Manoj\",\n    \"email\":\"manoj1@digiapt.com\",\n    \"phone_number\":\"9898989898\",\n    \"address\":\"435, digiapt software tech\",\n    \"pincode\":\"560102\",\n    \"construction_stage\":\"Plastering\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/users",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"users"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Valid request",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\":\"Manoj\",\n    \"email\":\"manoj@digiapt.com\",\n    \"phone_number\":\"9898989898\",\n    \"state\":\"AP\",\n    \"town\":\"AP town\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/users",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"users"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "44"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"2c-h67UYHNYQ7fRkhGUd5M05l5CFwQ\""
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 24 Aug 2020 02:20:14 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"name\": \"Manoj\",\n    \"email\": \"manoj@digiapt.com\"\n}"
+				},
+				{
+					"name": "Email missing",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\":\"Manoj\",\n    \"phone_number\":\"9898989898\",\n    \"state\":\"AP\",\n    \"town\":\"AP town\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/users",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"users"
+							]
+						}
+					},
+					"status": "Bad Request",
+					"code": 400,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "55"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"37-sq43Wrb7Cs/ULIClDXarEVFCMRU\""
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 24 Aug 2020 02:19:44 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"code\": \"email_missing\",\n    \"message\": \"email is mandatory\"\n}"
+				},
+				{
+					"name": "Create User",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\":\"Manoj\",\n    \"email\":\"manoj1@digiapt.com\",\n    \"phone_number\":\"9898989898\",\n    \"address\":\"435, digiapt software tech\",\n    \"pincode\":\"560102\",\n    \"construction_stage\":\"Plastering\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/users",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"users"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Mon, 28 Sep 2020 10:26:53 GMT"
+						},
+						{
+							"key": "Server",
+							"value": "Apache/2.4.29 (Ubuntu)"
+						},
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Methods",
+							"value": "GET,PUT,POST,DELETE,OPTIONS"
+						},
+						{
+							"key": "Access-Control-Allow-Headers",
+							"value": "Origin, Content-Type, Authorization, Accept,Content-Length, X-Requested-With, X-PINGOTHER"
+						},
+						{
+							"key": "Access-Control-Expose-Headers",
+							"value": "X-Total-Count"
+						},
+						{
+							"key": "X-Total-Count",
+							"value": "5000"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "55"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"37-h8xLUqd90/fIi78y+jz8IWo/bY0\""
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5, max=100"
+						},
+						{
+							"key": "Connection",
+							"value": "Keep-Alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"name\": \"Manoj\",\n    \"address\": \"435, digiapt software tech\"\n}"
 				}
 			]
 		}
