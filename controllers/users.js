@@ -64,7 +64,7 @@ var createUser = (req,res) => {
         userObject.name = req.body.name;
         userObject.email = req.body.email;
         userObject.phone_number = req.body.phone_number ? req.body.phone_number : undefined;
-        userObject.city_id = Number(req.body.city_id);
+        userObject.city_id = 4;//Number(req.body.city_id);
         log.debug(`${FUN_LABEL} userObject:`);
         log.debug(userObject);
         userModel.upsert(userObject).then(result => {
@@ -112,9 +112,9 @@ var hasMandatoryFieldsToCreateUser = (userObject) => {
         if(!userObject.name) {
             response.message = response.message + 'name';
         }
-        if(!userObject.city_id) {
-            response.message = response.message + ', city_id';
-        }
+        // if(!userObject.city_id) {
+        //     response.message = response.message + ', city_id';
+        // }
         if(!userObject.email) {
             response.message = response.message + ', email';
         }
