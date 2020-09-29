@@ -40,7 +40,8 @@ module.exports = function(sequelize, DataTypes) {
           tableName: 'city_master',
         },
         key: 'id'
-      }
+      },
+      unique: "fk_dealer_city_id"
     },
     pin_code: {
       type: DataTypes.INTEGER(6),

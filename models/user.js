@@ -15,7 +15,7 @@ module.exports = function(sequelize, DataTypes) {
     email: {
       type: DataTypes.STRING(256),
       allowNull: false,
-      unique: true
+      unique: "email_UNIQUE"
     },
     phone_number: {
       type: DataTypes.STRING(45),
@@ -29,7 +29,8 @@ module.exports = function(sequelize, DataTypes) {
           tableName: 'city_master',
         },
         key: 'id'
-      }
+      },
+      unique: "fk_user_city_id"
     },
     created: {
       type: DataTypes.DATE,

@@ -16,6 +16,16 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
+-- Dumping data for table `article`
+--
+
+LOCK TABLES `article` WRITE;
+/*!40000 ALTER TABLE `article` DISABLE KEYS */;
+INSERT INTO `article` VALUES (1,'New Direction: PRISM JOHNSON LIMITED','https://www.youtube.com/watch?v=whvihpvXOiI','video','Look at this video to know more about Prism\'s service','<div style=\'width: 100%;\'> <div class=\'article-banner\'> <img width=\'100%\' height=\'auto\' src=\'http://prism-johnson.digiapt.com/images/article-banner.png\' alt=\'Article Banner\'> </div> <div class=\'article-title\' style=\'padding: 22px 16px 14px 16px; font-size: 18px; font-weight: bold; background-color: #F2F2F2;\' >New Direction: PRISM JOHNSON LIMITED </div> <div class=\'article-descriptions\' style=\'font-weight: Regular; padding: 14px 16px 8px 16px; font-size: 12px; line-height: 24px;\'> <p class=\'article-desc-1\'>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum</p> <p class=\'article-desc-2\'>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum</p> </div> <div class=\'hindi-banner\' style=\'margin: auto 16px;\'>  <div style=\'padding: 16px 12px; background-color: #F2F2F2;\'> <img width=\'100%\' src=\'http://prism-johnson.digiapt.com/images/article-image-hi.png\' alt=\'Hindi Slogan\'> </div> </div>',1,'Budget'),(2,'Prism Products','https://www.prismcement.com/images/product-banner.jpg','image','Prism offers a range of products for variety of construction applications from foundation to finish','<div style=\'width: 100%;\'> <div class=\'article-banner\'> <img width=\'100%\' height=\'auto\' src=\'http://prism-johnson.digiapt.com/images/article-banner.png\' alt=\'Article Banner\'> </div> <div class=\'article-title\' style=\'padding: 22px 16px 14px 16px; font-size: 18px; font-weight: bold; background-color: #F2F2F2;\' >Prism Products </div> <div class=\'article-descriptions\' style=\'font-weight: Regular; padding: 14px 16px 8px 16px; font-size: 12px; line-height: 24px;\'> <p class=\'article-desc-1\'>2-1 - Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum</p> <p class=\'article-desc-2\'>2.2 - Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum</p> </div> <div class=\'hindi-banner\' style=\'margin: auto 16px;\'>  <div style=\'padding: 16px 12px; background-color: #F2F2F2;\'> <img width=\'100%\' src=\'http://prism-johnson.digiapt.com/images/article-image-hi.png\' alt=\'Hindi Slogan\'> </div> </div>',2,'Purchasing/Identifying a plot');
+/*!40000 ALTER TABLE `article` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Dumping data for table `city_master`
 --
 
@@ -81,4 +91,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-09-26 10:12:30
+-- Dump completed on 2020-09-29 16:09:38
