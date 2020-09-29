@@ -8,7 +8,7 @@ const db = require('../models');
 const Op = db.Sequelize.Op;
 const SECTION_ARTICLES =   require('../docs/api-mock-json/get-articles-of-a-section.json')
 const ARTICLE =   require('../docs/api-mock-json/get-one-article.json')
-
+const GRIH_NIRMAN =   require('../docs/api-mock-json/grih-nirman-sections.json')
 var getAllArticles = (req,res) => {
     const FUN_LABEL = `\n\t getAllArticles ${FILE_INFO} \n\t`; 
     let response = {};
@@ -16,8 +16,23 @@ var getAllArticles = (req,res) => {
     log.info(`${FUN_LABEL} IN`);
     log.info(`${FUN_LABEL} req params ${JSON.stringify(req.params)}`);
     log.info(`${FUN_LABEL} req query ${JSON.stringify(req.query)}`);
+    response = SECTION_ARTICLES;
+    let sec = Number(req.query.section)
+    let secName = '';
+    try {
+        GRIH_NIRMAN.stages.forEach(staging => {
+            staging.sections.forEach(section => {
+                if(section.id === sec) {
+                    secName = section.name;
+                }
+            })
+        });
+        response.section_name = secName;
+    } catch(e) {
+        log.error(e)
+    }
     // Mock response for get articles of one section
-    res.status(200).send(SECTION_ARTICLES);
+    res.status(200).send(response);
 }
 
 var getOneArticle = (req, res) => {
