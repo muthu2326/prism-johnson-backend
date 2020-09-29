@@ -1,5 +1,6 @@
 const log = require('../utils/logger').get();
 config = require('config');
+var articleService = require('../services/article.service.js');
 const FILE_INFO = 'Articles Controller';
 
 const db = require('../models');
@@ -16,23 +17,50 @@ var getAllArticles = (req,res) => {
     log.info(`${FUN_LABEL} IN`);
     log.info(`${FUN_LABEL} req params ${JSON.stringify(req.params)}`);
     log.info(`${FUN_LABEL} req query ${JSON.stringify(req.query)}`);
-    response = SECTION_ARTICLES;
     let sec = Number(req.query.section)
-    let secName = '';
-    try {
-        GRIH_NIRMAN.stages.forEach(staging => {
-            staging.sections.forEach(section => {
-                if(section.id === sec) {
-                    secName = section.name;
-                }
-            })
-        });
-        response.section_name = secName;
-    } catch(e) {
-        log.error(e)
+    // response = SECTION_ARTICLES;
+    // let secName = '';
+    // try {
+    //     GRIH_NIRMAN.stages.forEach(staging => {
+    //         staging.sections.forEach(section => {
+    //             if(section.id === sec) {
+    //                 secName = section.name;
+    //             }
+    //         })
+    //     });
+    //     response.section_name = secName;
+    // } catch(e) {
+    //     log.error(e)
+    // }
+    if(sec) {
+        queryCondition = {
+            where :{
+                section_id : sec 
+            }
+        }
     }
+    log.info(`${FUN_LABEL} going to make articleService.getAllArticles call`);
+    articleService.getAllArticles(req, res, queryCondition, (error, serviceResponse) => {
+        log.info(`${FUN_LABEL} received response for articleService.getAllArticles call`);
+        log.debug(serviceResponse);
+        log.debug(error);
+        if(!error) {
+            response.articles = serviceResponse.result;
+            response.count = serviceResponse.result.length;
+            if(sec) {
+                response.section_id = sec;
+                response.section_name = serviceResponse.result[0].section_name
+            } else {
+                response.section = 'All sections'
+            }
+            response.count 
+            res.status(200).send(response);
+        } else {
+            res.status(500).send('Server error');
+        }
+    })
     // Mock response for get articles of one section
-    res.status(200).send(response);
+    // res.status(200).send(response);
 }
 
 var getOneArticle = (req, res) => {

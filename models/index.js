@@ -24,6 +24,7 @@ db.gallery = require('./gallery.js')(sequelize, Sequelize);
 db.product_category = require('./product_category.js')(sequelize, Sequelize);
 db.testimonial = require('./testimonial.js')(sequelize, Sequelize);
 db.user = require('./user.js')(sequelize, Sequelize);
+db.article = require('./article.js')(sequelize, Sequelize);
 
 db.dealer.belongsTo(db.city_master, {foreignKey: 'city_id'});
 db.user.belongsTo(db.city_master, {foreignKey: 'city_id'});
