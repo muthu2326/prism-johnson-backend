@@ -12,7 +12,7 @@ var pagesRouter = require('./routes/pages');
 var constructionTipsRouter = require('./routes/construction_tips');
 var dealersRouter = require('./routes/dealers');
 var articlesRouter = require('./routes/articles');
-
+var productsRouter = require('./routes/products');
 var config = require('config');
 var app = express();
 
@@ -56,6 +56,7 @@ app.use('/pages', pagesRouter);
 app.use('/construction-tips', constructionTipsRouter);
 app.use('/dealers', dealersRouter);
 app.use('/articles', articlesRouter);
+app.use('/products', productsRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

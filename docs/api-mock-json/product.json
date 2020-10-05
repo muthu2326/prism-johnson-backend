@@ -1,0 +1,15 @@
+{
+    "id" : 1,
+    "name": "Prism Duratech Cement",
+    "description" : "An all-purpose cement with its application ranging from building a terrace, beam, columns, foundation, Roof Slab, plastering and in all kinds of RCC and precast jobs.",
+    "image_url":"http://prism-johnson.digiapt.com/images/products/duratech.png",
+    "price":325,
+    "features" : [
+        "Assures Superior quality with Higher Strengthimmensely suited for general construction.",
+        "An environment friendly cement made by using innovative technique.",
+        "Known for high strength, high performance and consistent quality.",
+        "Helps in making the concrete stronger, denser and leak proof, resulting in strengthening of the structure",
+        "High initial setting time to provide more time for application",
+        "Caters to the needs of all its major customer segments- Individual Home Builders (IHB), Masons and Contractors."
+    ]
+}

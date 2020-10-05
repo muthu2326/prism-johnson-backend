@@ -1,0 +1,20 @@
+[
+    {
+        "id" : 1,
+        "name": "Prism Duratech Cement",
+        "description" : "An all-purpose cement with its application ranging from building a terrace, beam, columns, foundation, Roof Slab, plastering and in all kinds of RCC and precast jobs.",
+        "image_url":"http://prism-johnson.digiapt.com/images/products/duratech.png"
+    },
+    {
+        "id" : 2,
+        "name": "Prism Champion Plus",
+        "description" : "An all-purpose cement with its application ranging from building a terrace, beam, columns, foundation, Roof Slab, plastering and in all kinds of RCC and precast jobs.",
+        "image_url":"http://prism-johnson.digiapt.com/images/products/champion-plus.png"
+    },
+    {
+        "id" : 3,
+        "name": "Prism Champion",
+        "description" : "An all-purpose cement with its application ranging from building a terrace, beam, columns, foundation, Roof Slab, plastering and in all kinds of RCC and precast jobs.",
+        "image_url":"http://prism-johnson.digiapt.com/images/products/champion.png"
+    }
+]
