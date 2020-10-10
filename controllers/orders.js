@@ -48,7 +48,9 @@ var createOrder = (req,res) => {
     fs.appendFileSync(`docs/db/temp_orders/all_orders.json`, ","+JSON.stringify(req.body), 'utf8');
     log.info("Finishing file writing - order");
     apiResponse.code = 'order_placed'
-    apiResponse.message = 'Order has been placed successfully';
+    apiResponse.message = 'Your Order Successfully Submitted.';
+    apiResponse.detailed_message = 'The PRISM Expert team will connect with you shortly';
+    apiResponse.reference_no = "#12345678"
     res.send(apiResponse);
 }
 
