@@ -1267,6 +1267,185 @@
 			]
 		},
 		{
+			"name": "Enquiry (Ask expert & Contact us)",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"enquiry_type\":\"ask-expert\",\n    \"name\":\"Manoj\",\n    \"email\":\"manoj1@digiapt.com\",\n    \"phone_number\":\"9898989898\",\n    \"category\":\"Cement\",\n    \"product\":\"Champion Plus Cement\",\n    \"construction_stage\":\"Planning\",\n    \"city_id\":1,\n    \"preferred_date\":\"31/10/2020\",\n    \"preferred_time_duration\" :\"9:00 AM - 10:00 AM\",\n    \"description\" :\"user inputted description\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/enquiries",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"enquiries"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Enquiry - Contact Us - Example",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"enquiry_type\":\"contact-us\",\n    \"name\":\"Manoj\",\n    \"email\":\"manoj1@digiapt.com\",\n    \"phone_number\":\"9898989898\",\n    \"city_id\":1,\n    \"pin_code\" : \"876767\",\n    \"construction_stage\":\"Planning\",\n    \"address\" :\"address rovided by user\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/enquiries",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"enquiries"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Methods",
+							"value": "GET,PUT,POST,DELETE,OPTIONS"
+						},
+						{
+							"key": "Access-Control-Allow-Headers",
+							"value": "Origin, Content-Type, Authorization, Accept,Content-Length, X-Requested-With, X-PINGOTHER"
+						},
+						{
+							"key": "Access-Control-Expose-Headers",
+							"value": "X-Total-Count"
+						},
+						{
+							"key": "X-Total-Count",
+							"value": "5000"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "151"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"97-sZ4EjEFqklr55OsP+PYHH4MAl5U\""
+						},
+						{
+							"key": "Date",
+							"value": "Sat, 10 Oct 2020 10:08:38 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"code\": \"contact_enquiry_recorded\",\n    \"detailed_message\": \"The PRISM team will connect with you shortly\",\n    \"message\": \"Thank You!\",\n    \"reference_no\": \"#12345678\"\n}"
+				},
+				{
+					"name": "Enquiry - Ask expert - Example",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"enquiry_type\":\"ask-expert\",\n    \"name\":\"Manoj\",\n    \"email\":\"manoj1@digiapt.com\",\n    \"phone_number\":\"9898989898\",\n    \"category\":\"Cement\",\n    \"product\":\"Champion Plus Cement\",\n    \"construction_stage\":\"Planning\",\n    \"city_id\":1,\n    \"preferred_date\":\"31/10/2020\",\n    \"preferred_time_duration\" :\"9:00 AM - 10:00 AM\",\n    \"description\" :\"user inputted description\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/enquiries",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"enquiries"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Methods",
+							"value": "GET,PUT,POST,DELETE,OPTIONS"
+						},
+						{
+							"key": "Access-Control-Allow-Headers",
+							"value": "Origin, Content-Type, Authorization, Accept,Content-Length, X-Requested-With, X-PINGOTHER"
+						},
+						{
+							"key": "Access-Control-Expose-Headers",
+							"value": "X-Total-Count"
+						},
+						{
+							"key": "X-Total-Count",
+							"value": "5000"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "157"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"9d-RungJGIBsRKLvsFVCrUpQUwr6m4\""
+						},
+						{
+							"key": "Date",
+							"value": "Sat, 10 Oct 2020 10:09:21 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"code\": \"expert_enquiry_recorded\",\n    \"detailed_message\": \"The PRISM Expert team will connect with you shortly\",\n    \"message\": \"Thank You!\",\n    \"reference_no\": \"#12345678\"\n}"
+				}
+			]
+		},
+		{
 			"name": "Get all products",
 			"request": {
 				"method": "GET",
@@ -1457,17 +1636,24 @@
 					"body": "{\n    \"id\": 1,\n    \"name\": \"Prism Duratech Cement\",\n    \"description\": \"An all-purpose cement with its application ranging from building a terrace, beam, columns, foundation, Roof Slab, plastering and in all kinds of RCC and precast jobs.\",\n    \"image_url\": \"http://localhost:8111/images/products/duratech.png\",\n    \"price\": 400,\n    \"features\": [\n        \"Assures Superior quality with Higher Strengthimmensely suited for general construction.\",\n        \"An environment friendly cement made by using innovative technique.\",\n        \"Known for high strength, high performance and consistent quality.\",\n        \"Helps in making the concrete stronger, denser and leak proof, resulting in strengthening of the structure\",\n        \"High initial setting time to provide more time for application\",\n        \"Caters to the needs of all its major customer segments- Individual Home Builders (IHB), Masons and Contractors.\"\n    ]\n}"
 				},
 				{
-					"name": "Get all cities",
+					"name": "Get a product - with related products",
 					"originalRequest": {
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{base_url}}/cities",
+							"raw": "{{base_url}}/products/{{product_id}}?pincode={{pin_code}}",
 							"host": [
 								"{{base_url}}"
 							],
 							"path": [
-								"cities"
+								"products",
+								"{{product_id}}"
+							],
+							"query": [
+								{
+									"key": "pincode",
+									"value": "{{pin_code}}"
+								}
 							]
 						}
 					},
@@ -1475,14 +1661,6 @@
 					"code": 200,
 					"_postman_previewlanguage": "json",
 					"header": [
-						{
-							"key": "Date",
-							"value": "Sat, 26 Sep 2020 04:55:16 GMT"
-						},
-						{
-							"key": "Server",
-							"value": "Apache/2.4.29 (Ubuntu)"
-						},
 						{
 							"key": "X-Powered-By",
 							"value": "Express"
@@ -1505,7 +1683,7 @@
 						},
 						{
 							"key": "X-Total-Count",
-							"value": "6"
+							"value": "5000"
 						},
 						{
 							"key": "Content-Type",
@@ -1513,23 +1691,23 @@
 						},
 						{
 							"key": "Content-Length",
-							"value": "219"
+							"value": "1452"
 						},
 						{
 							"key": "ETag",
-							"value": "W/\"db-K6+G9S8yfbvNhmYKFw9IaltBEtA\""
+							"value": "W/\"5ac-zkw8PQCgFGOUewVRD7JHH7sOpXs\""
 						},
 						{
-							"key": "Keep-Alive",
-							"value": "timeout=5, max=100"
+							"key": "Date",
+							"value": "Sat, 10 Oct 2020 10:17:52 GMT"
 						},
 						{
 							"key": "Connection",
-							"value": "Keep-Alive"
+							"value": "keep-alive"
 						}
 					],
 					"cookie": [],
-					"body": "[\n    {\n        \"name\": \"Bihar\",\n        \"cities\": [\n            {\n                \"name\": \"Araria\",\n                \"id\": 1\n            },\n            {\n                \"name\": \"Arrah\",\n                \"id\": 2\n            },\n            {\n                \"name\": \"Aurangabad\",\n                \"id\": 3\n            }\n        ]\n    },\n    {\n        \"name\": \"Madhya Pradesh\",\n        \"cities\": [\n            {\n                \"name\": \"Aron\",\n                \"id\": 4\n            },\n            {\n                \"name\": \"Achhroni\",\n                \"id\": 5\n            },\n            {\n                \"name\": \"Amayan\",\n                \"id\": 6\n            }\n        ]\n    }\n]"
+					"body": "{\n    \"id\": 1,\n    \"name\": \"Prism Duratech Cement\",\n    \"description\": \"An all-purpose cement with its application ranging from building a terrace, beam, columns, foundation, Roof Slab, plastering and in all kinds of RCC and precast jobs.\",\n    \"image_url\": \"http://prism-johnson.digiapt.com/images/products/duratech.png\",\n    \"price\": 375,\n    \"features\": [\n        \"Assures Superior quality with Higher Strengthimmensely suited for general construction.\",\n        \"An environment friendly cement made by using innovative technique.\",\n        \"Known for high strength, high performance and consistent quality.\",\n        \"Helps in making the concrete stronger, denser and leak proof, resulting in strengthening of the structure\",\n        \"High initial setting time to provide more time for application\",\n        \"Caters to the needs of all its major customer segments- Individual Home Builders (IHB), Masons and Contractors.\"\n    ],\n    \"related_products\": [\n        {\n            \"id\": 2,\n            \"name\": \"Prism Champion Plus\",\n            \"description\": \"An all-purpose cement with its application ranging from building a terrace, beam, columns, foundation, Roof Slab, plastering and in all kinds of RCC and precast jobs.\",\n            \"image_url\": \"http://prism-johnson.digiapt.com/images/products/champion-plus.png\"\n        },\n        {\n            \"id\": 3,\n            \"name\": \"Prism Champion\",\n            \"description\": \"An all-purpose cement with its application ranging from building a terrace, beam, columns, foundation, Roof Slab, plastering and in all kinds of RCC and precast jobs.\",\n            \"image_url\": \"http://prism-johnson.digiapt.com/images/products/champion.png\"\n        }\n    ]\n}"
 				},
 				{
 					"name": "Get a product - common price",

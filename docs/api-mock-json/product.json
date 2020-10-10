@@ -11,5 +11,19 @@
         "Helps in making the concrete stronger, denser and leak proof, resulting in strengthening of the structure",
         "High initial setting time to provide more time for application",
         "Caters to the needs of all its major customer segments- Individual Home Builders (IHB), Masons and Contractors."
+    ],
+    "related_products" : [
+        {
+            "id" : 2,
+            "name": "Prism Champion Plus",
+            "description" : "An all-purpose cement with its application ranging from building a terrace, beam, columns, foundation, Roof Slab, plastering and in all kinds of RCC and precast jobs.",
+            "image_url":"http://prism-johnson.digiapt.com/images/products/champion-plus.png"
+        },
+        {
+            "id" : 3,
+            "name": "Prism Champion",
+            "description" : "An all-purpose cement with its application ranging from building a terrace, beam, columns, foundation, Roof Slab, plastering and in all kinds of RCC and precast jobs.",
+            "image_url":"http://prism-johnson.digiapt.com/images/products/champion.png"
+        }
     ]
 }
