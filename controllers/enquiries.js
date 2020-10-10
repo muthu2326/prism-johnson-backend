@@ -53,9 +53,15 @@ var createEnquiry = (req,res) => {
     log.info("Starting file writing - Enquiry");
     fs.appendFileSync(`docs/db/temp_enquiries/all_enquiries.json`, ","+JSON.stringify(req.body), 'utf8');
     log.info("Finishing file writing - Enquiry");
-    apiResponse.code = 'enquiry_recorded'
+    if(req.body.enquiry_type === "ask-expert") {
+        apiResponse.code = 'expert_enquiry_recorded';
+        apiResponse.detailed_message = 'The PRISM Expert team will connect with you shortly';
+    } else {
+        apiResponse.code = 'contact_enquiry_recorded';
+        apiResponse.detailed_message = 'The PRISM team will connect with you shortly';
+    }
+    
     apiResponse.message = 'Thank You!';
-    apiResponse.detailed_message = 'The PRISM Expert team will connect with you shortly';
     apiResponse.reference_no = "#12345678"
     res.send(apiResponse);
 }
