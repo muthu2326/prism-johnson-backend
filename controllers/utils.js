@@ -4,6 +4,7 @@ const FILE_INFO = 'Utils Controller';
 
 const db = require('../models');
 const cityMasterModel = db.city_master;
+const hindiTextPOCModel = db.hindi_text_poc;
 const GRIH_NIRMAN =   require('../docs/api-mock-json/grih-nirman-sections.json')
 
 var getAllCities = (req,res) => {
@@ -76,7 +77,54 @@ var getGrihNirmanDetails = (req, res) => {
     log.info(`${FUN_LABEL} OUT`);
     res.status(200).send(GRIH_NIRMAN);
 }
+
+var getHindiContentPOC = (req, res) => {
+    const FUN_LABEL = `\n\t getHindiContentPOC ${FILE_INFO} \n\t`; 
+    // let response = {};
+    log.info(`${FUN_LABEL} IN`);
+    log.info(`${FUN_LABEL} req params ${JSON.stringify(req.params)}`);
+    log.info(`${FUN_LABEL} req query ${JSON.stringify(req.query)}`);
+    hindiTextPOCModel.findAndCountAll().then(result=> {
+        log.info(`${FUN_LABEL} got result for hindiTextPOCModel.findAndCountAll`);
+        log.debug(result);
+        res.status(200).send(result);
+    }).catch(err=>{
+        log.error(`${FUN_LABEL} error in hindiTextPOCModel.findAndCountAll`);
+        log.error(err);
+        log.info(`${FUN_LABEL} OUT`);
+        response.code = 'error_fetch_hindi_text';
+        response.message = 'Unable to fetch hindi text';
+        response.error_details = err;
+        return res.status(500).send(response);
+    })
+}
+
+var storeHindiContentPOC = (req, res) => {
+    const FUN_LABEL = `\n\t getHindiContentPOC ${FILE_INFO} \n\t`; 
+    // let response = {};
+    log.info(`${FUN_LABEL} IN`);
+    log.info(`${FUN_LABEL} req params ${JSON.stringify(req.params)}`);
+    log.info(`${FUN_LABEL} req query ${JSON.stringify(req.query)}`);
+    let entity = {
+        name: req.body.name
+    }
+    hindiTextPOCModel.create(entity).then(result=> {
+        log.info(`${FUN_LABEL} got result for hindiTextPOCModel.findAndCountAll`);
+        log.debug(result);
+        res.status(200).send(result);
+    }).catch(err=>{
+        log.error(`${FUN_LABEL} error in hindiTextPOCModel.findAndCountAll`);
+        log.error(err);
+        log.info(`${FUN_LABEL} OUT`);
+        response.code = 'error_fetch_hindi_text';
+        response.message = 'Unable to fetch hindi text';
+        response.error_details = err;
+        return res.status(500).send(response);
+    })
+}
 module.exports = {
     getAllCities,
-    getGrihNirmanDetails
+    getGrihNirmanDetails,
+    getHindiContentPOC,
+    storeHindiContentPOC
 };

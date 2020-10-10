@@ -55,6 +55,16 @@ LOCK TABLES `gallery` WRITE;
 UNLOCK TABLES;
 
 --
+-- Dumping data for table `hindi_text_poc`
+--
+
+LOCK TABLES `hindi_text_poc` WRITE;
+/*!40000 ALTER TABLE `hindi_text_poc` DISABLE KEYS */;
+INSERT INTO `hindi_text_poc` VALUES (1,'फाउंडेशन का कार्य - Hindi text'),(2,'सतह की अच्छे से'),(3,'Hindi - 3 सतह की अच्छे से');
+/*!40000 ALTER TABLE `hindi_text_poc` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Dumping data for table `product_category`
 --
 
@@ -91,4 +101,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-10-10 13:59:41
+-- Dump completed on 2020-10-10 22:29:56

@@ -14,4 +14,8 @@ router.get('/cities', utilController.getAllCities);
 /* GET Grih Nirman stages & sections */
 router.get('/grih-nirman-sections', utilController.getGrihNirmanDetails);
 
+/* GET Hindi text PoC */
+router.get('/poc-hindi-content', utilController.getHindiContentPOC);
+router.post('/poc-hindi-content', utilController.storeHindiContentPOC);
+
 module.exports = router;
