@@ -16,6 +16,26 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
+-- Table structure for table `article`
+--
+
+DROP TABLE IF EXISTS `article`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `article` (
+  `id` int(11) NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `media_asset_url` varchar(255) DEFAULT NULL,
+  `media_asset_type` varchar(45) DEFAULT NULL,
+  `summary` tinytext,
+  `content` mediumtext,
+  `section_id` int(11) DEFAULT NULL,
+  `section_name` varchar(100) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
 -- Table structure for table `city_master`
 --
 
@@ -133,7 +153,7 @@ CREATE TABLE `user` (
   UNIQUE KEY `email_UNIQUE` (`email`),
   KEY `fk_user_city_master_id_idx` (`city_id`),
   CONSTRAINT `fk_user_city_id` FOREIGN KEY (`city_id`) REFERENCES `city_master` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -145,4 +165,4 @@ CREATE TABLE `user` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-09-26 10:12:11
+-- Dump completed on 2020-09-29 16:09:15
