@@ -1164,6 +1164,109 @@
 			]
 		},
 		{
+			"name": "Place order for product",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"product_id\":2,\n    \"name\":\"Manoj\",\n    \"email\":\"manoj1@digiapt.com\",\n    \"phone_number\":\"9898989898\",\n    \"quantity\" :5,\n    \"construction_stage\":\"Plastering\",\n    \"pincode\":\"786666\",\n    \"address_line_1\":\"435, digiapt software tech\",\n    \"address_line_2\":\"HSR\",\n    \"pincode\":\"560102\",\n    \"city\":\"Araria\",\n    \"state\":\"Bihar\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/orders",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"orders"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Sample",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"product_id\":2,\n    \"name\":\"Manoj\",\n    \"email\":\"manoj1@digiapt.com\",\n    \"phone_number\":\"9898989898\",\n    \"quantity\" :5,\n    \"construction_stage\":\"Plastering\",\n    \"pincode\":\"786666\",\n    \"address_line_1\":\"435, digiapt software tech\",\n    \"address_line_2\":\"HSR\",\n    \"pincode\":\"560102\",\n    \"city\":\"Araria\",\n    \"state\":\"Bihar\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/orders",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"orders"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Methods",
+							"value": "GET,PUT,POST,DELETE,OPTIONS"
+						},
+						{
+							"key": "Access-Control-Allow-Headers",
+							"value": "Origin, Content-Type, Authorization, Accept,Content-Length, X-Requested-With, X-PINGOTHER"
+						},
+						{
+							"key": "Access-Control-Expose-Headers",
+							"value": "X-Total-Count"
+						},
+						{
+							"key": "X-Total-Count",
+							"value": "5000"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "170"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"aa-GvqIaZjU4lfcw70MID6p734B3y0\""
+						},
+						{
+							"key": "Date",
+							"value": "Sat, 10 Oct 2020 09:17:03 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"code\": \"order_placed\",\n    \"message\": \"Your Order Successfully Submitted.\",\n    \"detailed_message\": \"The PRISM Expert team will connect with you shortly\",\n    \"reference_no\": \"#12345678\"\n}"
+				}
+			]
+		},
+		{
 			"name": "Get all products",
 			"request": {
 				"method": "GET",
