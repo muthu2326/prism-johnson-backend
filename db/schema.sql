@@ -25,12 +25,16 @@ DROP TABLE IF EXISTS `article`;
 CREATE TABLE `article` (
   `id` int(11) NOT NULL,
   `name` varchar(255) NOT NULL,
+  `name_hi` varchar(255) CHARACTER SET utf8 DEFAULT NULL,
   `media_asset_url` varchar(255) DEFAULT NULL,
   `media_asset_type` varchar(45) DEFAULT NULL,
-  `summary` tinytext,
+  `summary` mediumtext,
+  `summary_hi` mediumtext CHARACTER SET utf8,
   `content` mediumtext,
+  `content_hi` mediumtext CHARACTER SET utf8,
   `section_id` int(11) DEFAULT NULL,
   `section_name` varchar(100) DEFAULT NULL,
+  `section_name_hi` varchar(100) CHARACTER SET utf8 DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -108,7 +112,7 @@ CREATE TABLE `hindi_text_poc` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) CHARACTER SET utf8 DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -179,4 +183,4 @@ CREATE TABLE `user` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-10-10 22:29:42
+-- Dump completed on 2020-10-14 10:57:14
