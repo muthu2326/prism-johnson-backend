@@ -91,10 +91,42 @@ var getAllArticles = (req,res) => {
 var getOneArticle = (req, res) => {
     const FUN_LABEL = `\n\t getOneArticle ${FILE_INFO} \n\t`; 
     let response = {};
+    let queryCondition = {};
     log.info(`${FUN_LABEL} IN`);
     log.info(`${FUN_LABEL} req params ${JSON.stringify(req.params)}`);
     log.info(`${FUN_LABEL} req query ${JSON.stringify(req.query)}`);
-    res.status(200).send(ARTICLE);
+    let articleId = Number(req.params.id);
+    queryCondition = {
+        where: { id : articleId }
+    };
+    articleService.getAnArticle(req, res, queryCondition, (error, serviceResponse) => {
+        log.info(`${FUN_LABEL} received response for articleService.getAnArticle call`);
+        log.debug(serviceResponse);
+        log.debug(`Query string ${JSON.stringify(req.query)}`);
+        log.debug(error);
+        if(!error) {
+            response.id = serviceResponse.result.id;
+            response.section_id = serviceResponse.result.section_id;
+            response.media_asset_url = serviceResponse.result.media_asset_url;
+            response.media_asset_type = serviceResponse.result.media_asset_type;
+            if(req.query.lang === HINDI_LANG) {
+                response.name = serviceResponse.result.name_hi;
+                response.summary = serviceResponse.result.summary_hi;
+                response.content = serviceResponse.result.content_hi;
+                response.section_name =   serviceResponse.result.section_name_hi;
+            } else {
+                response.name = serviceResponse.result.name;
+                response.summary = serviceResponse.result.summary;
+                response.content = serviceResponse.result.content;
+                response.section_name =   serviceResponse.result.section_name;
+            }
+            res.status(200).send(response);
+        } else {
+            res.status(500).send('Server error');
+        }
+    })
+    
+    // res.status(200).send(ARTICLE);
 }
 
 var createArticle = (req,res) => {
