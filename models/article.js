@@ -7,7 +7,7 @@ module.exports = function(sequelize, DataTypes) {
       allowNull: false,
       primaryKey: true
     },
-    name: {
+    name_en: {
       type: DataTypes.STRING(255),
       allowNull: false
     },
@@ -23,7 +23,7 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.STRING(45),
       allowNull: true
     },
-    summary: {
+    summary_en: {
       type: "MEDIUMTEXT",
       allowNull: true
     },
@@ -31,7 +31,7 @@ module.exports = function(sequelize, DataTypes) {
       type: "MEDIUMTEXT",
       allowNull: true
     },
-    content: {
+    content_en: {
       type: "MEDIUMTEXT",
       allowNull: true
     },
@@ -43,7 +43,7 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.INTEGER(11),
       allowNull: true
     },
-    section_name: {
+    section_name_en: {
       type: DataTypes.STRING(100),
       allowNull: true
     },

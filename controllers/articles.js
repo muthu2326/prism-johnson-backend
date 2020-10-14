@@ -3,7 +3,12 @@ config = require('config');
 var articleService = require('../services/article.service.js');
 const FILE_INFO = 'Articles Controller';
 const HINDI_LANG = 'hi';
+const ENGLISH_LANG = 'en';
 const db = require('../models');
+const util = require('../utils/util');
+let keysToBeRemoved = [];
+let keysToBeModified = [];
+let allKeys = [];
 // const ArticleModel = db.Article;
 // const cityMasterModel = db.city_master;
 const Op = db.Sequelize.Op;
@@ -47,34 +52,11 @@ var getAllArticles = (req,res) => {
         log.debug(error);
         if(!error) {
             response.articles = []
-            let thisArticle = {};
-            serviceResponse.result.forEach(element => {
-                thisArticle.id = element.id;
-                thisArticle.section_id = element.section_id;
-                thisArticle.media_asset_url = element.media_asset_url;
-                thisArticle.media_asset_type = element.media_asset_type;
-                if(req.query.lang === HINDI_LANG) {
-                    thisArticle.name = element.name_hi;
-                    thisArticle.summary = element.summary_hi;
-                    thisArticle.content = element.content_hi;
-                    thisArticle.section_name =   element.section_name_hi;
-                } else {
-                    thisArticle.name = element.name;
-                    thisArticle.summary = element.summary;
-                    thisArticle.content = element.content;
-                    thisArticle.section_name =   element.section_name;
-                }
-                response.articles.push(thisArticle);
-                thisArticle = {};
-            });
+            response.articles = util.formatJSONBasedOnLang(serviceResponse.result, req.query.lang);
             response.count = serviceResponse.result.length;
             if(sec) {
+                response.section_name = response.articles[0].section_name;
                 response.section_id = sec;
-                if(req.query.lang === HINDI_LANG) {
-                    response.section_name = serviceResponse.result[0].section_name_hi;
-                } else {
-                    response.section_name = serviceResponse.result[0].section_name;
-                }
             } else {
                 response.section = 'All sections'
             }
@@ -105,21 +87,7 @@ var getOneArticle = (req, res) => {
         log.debug(`Query string ${JSON.stringify(req.query)}`);
         log.debug(error);
         if(!error) {
-            response.id = serviceResponse.result.id;
-            response.section_id = serviceResponse.result.section_id;
-            response.media_asset_url = serviceResponse.result.media_asset_url;
-            response.media_asset_type = serviceResponse.result.media_asset_type;
-            if(req.query.lang === HINDI_LANG) {
-                response.name = serviceResponse.result.name_hi;
-                response.summary = serviceResponse.result.summary_hi;
-                response.content = serviceResponse.result.content_hi;
-                response.section_name =   serviceResponse.result.section_name_hi;
-            } else {
-                response.name = serviceResponse.result.name;
-                response.summary = serviceResponse.result.summary;
-                response.content = serviceResponse.result.content;
-                response.section_name =   serviceResponse.result.section_name;
-            }
+            response = util.formatJSONBasedOnLang([serviceResponse.result], req.query.lang);
             res.status(200).send(response);
         } else {
             res.status(500).send('Server error');

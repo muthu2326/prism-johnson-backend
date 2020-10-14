@@ -1,4 +1,5 @@
 const log = require('../utils/logger').get();
+const util = require('../utils/util');
 config = require('config');
 const FILE_INFO = 'Utils Controller';
 
@@ -20,7 +21,9 @@ var getAllCities = (req,res) => {
         let state = {};
         let city = {};
         let cities = [];
-        result.rows.forEach((element, index) => {
+        let rawCities = [];
+        rawCities = util.formatJSONBasedOnLang(result.rows, req.query.lang);
+        rawCities.forEach((element, index) => {
             if(index !== 0) {
                 if(element.state === result.rows[index-1].state){
                     city = {};

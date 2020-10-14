@@ -1,10 +1,12 @@
 {
     "id" : 1,
-    "name": "Prism Duratech Cement",
-    "description" : "An all-purpose cement with its application ranging from building a terrace, beam, columns, foundation, Roof Slab, plastering and in all kinds of RCC and precast jobs.",
+    "name_en": "Prism Duratech Cement",
+    "name_hi": "प्रिज्म ड्यूरेटेक सीमेंट",
+    "description_en" : "An all-purpose cement with its application ranging from building a terrace, beam, columns, foundation, Roof Slab, plastering and in all kinds of RCC and precast jobs.",
+    "description_hi" : "एक छत, बीम, स्तंभ, नींव, छत स्लैब, पलस्तर और सभी प्रकार के आरसीसी और प्रीकास्ट नौकरियों के निर्माण से लेकर इसके आवेदन के साथ एक ऑल-पर्पस सीमेंट।",
     "image_url":"http://prism-johnson.digiapt.com/images/products/duratech.png",
     "price":325,
-    "features" : [
+    "features_en" : [
         "Assures Superior quality with Higher Strengthimmensely suited for general construction.",
         "An environment friendly cement made by using innovative technique.",
         "Known for high strength, high performance and consistent quality.",
@@ -12,7 +14,15 @@
         "High initial setting time to provide more time for application",
         "Caters to the needs of all its major customer segments- Individual Home Builders (IHB), Masons and Contractors."
     ],
-    "related_products" : [
+    "features_hi" : [
+        "उच्च गुणवत्ता के साथ बेहतर गुणवत्ता का आश्वासन देता है जो सामान्य निर्माण के लिए अनुकूल है।",
+        "अभिनव तकनीक का उपयोग करके बनाया गया एक पर्यावरण अनुकूल सीमेंट।",
+        "उच्च शक्ति, उच्च प्रदर्शन और लगातार गुणवत्ता के लिए जाना जाता है।",
+        "कंक्रीट को मजबूत, सघन और रिसाव प्रूफ बनाने में मदद करता है, जिससे संरचना मजबूत होती है",
+        "आवेदन के लिए अधिक समय प्रदान करने के लिए उच्च प्रारंभिक सेटिंग समय",
+        "अपने सभी प्रमुख ग्राहक खंडों की जरूरतों को पूरा करता है- व्यक्तिगत गृह बिल्डर्स (IHB), राजमिस्त्री और ठेकेदार।"
+    ],
+    "related_products_en" : [
         {
             "id" : 2,
             "name": "Prism Champion Plus",
@@ -23,6 +33,20 @@
             "id" : 3,
             "name": "Prism Champion",
             "description" : "An all-purpose cement with its application ranging from building a terrace, beam, columns, foundation, Roof Slab, plastering and in all kinds of RCC and precast jobs.",
+            "image_url":"http://prism-johnson.digiapt.com/images/products/champion.png"
+        }
+    ],
+    "related_products_hi" : [
+        {
+            "id" : 2,
+            "name": "प्रिज्म चैंपियन प्लस",
+            "description" : "एक छत, बीम, स्तंभ, नींव, छत स्लैब, पलस्तर और सभी प्रकार के आरसीसी और प्रीकास्ट नौकरियों के निर्माण से लेकर इसके आवेदन के साथ एक ऑल-पर्पस सीमेंट।",
+            "image_url":"http://prism-johnson.digiapt.com/images/products/champion-plus.png"
+        },
+        {
+            "id" : 3,
+            "name": "प्रिज्म चैंपियन",
+            "description" : "एक छत, बीम, स्तंभ, नींव, छत स्लैब, पलस्तर और सभी प्रकार के आरसीसी और प्रीकास्ट नौकरियों के निर्माण से लेकर इसके आवेदन के साथ एक ऑल-पर्पस सीमेंट।",
             "image_url":"http://prism-johnson.digiapt.com/images/products/champion.png"
         }
     ]

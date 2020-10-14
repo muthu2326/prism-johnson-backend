@@ -1,4 +1,5 @@
 const log = require('../utils/logger').get();
+const util = require('../utils/util');
 config = require('config');
 const FILE_INFO = 'Products Controller';
 
@@ -16,12 +17,12 @@ var getAllProducts = (req,res) => {
     log.info(`${FUN_LABEL} IN`);
     log.info(`${FUN_LABEL} req params ${JSON.stringify(req.params)}`);
     log.info(`${FUN_LABEL} req query ${JSON.stringify(req.query)}`);
-    res.status(200).send(ALL_PRODUCTS);
+    res.status(200).send(util.formatJSONBasedOnLang(ALL_PRODUCTS, req.query.lang));
 }
 
 var getOneProductDetails = (req, res) => {
     const FUN_LABEL = `\n\t getOneProductDetails ${FILE_INFO} \n\t`; 
-    let apiResponse = PRODUCT;
+    let apiResponse = util.formatJSONBasedOnLang([PRODUCT], req.query.lang)
     log.info(`${FUN_LABEL} IN`);
     log.info(`${FUN_LABEL} req params ${JSON.stringify(req.params)}`);
     log.info(`${FUN_LABEL} req query ${JSON.stringify(req.query)}`);

@@ -1,20 +1,26 @@
 [
     {
         "id" : 1,
-        "name": "Prism Duratech Cement",
-        "description" : "An all-purpose cement with its application ranging from building a terrace, beam, columns, foundation, Roof Slab, plastering and in all kinds of RCC and precast jobs.",
+        "name_en": "Prism Duratech Cement",
+        "name_hi": "प्रिज्म ड्यूरेटेक सीमेंट",
+        "description_en" : "An all-purpose cement with its application ranging from building a terrace, beam, columns, foundation, Roof Slab, plastering and in all kinds of RCC and precast jobs.",
+        "description_hi" : "एक छत, बीम, स्तंभ, नींव, छत स्लैब, पलस्तर और सभी प्रकार के आरसीसी और प्रीकास्ट नौकरियों के निर्माण से लेकर इसके आवेदन के साथ एक ऑल-पर्पस सीमेंट।",
         "image_url":"http://prism-johnson.digiapt.com/images/products/duratech.png"
     },
     {
         "id" : 2,
-        "name": "Prism Champion Plus",
-        "description" : "An all-purpose cement with its application ranging from building a terrace, beam, columns, foundation, Roof Slab, plastering and in all kinds of RCC and precast jobs.",
+        "name_en": "Prism Champion Plus",
+        "name_hi": "प्रिज्म चैंपियन प्लस",
+        "description_en" : "An all-purpose cement with its application ranging from building a terrace, beam, columns, foundation, Roof Slab, plastering and in all kinds of RCC and precast jobs.",
+        "description_hi" : "एक छत, बीम, स्तंभ, नींव, छत स्लैब, पलस्तर और सभी प्रकार के आरसीसी और प्रीकास्ट नौकरियों के निर्माण से लेकर इसके आवेदन के साथ एक ऑल-पर्पस सीमेंट।",
         "image_url":"http://prism-johnson.digiapt.com/images/products/champion-plus.png"
     },
     {
         "id" : 3,
-        "name": "Prism Champion",
-        "description" : "An all-purpose cement with its application ranging from building a terrace, beam, columns, foundation, Roof Slab, plastering and in all kinds of RCC and precast jobs.",
+        "name_en": "Prism Champion",
+        "name_hi": "प्रिज्म चैंपियन",
+        "description_en" : "An all-purpose cement with its application ranging from building a terrace, beam, columns, foundation, Roof Slab, plastering and in all kinds of RCC and precast jobs.",
+        "description_hi" : "एक छत, बीम, स्तंभ, नींव, छत स्लैब, पलस्तर और सभी प्रकार के आरसीसी और प्रीकास्ट नौकरियों के निर्माण से लेकर इसके आवेदन के साथ एक ऑल-पर्पस सीमेंट।",
         "image_url":"http://prism-johnson.digiapt.com/images/products/champion.png"
     }
 ]

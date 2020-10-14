@@ -1,4 +1,5 @@
 const log = require('../utils/logger').get();
+const util = require('../utils/util');
 config = require('config');
 const FILE_INFO = 'Dealers Controller';
 
@@ -62,7 +63,8 @@ var getAllDealers = (req,res) => {
         log.info(`${FUN_LABEL} got result for dealerModel.findAll`);
         log.debug(result);
         response = [];
-        response = result.rows;
+        response = util.formatJSONBasedOnLang(result.rows, req.query.lang);
+        // response =result.rows;
         res.header('X-Total-Count', Number(result.count));
         log.info(`${FUN_LABEL} OUT`);
         res.header('X-Total-Count', Number(result.count));

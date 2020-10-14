@@ -7,11 +7,19 @@ module.exports = function(sequelize, DataTypes) {
       allowNull: false,
       primaryKey: true
     },
-    city: {
+    city_en: {
       type: DataTypes.STRING(128),
       allowNull: true
     },
-    state: {
+    city_hi: {
+      type: DataTypes.STRING(128),
+      allowNull: true
+    },
+    state_en: {
+      type: DataTypes.STRING(128),
+      allowNull: true
+    },
+    state_hi: {
       type: DataTypes.STRING(128),
       allowNull: true
     }

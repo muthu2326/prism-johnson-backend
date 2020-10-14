@@ -8,11 +8,19 @@ module.exports = function(sequelize, DataTypes) {
       allowNull: false,
       primaryKey: true
     },
-    name: {
+    name_en: {
       type: DataTypes.STRING(256),
       allowNull: false
     },
-    address: {
+    name_hi: {
+      type: DataTypes.STRING(255),
+      allowNull: true
+    },
+    address_en: {
+      type: DataTypes.STRING(500),
+      allowNull: true
+    },
+    address_hi: {
       type: DataTypes.STRING(500),
       allowNull: true
     },
