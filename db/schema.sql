@@ -24,16 +24,16 @@ DROP TABLE IF EXISTS `article`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `article` (
   `id` int(11) NOT NULL,
-  `name` varchar(255) NOT NULL,
+  `name_en` varchar(255) NOT NULL,
   `name_hi` varchar(255) CHARACTER SET utf8 DEFAULT NULL,
   `media_asset_url` varchar(255) DEFAULT NULL,
   `media_asset_type` varchar(45) DEFAULT NULL,
-  `summary` mediumtext,
+  `summary_en` mediumtext,
   `summary_hi` mediumtext CHARACTER SET utf8,
-  `content` mediumtext,
+  `content_en` mediumtext,
   `content_hi` mediumtext CHARACTER SET utf8,
   `section_id` int(11) DEFAULT NULL,
-  `section_name` varchar(100) DEFAULT NULL,
+  `section_name_en` varchar(100) DEFAULT NULL,
   `section_name_hi` varchar(100) CHARACTER SET utf8 DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -48,12 +48,14 @@ DROP TABLE IF EXISTS `city_master`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `city_master` (
   `id` int(11) NOT NULL,
-  `city` varchar(128) DEFAULT NULL,
-  `state` varchar(128) DEFAULT NULL,
+  `city_en` varchar(128) DEFAULT NULL,
+  `city_hi` varchar(128) CHARACTER SET utf8 DEFAULT NULL,
+  `state_en` varchar(128) DEFAULT NULL,
+  `state_hi` varchar(128) CHARACTER SET utf8 DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `id_UNIQUE` (`id`),
-  KEY `idx_city_master_state` (`state`),
-  KEY `idx_city_master_city` (`city`)
+  KEY `idx_city_master_state` (`state_en`),
+  KEY `idx_city_master_city` (`city_en`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -66,8 +68,10 @@ DROP TABLE IF EXISTS `dealer`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `dealer` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(256) NOT NULL,
-  `address` varchar(500) DEFAULT NULL,
+  `name_en` varchar(256) NOT NULL,
+  `name_hi` varchar(255) CHARACTER SET utf8 DEFAULT NULL,
+  `address_en` varchar(500) DEFAULT NULL,
+  `address_hi` varchar(500) CHARACTER SET utf8 DEFAULT NULL,
   `phone` varchar(45) DEFAULT NULL,
   `alternate_phone_1` varchar(45) DEFAULT NULL,
   `lat` varchar(45) DEFAULT NULL,
@@ -183,4 +187,4 @@ CREATE TABLE `user` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-10-14 10:57:14
+-- Dump completed on 2020-10-14 14:39:39
