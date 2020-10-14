@@ -87,7 +87,7 @@ var getOneArticle = (req, res) => {
         log.debug(`Query string ${JSON.stringify(req.query)}`);
         log.debug(error);
         if(!error) {
-            response = util.formatJSONBasedOnLang([serviceResponse.result], req.query.lang);
+            response = util.formatJSONBasedOnLang([serviceResponse.result], req.query.lang)[0];
             res.status(200).send(response);
         } else {
             res.status(500).send('Server error');

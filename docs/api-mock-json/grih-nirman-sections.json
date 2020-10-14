@@ -1,7 +1,7 @@
 {
     "stages": [{
             "id": 1,
-            "name": "Planning:",
+            "name": "Planning",
             "sections": [{
                     "id": 1,
                     "name": "Budget"
@@ -22,10 +22,32 @@
         },
         {
             "id": 2,
-            "name": "Constructing",
+            "name": "Construction",
             "sections": [{
                     "id": 101,
-                    "name": "Selection of construction Material"
+                    "name": "Selection of construction Material",
+                    "sections" : [
+                        {
+                            "id": 1011,
+                            "name": "Sand"
+                        },
+                        {
+                            "id": 1012,
+                            "name": "Gitti"
+                        },
+                        {
+                            "id": 1013,
+                            "name": "Steel"
+                        },
+                        {
+                            "id": 1014,
+                            "name": "Bricks"
+                        },
+                        {
+                            "id": 1015,
+                            "name": "Water"
+                        }
+                    ]
                 },
                 {
                     "id": 102,
@@ -66,7 +88,7 @@
             ]
         },{
             "id": 3,
-            "name": "Finishing:",
+            "name": "Finishing",
             "sections": [{
                     "id": 201,
                     "name": "Plastering"

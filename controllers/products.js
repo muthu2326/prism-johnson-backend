@@ -22,7 +22,7 @@ var getAllProducts = (req,res) => {
 
 var getOneProductDetails = (req, res) => {
     const FUN_LABEL = `\n\t getOneProductDetails ${FILE_INFO} \n\t`; 
-    let apiResponse = util.formatJSONBasedOnLang([PRODUCT], req.query.lang)
+    let apiResponse = util.formatJSONBasedOnLang([PRODUCT], req.query.lang)[0];
     log.info(`${FUN_LABEL} IN`);
     log.info(`${FUN_LABEL} req params ${JSON.stringify(req.params)}`);
     log.info(`${FUN_LABEL} req query ${JSON.stringify(req.query)}`);
