@@ -11,6 +11,10 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.STRING(255),
       allowNull: false
     },
+    name_hi: {
+      type: DataTypes.STRING(255),
+      allowNull: true
+    },
     media_asset_url: {
       type: DataTypes.STRING(255),
       allowNull: true
@@ -20,10 +24,18 @@ module.exports = function(sequelize, DataTypes) {
       allowNull: true
     },
     summary: {
-      type: "TINYTEXT",
+      type: "MEDIUMTEXT",
+      allowNull: true
+    },
+    summary_hi: {
+      type: "MEDIUMTEXT",
       allowNull: true
     },
     content: {
+      type: "MEDIUMTEXT",
+      allowNull: true
+    },
+    content_hi: {
       type: "MEDIUMTEXT",
       allowNull: true
     },
@@ -32,6 +44,10 @@ module.exports = function(sequelize, DataTypes) {
       allowNull: true
     },
     section_name: {
+      type: DataTypes.STRING(100),
+      allowNull: true
+    },
+    section_name_hi: {
       type: DataTypes.STRING(100),
       allowNull: true
     }

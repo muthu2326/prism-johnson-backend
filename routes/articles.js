@@ -11,6 +11,9 @@ router.get('/:id', articlesController.getOneArticle);
 /* Add an article */
 router.post('/', articlesController.createArticle);
 
+/* Add multiple articles */
+router.post('/bulk-insert', articlesController.bulkInsertArticles);
+
 /* Update an article */
 router.put('/:id', articlesController.updateArticle);
 

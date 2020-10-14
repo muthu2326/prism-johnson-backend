@@ -2,7 +2,7 @@ const log = require('../utils/logger').get();
 config = require('config');
 var articleService = require('../services/article.service.js');
 const FILE_INFO = 'Articles Controller';
-
+const HINDI_LANG = 'hi';
 const db = require('../models');
 // const ArticleModel = db.Article;
 // const cityMasterModel = db.city_master;
@@ -43,13 +43,38 @@ var getAllArticles = (req,res) => {
     articleService.getAllArticles(req, res, queryCondition, (error, serviceResponse) => {
         log.info(`${FUN_LABEL} received response for articleService.getAllArticles call`);
         log.debug(serviceResponse);
+        log.debug(`Query string ${JSON.stringify(req.query)}`);
         log.debug(error);
         if(!error) {
-            response.articles = serviceResponse.result;
+            response.articles = []
+            let thisArticle = {};
+            serviceResponse.result.forEach(element => {
+                thisArticle.id = element.id;
+                thisArticle.section_id = element.section_id;
+                thisArticle.media_asset_url = element.media_asset_url;
+                thisArticle.media_asset_type = element.media_asset_type;
+                if(req.query.lang === HINDI_LANG) {
+                    thisArticle.name = element.name_hi;
+                    thisArticle.summary = element.summary_hi;
+                    thisArticle.content = element.content_hi;
+                    thisArticle.section_name =   element.section_name_hi;
+                } else {
+                    thisArticle.name = element.name;
+                    thisArticle.summary = element.summary;
+                    thisArticle.content = element.content;
+                    thisArticle.section_name =   element.section_name;
+                }
+                response.articles.push(thisArticle);
+                thisArticle = {};
+            });
             response.count = serviceResponse.result.length;
             if(sec) {
                 response.section_id = sec;
-                response.section_name = serviceResponse.result[0].section_name
+                if(req.query.lang === HINDI_LANG) {
+                    response.section_name = serviceResponse.result[0].section_name_hi;
+                } else {
+                    response.section_name = serviceResponse.result[0].section_name;
+                }
             } else {
                 response.section = 'All sections'
             }
@@ -137,6 +162,23 @@ var createArticle = (req,res) => {
     // }
 }
 
+var bulkInsertArticles = (req,res) => {
+    const FUN_LABEL = `\n\t bulkInsertArticles ${FILE_INFO} \n\t`; 
+    log.info(`${FUN_LABEL} IN`);
+    log.info(`${FUN_LABEL} req body ${JSON.stringify(req.body)}`);
+    log.debug(`${FUN_LABEL} req params ${JSON.stringify(req.params)}`);
+    log.debug(`${FUN_LABEL} req query ${JSON.stringify(req.query)}`);
+    let entities = req.body;
+    articleService.bulkInsertArticles(req, res, entities, null, (error, serviceResponse) => {
+        log.info(`Received response`)
+        if(error) {
+            res.send(error);
+        } else {
+            res.send(serviceResponse);
+        }
+    })
+}
+
 var updateArticle = (req,res) => {
     const FUN_LABEL = `\n\t updateArticle ${FILE_INFO} \n\t`; 
     let response = {};
@@ -219,6 +261,7 @@ var deleteArticle = (req,res) => {
 module.exports = {
     getAllArticles,
     getOneArticle,
+    bulkInsertArticles,
     createArticle,
     updateArticle,
     deleteArticle

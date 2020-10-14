@@ -81,7 +81,7 @@ GRANT ALL ON prism_johnson.* TO 'prism_johnson'@'localhost';
 ```
 #!shell
 
-sequelize-auto -o "./models" -d prism_johnson -h localhost -u prism_johnson -p 3306 -x <password> -e mysql
+sequelize-auto -o "./models" -d prism_johnson -h localhost -u prism_johnson -p 3306 -x pri5wj0hns0N -e mysql
 
 ```
 

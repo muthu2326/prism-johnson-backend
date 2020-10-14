@@ -23,7 +23,8 @@ exports.bulkInsertArticles = (req, res, entities, condition, callback) => {
         serviceResponse.code = 'cannot_process_no_entity';
         callback(null, serviceResponse);
     }
-    articleModel.bulkCreate(entities, condition).then(result=> {
+    // articleModel.bulkCreate(entities, condition).then(result=> {
+    articleModel.bulkCreate(entities).then(result=> {
         log.info(`${FUN_LABEL} got result for articleModel.bulkCreate`);
         log.debug(result);
         if(result) {
