@@ -1,5 +1,7 @@
 const log = require('../utils/logger').get();
+const https = require('https');
 const util = require('../utils/util');
+var request = require("request");
 config = require('config');
 const FILE_INFO = 'Utils Controller';
 
@@ -125,9 +127,42 @@ var storeHindiContentPOC = (req, res) => {
         return res.status(500).send(response);
     })
 }
+
+var sendSMSPOC = (req, res) => {
+    /**
+     * REFER: http://bhashsms.com/index.php
+     * Compose Single / GROUP SMS
+     * 
+     */
+    const FUN_LABEL = `\n\t sendSMSPOC ${FILE_INFO} \n\t`; 
+    let response = {};
+    log.info(`${FUN_LABEL} IN`);
+    log.info(`${FUN_LABEL} req params ${JSON.stringify(req.params)}`);
+    log.info(`${FUN_LABEL} req query ${JSON.stringify(req.query)}`);
+    let smsContent = `TestSMS2ENcoded`;
+    var options = {
+        method: 'GET',
+        url: `http://bhashsms.com/api/sendmsg.php?user=prismcement&pass=pcl@2017&sender=PRISMC&phone=9786215105&text=${encodeURI(smsContent)}&priority=ndnd&stype=normal`,
+        // headers: {
+        //     'x-auth-client': bigcommerce_client_id,
+        //     'x-auth-token': bigcommerce_auth_token
+        // }
+    };
+
+    request(options, function(error, response, body) {
+        if (error) {
+            // throw new Error(error);
+            res.status(500).send("Could not send SMS")
+        } 
+
+        log.debug(body);
+        res.status(200).send("SMS has been sent");
+    });
+}
 module.exports = {
     getAllCities,
     getGrihNirmanDetails,
     getHindiContentPOC,
-    storeHindiContentPOC
+    storeHindiContentPOC,
+    sendSMSPOC
 };

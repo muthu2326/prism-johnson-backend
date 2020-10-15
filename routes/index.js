@@ -18,4 +18,7 @@ router.get('/grih-nirman-sections', utilController.getGrihNirmanDetails);
 router.get('/poc-hindi-content', utilController.getHindiContentPOC);
 router.post('/poc-hindi-content', utilController.storeHindiContentPOC);
 
+/** Send SMS POC */
+router.post('/poc-send-sms', utilController.sendSMSPOC);
+
 module.exports = router;
