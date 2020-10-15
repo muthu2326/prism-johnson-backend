@@ -24,19 +24,19 @@ var getAllArticles = (req,res) => {
     log.info(`${FUN_LABEL} req query ${JSON.stringify(req.query)}`);
     let sec = Number(req.query.section)
     // response = SECTION_ARTICLES;
-    // let secName = '';
-    // try {
-    //     GRIH_NIRMAN.stages.forEach(staging => {
-    //         staging.sections.forEach(section => {
-    //             if(section.id === sec) {
-    //                 secName = section.name;
-    //             }
-    //         })
-    //     });
-    //     response.section_name = secName;
-    // } catch(e) {
-    //     log.error(e)
-    // }
+    let secName = '';
+    try {
+        GRIH_NIRMAN.stages.forEach(staging => {
+            staging.sections.forEach(section => {
+                if(section.id === sec) {
+                    secName = section.name;
+                }
+            })
+        });
+        response.section_name = secName;
+    } catch(e) {
+        log.error(e)
+    }
     if(sec) {
         queryCondition = {
             where :{
@@ -52,15 +52,19 @@ var getAllArticles = (req,res) => {
         log.debug(error);
         if(!error) {
             response.articles = []
-            response.articles = util.formatJSONBasedOnLang(serviceResponse.result, req.query.lang);
+            if(serviceResponse.result.length > 0) {
+                response.articles = util.formatJSONBasedOnLang(serviceResponse.result, req.query.lang);
+            } else {
+                response.message = "No articles available";
+                response.code = "not_found";
+            }
             response.count = serviceResponse.result.length;
             if(sec) {
-                response.section_name = response.articles[0].section_name;
+                response.section_name = response.articles[0]? response.articles[0].section_name : secName;
                 response.section_id = sec;
             } else {
                 response.section = 'All sections'
             }
-            response.count 
             res.status(200).send(response);
         } else {
             res.status(500).send('Server error');
