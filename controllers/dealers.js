@@ -198,8 +198,8 @@ var updateDealer = (req,res) => {
     log.debug(`${FUN_LABEL} req params ${JSON.stringify(req.params)}`);
     log.debug(`${FUN_LABEL} req query ${JSON.stringify(req.query)}`);
     dealerId = req.params.id;
-    dealerObjectToBeUpdated.name = req.body.name ? req.body.name : undefined;
-    dealerObjectToBeUpdated.address = req.body.address ? req.body.address : undefined;
+    dealerObjectToBeUpdated.name_en = req.body.name ? req.body.name : undefined;
+    dealerObjectToBeUpdated.address_en = req.body.address ? req.body.address : undefined;
     dealerObjectToBeUpdated.phone = req.body.phone_numbers ? (req.body.phone_numbers[0] ? req.body.phone_numbers[0] : undefined) : undefined;
     dealerObjectToBeUpdated.alternate_phone_1 = req.body.phone_numbers ? (req.body.phone_numbers[1] ? req.body.phone_numbers[1] : undefined)  : undefined;
     dealerObjectToBeUpdated.city_id = req.body.city_id ? req.body.city_id : undefined;
