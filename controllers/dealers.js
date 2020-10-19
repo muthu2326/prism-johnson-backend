@@ -90,14 +90,14 @@ var getOneDealerDetails = (req, res) => {
         where:{ id: Number(req.params.id)},
         include:[{
             model:cityMasterModel,
-            attributes:['city', 'state']
+            attributes:['city_en', 'state_en']
         }]
     }).then(result=> {
         log.info(`${FUN_LABEL} got result for dealerModel.findOne`);
         log.debug(result);
         response.id = result.id;
-        response.name = result.name;
-        response.address = result.address;
+        response.name = result.name_en;
+        response.address = result.address_en;
         response.phone_numbers = [];
         result.phone ? response.phone_numbers.push(result.phone): '';
         result.alternate_phone_1 ? response.phone_numbers.push(result.alternate_phone_1) : '';
@@ -107,8 +107,8 @@ var getOneDealerDetails = (req, res) => {
         response.lang = result.lang;
         response.pin_code = result.pin_code;
         response.city_id = result.city_id;
-        response.city = result.city_master.city;
-        response.state = result.city_master.state;
+        response.city = result.city_master.city_en;
+        response.state = result.city_master.state_en;
         response.created = result.created;
         response.updated = result.updated;
         log.info(`${FUN_LABEL} OUT`);
