@@ -137,8 +137,8 @@ var createDealer = (req,res) => {
     log.debug(`${FUN_LABEL} payloadValidationResult: ${JSON.stringify(payloadValidationResult)}`);
     if(payloadValidationResult.valid) {
         try {
-            dealerObject.name = req.body.name;
-            dealerObject.address = req.body.address;
+            dealerObject.name_en = req.body.name;
+            dealerObject.address_en = req.body.address;
             dealerObject.phone = req.body.phone_numbers[0];
             dealerObject.alternate_phone_1 = req.body.phone_numbers[1];
             dealerObject.lat = req.body.lat;
