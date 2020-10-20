@@ -7,6 +7,7 @@ const log = require('./utils/logger').get();
 var allowlist = ['http://localhost:3000', 'http://prism-johnson.digiapt.com']
 
 var indexRouter = require('./routes/index');
+var authRouter = require('./routes/auth');
 var usersRouter = require('./routes/users');
 var pagesRouter = require('./routes/pages');
 var constructionTipsRouter = require('./routes/construction_tips');
@@ -55,6 +56,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
+app.use('/auth', authRouter);
 app.use('/pages', pagesRouter);
 app.use('/construction-tips', constructionTipsRouter);
 app.use('/dealers', dealersRouter);
