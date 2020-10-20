@@ -124,7 +124,128 @@ var hasMandatoryFieldsToCreateUser = (userObject) => {
     log.info(`${FUN_LABEL} OUT`);
     return response;
 }
+
+var createAdminUser = (req,res) => {
+    const FUN_LABEL = `\n\t createAdminUser ${FILE_INFO} \n\t`; 
+    let apiResponse = {};
+    let queryCondition = {};
+    log.info(`${FUN_LABEL} IN`);
+    // log.info(`${FUN_LABEL} req header ${JSON.stringify(req.headers)}`);
+    log.info(`${FUN_LABEL} req body ${JSON.stringify(req.body)}`);
+    log.info(`${FUN_LABEL} req params ${JSON.stringify(req.params)}`);
+    log.info(`${FUN_LABEL} req query ${JSON.stringify(req.query)}`);
+    apiResponse.code = 'success';
+    apiResponse.message = 'User has been created successfully';
+    apiResponse.data = {
+        "id" : 1,
+        "name" : req.body.name,
+        "email" : req.body.email,
+        "role" : req.body.role,
+        "mobile" : req.body.mobile
+    }
+    res.status(200).send(apiResponse);
+}
+
+var updateAdminUser = (req,res) => {
+    const FUN_LABEL = `\n\t updateAdminUser ${FILE_INFO} \n\t`; 
+    let apiResponse = {};
+    let queryCondition = {};
+    log.info(`${FUN_LABEL} IN`);
+    // log.info(`${FUN_LABEL} req header ${JSON.stringify(req.headers)}`);
+    log.info(`${FUN_LABEL} req body ${JSON.stringify(req.body)}`);
+    log.info(`${FUN_LABEL} req params ${JSON.stringify(req.params)}`);
+    log.info(`${FUN_LABEL} req query ${JSON.stringify(req.query)}`);
+    apiResponse.code = 'success';
+    apiResponse.message = 'User has been updated successfully';
+    apiResponse.data = {
+        "id" : req.body.id,
+        "name" : req.body.name,
+        "email" : req.body.email,
+        "role" : req.body.role,
+        "mobile" : req.body.mobile
+    }
+    res.status(200).send(apiResponse);
+}
+
+var getAdminUsers = (req,res) => {
+    const FUN_LABEL = `\n\t getAdminUsers ${FILE_INFO} \n\t`; 
+    let apiResponse = {};
+    let queryCondition = {};
+    log.info(`${FUN_LABEL} IN`);
+    // log.info(`${FUN_LABEL} req header ${JSON.stringify(req.headers)}`);
+    log.info(`${FUN_LABEL} req body ${JSON.stringify(req.body)}`);
+    log.info(`${FUN_LABEL} req params ${JSON.stringify(req.params)}`);
+    log.info(`${FUN_LABEL} req query ${JSON.stringify(req.query)}`);
+    apiResponse.code = 'success';
+    apiResponse.message = 'User has been updated successfully';
+    apiResponse.data = [
+        {
+            "id" : 1,
+            "name" : "Nirmal",
+            "email" : "nirmal@digiapt.com",
+            "password" : "xxxxxx",
+            "role" : "TTE",
+            "mobile" : "989898989"
+        },
+        {
+            "id" : 2,
+            "name" : "Shreyas",
+            "email" : "shreyas@digiapt.com",
+            "password" : "xxxxxx",
+            "role" : "TTE",
+            "mobile" : "989898934"
+        }           
+    ]
+    res.header('X-Total-Count', apiResponse.data.length);
+    res.status(200).send(apiResponse);
+}
+
+var deleteAdminUser = (req,res) => {
+    const FUN_LABEL = `\n\t deleteAdminUser ${FILE_INFO} \n\t`; 
+    let apiResponse = {};
+    let queryCondition = {};
+    log.info(`${FUN_LABEL} IN`);
+    // log.info(`${FUN_LABEL} req header ${JSON.stringify(req.headers)}`);
+    log.info(`${FUN_LABEL} req body ${JSON.stringify(req.body)}`);
+    log.info(`${FUN_LABEL} req params ${JSON.stringify(req.params)}`);
+    log.info(`${FUN_LABEL} req query ${JSON.stringify(req.query)}`);
+    apiResponse.code = 'success';
+    apiResponse.message = 'User has been deleted';
+    apiResponse.data = {
+        "id" : req.body.id
+    }
+    res.status(200).send(apiResponse);
+}
+
+var getOneAdminUser = (req,res) => {
+    const FUN_LABEL = `\n\t getAdminUser ${FILE_INFO} \n\t`; 
+    let apiResponse = {};
+    let queryCondition = {};
+    log.info(`${FUN_LABEL} IN`);
+    // log.info(`${FUN_LABEL} req header ${JSON.stringify(req.headers)}`);
+    log.info(`${FUN_LABEL} req body ${JSON.stringify(req.body)}`);
+    log.info(`${FUN_LABEL} req params ${JSON.stringify(req.params)}`);
+    log.info(`${FUN_LABEL} req query ${JSON.stringify(req.query)}`);
+    apiResponse.code = 'success';
+    apiResponse.message = 'User found & fetched';
+    apiResponse.data = {
+        "id" : Number(req.params.id),
+        "name" : "Nirmal",
+        "email" : "nirmal@digiapt.com",
+        "password" : "xxxxxx",
+        "role" : "TTE",
+        "mobile" : "989898989"
+    };
+    // res.header('X-Total-Count', apiResponse.data.length);
+    res.status(200).send(apiResponse);
+}
+
 module.exports = {
     getUsers,
-    createUser
+    createUser,
+    createAdminUser,
+    updateAdminUser,
+    getAdminUsers,
+    getOneAdminUser,
+    deleteAdminUser
 };

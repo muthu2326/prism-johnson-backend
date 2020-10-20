@@ -8,4 +8,19 @@ router.get('/', usersController.getUsers);
 /* create a user. */
 router.post('/', usersController.createUser);
 
+/* create Admin / TTE. */
+router.post('/admin', usersController.createAdminUser);
+
+/* Update Admin / TTE. */
+router.put('/admin/:id', usersController.updateAdminUser);
+
+/* GET admin users. */
+router.get('/admin', usersController.getAdminUsers);
+
+/* GET one admin user. */
+router.get('/admin/:id', usersController.getOneAdminUser);
+
+/* Delete Admin/TTE */
+router.delete('/admin/:id', usersController.deleteAdminUser);
+
 module.exports = router;

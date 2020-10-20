@@ -17,10 +17,12 @@ var login = (req,res) => {
     log.info(`${FUN_LABEL} req query ${JSON.stringify(req.query)}`);
     apiResponse = {
         "code" : "login_success",
-        "message" : "User logged in successfully",
+        "message" : "User logged in successfully"
+    };
+    apiResponse.data = {
         "token" : "asdjhasjdasd",
-        "role" : "admin" 
-    }    
+        "role" : "admin"
+    }
     res.status(200).send(apiResponse);
 }
 
