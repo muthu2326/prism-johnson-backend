@@ -16,6 +16,7 @@ var articlesRouter = require('./routes/articles');
 var productsRouter = require('./routes/products');
 var ordersRouter = require('./routes/orders');
 var enquiriesRouter = require('./routes/enquiries');
+var mediaAssetRouter = require('./routes/media_asset');
 
 var config = require('config');
 var app = express();
@@ -64,6 +65,7 @@ app.use('/articles', articlesRouter);
 app.use('/products', productsRouter);
 app.use('/orders', ordersRouter);
 app.use('/enquiries', enquiriesRouter);
+app.use('/media-assets', mediaAssetRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
