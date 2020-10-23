@@ -26,8 +26,8 @@ CREATE TABLE `article` (
   `id` int(11) NOT NULL,
   `name_en` varchar(255) NOT NULL,
   `name_hi` varchar(255) CHARACTER SET utf8 DEFAULT NULL,
-  `media_asset_url` varchar(255) DEFAULT NULL,
-  `media_asset_type` varchar(45) DEFAULT NULL,
+  `media_url` varchar(255) DEFAULT NULL,
+  `media_type` varchar(45) DEFAULT NULL,
   `summary_en` mediumtext,
   `summary_hi` mediumtext CHARACTER SET utf8,
   `content_en` mediumtext,
@@ -85,7 +85,7 @@ CREATE TABLE `dealer` (
   KEY `fk_dealer_city_master_id_idx` (`city_id`),
   KEY `idx_dealer_pin_code` (`pin_code`),
   CONSTRAINT `fk_dealer_city_id` FOREIGN KEY (`city_id`) REFERENCES `city_master` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -175,7 +175,7 @@ CREATE TABLE `user` (
   UNIQUE KEY `email_UNIQUE` (`email`),
   KEY `fk_user_city_master_id_idx` (`city_id`),
   CONSTRAINT `fk_user_city_id` FOREIGN KEY (`city_id`) REFERENCES `city_master` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -187,4 +187,4 @@ CREATE TABLE `user` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-10-14 14:39:39
+-- Dump completed on 2020-10-23 13:45:24
