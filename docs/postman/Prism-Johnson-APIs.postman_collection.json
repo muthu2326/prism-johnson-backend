@@ -1935,24 +1935,11 @@
 			"protocolProfileBehavior": {}
 		},
 		{
-			"name": "Get Grih Nirman Sections",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "{{base_url}}/grih-nirman-sections",
-					"host": [
-						"{{base_url}}"
-					],
-					"path": [
-						"grih-nirman-sections"
-					]
-				}
-			},
-			"response": [
+			"name": "Grih Nirman / Articles",
+			"item": [
 				{
 					"name": "Get Grih Nirman Sections",
-					"originalRequest": {
+					"request": {
 						"method": "GET",
 						"header": [],
 						"url": {
@@ -1965,255 +1952,87 @@
 							]
 						}
 					},
-					"status": "OK",
-					"code": 200,
-					"_postman_previewlanguage": "json",
-					"header": [
+					"response": [
 						{
-							"key": "Date",
-							"value": "Sat, 26 Sep 2020 04:53:39 GMT"
-						},
-						{
-							"key": "Server",
-							"value": "Apache/2.4.29 (Ubuntu)"
-						},
-						{
-							"key": "X-Powered-By",
-							"value": "Express"
-						},
-						{
-							"key": "Access-Control-Allow-Origin",
-							"value": "*"
-						},
-						{
-							"key": "Access-Control-Allow-Methods",
-							"value": "GET,PUT,POST,DELETE,OPTIONS"
-						},
-						{
-							"key": "Access-Control-Allow-Headers",
-							"value": "Origin, Content-Type, Authorization, Accept,Content-Length, X-Requested-With, X-PINGOTHER"
-						},
-						{
-							"key": "Access-Control-Expose-Headers",
-							"value": "X-Total-Count"
-						},
-						{
-							"key": "X-Total-Count",
-							"value": "5000"
-						},
-						{
-							"key": "Content-Type",
-							"value": "application/json; charset=utf-8"
-						},
-						{
-							"key": "Content-Length",
-							"value": "828"
-						},
-						{
-							"key": "ETag",
-							"value": "W/\"33c-Ck6+WqUX6QsujnPmB2IUy17jD1M\""
-						},
-						{
-							"key": "Keep-Alive",
-							"value": "timeout=5, max=100"
-						},
-						{
-							"key": "Connection",
-							"value": "Keep-Alive"
-						}
-					],
-					"cookie": [],
-					"body": "{\n    \"stages\": [\n        {\n            \"id\": 1,\n            \"name\": \"Planning:\",\n            \"sections\": [\n                {\n                    \"id\": 1,\n                    \"name\": \"Budget\"\n                },\n                {\n                    \"id\": 2,\n                    \"name\": \"Purchasing/Identifying a plot\"\n                },\n                {\n                    \"id\": 3,\n                    \"name\": \"Team Selection\"\n                },\n                {\n                    \"id\": 4,\n                    \"name\": \"Map Preparation and necessary Approvals\"\n                }\n            ]\n        },\n        {\n            \"id\": 2,\n            \"name\": \"Constructing\",\n            \"sections\": [\n                {\n                    \"id\": 101,\n                    \"name\": \"Selection of construction Material\"\n                },\n                {\n                    \"id\": 102,\n                    \"name\": \"Layout\"\n                },\n                {\n                    \"id\": 103,\n                    \"name\": \"Excavation\"\n                },\n                {\n                    \"id\": 104,\n                    \"name\": \"Laying the Foundation\"\n                },\n                {\n                    \"id\": 105,\n                    \"name\": \"Brickwork\"\n                },\n                {\n                    \"id\": 106,\n                    \"name\": \"Formwork\"\n                },\n                {\n                    \"id\": 107,\n                    \"name\": \"Slab Casting & Curing\"\n                },\n                {\n                    \"id\": 108,\n                    \"name\": \"Electric Work\"\n                },\n                {\n                    \"id\": 109,\n                    \"name\": \"Plumbing Work\"\n                },\n                {\n                    \"id\": 110,\n                    \"name\": \"Points to Remember\"\n                }\n            ]\n        },\n        {\n            \"id\": 3,\n            \"name\": \"Finishing:\",\n            \"sections\": [\n                {\n                    \"id\": 201,\n                    \"name\": \"Plastering\"\n                },\n                {\n                    \"id\": 202,\n                    \"name\": \"Wall & Floor Tiling\"\n                },\n                {\n                    \"id\": 203,\n                    \"name\": \"Bath/Sanitary Fitting Work\"\n                },\n                {\n                    \"id\": 204,\n                    \"name\": \"Painting and Decoration\"\n                }\n            ]\n        }\n    ]\n}"
-				}
-			]
-		},
-		{
-			"name": "Get articles of a section",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "{{base_url}}/articles?section={{section_id}}&lang=hi",
-					"host": [
-						"{{base_url}}"
-					],
-					"path": [
-						"articles"
-					],
-					"query": [
-						{
-							"key": "section",
-							"value": "{{section_id}}"
-						},
-						{
-							"key": "lang",
-							"value": "hi"
-						}
-					]
-				}
-			},
-			"response": [
-				{
-					"name": "Get articles of a section - English",
-					"originalRequest": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "{{base_url}}/articles?section={{section_id}}&lang=",
-							"host": [
-								"{{base_url}}"
-							],
-							"path": [
-								"articles"
-							],
-							"query": [
+							"name": "Get Grih Nirman Sections",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/grih-nirman-sections",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"grih-nirman-sections"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
 								{
-									"key": "section",
-									"value": "{{section_id}}"
+									"key": "Date",
+									"value": "Sat, 26 Sep 2020 04:53:39 GMT"
 								},
 								{
-									"key": "lang",
-									"value": ""
+									"key": "Server",
+									"value": "Apache/2.4.29 (Ubuntu)"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Access-Control-Allow-Methods",
+									"value": "GET,PUT,POST,DELETE,OPTIONS"
+								},
+								{
+									"key": "Access-Control-Allow-Headers",
+									"value": "Origin, Content-Type, Authorization, Accept,Content-Length, X-Requested-With, X-PINGOTHER"
+								},
+								{
+									"key": "Access-Control-Expose-Headers",
+									"value": "X-Total-Count"
+								},
+								{
+									"key": "X-Total-Count",
+									"value": "5000"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "828"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"33c-Ck6+WqUX6QsujnPmB2IUy17jD1M\""
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5, max=100"
+								},
+								{
+									"key": "Connection",
+									"value": "Keep-Alive"
 								}
-							]
+							],
+							"cookie": [],
+							"body": "{\n    \"stages\": [\n        {\n            \"id\": 1,\n            \"name\": \"Planning:\",\n            \"sections\": [\n                {\n                    \"id\": 1,\n                    \"name\": \"Budget\"\n                },\n                {\n                    \"id\": 2,\n                    \"name\": \"Purchasing/Identifying a plot\"\n                },\n                {\n                    \"id\": 3,\n                    \"name\": \"Team Selection\"\n                },\n                {\n                    \"id\": 4,\n                    \"name\": \"Map Preparation and necessary Approvals\"\n                }\n            ]\n        },\n        {\n            \"id\": 2,\n            \"name\": \"Constructing\",\n            \"sections\": [\n                {\n                    \"id\": 101,\n                    \"name\": \"Selection of construction Material\"\n                },\n                {\n                    \"id\": 102,\n                    \"name\": \"Layout\"\n                },\n                {\n                    \"id\": 103,\n                    \"name\": \"Excavation\"\n                },\n                {\n                    \"id\": 104,\n                    \"name\": \"Laying the Foundation\"\n                },\n                {\n                    \"id\": 105,\n                    \"name\": \"Brickwork\"\n                },\n                {\n                    \"id\": 106,\n                    \"name\": \"Formwork\"\n                },\n                {\n                    \"id\": 107,\n                    \"name\": \"Slab Casting & Curing\"\n                },\n                {\n                    \"id\": 108,\n                    \"name\": \"Electric Work\"\n                },\n                {\n                    \"id\": 109,\n                    \"name\": \"Plumbing Work\"\n                },\n                {\n                    \"id\": 110,\n                    \"name\": \"Points to Remember\"\n                }\n            ]\n        },\n        {\n            \"id\": 3,\n            \"name\": \"Finishing:\",\n            \"sections\": [\n                {\n                    \"id\": 201,\n                    \"name\": \"Plastering\"\n                },\n                {\n                    \"id\": 202,\n                    \"name\": \"Wall & Floor Tiling\"\n                },\n                {\n                    \"id\": 203,\n                    \"name\": \"Bath/Sanitary Fitting Work\"\n                },\n                {\n                    \"id\": 204,\n                    \"name\": \"Painting and Decoration\"\n                }\n            ]\n        }\n    ]\n}"
 						}
-					},
-					"status": "OK",
-					"code": 200,
-					"_postman_previewlanguage": "json",
-					"header": [
-						{
-							"key": "X-Powered-By",
-							"value": "Express"
-						},
-						{
-							"key": "Access-Control-Allow-Origin",
-							"value": "*"
-						},
-						{
-							"key": "Access-Control-Allow-Methods",
-							"value": "GET,PUT,POST,DELETE,OPTIONS"
-						},
-						{
-							"key": "Access-Control-Allow-Headers",
-							"value": "Origin, Content-Type, Authorization, Accept,Content-Length, X-Requested-With, X-PINGOTHER"
-						},
-						{
-							"key": "Access-Control-Expose-Headers",
-							"value": "X-Total-Count"
-						},
-						{
-							"key": "X-Total-Count",
-							"value": "5000"
-						},
-						{
-							"key": "Content-Type",
-							"value": "application/json; charset=utf-8"
-						},
-						{
-							"key": "Content-Length",
-							"value": "7189"
-						},
-						{
-							"key": "ETag",
-							"value": "W/\"1c15-1NnbmsFrLOBjE8jTX7xD9RVkClo\""
-						},
-						{
-							"key": "Date",
-							"value": "Wed, 14 Oct 2020 05:25:47 GMT"
-						},
-						{
-							"key": "Connection",
-							"value": "keep-alive"
-						}
-					],
-					"cookie": [],
-					"body": "{\n    \"articles\": [\n        {\n            \"id\": 1,\n            \"section_id\": 1,\n            \"media_asset_url\": \"https://www.youtube.com/watch?v=whvihpvXOiI\",\n            \"media_asset_type\": \"video\",\n            \"name\": \"New Direction: PRISM JOHNSON LIMITED\",\n            \"summary\": \"Look at this video to know more about Prism's service\",\n            \"content\": \"<div style='width: 100%;'> <div class='article-banner'> <img width='100%' height='auto' src='http://prism-johnson.digiapt.com/images/article-banner.png' alt='Article Banner'> </div> <div class='article-title' style='padding: 22px 16px 14px 16px; font-size: 18px; font-weight: bold; background-color: #F2F2F2;' >New Direction: PRISM JOHNSON LIMITED </div> <div class='article-descriptions' style='font-weight: Regular; padding: 14px 16px 8px 16px; font-size: 12px; line-height: 24px;'> <p class='article-desc-1'>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum</p> <p class='article-desc-2'>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum</p> </div> <div class='hindi-banner' style='margin: auto 16px;'>  <div style='padding: 16px 12px; background-color: #F2F2F2;'> <img width='100%' src='http://prism-johnson.digiapt.com/images/article-image-hi.png' alt='Hindi Slogan'> </div> </div>\",\n            \"section_name\": \"Budget\"\n        },\n        {\n            \"id\": 3,\n            \"section_id\": 1,\n            \"media_asset_url\": \"https://www.prismcement.com/images/proj1.jpg\",\n            \"media_asset_type\": \"image\",\n            \"name\": \"Bridges & Flyers\",\n            \"summary\": \"Prism Johnson Limited comes with modern day infrastructure development providing quality product, safety, timely construction, ease of construction and efficiency with minimum cost.\",\n            \"content\": \"<div style='width: 100%;'> <div class='article-banner'> <img width='100%' height='auto' src='https://www.prismcement.com/images/proj1.jpg' alt='Article Banner'> </div> <div class='article-title' style='padding: 22px 16px 14px 16px; font-size: 18px; font-weight: bold; background-color: #F2F2F2;' >Bridges & Flyers </div> <div class='article-descriptions' style='font-weight: Regular; padding: 14px 16px 8px 16px; font-size: 12px; line-height: 24px;'> <p class='article-desc-1'>Description 1 - Prism Johnson Limited comes with modern day infrastructure development providing quality product, safety, timely construction, ease of construction and efficiency with minimum cost.</p> <p class='article-desc-2'>Description 2 - Prism Johnson Limited comes with modern day infrastructure development providing quality product, safety, timely construction, ease of construction and efficiency with minimum cost.</p> </div> <div class='hindi-banner' style='margin: auto 16px;'>  <div style='padding: 16px 12px; background-color: #F2F2F2;'> <img width='100%' src='http://prism-johnson.digiapt.com/images/article-image-hi.png' alt='Hindi Slogan'> </div> </div>\",\n            \"section_name\": \"Budget\"\n        },\n        {\n            \"id\": 5,\n            \"section_id\": 1,\n            \"media_asset_url\": \"https://www.prismcement.com/images/infra-1.jpg\",\n            \"media_asset_type\": \"image\",\n            \"name\": \"Infrastructure Development\",\n            \"summary\": \"Prism Johnson Limited remains committed to take up the responsibility of sustainable growth by transforming the challenges it faces into value creation opportunities.\",\n            \"content\": \"<div style='width: 100%;'> <div class='article-banner'> <img width='100%' height='auto' src='https://www.prismcement.com/images/infra-1.jpg' alt='Article Banner'> </div> <div class='article-title' style='padding: 22px 16px 14px 16px; font-size: 18px; font-weight: bold; background-color: #F2F2F2;' >Infrastructure Development </div> <div class='article-descriptions' style='font-weight: Regular; padding: 14px 16px 8px 16px; font-size: 12px; line-height: 24px;'> <p class='article-desc-1'>Corporate Social Responsibility is an integral part of everything that we do. It is one of the essential core value of Prism Johnson Limited. The Company is conscious of its responsibilities towards the communities in whose amidst the manufacturing and business operations are conducted.</p> <p class='article-desc-2'>Corporate Social responsibility is instilled in our Vision, our strategies and management goals. The ethical standing of the Organization is evident in the unquestioned credibility it has patiently built over the years with all its stakeholders. The principles of sustainable growth extend to our CSR initiatives, which focus on holistic development of the local community and create social, ecological and economic value to the society. The company undertakes projects and schemes to promote the social and economic development of communities in and around the manufacturing locations of Prism Johnson Limited.</p> </div> <div class='hindi-banner' style='margin: auto 16px;'>  <div style='padding: 16px 12px; background-color: #F2F2F2;'> <img width='100%' src='http://prism-johnson.digiapt.com/images/article-image-hi.png' alt='Hindi Slogan'> </div> </div>\",\n            \"section_name\": \"Budget\"\n        },\n        {\n            \"id\": 6,\n            \"section_id\": 1,\n            \"media_asset_url\": \"https://www.prismcement.com/images/proj3.jpg\",\n            \"media_asset_type\": \"image\",\n            \"name\": \"Roads\",\n            \"summary\": \"We take pride in contributing towards the construction of roads and its participation over here has also been considerable as it not only elongates the service life of the structure but also comes with small maintenance cost.\",\n            \"content\": \"<div style='width: 100%;'> <div class='article-banner'> <img width='100%' height='auto' src='https://www.prismcement.com/images/proj3.jpg' alt='Article Banner'> </div> <div class='article-title' style='padding: 22px 16px 14px 16px; font-size: 18px; font-weight: bold; background-color: #F2F2F2;' >Roads </div> <div class='article-descriptions' style='font-weight: Regular; padding: 14px 16px 8px 16px; font-size: 12px; line-height: 24px;'> <p class='article-desc-1'>Description 1 - We take pride in contributing towards the construction of roads and its participation over here has also been considerable as it not only elongates the service life of the structure but also comes with small maintenance cost.</p> <p class='article-desc-2'>Description 2 - We take pride in contributing towards the construction of roads and its participation over here has also been considerable as it not only elongates the service life of the structure but also comes with small maintenance cost.</p> </div> <div class='hindi-banner' style='margin: auto 16px;'>  <div style='padding: 16px 12px; background-color: #F2F2F2;'> <img width='100%' src='http://prism-johnson.digiapt.com/images/article-image-hi.png' alt='Hindi Slogan'> </div> </div>\",\n            \"section_name\": \"Budget\"\n        }\n    ],\n    \"count\": 4,\n    \"section_id\": 1,\n    \"section_name\": \"Budget\"\n}"
+					]
 				},
 				{
 					"name": "Get articles of a section",
-					"originalRequest": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "{{base_url}}/articles?section={{section_id}}",
-							"host": [
-								"{{base_url}}"
-							],
-							"path": [
-								"articles"
-							],
-							"query": [
-								{
-									"key": "section",
-									"value": "{{section_id}}"
-								}
-							]
-						}
-					},
-					"status": "OK",
-					"code": 200,
-					"_postman_previewlanguage": "json",
-					"header": [
-						{
-							"key": "Date",
-							"value": "Sat, 26 Sep 2020 04:53:57 GMT"
-						},
-						{
-							"key": "Server",
-							"value": "Apache/2.4.29 (Ubuntu)"
-						},
-						{
-							"key": "X-Powered-By",
-							"value": "Express"
-						},
-						{
-							"key": "Access-Control-Allow-Origin",
-							"value": "*"
-						},
-						{
-							"key": "Access-Control-Allow-Methods",
-							"value": "GET,PUT,POST,DELETE,OPTIONS"
-						},
-						{
-							"key": "Access-Control-Allow-Headers",
-							"value": "Origin, Content-Type, Authorization, Accept,Content-Length, X-Requested-With, X-PINGOTHER"
-						},
-						{
-							"key": "Access-Control-Expose-Headers",
-							"value": "X-Total-Count"
-						},
-						{
-							"key": "X-Total-Count",
-							"value": "5000"
-						},
-						{
-							"key": "Content-Type",
-							"value": "application/json; charset=utf-8"
-						},
-						{
-							"key": "Content-Length",
-							"value": "1017"
-						},
-						{
-							"key": "ETag",
-							"value": "W/\"3f9-kxTCmecBlROr6d4KrlK05E6PXfU\""
-						},
-						{
-							"key": "Keep-Alive",
-							"value": "timeout=5, max=100"
-						},
-						{
-							"key": "Connection",
-							"value": "Keep-Alive"
-						}
-					],
-					"cookie": [],
-					"body": "{\n    \"articles\": [\n        {\n            \"id\": 1002,\n            \"name\": \"New Direction: PRISM JOHNSON LIMITED \",\n            \"media_asset_url\": \"https://www.youtube.com/watch?v=whvihpvXOiI\",\n            \"media_asset_type\": \"video\",\n            \"summary\": \"summary of the article\"\n        },\n        {\n            \"id\": 1003,\n            \"name\": \"Prism Products\",\n            \"media_asset_url\": \"https://www.prismcement.com/images/product-banner.jpg\",\n            \"media_asset_type\": \"image\",\n            \"summary\": \"Prism offers a range of products for variety of construction applications from foundation to finish\"\n        },\n        {\n            \"id\": 1004,\n            \"name\": \"1004 New Direction: PRISM JOHNSON LIMITED \",\n            \"media_asset_url\": \"https://www.youtube.com/watch?v=whvihpvXOiI\",\n            \"media_asset_type\": \"video\",\n            \"summary\": \"1004 Prism offers a range of products for variety of construction applications from foundation to finish\"\n        },\n        {\n            \"id\": 1005,\n            \"name\": \"1005 New Direction: PRISM JOHNSON LIMITED \",\n            \"media_asset_url\": \"https://www.youtube.com/watch?v=whvihpvXOiI\",\n            \"media_asset_type\": \"video\",\n            \"summary\": \"1005 Prism offers a range of products for variety of construction applications from foundation to finish\"\n        }\n    ],\n    \"section_id\": 1,\n    \"count\": 4\n}"
-				},
-				{
-					"name": "Get articles of a section - Hindi",
-					"originalRequest": {
+					"request": {
 						"method": "GET",
 						"header": [],
 						"url": {
@@ -2236,86 +2055,89 @@
 							]
 						}
 					},
-					"status": "OK",
-					"code": 200,
-					"_postman_previewlanguage": "json",
-					"header": [
+					"response": [
 						{
-							"key": "X-Powered-By",
-							"value": "Express"
-						},
-						{
-							"key": "Access-Control-Allow-Origin",
-							"value": "*"
-						},
-						{
-							"key": "Access-Control-Allow-Methods",
-							"value": "GET,PUT,POST,DELETE,OPTIONS"
-						},
-						{
-							"key": "Access-Control-Allow-Headers",
-							"value": "Origin, Content-Type, Authorization, Accept,Content-Length, X-Requested-With, X-PINGOTHER"
-						},
-						{
-							"key": "Access-Control-Expose-Headers",
-							"value": "X-Total-Count"
-						},
-						{
-							"key": "X-Total-Count",
-							"value": "5000"
-						},
-						{
-							"key": "Content-Type",
-							"value": "application/json; charset=utf-8"
-						},
-						{
-							"key": "Content-Length",
-							"value": "11843"
-						},
-						{
-							"key": "ETag",
-							"value": "W/\"2e43-s3sMH0FK/Wmd2c/0vKPqrTVOA5Y\""
-						},
-						{
-							"key": "Date",
-							"value": "Wed, 14 Oct 2020 05:25:22 GMT"
-						},
-						{
-							"key": "Connection",
-							"value": "keep-alive"
-						}
-					],
-					"cookie": [],
-					"body": "{\n    \"articles\": [\n        {\n            \"id\": 1,\n            \"section_id\": 1,\n            \"media_asset_url\": \"https://www.youtube.com/watch?v=whvihpvXOiI\",\n            \"media_asset_type\": \"video\",\n            \"name\": \"नई दिशा: प्रिज्म जॉनसन लिमिटेड\",\n            \"summary\": \"प्रिज्म की सेवा के बारे में अधिक जानने के लिए इस वीडियो को देखें\",\n            \"content\": \"<div style='width: 100%;'> <div class='article-banner'> <img width='100%' height='auto' src='http://prism-johnson.digiapt.com/images/article-banner.png' alt='Article Banner'> </div> <div class='article-title' style='padding: 22px 16px 14px 16px; font-size: 18px; font-weight: bold; background-color: #F2F2F2;' >नई दिशा: प्रिज्म जॉनसन लिमिटेड </div> <div class='article-descriptions' style='font-weight: Regular; padding: 14px 16px 8px 16px; font-size: 12px; line-height: 24px;'> <p class='article-desc-1'>लोरम इप्सम डोलर अमेट, कंसेटेटुर एडिपिसिंग एलीट, सेड डू ईज्मोड अस्थायी इंकिडीडंट यूट लैटर एट डोलोर मैग्ना एलिका। यूट एनिम एड मिनिमम वेनियम, क्विस नॉस्ट्रुड एक्सरसाइज ullamco laboris nisi ut aliquip ex eaodo resultat। ड्यूस ऑटे यूरेअर डोलर रीप्लेन्ड्रिट इन वॉलपेक्टेट वेलिट एसेल सिलम डोलोर यूरोप फुगिया नुल्ला पैराइटुर। असाधारण सिंट ऑकसैट क्यूपिडैट नॉन प्रोसीडेंट, सीन इन गुंपा क्यू ऑफिसिया देसिरंट मोलिट एनीम आईडी इस्ट लेबरम</p> <p class='article-desc-2'>लोरम इप्सम डोलर अमेट, कंसेटेटुर एडिपिसिंग एलीट, सेड डू ईज्मोड अस्थायी इंकिडीडंट यूट लैटर एट डोलोर मैग्ना एलिका। यूट एनिम एड मिनिमम वेनियम, क्विस नॉस्ट्रुड एक्सरसाइज ullamco laboris nisi ut aliquip ex eaodo resultat। ड्यूस ऑटे यूरेअर डोलर रीप्लेन्ड्रिट इन वॉलपेक्टेट वेलिट एसेल सिलम डोलोर यूरोप फुगिया नुल्ला पैराइटुर। असाधारण सिंट ऑकसैट क्यूपिडैट नॉन प्रोसीडेंट, सीन इन गुंपा क्यू ऑफिसिया देसिरंट मोलिट एनीम आईडी इस्ट लेबरम</p> </div> <div class='hindi-banner' style='margin: auto 16px;'>  <div style='padding: 16px 12px; background-color: #F2F2F2;'> <img width='100%' src='http://prism-johnson.digiapt.com/images/article-image-hi.png' alt='Hindi Slogan'> </div> </div>\",\n            \"section_name\": \"बजट\"\n        },\n        {\n            \"id\": 3,\n            \"section_id\": 1,\n            \"media_asset_url\": \"https://www.prismcement.com/images/proj1.jpg\",\n            \"media_asset_type\": \"image\",\n            \"name\": \"पुल और फ्लायर्स\",\n            \"summary\": \"प्रिज़म जॉनसन लिमिटेड आधुनिक उत्पाद, सुरक्षा, समय पर निर्माण, निर्माण में आसानी और न्यूनतम लागत के साथ दक्षता प्रदान करने वाले आधुनिक बुनियादी ढाँचे के विकास के साथ आता है।\",\n            \"content\": \"<div style='width: 100%;'> <div class='article-banner'> <img width='100%' height='auto' src='https://www.prismcement.com/images/proj1.jpg' alt='Article Banner'> </div> <div class='article-title' style='padding: 22px 16px 14px 16px; font-size: 18px; font-weight: bold; background-color: #F2F2F2;' >पुल और फ्लायर्स </div> <div class='article-descriptions' style='font-weight: Regular; padding: 14px 16px 8px 16px; font-size: 12px; line-height: 24px;'> <p class='article-desc-1'>विवरण 1 - प्रिज्म जॉनसन लिमिटेड आधुनिक उत्पाद, सुरक्षा, समय पर निर्माण, निर्माण में आसानी और न्यूनतम लागत के साथ दक्षता प्रदान करने के लिए बुनियादी ढाँचे के विकास के साथ आता है।</p> <p class='article-desc-2'>विवरण 2 - प्रिज्म जॉनसन लिमिटेड आधुनिक उत्पाद, सुरक्षा, समय पर निर्माण, निर्माण में आसानी और न्यूनतम लागत के साथ दक्षता प्रदान करने वाले बुनियादी ढाँचे के विकास के साथ आता है।</p> </div> <div class='hindi-banner' style='margin: auto 16px;'>  <div style='padding: 16px 12px; background-color: #F2F2F2;'> <img width='100%' src='http://prism-johnson.digiapt.com/images/article-image-hi.png' alt='Hindi Slogan'> </div> </div>\",\n            \"section_name\": \"बजट\"\n        },\n        {\n            \"id\": 5,\n            \"section_id\": 1,\n            \"media_asset_url\": \"https://www.prismcement.com/images/infra-1.jpg\",\n            \"media_asset_type\": \"image\",\n            \"name\": \"बुनियादी ढांचे का विकास\",\n            \"summary\": \"प्रिज्म जॉनसन लिमिटेड उन चुनौतियों का सामना करने के लिए सतत विकास की जिम्मेदारी लेने के लिए प्रतिबद्ध है जो इसे मूल्य सृजन के अवसरों में बदल देती हैं।\",\n            \"content\": \"<div style='width: 100%;'> <div class='article-banner'> <img width='100%' height='auto' src='https://www.prismcement.com/images/infra-1.jpg' alt='Article Banner'> </div> <div class='article-title' style='padding: 22px 16px 14px 16px; font-size: 18px; font-weight: bold; background-color: #F2F2F2;' >बुनियादी ढांचे का विकास </div> <div class='article-descriptions' style='font-weight: Regular; padding: 14px 16px 8px 16px; font-size: 12px; line-height: 24px;'> <p class='article-desc-1'>कॉरपोरेट सोशल रिस्पॉन्सिबिलिटी हर चीज का एक अभिन्न हिस्सा है जो हम करते हैं। यह प्रिज्म जॉनसन लिमिटेड के आवश्यक मूल मूल्य में से एक है। कंपनी उन समुदायों के प्रति अपनी जिम्मेदारियों के प्रति सचेत है जिनके बीच विनिर्माण और व्यवसाय संचालन का संचालन किया जाता है।</p> <p class='article-desc-2'>कॉर्पोरेट सामाजिक जिम्मेदारी हमारे विजन, हमारी रणनीतियों और प्रबंधन लक्ष्यों में निहित है। संगठन की नैतिक प्रतिष्ठा निर्विवाद रूप से उस विश्वसनीयता के साथ स्पष्ट है जो उसने अपने सभी हितधारकों के साथ वर्षों में बनाई है। सतत विकास के सिद्धांत हमारी सीएसआर पहलों तक विस्तृत हैं, जो स्थानीय समुदाय के समग्र विकास पर ध्यान केंद्रित करते हैं और समाज के लिए सामाजिक, पारिस्थितिक और आर्थिक मूल्य बनाते हैं। कंपनी प्रिज्म जॉनसन लिमिटेड के विनिर्माण स्थानों और उसके आसपास समुदायों के सामाजिक और आर्थिक विकास को बढ़ावा देने के लिए परियोजनाएं और योजनाएं चलाती है।</p> </div> <div class='hindi-banner' style='margin: auto 16px;'>  <div style='padding: 16px 12px; background-color: #F2F2F2;'> <img width='100%' src='http://prism-johnson.digiapt.com/images/article-image-hi.png' alt='Hindi Slogan'> </div> </div>\",\n            \"section_name\": \"बजट\"\n        },\n        {\n            \"id\": 6,\n            \"section_id\": 1,\n            \"media_asset_url\": \"https://www.prismcement.com/images/proj3.jpg\",\n            \"media_asset_type\": \"image\",\n            \"name\": \"सड़कें\",\n            \"summary\": \"हम सड़कों के निर्माण में योगदान देने में गर्व महसूस करते हैं और यहां पर इसकी भागीदारी भी काफी रही है क्योंकि यह न केवल संरचना के सेवा जीवन को बढ़ाता है बल्कि छोटे रखरखाव लागत के साथ आता है।\",\n            \"content\": \"<div style='width: 100%;'> <div class='article-banner'> <img width='100%' height='auto' src='https://www.prismcement.com/images/proj3.jpg' alt='Article Banner'> </div> <div class='article-title' style='padding: 22px 16px 14px 16px; font-size: 18px; font-weight: bold; background-color: #F2F2F2;' >सड़कें </div> <div class='article-descriptions' style='font-weight: Regular; padding: 14px 16px 8px 16px; font-size: 12px; line-height: 24px;'> <p class='article-desc-1'>विवरण 1 - हम सड़कों के निर्माण में योगदान देने में गर्व महसूस करते हैं और यहाँ पर इसकी भागीदारी भी काफी रही है क्योंकि यह न केवल संरचना के सेवा जीवन को बढ़ाता है बल्कि छोटे रखरखाव लागत के साथ आता है।</p> <p class='article-desc-2'>विवरण 2 - हम सड़कों के निर्माण की दिशा में योगदान करने में गर्व महसूस करते हैं और यहाँ पर इसकी भागीदारी भी काफी रही है क्योंकि यह न केवल संरचना के सेवा जीवन को बढ़ाता है बल्कि छोटे रखरखाव लागत के साथ आता है।</p> </div> <div class='hindi-banner' style='margin: auto 16px;'>  <div style='padding: 16px 12px; background-color: #F2F2F2;'> <img width='100%' src='http://prism-johnson.digiapt.com/images/article-image-hi.png' alt='Hindi Slogan'> </div> </div>\",\n            \"section_name\": \"बजट\"\n        }\n    ],\n    \"count\": 4,\n    \"section_id\": 1,\n    \"section_name\": \"बजट\"\n}"
-				}
-			]
-		},
-		{
-			"name": "Get one article",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "{{base_url}}/articles/{{article_id}}?lang=hi",
-					"host": [
-						"{{base_url}}"
-					],
-					"path": [
-						"articles",
-						"{{article_id}}"
-					],
-					"query": [
-						{
-							"key": "lang",
-							"value": "hi"
+							"name": "Get articles of a section",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/articles?section={{section_id}}&lang=hi",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"articles"
+									],
+									"query": [
+										{
+											"key": "section",
+											"value": "{{section_id}}"
+										},
+										{
+											"key": "lang",
+											"value": "hi"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Access-Control-Allow-Methods",
+									"value": "GET,PUT,POST,DELETE,OPTIONS"
+								},
+								{
+									"key": "Access-Control-Allow-Headers",
+									"value": "Origin, Content-Type, Authorization, Accept,Content-Length, X-Requested-With, X-PINGOTHER"
+								},
+								{
+									"key": "Access-Control-Expose-Headers",
+									"value": "X-Total-Count"
+								},
+								{
+									"key": "X-Total-Count",
+									"value": "3"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "616"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"268-kWN+sqpqnX4VQki53oU0XU4S8fg\""
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 23 Oct 2020 08:55:47 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"code\": \"Fetched articles of this section\",\n    \"message\": \"fetched_articles\",\n    \"data\": {\n        \"articles\": [\n            {\n                \"id\": 1,\n                \"title\": \"title name\",\n                \"description\": \"description content\",\n                \"media_url\": \"https://www.prismcement.com/images/product-banner.jpg\",\n                \"media_type\": \"image\"\n            },\n            {\n                \"id\": 2,\n                \"title\": \"2-title name\",\n                \"description\": \"2-description content\",\n                \"media_url\": \"https://www.prismcement.com/images/product-banner.jpg\",\n                \"media_type\": \"image\"\n            },\n            {\n                \"id\": 3,\n                \"title\": \"3-title name\",\n                \"description\": \"3-description content\",\n                \"media_url\": \"https://www.prismcement.com/images/product-banner.jpg\",\n                \"media_type\": \"image\"\n            }\n        ],\n        \"count\": 4,\n        \"section_name\": \"Budget\",\n        \"section_id\": 1\n    }\n}"
 						}
 					]
-				}
-			},
-			"response": [
+				},
 				{
-					"name": "Get one article - hindi",
-					"originalRequest": {
+					"name": "Get one article",
+					"request": {
 						"method": "GET",
 						"header": [],
 						"url": {
@@ -2335,203 +2157,85 @@
 							]
 						}
 					},
-					"status": "OK",
-					"code": 200,
-					"_postman_previewlanguage": "json",
-					"header": [
+					"response": [
 						{
-							"key": "X-Powered-By",
-							"value": "Express"
-						},
-						{
-							"key": "Access-Control-Allow-Origin",
-							"value": "*"
-						},
-						{
-							"key": "Access-Control-Allow-Methods",
-							"value": "GET,PUT,POST,DELETE,OPTIONS"
-						},
-						{
-							"key": "Access-Control-Allow-Headers",
-							"value": "Origin, Content-Type, Authorization, Accept,Content-Length, X-Requested-With, X-PINGOTHER"
-						},
-						{
-							"key": "Access-Control-Expose-Headers",
-							"value": "X-Total-Count"
-						},
-						{
-							"key": "X-Total-Count",
-							"value": "5000"
-						},
-						{
-							"key": "Content-Type",
-							"value": "application/json; charset=utf-8"
-						},
-						{
-							"key": "Content-Length",
-							"value": "3349"
-						},
-						{
-							"key": "ETag",
-							"value": "W/\"d15-eti0JUYAULzcX7v6SXrjpDAGvKE\""
-						},
-						{
-							"key": "Date",
-							"value": "Wed, 14 Oct 2020 05:49:45 GMT"
-						},
-						{
-							"key": "Connection",
-							"value": "keep-alive"
-						}
-					],
-					"cookie": [],
-					"body": "{\n    \"id\": 1,\n    \"section_id\": 1,\n    \"media_asset_url\": \"https://www.youtube.com/watch?v=whvihpvXOiI\",\n    \"media_asset_type\": \"video\",\n    \"name\": \"नई दिशा: प्रिज्म जॉनसन लिमिटेड\",\n    \"summary\": \"प्रिज्म की सेवा के बारे में अधिक जानने के लिए इस वीडियो को देखें\",\n    \"content\": \"<div style='width: 100%;'> <div class='article-banner'> <img width='100%' height='auto' src='http://prism-johnson.digiapt.com/images/article-banner.png' alt='Article Banner'> </div> <div class='article-title' style='padding: 22px 16px 14px 16px; font-size: 18px; font-weight: bold; background-color: #F2F2F2;' >नई दिशा: प्रिज्म जॉनसन लिमिटेड </div> <div class='article-descriptions' style='font-weight: Regular; padding: 14px 16px 8px 16px; font-size: 12px; line-height: 24px;'> <p class='article-desc-1'>लोरम इप्सम डोलर अमेट, कंसेटेटुर एडिपिसिंग एलीट, सेड डू ईज्मोड अस्थायी इंकिडीडंट यूट लैटर एट डोलोर मैग्ना एलिका। यूट एनिम एड मिनिमम वेनियम, क्विस नॉस्ट्रुड एक्सरसाइज ullamco laboris nisi ut aliquip ex eaodo resultat। ड्यूस ऑटे यूरेअर डोलर रीप्लेन्ड्रिट इन वॉलपेक्टेट वेलिट एसेल सिलम डोलोर यूरोप फुगिया नुल्ला पैराइटुर। असाधारण सिंट ऑकसैट क्यूपिडैट नॉन प्रोसीडेंट, सीन इन गुंपा क्यू ऑफिसिया देसिरंट मोलिट एनीम आईडी इस्ट लेबरम</p> <p class='article-desc-2'>लोरम इप्सम डोलर अमेट, कंसेटेटुर एडिपिसिंग एलीट, सेड डू ईज्मोड अस्थायी इंकिडीडंट यूट लैटर एट डोलोर मैग्ना एलिका। यूट एनिम एड मिनिमम वेनियम, क्विस नॉस्ट्रुड एक्सरसाइज ullamco laboris nisi ut aliquip ex eaodo resultat। ड्यूस ऑटे यूरेअर डोलर रीप्लेन्ड्रिट इन वॉलपेक्टेट वेलिट एसेल सिलम डोलोर यूरोप फुगिया नुल्ला पैराइटुर। असाधारण सिंट ऑकसैट क्यूपिडैट नॉन प्रोसीडेंट, सीन इन गुंपा क्यू ऑफिसिया देसिरंट मोलिट एनीम आईडी इस्ट लेबरम</p> </div> <div class='hindi-banner' style='margin: auto 16px;'>  <div style='padding: 16px 12px; background-color: #F2F2F2;'> <img width='100%' src='http://prism-johnson.digiapt.com/images/article-image-hi.png' alt='Hindi Slogan'> </div> </div>\",\n    \"section_name\": \"बजट\"\n}"
-				},
-				{
-					"name": "Get one article - English",
-					"originalRequest": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "{{base_url}}/articles/{{article_id}}",
-							"host": [
-								"{{base_url}}"
+							"name": "Get one article",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/articles/{{article_id}}?lang=hi",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"articles",
+										"{{article_id}}"
+									],
+									"query": [
+										{
+											"key": "lang",
+											"value": "hi"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Access-Control-Allow-Methods",
+									"value": "GET,PUT,POST,DELETE,OPTIONS"
+								},
+								{
+									"key": "Access-Control-Allow-Headers",
+									"value": "Origin, Content-Type, Authorization, Accept,Content-Length, X-Requested-With, X-PINGOTHER"
+								},
+								{
+									"key": "Access-Control-Expose-Headers",
+									"value": "X-Total-Count"
+								},
+								{
+									"key": "X-Total-Count",
+									"value": "5000"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "2062"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"80e-y4moYenD8rfemW9rHEU7vmLVw2k\""
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 23 Oct 2020 08:48:27 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
 							],
-							"path": [
-								"articles",
-								"{{article_id}}"
-							]
+							"cookie": [],
+							"body": "{\n    \"data\": {\n        \"title\": \"title of the article\",\n        \"section_1\": {\n            \"sub_title\": \"sub title of the article\",\n            \"media_url\": \"https://www.youtube.com/watch?v=whvihpvXOiI\",\n            \"media_type\": \"video\",\n            \"description\": \"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.\",\n            \"features\": [\n                \"It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. \",\n                \"he point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here'\",\n                \"Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like)\"\n            ]\n        },\n        \"section-2\": {\n            \"media_url\": \"https://www.prismcement.com/images/product-banner.jpg\",\n            \"media_type\": \"image\",\n            \"description\": \"At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime placeat facere possimus, omnis voluptas assumenda est, omnis dolor repellendus. Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet ut et voluptates repudiandae sint et molestiae non recusandae. Itaque earum rerum hic tenetur a sapiente delectus, ut aut reiciendis voluptatibus maiores alias consequatur aut perferendis doloribus asperiores repellat.\"\n        }\n    },\n    \"code\": \"fetched_article\",\n    \"message\": \"Fetched an article\"\n}"
 						}
-					},
-					"status": "OK",
-					"code": 200,
-					"_postman_previewlanguage": "json",
-					"header": [
-						{
-							"key": "X-Powered-By",
-							"value": "Express"
-						},
-						{
-							"key": "Access-Control-Allow-Origin",
-							"value": "*"
-						},
-						{
-							"key": "Access-Control-Allow-Methods",
-							"value": "GET,PUT,POST,DELETE,OPTIONS"
-						},
-						{
-							"key": "Access-Control-Allow-Headers",
-							"value": "Origin, Content-Type, Authorization, Accept,Content-Length, X-Requested-With, X-PINGOTHER"
-						},
-						{
-							"key": "Access-Control-Expose-Headers",
-							"value": "X-Total-Count"
-						},
-						{
-							"key": "X-Total-Count",
-							"value": "5000"
-						},
-						{
-							"key": "Content-Type",
-							"value": "application/json; charset=utf-8"
-						},
-						{
-							"key": "Content-Length",
-							"value": "1939"
-						},
-						{
-							"key": "ETag",
-							"value": "W/\"793-RdcmmKMuX7sJwRz0mpZxRwGLKfg\""
-						},
-						{
-							"key": "Date",
-							"value": "Wed, 14 Oct 2020 05:50:02 GMT"
-						},
-						{
-							"key": "Connection",
-							"value": "keep-alive"
-						}
-					],
-					"cookie": [],
-					"body": "{\n    \"id\": 1,\n    \"section_id\": 1,\n    \"media_asset_url\": \"https://www.youtube.com/watch?v=whvihpvXOiI\",\n    \"media_asset_type\": \"video\",\n    \"name\": \"New Direction: PRISM JOHNSON LIMITED\",\n    \"summary\": \"Look at this video to know more about Prism's service\",\n    \"content\": \"<div style='width: 100%;'> <div class='article-banner'> <img width='100%' height='auto' src='http://prism-johnson.digiapt.com/images/article-banner.png' alt='Article Banner'> </div> <div class='article-title' style='padding: 22px 16px 14px 16px; font-size: 18px; font-weight: bold; background-color: #F2F2F2;' >New Direction: PRISM JOHNSON LIMITED </div> <div class='article-descriptions' style='font-weight: Regular; padding: 14px 16px 8px 16px; font-size: 12px; line-height: 24px;'> <p class='article-desc-1'>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum</p> <p class='article-desc-2'>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum</p> </div> <div class='hindi-banner' style='margin: auto 16px;'>  <div style='padding: 16px 12px; background-color: #F2F2F2;'> <img width='100%' src='http://prism-johnson.digiapt.com/images/article-image-hi.png' alt='Hindi Slogan'> </div> </div>\",\n    \"section_name\": \"Budget\"\n}"
-				},
-				{
-					"name": "Get one article",
-					"originalRequest": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "{{base_url}}/articles/{{article_id}}",
-							"host": [
-								"{{base_url}}"
-							],
-							"path": [
-								"articles",
-								"{{article_id}}"
-							]
-						}
-					},
-					"status": "OK",
-					"code": 200,
-					"_postman_previewlanguage": "json",
-					"header": [
-						{
-							"key": "Date",
-							"value": "Sat, 26 Sep 2020 04:54:10 GMT"
-						},
-						{
-							"key": "Server",
-							"value": "Apache/2.4.29 (Ubuntu)"
-						},
-						{
-							"key": "X-Powered-By",
-							"value": "Express"
-						},
-						{
-							"key": "Access-Control-Allow-Origin",
-							"value": "*"
-						},
-						{
-							"key": "Access-Control-Allow-Methods",
-							"value": "GET,PUT,POST,DELETE,OPTIONS"
-						},
-						{
-							"key": "Access-Control-Allow-Headers",
-							"value": "Origin, Content-Type, Authorization, Accept,Content-Length, X-Requested-With, X-PINGOTHER"
-						},
-						{
-							"key": "Access-Control-Expose-Headers",
-							"value": "X-Total-Count"
-						},
-						{
-							"key": "X-Total-Count",
-							"value": "5000"
-						},
-						{
-							"key": "Content-Type",
-							"value": "application/json; charset=utf-8"
-						},
-						{
-							"key": "Content-Length",
-							"value": "485"
-						},
-						{
-							"key": "ETag",
-							"value": "W/\"1e5-QKfxfujrchAQvnCAnt1fky+DeiE\""
-						},
-						{
-							"key": "Keep-Alive",
-							"value": "timeout=5, max=100"
-						},
-						{
-							"key": "Connection",
-							"value": "Keep-Alive"
-						}
-					],
-					"cookie": [],
-					"body": "{\n    \"id\": 1002,\n    \"name\": \"New Direction: PRISM JOHNSON LIMITED \",\n    \"media_asset_url\": \"https://www.youtube.com/watch?v=whvihpvXOiI\",\n    \"media_asset_type\": \"video\",\n    \"summary\": \"Prism offers a range of products for variety of construction applications from foundation to finish\",\n    \"content\": \"<div> <h1>Name of the article</h1> <h2>Section-1 of the article </h2> <p>Paragraph Section-1 of the article </p> <h2>Section-2 of the article </h2> <p>Paragraph Section-2 of the article </p> <div>\",\n    \"section_id\": 1\n}"
+					]
 				}
-			]
+			],
+			"protocolProfileBehavior": {}
 		},
 		{
 			"name": "Get all cities",
