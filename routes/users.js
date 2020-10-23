@@ -5,6 +5,9 @@ var usersController = require('../controllers/users');
 /* GET users listing. */
 router.get('/', usersController.getUsers);
 
+/* GET one user. */
+router.get('/:id', usersController.getOneUser);
+
 /* create a user. */
 router.post('/', usersController.createUser);
 

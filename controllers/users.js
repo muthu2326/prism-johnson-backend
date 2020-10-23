@@ -15,7 +15,7 @@ var getUsers = (req,res) => {
     userModel.findAndCountAll({
         include:[{
             model:cityMasterModel,
-            attributes:['city', 'state']
+            attributes:['city_en', 'state_en']
         }]
     }).then(result=> {
         log.info(`${FUN_LABEL} got result for userModel.findAll`);
@@ -29,15 +29,60 @@ var getUsers = (req,res) => {
                 user.email = element.email;
                 user.phone_number = element.phone_number;
                 user.city_id = element.city_id;
-                user.city = element.city_master.city;
-                user.state = element.city_master.state; 
+                user.city = element.city_master.city_en;
+                user.state = element.city_master.state_en; 
                 users.push(user);
                 user = {};
             });
         }
         log.info(`${FUN_LABEL} OUT`);
-        response = users;
+        response.data = users;
+        response.code = 'fetched_all_users';
+        response.message = 'Fetched users';
         res.header('X-Total-Count', Number(result.count));
+        res.status(200).send(response);
+    }).catch(err=>{
+        log.error(`${FUN_LABEL} error in userModel.findAll`);
+        log.error(err);
+        log.info(`${FUN_LABEL} OUT`);
+        response.code = 'error_fetch_users';
+        response.message = 'Unable to fetch users';
+        response.error_details = err;
+        return res.status(500).send(response);
+    })
+}
+
+var getOneUser = (req,res) => {
+    const FUN_LABEL = `\n\t getOneUser ${FILE_INFO} \n\t`; 
+    let response = {};
+    log.info(`${FUN_LABEL} IN`);
+    log.debug(`${FUN_LABEL} req params ${JSON.stringify(req.params)}`);
+    userModel.findOne({
+        where : {
+            id : Number(req.params.id)
+        },
+        include:[{
+            model:cityMasterModel,
+            attributes:['city_en', 'state_en']
+        }]
+    }).then(result=> {
+        log.info(`${FUN_LABEL} got result for userModel.findAll`);
+        log.debug(result);
+        let user = {};
+        if(result) {
+            user.id = result.id;
+            user.name = result.name;
+            user.email = result.email;
+            user.phone_number = result.phone_number;
+            user.city_id = result.city_id;
+            user.city = result.city_master.city_en;
+            user.state = result.city_master.state_en; 
+        }
+        log.info(`${FUN_LABEL} OUT`);
+        response.code = 'fetched_user';
+        response.message = 'Fetched user based on id';
+        response.data = user;
+        // res.header('X-Total-Count', Number(result.count));
         res.status(200).send(response);
     }).catch(err=>{
         log.error(`${FUN_LABEL} error in userModel.findAll`);
@@ -322,6 +367,7 @@ var getOneAdminUser = (req,res) => {
 
 module.exports = {
     getUsers,
+    getOneUser,
     createUser,
     createAdminUser,
     updateAdminUser,
