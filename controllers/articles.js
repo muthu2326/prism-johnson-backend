@@ -15,7 +15,8 @@ let allKeys = [];
 const Op = db.Sequelize.Op;
 const SECTION_ARTICLES =   require('../docs/api-mock-json/get-articles-of-a-section.json')
 const ARTICLE =   require('../docs/api-mock-json/get-one-article.json')
-const GRIH_NIRMAN =   require('../docs/api-mock-json/grih-nirman-sections.json')
+const GRIH_NIRMAN =   require('../docs/api-mock-json/grih-nirman-sections.json');
+const article = require('../models/article');
 var getAllArticles = (req,res) => {
     const FUN_LABEL = `\n\t getAllArticles ${FILE_INFO} \n\t`; 
     let response = {};
@@ -47,38 +48,70 @@ var getAllArticles = (req,res) => {
         }
     }
     log.info(`${FUN_LABEL} going to make articleService.getAllArticles call`);
-    articleService.getAllArticles(req, res, queryCondition, (error, serviceResponse) => {
-        log.info(`${FUN_LABEL} received response for articleService.getAllArticles call`);
-        log.debug(serviceResponse);
-        log.debug(`Query string ${JSON.stringify(req.query)}`);
-        log.debug(error);
-        if(!error) {
-            response.articles = []
-            if(serviceResponse.result.length > 0) {
-                response.articles = util.formatJSONBasedOnLang(serviceResponse.result, req.query.lang);
-            }
-            response.count = serviceResponse.result.length;
-            if(sec) {
-                response.section_name = response.articles[0]? response.articles[0].section_name : secName;
-                response.section_id = sec;
-                apiResponse.message = 'Fetched articles of this section';
-            } else {
-                response.section = 'All sections'
-                apiResponse.message = 'Fetched articles of all sections';
-            }
-            apiResponse.code = 'fetched_articles';
-            if(serviceResponse.result.length === 0) {
-                apiResponse.message = "No articles available";
-                apiResponse.code = "not_found";
-            }
-            apiResponse.data = response;
-            res.status(200).send(apiResponse);
-        } else {
-            res.status(500).send(MESSAGES.server_error_message);
-        }
-    })
+    // articleService.getAllArticles(req, res, queryCondition, (error, serviceResponse) => {
+    //     log.info(`${FUN_LABEL} received response for articleService.getAllArticles call`);
+    //     log.debug(serviceResponse);
+    //     log.debug(`Query string ${JSON.stringify(req.query)}`);
+    //     log.debug(error);
+    //     if(!error) {
+    //         response.articles = []
+    //         if(serviceResponse.result.length > 0) {
+    //             response.articles = util.formatJSONBasedOnLang(serviceResponse.result, req.query.lang);
+    //         }
+    //         response.count = serviceResponse.result.length;
+    //         if(sec) {
+    //             response.section_name = response.articles[0]? response.articles[0].section_name : secName;
+    //             response.section_id = sec;
+    //             apiResponse.message = 'Fetched articles of this section';
+    //         } else {
+    //             response.section = 'All sections'
+    //             apiResponse.message = 'Fetched articles of all sections';
+    //         }
+    //         apiResponse.code = 'fetched_articles';
+    //         if(serviceResponse.result.length === 0) {
+    //             apiResponse.message = "No articles available";
+    //             apiResponse.code = "not_found";
+    //         }
+    //         apiResponse.data = response;
+    //         res.status(200).send(apiResponse);
+    //     } else {
+    //         res.status(500).send(MESSAGES.server_error_message);
+    //     }
+    // })
+    
     // Mock response for get articles of one section
-    // res.status(200).send(response);
+    apiResponse.code = "Fetched articles of this section";
+    apiResponse.message = "fetched_articles";
+    apiResponse.data = {
+        articles : [
+            {
+                "id" :1,
+                "title" : "title name",
+                "description" : "description content",
+                "media_url" : "https://www.prismcement.com/images/product-banner.jpg",
+                "media_type" : "image"
+            },
+            {
+                "id" :2,
+                "title" : "2-title name",
+                "description" : "2-description content",
+                "media_url" : "https://www.prismcement.com/images/product-banner.jpg",
+                "media_type" : "image"
+            },
+            {
+                "id" : 3,
+                "title" : "3-title name",
+                "description" : "3-description content",
+                "media_url" : "https://www.prismcement.com/images/product-banner.jpg",
+                "media_type" : "image"
+            }
+        ],
+        count: 4,
+        section_name: "Budget",
+        section_id: 1
+    }
+    res.header('X-Total-Count', 3);
+    res.status(200).send(apiResponse);
 }
 
 var getOneArticle = (req, res) => {
@@ -92,23 +125,43 @@ var getOneArticle = (req, res) => {
     queryCondition = {
         where: { id : articleId }
     };
-    articleService.getAnArticle(req, res, queryCondition, (error, serviceResponse) => {
-        log.info(`${FUN_LABEL} received response for articleService.getAnArticle call`);
-        log.debug(serviceResponse);
-        log.debug(`Query string ${JSON.stringify(req.query)}`);
-        log.debug(error);
-        if(!error) {
-            apiResponse.data = {};
-            apiResponse.data = util.formatJSONBasedOnLang([serviceResponse.result], req.query.lang)[0];
-            apiResponse.message = "fetched_article";
-            apiResponse.code = "article_found";
-            res.status(200).send(apiResponse);
-        } else {
-            res.status(500).send(MESSAGES.server_error_message);
+    // articleService.getAnArticle(req, res, queryCondition, (error, serviceResponse) => {
+    //     log.info(`${FUN_LABEL} received response for articleService.getAnArticle call`);
+    //     log.debug(serviceResponse);
+    //     log.debug(`Query string ${JSON.stringify(req.query)}`);
+    //     log.debug(error);
+    //     if(!error) {
+    //         apiResponse.data = {};
+    //         apiResponse.data = util.formatJSONBasedOnLang([serviceResponse.result], req.query.lang)[0];
+    //         apiResponse.message = "fetched_article";
+    //         apiResponse.code = "article_found";
+    //         res.status(200).send(apiResponse);
+    //     } else {
+    //         res.status(500).send(MESSAGES.server_error_message);
+    //     }
+    // })
+    apiResponse.data = {
+        "id" : 1,
+        "title" : "title of the article",
+        "section_1" : {
+            "sub_title" : "sub title of the article",
+            "media_url" : "https://www.youtube.com/watch?v=whvihpvXOiI",
+            "media_type" : "video",
+            "description" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+            "features" : ["It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. "
+                ,"he point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here'"
+                ,"Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like)"
+            ]
+        },
+        "section-2" : {
+            "media_url" : "https://www.prismcement.com/images/product-banner.jpg",
+            "media_type" : "image",
+            "description" : "At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime placeat facere possimus, omnis voluptas assumenda est, omnis dolor repellendus. Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet ut et voluptates repudiandae sint et molestiae non recusandae. Itaque earum rerum hic tenetur a sapiente delectus, ut aut reiciendis voluptatibus maiores alias consequatur aut perferendis doloribus asperiores repellat."
         }
-    })
-    
-    // res.status(200).send(ARTICLE);
+    }
+    apiResponse.code = 'fetched_article';
+    apiResponse.message = 'Fetched an article';
+    res.status(200).send(apiResponse);
 }
 
 var createArticle = (req,res) => {
