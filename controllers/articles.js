@@ -6,6 +6,7 @@ const HINDI_LANG = 'hi';
 const ENGLISH_LANG = 'en';
 const db = require('../models');
 const util = require('../utils/util');
+const MESSAGES = require('../utils/message.json');
 let keysToBeRemoved = [];
 let keysToBeModified = [];
 let allKeys = [];
@@ -18,6 +19,7 @@ const GRIH_NIRMAN =   require('../docs/api-mock-json/grih-nirman-sections.json')
 var getAllArticles = (req,res) => {
     const FUN_LABEL = `\n\t getAllArticles ${FILE_INFO} \n\t`; 
     let response = {};
+    let apiResponse = {};
     let queryCondition = {};
     log.info(`${FUN_LABEL} IN`);
     log.info(`${FUN_LABEL} req params ${JSON.stringify(req.params)}`);
@@ -54,20 +56,25 @@ var getAllArticles = (req,res) => {
             response.articles = []
             if(serviceResponse.result.length > 0) {
                 response.articles = util.formatJSONBasedOnLang(serviceResponse.result, req.query.lang);
-            } else {
-                response.message = "No articles available";
-                response.code = "not_found";
             }
             response.count = serviceResponse.result.length;
             if(sec) {
                 response.section_name = response.articles[0]? response.articles[0].section_name : secName;
                 response.section_id = sec;
+                apiResponse.message = 'Fetched articles of this section';
             } else {
                 response.section = 'All sections'
+                apiResponse.message = 'Fetched articles of all sections';
             }
-            res.status(200).send(response);
+            apiResponse.code = 'fetched_articles';
+            if(serviceResponse.result.length === 0) {
+                apiResponse.message = "No articles available";
+                apiResponse.code = "not_found";
+            }
+            apiResponse.data = response;
+            res.status(200).send(apiResponse);
         } else {
-            res.status(500).send('Server error');
+            res.status(500).send(MESSAGES.server_error_message);
         }
     })
     // Mock response for get articles of one section
@@ -76,7 +83,7 @@ var getAllArticles = (req,res) => {
 
 var getOneArticle = (req, res) => {
     const FUN_LABEL = `\n\t getOneArticle ${FILE_INFO} \n\t`; 
-    let response = {};
+    let apiResponse = {};
     let queryCondition = {};
     log.info(`${FUN_LABEL} IN`);
     log.info(`${FUN_LABEL} req params ${JSON.stringify(req.params)}`);
@@ -91,10 +98,13 @@ var getOneArticle = (req, res) => {
         log.debug(`Query string ${JSON.stringify(req.query)}`);
         log.debug(error);
         if(!error) {
-            response = util.formatJSONBasedOnLang([serviceResponse.result], req.query.lang)[0];
-            res.status(200).send(response);
+            apiResponse.data = {};
+            apiResponse.data = util.formatJSONBasedOnLang([serviceResponse.result], req.query.lang)[0];
+            apiResponse.message = "fetched_article";
+            apiResponse.code = "article_found";
+            res.status(200).send(apiResponse);
         } else {
-            res.status(500).send('Server error');
+            res.status(500).send(MESSAGES.server_error_message);
         }
     })
     

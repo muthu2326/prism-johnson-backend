@@ -1,0 +1,6 @@
+{
+    "server_error_message" : {
+        "code" : "server_error",
+        "message" : "Server error, please try again later"
+    }
+}

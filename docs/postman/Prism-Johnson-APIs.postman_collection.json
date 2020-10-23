@@ -207,23 +207,6 @@
 					"response": []
 				},
 				{
-					"name": "Get all users",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "{{base_url}}/users",
-							"host": [
-								"{{base_url}}"
-							],
-							"path": [
-								"users"
-							]
-						}
-					},
-					"response": []
-				},
-				{
 					"name": "Get all dealers",
 					"request": {
 						"method": "GET",
@@ -1265,15 +1248,15 @@
 								},
 								{
 									"key": "Content-Length",
-									"value": "292"
+									"value": "711"
 								},
 								{
 									"key": "ETag",
-									"value": "W/\"124-S//MGfpE7WD/jeaNBL6wvIOK02k\""
+									"value": "W/\"2c7-yRYRgFn+670ILvfE/loargdlodM\""
 								},
 								{
 									"key": "Date",
-									"value": "Tue, 20 Oct 2020 10:53:50 GMT"
+									"value": "Fri, 23 Oct 2020 07:14:20 GMT"
 								},
 								{
 									"key": "Connection",
@@ -1281,7 +1264,7 @@
 								}
 							],
 							"cookie": [],
-							"body": "{\n    \"code\": \"success\",\n    \"message\": \"User has been updated successfully\",\n    \"data\": [\n        {\n            \"id\": 1,\n            \"name\": \"Nirmal\",\n            \"email\": \"nirmal@digiapt.com\",\n            \"password\": \"xxxxxx\",\n            \"role\": \"TTE\",\n            \"mobile\": \"989898989\"\n        },\n        {\n            \"id\": 2,\n            \"name\": \"Shreyas\",\n            \"email\": \"shreyas@digiapt.com\",\n            \"password\": \"xxxxxx\",\n            \"role\": \"TTE\",\n            \"mobile\": \"989898934\"\n        }\n    ]\n}"
+							"body": "{\n    \"code\": \"success\",\n    \"message\": \"User has been updated successfully\",\n    \"data\": [\n        {\n            \"id\": 1,\n            \"name\": \"Nirmal\",\n            \"email\": \"nirmal@digiapt.com\",\n            \"role\": \"TTE\",\n            \"mobile\": \"989898989\",\n            \"location\": {\n                \"state\": \"Karnataka\",\n                \"cities\": [\n                    {\n                        \"id\": 1,\n                        \"name\": \"Bangalore East\"\n                    },\n                    {\n                        \"id\": 2,\n                        \"name\": \"Bangalore West\"\n                    },\n                    {\n                        \"id\": 3,\n                        \"name\": \"Bangalore South\"\n                    },\n                    {\n                        \"id\": 4,\n                        \"name\": \"Bangalore North\"\n                    },\n                    {\n                        \"id\": 5,\n                        \"name\": \"Bellari\"\n                    }\n                ]\n            }\n        },\n        {\n            \"id\": 2,\n            \"name\": \"Shreyas\",\n            \"email\": \"shreyas@digiapt.com\",\n            \"role\": \"TTE\",\n            \"mobile\": \"989898934\",\n            \"location\": {\n                \"state\": \"Karnataka\",\n                \"cities\": [\n                    {\n                        \"id\": 1,\n                        \"name\": \"Bangalore East\"\n                    },\n                    {\n                        \"id\": 2,\n                        \"name\": \"Bangalore West\"\n                    },\n                    {\n                        \"id\": 3,\n                        \"name\": \"Bangalore South\"\n                    },\n                    {\n                        \"id\": 4,\n                        \"name\": \"Bangalore North\"\n                    },\n                    {\n                        \"id\": 5,\n                        \"name\": \"Bellari\"\n                    },\n                    {\n                        \"id\": 6,\n                        \"name\": \"Mandiya\"\n                    },\n                    {\n                        \"id\": 7,\n                        \"name\": \"Mysore\"\n                    }\n                ]\n            }\n        }\n    ]\n}"
 						}
 					]
 				},
@@ -1376,15 +1359,15 @@
 								},
 								{
 									"key": "Content-Length",
-									"value": "166"
+									"value": "350"
 								},
 								{
 									"key": "ETag",
-									"value": "W/\"a6-x671KUGHgZgRAWqFQHGXfzEJg74\""
+									"value": "W/\"15e-GZncy5up+aI0J+TYVSgh3TA2eQw\""
 								},
 								{
 									"key": "Date",
-									"value": "Tue, 20 Oct 2020 10:52:43 GMT"
+									"value": "Fri, 23 Oct 2020 07:13:52 GMT"
 								},
 								{
 									"key": "Connection",
@@ -1392,7 +1375,7 @@
 								}
 							],
 							"cookie": [],
-							"body": "{\n    \"code\": \"success\",\n    \"message\": \"User found & fetched\",\n    \"data\": {\n        \"id\": 1,\n        \"name\": \"Nirmal\",\n        \"email\": \"nirmal@digiapt.com\",\n        \"password\": \"xxxxxx\",\n        \"role\": \"TTE\",\n        \"mobile\": \"989898989\"\n    }\n}"
+							"body": "{\n    \"code\": \"success\",\n    \"message\": \"User found & fetched\",\n    \"data\": {\n        \"id\": 1,\n        \"name\": \"Nirmal\",\n        \"email\": \"nirmal@digiapt.com\",\n        \"role\": \"TTE\",\n        \"mobile\": \"989898989\",\n        \"location\": {\n            \"state\": \"Karnataka\",\n            \"cities\": [\n                {\n                    \"id\": 1,\n                    \"name\": \"Bangalore East\"\n                },\n                {\n                    \"id\": 2,\n                    \"name\": \"Bangalore West\"\n                },\n                {\n                    \"id\": 3,\n                    \"name\": \"Bangalore South\"\n                },\n                {\n                    \"id\": 4,\n                    \"name\": \"Bangalore North\"\n                },\n                {\n                    \"id\": 5,\n                    \"name\": \"Bellari\"\n                }\n            ]\n        }\n    }\n}"
 						}
 					]
 				},
@@ -1546,6 +1529,407 @@
 							""
 						]
 					}
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Users (Consumers)",
+			"item": [
+				{
+					"name": "Get all users",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/users",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"users"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Get all users",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/users",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"users"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Access-Control-Allow-Methods",
+									"value": "GET,PUT,POST,DELETE,OPTIONS"
+								},
+								{
+									"key": "Access-Control-Allow-Headers",
+									"value": "Origin, Content-Type, Authorization, Accept,Content-Length, X-Requested-With, X-PINGOTHER"
+								},
+								{
+									"key": "Access-Control-Expose-Headers",
+									"value": "X-Total-Count"
+								},
+								{
+									"key": "X-Total-Count",
+									"value": "2"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "325"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"145-qVqub1gcV0JpkgFMtxMT4GUZn6g\""
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 23 Oct 2020 07:28:21 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": [\n        {\n            \"id\": 3,\n            \"name\": \"Mano\",\n            \"email\": \"manoj@digiapt.com\",\n            \"phone_number\": \"9898989898\",\n            \"city_id\": 4,\n            \"city\": \"Aron\",\n            \"state\": \"Madhya Pradesh\"\n        },\n        {\n            \"id\": 7,\n            \"name\": \"Manoj\",\n            \"email\": \"manoj1@digiapt.com\",\n            \"phone_number\": \"9898989898\",\n            \"city_id\": 4,\n            \"city\": \"Aron\",\n            \"state\": \"Madhya Pradesh\"\n        }\n    ],\n    \"code\": \"fetched_all_users\",\n    \"message\": \"Fetched users\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Get one user",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/users/{{user_id}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"users",
+								"{{user_id}}"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Get one user",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/users/{{user_id}}",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"users",
+										"{{user_id}}"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Access-Control-Allow-Methods",
+									"value": "GET,PUT,POST,DELETE,OPTIONS"
+								},
+								{
+									"key": "Access-Control-Allow-Headers",
+									"value": "Origin, Content-Type, Authorization, Accept,Content-Length, X-Requested-With, X-PINGOTHER"
+								},
+								{
+									"key": "Access-Control-Expose-Headers",
+									"value": "X-Total-Count"
+								},
+								{
+									"key": "X-Total-Count",
+									"value": "5000"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "197"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"c5-OZSrqBxWT3taVDEudNLF1qa/Mek\""
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 23 Oct 2020 07:27:12 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"code\": \"fetched_user\",\n    \"message\": \"Fetched user based on id\",\n    \"data\": {\n        \"id\": 3,\n        \"name\": \"Mano\",\n        \"email\": \"manoj@digiapt.com\",\n        \"phone_number\": \"9898989898\",\n        \"city_id\": 4,\n        \"city\": \"Aron\",\n        \"state\": \"Madhya Pradesh\"\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Create User",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\":\"Manoj\",\n    \"email\":\"manoj1@digiapt.com\",\n    \"phone_number\":\"9898989898\",\n    \"address\":\"435, digiapt software tech\",\n    \"pincode\":\"560102\",\n    \"construction_stage\":\"Plastering\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/users",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"users"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Valid request",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"name\":\"Manoj\",\n    \"email\":\"manoj@digiapt.com\",\n    \"phone_number\":\"9898989898\",\n    \"state\":\"AP\",\n    \"town\":\"AP town\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/users",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"users"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "44"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"2c-h67UYHNYQ7fRkhGUd5M05l5CFwQ\""
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 24 Aug 2020 02:20:14 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"name\": \"Manoj\",\n    \"email\": \"manoj@digiapt.com\"\n}"
+						},
+						{
+							"name": "Email missing",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"name\":\"Manoj\",\n    \"phone_number\":\"9898989898\",\n    \"state\":\"AP\",\n    \"town\":\"AP town\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/users",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"users"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "55"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"37-sq43Wrb7Cs/ULIClDXarEVFCMRU\""
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 24 Aug 2020 02:19:44 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"code\": \"email_missing\",\n    \"message\": \"email is mandatory\"\n}"
+						},
+						{
+							"name": "Create User",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"name\":\"Manoj\",\n    \"email\":\"manoj1@digiapt.com\",\n    \"phone_number\":\"9898989898\",\n    \"address\":\"435, digiapt software tech\",\n    \"pincode\":\"560102\",\n    \"construction_stage\":\"Plastering\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/users",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"users"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Mon, 28 Sep 2020 10:26:53 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "Apache/2.4.29 (Ubuntu)"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Access-Control-Allow-Methods",
+									"value": "GET,PUT,POST,DELETE,OPTIONS"
+								},
+								{
+									"key": "Access-Control-Allow-Headers",
+									"value": "Origin, Content-Type, Authorization, Accept,Content-Length, X-Requested-With, X-PINGOTHER"
+								},
+								{
+									"key": "Access-Control-Expose-Headers",
+									"value": "X-Total-Count"
+								},
+								{
+									"key": "X-Total-Count",
+									"value": "5000"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "55"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"37-h8xLUqd90/fIi78y+jz8IWo/bY0\""
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5, max=100"
+								},
+								{
+									"key": "Connection",
+									"value": "Keep-Alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"name\": \"Manoj\",\n    \"address\": \"435, digiapt software tech\"\n}"
+						}
+					]
 				}
 			],
 			"protocolProfileBehavior": {}
@@ -2766,229 +3150,6 @@
 				}
 			},
 			"response": []
-		},
-		{
-			"name": "Create User",
-			"request": {
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\n    \"name\":\"Manoj\",\n    \"email\":\"manoj1@digiapt.com\",\n    \"phone_number\":\"9898989898\",\n    \"address\":\"435, digiapt software tech\",\n    \"pincode\":\"560102\",\n    \"construction_stage\":\"Plastering\"\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "{{base_url}}/users",
-					"host": [
-						"{{base_url}}"
-					],
-					"path": [
-						"users"
-					]
-				}
-			},
-			"response": [
-				{
-					"name": "Valid request",
-					"originalRequest": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n    \"name\":\"Manoj\",\n    \"email\":\"manoj@digiapt.com\",\n    \"phone_number\":\"9898989898\",\n    \"state\":\"AP\",\n    \"town\":\"AP town\"\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "{{base_url}}/users",
-							"host": [
-								"{{base_url}}"
-							],
-							"path": [
-								"users"
-							]
-						}
-					},
-					"status": "OK",
-					"code": 200,
-					"_postman_previewlanguage": "json",
-					"header": [
-						{
-							"key": "X-Powered-By",
-							"value": "Express"
-						},
-						{
-							"key": "Content-Type",
-							"value": "application/json; charset=utf-8"
-						},
-						{
-							"key": "Content-Length",
-							"value": "44"
-						},
-						{
-							"key": "ETag",
-							"value": "W/\"2c-h67UYHNYQ7fRkhGUd5M05l5CFwQ\""
-						},
-						{
-							"key": "Date",
-							"value": "Mon, 24 Aug 2020 02:20:14 GMT"
-						},
-						{
-							"key": "Connection",
-							"value": "keep-alive"
-						}
-					],
-					"cookie": [],
-					"body": "{\n    \"name\": \"Manoj\",\n    \"email\": \"manoj@digiapt.com\"\n}"
-				},
-				{
-					"name": "Email missing",
-					"originalRequest": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n    \"name\":\"Manoj\",\n    \"phone_number\":\"9898989898\",\n    \"state\":\"AP\",\n    \"town\":\"AP town\"\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "{{base_url}}/users",
-							"host": [
-								"{{base_url}}"
-							],
-							"path": [
-								"users"
-							]
-						}
-					},
-					"status": "Bad Request",
-					"code": 400,
-					"_postman_previewlanguage": "json",
-					"header": [
-						{
-							"key": "X-Powered-By",
-							"value": "Express"
-						},
-						{
-							"key": "Content-Type",
-							"value": "application/json; charset=utf-8"
-						},
-						{
-							"key": "Content-Length",
-							"value": "55"
-						},
-						{
-							"key": "ETag",
-							"value": "W/\"37-sq43Wrb7Cs/ULIClDXarEVFCMRU\""
-						},
-						{
-							"key": "Date",
-							"value": "Mon, 24 Aug 2020 02:19:44 GMT"
-						},
-						{
-							"key": "Connection",
-							"value": "keep-alive"
-						}
-					],
-					"cookie": [],
-					"body": "{\n    \"code\": \"email_missing\",\n    \"message\": \"email is mandatory\"\n}"
-				},
-				{
-					"name": "Create User",
-					"originalRequest": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n    \"name\":\"Manoj\",\n    \"email\":\"manoj1@digiapt.com\",\n    \"phone_number\":\"9898989898\",\n    \"address\":\"435, digiapt software tech\",\n    \"pincode\":\"560102\",\n    \"construction_stage\":\"Plastering\"\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "{{base_url}}/users",
-							"host": [
-								"{{base_url}}"
-							],
-							"path": [
-								"users"
-							]
-						}
-					},
-					"status": "OK",
-					"code": 200,
-					"_postman_previewlanguage": "json",
-					"header": [
-						{
-							"key": "Date",
-							"value": "Mon, 28 Sep 2020 10:26:53 GMT"
-						},
-						{
-							"key": "Server",
-							"value": "Apache/2.4.29 (Ubuntu)"
-						},
-						{
-							"key": "X-Powered-By",
-							"value": "Express"
-						},
-						{
-							"key": "Access-Control-Allow-Origin",
-							"value": "*"
-						},
-						{
-							"key": "Access-Control-Allow-Methods",
-							"value": "GET,PUT,POST,DELETE,OPTIONS"
-						},
-						{
-							"key": "Access-Control-Allow-Headers",
-							"value": "Origin, Content-Type, Authorization, Accept,Content-Length, X-Requested-With, X-PINGOTHER"
-						},
-						{
-							"key": "Access-Control-Expose-Headers",
-							"value": "X-Total-Count"
-						},
-						{
-							"key": "X-Total-Count",
-							"value": "5000"
-						},
-						{
-							"key": "Content-Type",
-							"value": "application/json; charset=utf-8"
-						},
-						{
-							"key": "Content-Length",
-							"value": "55"
-						},
-						{
-							"key": "ETag",
-							"value": "W/\"37-h8xLUqd90/fIi78y+jz8IWo/bY0\""
-						},
-						{
-							"key": "Keep-Alive",
-							"value": "timeout=5, max=100"
-						},
-						{
-							"key": "Connection",
-							"value": "Keep-Alive"
-						}
-					],
-					"cookie": [],
-					"body": "{\n    \"name\": \"Manoj\",\n    \"address\": \"435, digiapt software tech\"\n}"
-				}
-			]
 		},
 		{
 			"name": "Place order for product",

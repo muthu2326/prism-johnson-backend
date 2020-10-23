@@ -15,11 +15,11 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.STRING(255),
       allowNull: true
     },
-    media_asset_url: {
+    media_url: {
       type: DataTypes.STRING(255),
       allowNull: true
     },
-    media_asset_type: {
+    media_type: {
       type: DataTypes.STRING(45),
       allowNull: true
     },
