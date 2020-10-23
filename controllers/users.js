@@ -183,17 +183,73 @@ var getAdminUsers = (req,res) => {
             "id" : 1,
             "name" : "Nirmal",
             "email" : "nirmal@digiapt.com",
-            "password" : "xxxxxx",
             "role" : "TTE",
-            "mobile" : "989898989"
+            "mobile" : "989898989",
+            "location" : {
+                "state" : "Karnataka",
+                "cities" : [
+                    {
+                        "id" : 1,
+                        "name" : "Bangalore East"
+                    },
+                    {
+                        "id" : 2,
+                        "name" : "Bangalore West"
+                    },
+                    {
+                        "id" : 3,
+                        "name" : "Bangalore South"
+                    },
+                    {
+                        "id" : 4,
+                        "name" : "Bangalore North"
+                    },
+                    {
+                        "id" : 5,
+                        "name" : "Bellari"
+                    }
+                ]
+            }
         },
         {
             "id" : 2,
             "name" : "Shreyas",
             "email" : "shreyas@digiapt.com",
-            "password" : "xxxxxx",
             "role" : "TTE",
-            "mobile" : "989898934"
+            "mobile" : "989898934",
+            "location" : {
+                "state" : "Karnataka",
+                "cities" : [
+                    {
+                        "id" : 1,
+                        "name" : "Bangalore East"
+                    },
+                    {
+                        "id" : 2,
+                        "name" : "Bangalore West"
+                    },
+                    {
+                        "id" : 3,
+                        "name" : "Bangalore South"
+                    },
+                    {
+                        "id" : 4,
+                        "name" : "Bangalore North"
+                    },
+                    {
+                        "id" : 5,
+                        "name" : "Bellari"
+                    },
+                    {
+                        "id" : 6,
+                        "name" : "Mandiya"
+                    },
+                    {
+                        "id" : 7,
+                        "name" : "Mysore"
+                    }
+                ]
+            }
         }           
     ]
     res.header('X-Total-Count', apiResponse.data.length);
@@ -232,9 +288,33 @@ var getOneAdminUser = (req,res) => {
         "id" : Number(req.params.id),
         "name" : "Nirmal",
         "email" : "nirmal@digiapt.com",
-        "password" : "xxxxxx",
         "role" : "TTE",
-        "mobile" : "989898989"
+        "mobile" : "989898989",
+        "location" : {
+            "state" : "Karnataka",
+            "cities" : [
+                {
+                    "id" : 1,
+                    "name" : "Bangalore East"
+                },
+                {
+                    "id" : 2,
+                    "name" : "Bangalore West"
+                },
+                {
+                    "id" : 3,
+                    "name" : "Bangalore South"
+                },
+                {
+                    "id" : 4,
+                    "name" : "Bangalore North"
+                },
+                {
+                    "id" : 5,
+                    "name" : "Bellari"
+                }
+            ]
+        }
     };
     // res.header('X-Total-Count', apiResponse.data.length);
     res.status(200).send(apiResponse);

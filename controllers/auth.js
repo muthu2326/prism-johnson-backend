@@ -6,6 +6,7 @@ const util = require('../utils/util');
 // const cityMasterModel = db.city_master;
 const Op = db.Sequelize.Op;
 
+// TODO:: send whole user response along with data
 var login = (req,res) => {
     const FUN_LABEL = `\n\t login ${FILE_INFO} \n\t`; 
     let apiResponse = {};
