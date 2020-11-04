@@ -1,7 +1,7 @@
 const log = require('../utils/logger').get();
 config = require('config');
 log.setLevel(config.log_level);
-const db = require('../models');
+const db = require('../models-old');
 const userModel = db.user;
 const cityMasterModel = db.city_master;
 

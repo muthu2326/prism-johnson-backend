@@ -4,7 +4,7 @@ var articleService = require('../services/article.service.js');
 const FILE_INFO = 'Articles Controller';
 const HINDI_LANG = 'hi';
 const ENGLISH_LANG = 'en';
-const db = require('../models');
+const db = require('../models-old');
 const util = require('../utils/util');
 const MESSAGES = require('../utils/message.json');
 let keysToBeRemoved = [];
@@ -16,7 +16,7 @@ const Op = db.Sequelize.Op;
 const SECTION_ARTICLES =   require('../docs/api-mock-json/get-articles-of-a-section.json')
 const ARTICLE =   require('../docs/api-mock-json/get-one-article.json')
 const GRIH_NIRMAN =   require('../docs/api-mock-json/grih-nirman-sections.json');
-const article = require('../models/article');
+const article = require('../models-old/article');
 var getAllArticles = (req,res) => {
     const FUN_LABEL = `\n\t getAllArticles ${FILE_INFO} \n\t`; 
     let response = {};

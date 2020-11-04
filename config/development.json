@@ -6,7 +6,7 @@
         "host": "localhost",
         "port": 3306,
         "user": "prism_johnson",
-        "password": "pri5wj0hns0N"
+        "password": "prism123!"
     },
     "sequelize": {
         "operatorsAliases": {

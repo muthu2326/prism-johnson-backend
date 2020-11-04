@@ -1,6 +1,6 @@
 const log = require('../utils/logger').get();
 config = require('config');
-const db = require('../models');
+const db = require('../models-old');
 const FILE_INFO = 'Article Service';
 const articleModel = db.article;
 const Op = db.Sequelize.Op;

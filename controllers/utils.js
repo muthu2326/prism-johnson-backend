@@ -5,7 +5,7 @@ var request = require("request");
 config = require('config');
 const FILE_INFO = 'Utils Controller';
 
-const db = require('../models');
+const db = require('../models-old');
 const cityMasterModel = db.city_master;
 const hindiTextPOCModel = db.hindi_text_poc;
 const GRIH_NIRMAN =   require('../docs/api-mock-json/grih-nirman-sections.json')

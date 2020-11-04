@@ -56,16 +56,16 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
-app.use('/users', usersRouter);
-app.use('/auth', authRouter);
-app.use('/pages', pagesRouter);
-app.use('/construction-tips', constructionTipsRouter);
-app.use('/dealers', dealersRouter);
-app.use('/articles', articlesRouter);
-app.use('/products', productsRouter);
-app.use('/orders', ordersRouter);
-app.use('/enquiries', enquiriesRouter);
-app.use('/media-assets', mediaAssetRouter);
+app.use('/v1/users', usersRouter);
+app.use('/v1/auth', authRouter);
+app.use('/v1/pages', pagesRouter);
+app.use('/v1/construction-tips', constructionTipsRouter);
+app.use('/v1/dealers', dealersRouter);
+app.use('/v1/articles', articlesRouter);
+app.use('/v1/products', productsRouter);
+app.use('/v1/orders', ordersRouter);
+app.use('/v1/enquiries', enquiriesRouter);
+app.use('/v1/media-assets', mediaAssetRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

@@ -8,6 +8,9 @@ router.get('/', usersController.getUsers);
 /* GET one user. */
 router.get('/:id', usersController.getOneUser);
 
+/* POST user registration */
+router.post('/', usersController.userRegistration);
+
 /* create a user. */
 router.post('/', usersController.createUser);
 

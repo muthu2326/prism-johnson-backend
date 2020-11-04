@@ -2,59 +2,59 @@
 
 const Sequelize = require('sequelize');
 module.exports = function(sequelize, DataTypes) {
-  return sequelize.define('user', {
+  return sequelize.define('content', {
     id: {
       autoIncrement: true,
       type: DataTypes.INTEGER(11),
       allowNull: false,
       primaryKey: true
     },
-    name: {
-      type: DataTypes.STRING(500),
-      allowNull: true
-    },
-    email: {
-      type: DataTypes.STRING(500),
-      allowNull: true
-    },
-    password: {
+    title: {
       type: DataTypes.TEXT,
       allowNull: true
     },
-    reset_pasword_link_sent: {
-      type: DataTypes.INTEGER(4),
+    type: {
+      type: DataTypes.STRING(500),
       allowNull: true
     },
-    address: {
+    media_type: {
       type: DataTypes.TEXT,
       allowNull: true
     },
-    mobile: {
+    media_url: {
+      type: DataTypes.TEXT,
+      allowNull: true
+    },
+    griha_nirman_description: {
+      type: DataTypes.TEXT,
+      allowNull: true
+    },
+    contact_address: {
+      type: DataTypes.TEXT,
+      allowNull: true
+    },
+    contact_email: {
+      type: DataTypes.STRING(500),
+      allowNull: true
+    },
+    contact_toll_free_number: {
+      type: DataTypes.STRING(500),
+      allowNull: true
+    },
+    lang: {
       type: DataTypes.STRING(100),
-      allowNull: true
-    },
-    pincode: {
-      type: DataTypes.INTEGER(11),
-      allowNull: true
-    },
-    stage_of_planning: {
-      type: DataTypes.STRING(500),
-      allowNull: true
-    },
-    role: {
-      type: DataTypes.STRING(200),
       allowNull: true
     },
     reference: {
       type: DataTypes.INTEGER(11),
       allowNull: true
     },
-    city_id: {
-      type: DataTypes.TEXT,
+    created_by: {
+      type: DataTypes.INTEGER(11),
       allowNull: true
     },
-    lang: {
-      type: DataTypes.STRING(100),
+    updated_by: {
+      type: DataTypes.INTEGER(11),
       allowNull: true
     },
     created: {
@@ -67,7 +67,7 @@ module.exports = function(sequelize, DataTypes) {
     }
   }, {
     sequelize,
-    tableName: 'user',
+    tableName: 'content',
     timestamps: false
     });
 };

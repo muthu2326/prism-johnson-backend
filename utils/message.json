@@ -2,5 +2,12 @@
     "server_error_message" : {
         "code" : "server_error",
         "message" : "Server error, please try again later"
+    },
+    "missing_mandatory_fields": {
+        "data": {},
+        "error": {
+            "message": "Missing mandatory fields"
+        },
+        "status": 400
     }
 }

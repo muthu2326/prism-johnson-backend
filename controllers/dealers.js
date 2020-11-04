@@ -3,7 +3,7 @@ const util = require('../utils/util');
 config = require('config');
 const FILE_INFO = 'Dealers Controller';
 
-const db = require('../models');
+const db = require('../models-old');
 const dealerModel = db.dealer;
 const cityMasterModel = db.city_master;
 const Op = db.Sequelize.Op;
