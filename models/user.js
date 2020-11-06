@@ -14,38 +14,43 @@ module.exports = function(sequelize, DataTypes) {
       allowNull: true
     },
     email: {
-      type: DataTypes.STRING(500),
-      allowNull: true
-    },
-    password: {
-      type: DataTypes.TEXT,
+      type: DataTypes.STRING(200),
       allowNull: true
     },
     reset_pasword_link_sent: {
       type: DataTypes.INTEGER(4),
-      allowNull: true
+      allowNull: true,
+      defaultValue: 0
     },
     address: {
       type: DataTypes.TEXT,
       allowNull: true
     },
     mobile: {
-      type: DataTypes.STRING(100),
-      allowNull: true
-    },
-    pincode: {
-      type: DataTypes.INTEGER(11),
-      allowNull: true
-    },
-    stage_of_planning: {
-      type: DataTypes.STRING(500),
-      allowNull: true
-    },
-    role: {
       type: DataTypes.STRING(200),
       allowNull: true
     },
-    reference: {
+    pincode: {
+      type: DataTypes.STRING(100),
+      allowNull: true
+    },
+    stage_of_planning: {
+      type: DataTypes.STRING(200),
+      allowNull: true
+    },
+    role: {
+      type: DataTypes.STRING(100),
+      allowNull: true
+    },
+    slug: {
+      type: DataTypes.STRING(200),
+      allowNull: true
+    },
+    lang: {
+      type: DataTypes.STRING(100),
+      allowNull: true
+    },
+    state_id: {
       type: DataTypes.INTEGER(11),
       allowNull: true
     },
@@ -53,16 +58,12 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.TEXT,
       allowNull: true
     },
-    lang: {
-      type: DataTypes.STRING(100),
-      allowNull: true
-    },
     created: {
       type: DataTypes.DATE,
       allowNull: true
     },
     updated: {
-      type: DataTypes.DATEONLY,
+      type: DataTypes.DATE,
       allowNull: true
     }
   }, {

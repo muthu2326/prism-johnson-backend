@@ -1,26 +1,50 @@
 var DataTypes = require("sequelize").DataTypes;
-var _cities = require("./cities");
-var _description_list = require("./description_list");
+var _articles = require("./articles");
 var _banner = require("./banner");
+var _credentials = require("./credentials");
 var _content = require("./content");
+var _dealer = require("./dealer");
+var _order = require("./order");
+var _product_mrp_list = require("./product_mrp_list");
+var _city = require("./city");
+var _quries = require("./quries");
+var _sections = require("./sections");
+var _product = require("./product");
+var _state = require("./state");
 var _user = require("./user");
-var _queries = require("./queries");
+var _sub_description = require("./sub_description");
 
 function initModels(sequelize) {
-  var cities = _cities(sequelize, DataTypes);
-  var description_list = _description_list(sequelize, DataTypes);
+  var articles = _articles(sequelize, DataTypes);
   var banner = _banner(sequelize, DataTypes);
+  var credentials = _credentials(sequelize, DataTypes);
   var content = _content(sequelize, DataTypes);
+  var dealer = _dealer(sequelize, DataTypes);
+  var order = _order(sequelize, DataTypes);
+  var product_mrp_list = _product_mrp_list(sequelize, DataTypes);
+  var city = _city(sequelize, DataTypes);
+  var quries = _quries(sequelize, DataTypes);
+  var sections = _sections(sequelize, DataTypes);
+  var product = _product(sequelize, DataTypes);
+  var state = _state(sequelize, DataTypes);
   var user = _user(sequelize, DataTypes);
-  var queries = _queries(sequelize, DataTypes);
+  var sub_description = _sub_description(sequelize, DataTypes);
 
   return {
-    cities,
-    description_list,
+    articles,
     banner,
+    credentials,
     content,
+    dealer,
+    order,
+    product_mrp_list,
+    city,
+    quries,
+    sections,
+    product,
+    state,
     user,
-    queries,
+    sub_description,
   };
 }
 module.exports = { initModels };

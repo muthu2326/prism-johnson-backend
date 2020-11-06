@@ -2,44 +2,66 @@
 
 const Sequelize = require('sequelize');
 module.exports = function(sequelize, DataTypes) {
-  return sequelize.define('content', {
+  return sequelize.define('dealer', {
     id: {
       autoIncrement: true,
       type: DataTypes.INTEGER(11),
       allowNull: false,
       primaryKey: true
     },
-    title: {
-      type: DataTypes.TEXT,
+    state_id: {
+      type: DataTypes.INTEGER(11),
       allowNull: true
     },
-    type: {
+    region: {
       type: DataTypes.STRING(200),
       allowNull: true
     },
-    media_type: {
+    branch: {
+      type: DataTypes.STRING(255),
+      allowNull: true
+    },
+    territory: {
       type: DataTypes.STRING(200),
       allowNull: true
     },
-    media_url: {
+    dealer_code: {
+      type: DataTypes.STRING(200),
+      allowNull: true,
+      unique: "dealer_code_UNIQUE"
+    },
+    name: {
       type: DataTypes.TEXT,
       allowNull: true
     },
-    griha_nirman_description: {
+    pincode: {
+      type: DataTypes.STRING(100),
+      allowNull: true
+    },
+    address: {
       type: DataTypes.TEXT,
       allowNull: true
     },
-    contact_address: {
-      type: DataTypes.TEXT,
+    city_id: {
+      type: DataTypes.INTEGER(11),
       allowNull: true
     },
-    contact_email: {
+    contact_no: {
+      type: DataTypes.STRING(100),
+      allowNull: true
+    },
+    email: {
       type: DataTypes.STRING(200),
       allowNull: true
     },
-    contact_toll_free_number: {
+    password: {
       type: DataTypes.STRING(200),
       allowNull: true
+    },
+    reset_pasword_link_sent: {
+      type: DataTypes.INTEGER(4),
+      allowNull: true,
+      defaultValue: 0
     },
     lang: {
       type: DataTypes.STRING(100),
@@ -56,18 +78,10 @@ module.exports = function(sequelize, DataTypes) {
     updated: {
       type: DataTypes.DATE,
       allowNull: true
-    },
-    created_by: {
-      type: DataTypes.INTEGER(11),
-      allowNull: true
-    },
-    updated_by: {
-      type: DataTypes.INTEGER(11),
-      allowNull: true
     }
   }, {
     sequelize,
-    tableName: 'content',
+    tableName: 'dealer',
     timestamps: false
     });
 };

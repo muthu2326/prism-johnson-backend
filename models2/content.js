@@ -14,11 +14,11 @@ module.exports = function(sequelize, DataTypes) {
       allowNull: true
     },
     type: {
-      type: DataTypes.STRING(200),
+      type: DataTypes.STRING(500),
       allowNull: true
     },
     media_type: {
-      type: DataTypes.STRING(200),
+      type: DataTypes.TEXT,
       allowNull: true
     },
     media_url: {
@@ -34,27 +34,19 @@ module.exports = function(sequelize, DataTypes) {
       allowNull: true
     },
     contact_email: {
-      type: DataTypes.STRING(200),
+      type: DataTypes.STRING(500),
       allowNull: true
     },
     contact_toll_free_number: {
-      type: DataTypes.STRING(200),
+      type: DataTypes.STRING(500),
       allowNull: true
     },
     lang: {
       type: DataTypes.STRING(100),
       allowNull: true
     },
-    slug: {
-      type: DataTypes.STRING(200),
-      allowNull: true
-    },
-    created: {
-      type: DataTypes.DATE,
-      allowNull: true
-    },
-    updated: {
-      type: DataTypes.DATE,
+    reference: {
+      type: DataTypes.INTEGER(11),
       allowNull: true
     },
     created_by: {
@@ -63,6 +55,14 @@ module.exports = function(sequelize, DataTypes) {
     },
     updated_by: {
       type: DataTypes.INTEGER(11),
+      allowNull: true
+    },
+    created: {
+      type: DataTypes.DATE,
+      allowNull: true
+    },
+    updated: {
+      type: DataTypes.DATEONLY,
       allowNull: true
     }
   }, {

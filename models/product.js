@@ -2,19 +2,15 @@
 
 const Sequelize = require('sequelize');
 module.exports = function(sequelize, DataTypes) {
-  return sequelize.define('content', {
+  return sequelize.define('product', {
     id: {
       autoIncrement: true,
       type: DataTypes.INTEGER(11),
       allowNull: false,
       primaryKey: true
     },
-    title: {
-      type: DataTypes.TEXT,
-      allowNull: true
-    },
-    type: {
-      type: DataTypes.STRING(200),
+    productcode: {
+      type: DataTypes.STRING(100),
       allowNull: true
     },
     media_type: {
@@ -25,20 +21,16 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.TEXT,
       allowNull: true
     },
-    griha_nirman_description: {
+    title: {
       type: DataTypes.TEXT,
       allowNull: true
     },
-    contact_address: {
+    short_description: {
       type: DataTypes.TEXT,
       allowNull: true
     },
-    contact_email: {
-      type: DataTypes.STRING(200),
-      allowNull: true
-    },
-    contact_toll_free_number: {
-      type: DataTypes.STRING(200),
+    description: {
+      type: DataTypes.TEXT,
       allowNull: true
     },
     lang: {
@@ -67,7 +59,7 @@ module.exports = function(sequelize, DataTypes) {
     }
   }, {
     sequelize,
-    tableName: 'content',
+    tableName: 'product',
     timestamps: false
     });
 };

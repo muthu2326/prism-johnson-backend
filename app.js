@@ -6,17 +6,23 @@ var logger = require('morgan');
 const log = require('./utils/logger').get();
 var allowlist = ['http://localhost:3000', 'http://prism-johnson.digiapt.com']
 
-var indexRouter = require('./routes/index');
-var authRouter = require('./routes/auth');
-var usersRouter = require('./routes/users');
-var pagesRouter = require('./routes/pages');
-var constructionTipsRouter = require('./routes/construction_tips');
-var dealersRouter = require('./routes/dealers');
-var articlesRouter = require('./routes/articles');
-var productsRouter = require('./routes/products');
-var ordersRouter = require('./routes/orders');
-var enquiriesRouter = require('./routes/enquiries');
-var mediaAssetRouter = require('./routes/media_asset');
+// var indexRouter = require('./routes-old/index');
+// var authRouter = require('./routes-old/auth');
+// var usersRouter = require('./routes-old/users');
+// var pagesRouter = require('./routes-old/pages');
+// var constructionTipsRouter = require('./routes-old/construction_tips');
+// var dealersRouter = require('./routes-old/dealers');
+// var articlesRouter = require('./routes-old/articles');
+// var productsRouter = require('./routes-old/products');
+// var ordersRouter = require('./routes-old/orders');
+// var enquiriesRouter = require('./routes-old/enquiries');
+// var mediaAssetRouter = require('./routes-old/media_asset');
+
+var contentRouter = require('./routes/content.server.routes')
+var userRouter = require('./routes/user.server.routes')
+var dealersRouter = require('./routes/dealer.server.routes')
+var bannerRouter = require('./routes/banner.server.routes')
+var articlesRouter = require('./routes/articles.server.routes')
 
 var config = require('config');
 var app = express();
@@ -55,17 +61,23 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', indexRouter);
-app.use('/v1/users', usersRouter);
-app.use('/v1/auth', authRouter);
-app.use('/v1/pages', pagesRouter);
-app.use('/v1/construction-tips', constructionTipsRouter);
-app.use('/v1/dealers', dealersRouter);
-app.use('/v1/articles', articlesRouter);
-app.use('/v1/products', productsRouter);
-app.use('/v1/orders', ordersRouter);
-app.use('/v1/enquiries', enquiriesRouter);
-app.use('/v1/media-assets', mediaAssetRouter);
+// app.use('/', indexRouter);
+// app.use('/users', usersRouter);
+// app.use('/auth', authRouter);
+// app.use('/pages', pagesRouter);
+// app.use('/construction-tips', constructionTipsRouter);
+// app.use('/dealers', dealersRouter);
+// app.use('/articles', articlesRouter);
+// app.use('/products', productsRouter);
+// app.use('/orders', ordersRouter);
+// app.use('/enquiries', enquiriesRouter);
+// app.use('/media-assets', mediaAssetRouter);
+
+app.use('/api/v1/cms', contentRouter);
+app.use('/api/v1/users', userRouter);
+app.use('/api/v1/banner', bannerRouter);
+app.use('/api/v1/dealer', dealersRouter);
+app.use('/api/v1/articles', articlesRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

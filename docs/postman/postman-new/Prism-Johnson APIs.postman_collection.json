@@ -1,0 +1,468 @@
+{
+	"info": {
+		"_postman_id": "ea136734-0b34-4950-a274-f66472adad69",
+		"name": "Prism-Johnson APIs",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "User registration",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\" : \"Rahul\",\n    \"email\" : \"rahul@gmail.com\",\n    \"password\" : \"welcome2\",\n    \"reset_pasword_link_sent\" : 0,\n    \"address\" : \"ram puram b-21\",\n    \"mobile\" : \"9066125393\",\n    \"pincode\" : 560023,\n    \"stage_of_planning\" : \"Planning\",\n    \"role\" : \"user\",\n    \"reference\" : null,\n    \"city_id\" : 2,\n    \"lang\" : \"eng\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base-url}}/api/v1/users/register",
+					"host": [
+						"{{base-url}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"users",
+						"register"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get all users",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base-url}}/api/v1/users",
+					"host": [
+						"{{base-url}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get user by ID",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base-url}}/api/v1/users/{{user_id}}",
+					"host": [
+						"{{base-url}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"users",
+						"{{user_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update user",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\" : \"Fahul\",\n    \"email\" : \"rahul@gmail.com\",\n    \"password\" : \"welcome2\",\n    \"reset_pasword_link_sent\" : 0,\n    \"address\" : \"ram puram b-21\",\n    \"mobile\" : \"9066125393\",\n    \"pincode\" : 560023,\n    \"stage_of_planning\" : \"Planning\",\n    \"role\" : \"user\",\n    \"reference\" : null,\n    \"city_id\" : 2,\n    \"lang\" : \"eng\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base-url}}/api/v1/users/{{user_id}}",
+					"host": [
+						"{{base-url}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"users",
+						"{{user_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete user",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{base-url}}/api/v1/users/1",
+					"host": [
+						"{{base-url}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"users",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Banner",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"media_type\" : \"Image\",\n    \"title\" : \"Product\",\n    \"description\" : \"Lorem Ipsum is simply dummy text of the printing and typesetting industry.\",\n    \"media_url\" : \"https:///img\",\n    \"lang\" : \"eng\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base-url}}/api/v1/banner",
+					"host": [
+						"{{base-url}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"banner"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update Banner By Id",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"media_type\" : \"Image\",\n    \"title\" : \"Product\",\n    \"description\" : \"Lorem Ipsum is simply dummy text of the printing and typesetting industry.\",\n    \"media_url\" : \"https:///img\",\n    \"lang\" : \"eng\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base-url}}/api/v1/banner/{{banner_id}}",
+					"host": [
+						"{{base-url}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"banner",
+						"{{banner_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Banner By Id",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"media_type\" : \"Image\",\n    \"title\" : \"Product\",\n    \"description\" : \"Lorem Ipsum is simply dummy text of the printing and typesetting industry.\",\n    \"media_url\" : \"https:///img\",\n    \"lang\" : \"eng\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base-url}}/api/v1/banner/{{banner_id}}",
+					"host": [
+						"{{base-url}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"banner",
+						"{{banner_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Banner By Id",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{base-url}}/api/v1/banner/{{banner_id}}",
+					"host": [
+						"{{base-url}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"banner",
+						"{{banner_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get all banners",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base-url}}/api/v1/banner",
+					"host": [
+						"{{base-url}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"banner"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Home Page Content",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"title\": \"T1\",\n    \"type\": \"intro\",\n    \"media_type\": \"Image\",\n    \"media_url\": \"http://img1\",\n    \"griha_nirman_description\": \"हिंदी टायपिंग\",\n    \"contact_address\": \"XX street, 2nd Main Banglore\",\n    \"contact_email\": \"prism@contact.com\",\n    \"contact_toll_free_number\": \"1800-111-233\",\n    \"lang\": \"eng\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base-url}}/api/v1/cms",
+					"host": [
+						"{{base-url}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"cms"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update Home Page Content",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"title\": \"T2\",\n    \"type\": \"intro\",\n    \"media_type\": \"Image\",\n    \"media_url\": \"http://img1\",\n    \"griha_nirman_description\": \"Lorem Ipsum is simply dummy text of the printing and typesetting industry.\",\n    \"contact_address\": \"XX street, 2nd Main Banglore\",\n    \"contact_email\": \"prism@contact.com\",\n    \"contact_toll_free_number\": \"1800-111-233\",\n    \"lang\": \"eng\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base-url}}/api/v1/cms/{{cms_data_id}}",
+					"host": [
+						"{{base-url}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"cms",
+						"{{cms_data_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Home Page Content By Id",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base-url}}/api/v1/cms/{{cms_data_id}}",
+					"host": [
+						"{{base-url}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"cms",
+						"{{cms_data_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Home Page Content By Id",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{base-url}}/api/v1/cms/{{cms_data_id}}",
+					"host": [
+						"{{base-url}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"cms",
+						"{{cms_data_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Service article/Grih Nirman article",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"type\": \"service_article\",\n    \"media_type\": \"Video\",\n    \"media_url\": \"hhtp://video/1\",\n    \"title\": \"Planning\",\n    \"short_description\": \"Lorem Ipsum is simply dummy text of the printing and typesetting industry.\",\n    \"description\": \"It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).\",\n    \"lang\": \"eng\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base-url}}/api/v1/articles",
+					"host": [
+						"{{base-url}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"articles"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update Service article/Grih Nirman article By ID",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"type\": \"griha_niram\",\n    \"media_type\": \"Video\",\n    \"media_url\": \"hhtp://video/1\",\n    \"title\": \"Construction\",\n    \"short_description\": \"Lorem Ipsum is simply dummy text of the printing and typesetting industry.\",\n    \"description\": \"It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).\",\n    \"lang\": \"eng\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base-url}}/api/v1/articles/{{article_id}}",
+					"host": [
+						"{{base-url}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"articles",
+						"{{article_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Service article/Grih Nirman article By ID",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base-url}}/api/v1/articles/{{article_id}}",
+					"host": [
+						"{{base-url}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"articles",
+						"{{article_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Service article/Grih Nirman article By ID",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{base-url}}/api/v1/articles/{{article_id}}",
+					"host": [
+						"{{base-url}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"articles",
+						"{{article_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get all Service article/Grih Nirman articles",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base-url}}/api/v1/articles",
+					"host": [
+						"{{base-url}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"articles"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}

@@ -2,51 +2,59 @@
 
 const Sequelize = require('sequelize');
 module.exports = function(sequelize, DataTypes) {
-  return sequelize.define('content', {
+  return sequelize.define('user', {
     id: {
       autoIncrement: true,
       type: DataTypes.INTEGER(11),
       allowNull: false,
       primaryKey: true
     },
-    title: {
+    name: {
+      type: DataTypes.STRING(500),
+      allowNull: true
+    },
+    email: {
+      type: DataTypes.STRING(500),
+      allowNull: true
+    },
+    password: {
       type: DataTypes.TEXT,
       allowNull: true
     },
-    type: {
-      type: DataTypes.STRING(200),
+    reset_pasword_link_sent: {
+      type: DataTypes.INTEGER(4),
       allowNull: true
     },
-    media_type: {
-      type: DataTypes.STRING(200),
-      allowNull: true
-    },
-    media_url: {
+    address: {
       type: DataTypes.TEXT,
       allowNull: true
     },
-    griha_nirman_description: {
-      type: DataTypes.TEXT,
+    mobile: {
+      type: DataTypes.STRING(100),
       allowNull: true
     },
-    contact_address: {
-      type: DataTypes.TEXT,
+    pincode: {
+      type: DataTypes.INTEGER(11),
       allowNull: true
     },
-    contact_email: {
+    stage_of_planning: {
+      type: DataTypes.STRING(500),
+      allowNull: true
+    },
+    role: {
       type: DataTypes.STRING(200),
       allowNull: true
     },
-    contact_toll_free_number: {
-      type: DataTypes.STRING(200),
+    reference: {
+      type: DataTypes.INTEGER(11),
+      allowNull: true
+    },
+    city_id: {
+      type: DataTypes.TEXT,
       allowNull: true
     },
     lang: {
       type: DataTypes.STRING(100),
-      allowNull: true
-    },
-    slug: {
-      type: DataTypes.STRING(200),
       allowNull: true
     },
     created: {
@@ -54,20 +62,12 @@ module.exports = function(sequelize, DataTypes) {
       allowNull: true
     },
     updated: {
-      type: DataTypes.DATE,
-      allowNull: true
-    },
-    created_by: {
-      type: DataTypes.INTEGER(11),
-      allowNull: true
-    },
-    updated_by: {
-      type: DataTypes.INTEGER(11),
+      type: DataTypes.DATEONLY,
       allowNull: true
     }
   }, {
     sequelize,
-    tableName: 'content',
+    tableName: 'user',
     timestamps: false
     });
 };

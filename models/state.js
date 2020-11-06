@@ -2,35 +2,23 @@
 
 const Sequelize = require('sequelize');
 module.exports = function(sequelize, DataTypes) {
-  return sequelize.define('banner', {
+  return sequelize.define('state', {
     id: {
       autoIncrement: true,
       type: DataTypes.INTEGER(11),
       allowNull: false,
       primaryKey: true
     },
-    media_type: {
-      type: DataTypes.STRING(200),
-      allowNull: true
-    },
-    title: {
-      type: DataTypes.TEXT,
-      allowNull: true
-    },
-    description: {
-      type: DataTypes.TEXT,
-      allowNull: true
-    },
-    media_url: {
-      type: DataTypes.TEXT,
-      allowNull: true
-    },
-    slug: {
+    name: {
       type: DataTypes.STRING(200),
       allowNull: true
     },
     lang: {
       type: DataTypes.STRING(100),
+      allowNull: true
+    },
+    slug: {
+      type: DataTypes.STRING(200),
       allowNull: true
     },
     created: {
@@ -43,7 +31,7 @@ module.exports = function(sequelize, DataTypes) {
     }
   }, {
     sequelize,
-    tableName: 'banner',
+    tableName: 'state',
     timestamps: false
     });
 };
