@@ -12,7 +12,6 @@ const {
 
 var CityModel = require('../models/init-models');
 var City = CityModel.initModels(db).city
-
 /*
  ** Beans generated CRR*UD controller methods.
  */
@@ -72,10 +71,35 @@ exports.getAllCities = function (req, res) {
     /* Query DB using sequelize api for all Cities*/
     City.findAll().then(function (cities) {
         /*Return an array of Cities */
-        res.jsonp(cities);
+        if (cities.length > 0) {
+            res.status(200).jsonp({
+                status: 200,
+                data: cities,
+                error: {}
+            });
+            return;
+        } else {
+            res.status(400).jsonp({
+                status: 400,
+                data: [],
+                error: {
+                    msg: message.no_cities_found
+                }
+            });
+            return;
+        }
     }).catch(function (err) {
         console.log('could not fetch all cities');
         console.log('err: %j', err);
+        res.status(500).jsonp({
+            status: 500,
+            data: {},
+            error: {
+                msg: message.something_went_wrong,
+                err: err
+            }
+        });
+        return;
     });
 }; /*End of getAllCities*/
 
