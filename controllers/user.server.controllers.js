@@ -10,7 +10,7 @@ const saltRounds = 10;
 
 
 var db = require('../db/connection/db');
-var message = require('../utils/message.json')
+var message = require('../utils/message.json');
 var {
     checkDuplicateUser
 } = require('../utils/db_helper')
@@ -57,7 +57,7 @@ exports.createUser = function (req, res) {
             return;
         } else if (!result.isDuplicate) {
             let NOW = new Date()
-            let slug = slugify(`${uuidv4().slice(4, 12)} ${req.body.lang}`)
+            let slug = slugify(`${uuidv4().slice(4, 12)} ${req.body.email.slice(0,5)}`)
             console.log('slug', slug)
             let lang = req.body.lang ? req.body.lang.toLowerCase() : 'en'
 
@@ -149,7 +149,7 @@ exports.userRegistration = function (req, res) {
             return;
         } else if (!result.isDuplicate) {
             let NOW = new Date()
-            let slug = slugify(`${uuidv4().slice(4, 12)} ${req.body.lang}`)
+            let slug = slugify(`${uuidv4().slice(4, 12)} ${req.body.email.slice(0,5)}`)
             console.log('slug', slug)
             let lang = req.body.lang.toLowerCase();
 
@@ -396,6 +396,7 @@ exports.updateUser = function (req, res) {
                             },
                             error: {}
                         });
+                        return;
                     } else {
                         res.status(400).jsonp({
                             status: 400,
@@ -404,6 +405,7 @@ exports.updateUser = function (req, res) {
                                 msg: message.user_not_found
                             }
                         });
+                        return;
                     }
                 }).catch(function (err) {
                     console.log('Could not update user record');

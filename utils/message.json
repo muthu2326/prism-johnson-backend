@@ -10,6 +10,10 @@
     "invalid_login_credentials": "Invalid email or password",
     "user_already_exist": "User already exist",
     "no_users_found": "No users found",
+    "no_queries_found": "No queries found",
     "user_deleted": "Successfully removed user",
-    "user_updated": "Successfully updated user"
+    "user_updated": "Successfully updated user",
+
+    "updated_query": "Successfully updated query",
+    "removed_query": "Successfully removed query"
 }

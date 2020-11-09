@@ -2,6 +2,12 @@
 
 var Sequelize = require('sequelize');
 var db = require('../db/connection/db');
+var { findUser } = require('../utils/db_helper')
+var message = require('../utils/message.json');
+var slugify = require('slugify')
+const {
+    v4: uuidv4
+} = require('uuid');
 
 /* var EntityModel = require('../models/init-models'); 
  * var Entity = EntityModel.initModels(db.getDbConnection())
@@ -18,152 +24,192 @@ var Query = QueryModel.initModels(db).quries;
 exports.createQuery = function(req, res) {
     // Log entry.
     console.log('Query Controller: entering createQuery ');
+    console.log('req body :: ', req.body)
+    console.log('req params :: ', req.params)
+    console.log('req query :: ', req.query)
 
-    // var v = new lib.Validator [{"id:number");
-
-    // if (!v.run(req.body)) {
-    //     return res.status(400).send({
-    //         error: v.errors
-    //     });
-    // }
-    let NOW = new Date()
-    Query.create({
-        id: Math.random().toString(10).slice(3,15),
-        type : req.body.type,
-        name : req.body.name,
-        email : req.body.email,
-        category : req.body.category,
-        product : req.body.product,
-        stage_of_construction : req.body.stage_of_construction,
-        state : req.body.state,
-        description : req.body.description,
-        status : req.body.status,
-        status_description : req.body.status_description,
-        lang : req.body.lang,
-        reference : req.body.reference,
-        user_id : req.body.user_id,
-        created : NOW,
-        updated : NOW
-    }).then(function(result) {
-        console.log('created queries', result);
-        res.jsonp({
-            status: 200,
-            data: {
-                reference_id : `#${result.id}`,
-                msg: 'success'
-            },
-            error: {}
+    if(!req.body.email || !req.body.name){
+        res.status(400).jsonp({
+            status: 400,
+            data: {},
+            error: {
+                msg: message.missing_fields
+            }
         });
-    }).catch(function(err) {
-        console.log('Could not create queries record');
-        console.log('err: %j', err);
-    });
+        return;
+    }
+
+    let NOW = new Date()
+
+    findUser(req.body.user_id, 'user', function(err, response) {
+        if(err){
+            res.status(400).jsonp({
+                status: 400,
+                data: {},
+                error: {
+                    msg: message.no_users_found
+                }
+            });
+            return;
+        }else if(response){
+            let slug = slugify(`${uuidv4().slice(4, 12)} ${req.body.email.slice(0,5)}`)
+            Query.create({
+                id: Math.random().toString(10).slice(3,15),
+                type : req.body.type,
+                name : req.body.name,
+                email : req.body.email,
+                category : req.body.category,
+                productcode : req.body.product_code,
+                product_name: req.body.product_name,
+                mobile: req.body.mobile,
+                city: req.body.city,
+                stage_of_construction : req.body.stage_of_construction,
+                preferred_date: new Date(req.body.preferred_date),
+                preferred_time: req.body.preferred_time,
+                state : req.body.state,
+                description : req.body.description,
+                status : req.body.status,
+                status_description : req.body.status_description,
+                lang : req.body.lang ? req.body.lang : 'en',
+                slug : slug,
+                user_id : req.body.user_id,
+                created : NOW,
+                updated : NOW
+            }).then(function(result) {
+                console.log('created queries', result);
+                res.jsonp({
+                    status: 200,
+                    data: {
+                        id : `#${result.id}`,
+                        msg: 'success'
+                    },
+                    error: {}
+                });
+            }).catch(function(err) {
+                console.log('Could not create queries record');
+                console.log('err: %j', err);
+                res.jsonp({
+                    status: 500,
+                    data: {},
+                    error: {
+                        msg : message.something_went_wrong,
+                        err: err
+                    }
+                });
+            });
+        }
+    })
 
 } /*End of createQuery*/
 
 
 /*Get a single queries */
 exports.getQuery = function(req, res) {
-    var queries_id = req.params.queries_id;
     console.log('Query Controller: entering getQuery ');
+    console.log('req params :: ', req.params)
+    console.log('req query :: ', req.query)
+
+    var queries_id = req.params.queries_id;
+
     /*Validate for a null id*/
     if (!queries_id) {
-        res.status(400).send("queries ID is null");
+        res.status(400).jsonp({
+            status: 400,
+            data: {},
+            error: {
+                msg: message.invalid_get_request
+            }
+        });
         return;
     }
+
+    if (!req.query.type) {
+        res.status(400).jsonp({
+            status: 400,
+            data: {},
+            error: {
+                msg: message.invalid_get_request
+            }
+        });
+        return;
+    }
+
+    let lang = req.query.lang ? req.query.lang : 'en'
+    let type = req.query.type ? req.query.type : 'ask_expert'
+
     /* Query DB using sequelize api for a single queries*/
     Query.findOne({
         where: {
-            id: queries_id
+            id: queries_id,
+            lang: lang,
+            type: type
         }
     }).then(function(queries) {
         console.log(queries);
-        res.jsonp({
+        res.status(200).jsonp({
             status: 200,
-            data: {
-                "user_id" : 21,     
-                "type" : 'ask_expert',     
-                "name" : 'Jai',
-                "email " : 'jai@gmail.com',            
-                "category" : 'Cements',
-                "productcode" : "P10001",
-                "product_id " : 1,
-                "stage_of_construction" : 'Planning',
-                "state" : 'Karnataka',
-                "city" : 'Bangalore',  
-                "pincode" : null,
-                "preferred_date" : "21/11/2020", 
-                "preferred_time" : '10 AM - 11 AM',    
-                "description" : 'Lorem ipsum',
-                "status" : 'submitted',
-                "status_description" : null,  
-                "lang" : "en",
-                "slug" : null 
-            }
+            data: queries,
+            error: {}
         });
+        return;
     }).catch(function(err) {
         console.log('could not fetch queries');
         console.log('err: %j', err);
+        res.status(500).jsonp({
+            status: 500,
+            data: {},
+            error: {
+                msg: message.something_went_wrong,
+                err: err
+            }
+        });
+        return;
     });
 } /*End of getQuery*/
 
 /*Get all Queries */
 exports.getAllQueries = function(req, res) {
     console.log('Query Controller: entering getAllQueries');
+    console.log('req params :: ', req.params)
+    console.log('req query :: ', req.query)
+
+    let lang = req.query.lang ? req.query.lang : 'en'
+    console.log('lang', lang)
+
     /* Query DB using sequelize api for all Queries*/
-    Query.findAll().then(function(queries) {
+    Query.findAll({
+        where: {
+            lang: lang
+        }
+    }).then(function(queries) {
         /*Return an array of Queries */
-        res.jsonp({
-            status: 200,
-            data: [
-                {
-                    "user_id" : 21,     
-                    "type" : 'ask_expert',     
-                    "name" : 'Jai',
-                    "email " : 'jai@gmail.com',            
-                    "category" : 'Cements',
-                    "productcode" : "P10001",
-                    "product_name": "Prism Duratech Cement",
-                    "product_id " : 1,
-                    "stage_of_construction" : 'Planning',
-                    "state" : 'Karnataka',
-                    "city" : 'Bangalore',  
-                    "pincode" : null,
-                    "preferred_date" : "21/11/2020", 
-                    "preferred_time" : '10 AM - 11 AM',    
-                    "description" : 'Lorem ipsum',
-                    "status" : 'submitted',
-                    "status_description" : null,  
-                    "lang" : "en",
-                    "slug" : null 
-                },
-                {
-                    "user_id" : 22,     
-                    "type" : 'ask_expert',     
-                    "name" : 'Jai',
-                    "email " : 'jai@gmail.com',            
-                    "category" : 'Cements',
-                    "productcode" : "P10002",
-                    "product_id " : 2,
-                    "product_name": "Prism Champion Plus",
-                    "stage_of_construction" : 'Planning',
-                    "state" : 'Karnataka',
-                    "city" : 'Bangalore',  
-                    "pincode" : null,
-                    "preferred_date" : "21/11/2020", 
-                    "preferred_time" : '10 AM - 11 AM',    
-                    "description" : 'Lorem ipsum',
-                    "status" : 'submitted',
-                    "status_description" : null,  
-                    "lang" : "en",
-                    "slug" : null 
+        if(queries.length > 0){
+            res.status(200).jsonp({
+                status: 200,
+                data: queries,
+                error: {}
+            });
+        }else{
+            res.status(400).jsonp({
+                status: 400,
+                data: [],
+                error: {
+                    msg: message.no_queries_found
                 }
-            ],
-            error: {}
-        });
+            });
+        }
     }).catch(function(err) {
         console.log('could not fetch all queries');
         console.log('err: %j', err);
+        res.status(500).jsonp({
+            status: 500,
+            data: {},
+            error: {
+                msg: message.something_went_wrong,
+                err: err
+            }
+        });
+        return;
     });
 }; /*End of getAllQueries*/
 
@@ -172,36 +218,70 @@ exports.getAllQueries = function(req, res) {
 exports.updateQuery = function(req, res) {
     // Log entry.
     console.log('Query Controller: entering updateQuery ');
+    console.log('req params :: ', req.params)
+    console.log('req query :: ', req.query)
+    console.log('req body :: ', req.body)
 
     var queries_id = req.params.queries_id;
+    let lang = req.query.lang ? req.query.lang : 'en'
+    let NOW = new Date()
+
+    if (!queries_id) {
+        res.status(400).jsonp({
+            status: 400,
+            data: {},
+            error: {
+                msg: message.invalid_get_request
+            }
+        });
+        return;
+    }
+
     Query.update({
-        id : req.body.id,
-				type : req.body.type,
-				name : req.body.name,
-				email : req.body.email,
-				category : req.body.category,
-				product : req.body.product,
-				stage_of_construction : req.body.stage_of_construction,
-				state : req.body.state,
-				description : req.body.description,
-				status : req.body.status,
-				status_description : req.body.status_description,
-				lang : req.body.lang,
-				reference : req.body.reference,
-				user_id : req.body.user_id,
-				created : req.body.created,
-				updated : req.body.updated
+        type : req.body.type,
+        name : req.body.name,
+        email : req.body.email,
+        category : req.body.category,
+        productcode : req.body.productcode,
+        product_name: req.body.product_name,
+        product_id: req.body.product_id,
+        mobile: req.body.mobile,
+        stage_of_construction : req.body.stage_of_construction,
+        preferred_date: req.body.preferred_date,
+        preferred_time: req.body.preferred_time,
+        state : req.body.state,
+        description : req.body.description,
+        status : req.body.status,
+        status_description : req.body.status_description,
+        user_id : req.body.user_id,
+        updated : NOW
     }, {
         where: {
             /* queries table primary key */
-            id: queries_id
+            id: queries_id,
+            lang: lang
         }
     }).then(function(result) {
         console.log('updated queries', result);
-        res.send("queries updated successfully");
+        res.status(200).jsonp({
+            status: 200,
+            data: {
+                msg: `${message.updated_query} ${req.params.queries_id}`
+            },
+            error: {}
+        });
     }).catch(function(err) {
         console.log('Could not update queries record');
         console.log('err: %j', err);
+        res.status(500).jsonp({
+            status: 500,
+            data: {},
+            error: {
+                msg: message.something_went_wrong,
+                err: err
+            }
+        });
+        return;
     });
 
 } /*End of updateQuery*/
@@ -209,24 +289,52 @@ exports.updateQuery = function(req, res) {
 /*Delete a single query */
 exports.deleteQuery = function(req, res) {
     console.log('Query Controller: entering deleteQuery ');
+    console.log('req params :: ', req.params)
+    console.log('req query :: ', req.query)
 
     var queries_id = req.params.queries_id;
+    let lang = req.query.lang ? req.query.lang : 'en'
+
     /*Validate for a null queries_id*/
     if (!queries_id) {
-        res.status(400).send("queries ID is null");
+        res.status(400).jsonp({
+            status: 400,
+            data: {},
+            error: {
+                msg: message.invalid_get_request
+            }
+        });
         return;
     }
+
     /* Delete queries record*/
     Query.destroy({
         where: {
-            id: queries_id
+            id: queries_id,
+            lang: lang
         }
     }).then(function(query) {
         console.log(query);
-        res.jsonp(query);
+        res.status(200).jsonp({
+            status: 200,
+            data: {
+                msg: `${message.removed_query} ${req.params.queries_id}`
+            },
+            error: {}
+        });
+        return;
     }).catch(function(err) {
         console.log('could not delete query');
         console.log('err: %j', err);
+        res.status(500).jsonp({
+            status: 500,
+            data: {},
+            error: {
+                msg: message.something_went_wrong,
+                err: err
+            }
+        });
+        return;
 
     });
 } /*End of deleteQuery*/

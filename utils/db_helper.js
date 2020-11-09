@@ -40,3 +40,25 @@ exports.checkDuplicateUser = (email, role, cb) => {
         return;
     });
 }
+
+exports.findUser = (user_id, role, cb) => {
+    User.findOne({
+        where: {
+           id: user_id,
+           role: role
+        }
+    }).then(function(user) {
+        console.log(user);
+        if(user != null){
+            console.log('found user')
+            cb(null, true)
+        }else{
+            cb(false, null)
+        }
+    }).catch(function(err) {
+        console.log('could not fetch user');
+        console.log('err: %j', err);
+        cb(false, null) // new user
+        return;
+    });
+}

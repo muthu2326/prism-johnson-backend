@@ -101,6 +101,10 @@ module.exports = function(sequelize, DataTypes) {
     preferred_time: {
       type: DataTypes.STRING(100),
       allowNull: true
+    },
+    product_name: {
+      type: DataTypes.STRING(200),
+      allowNull: true
     }
   }, {
     sequelize,
