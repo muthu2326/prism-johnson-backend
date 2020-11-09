@@ -49,7 +49,13 @@ exports.createQuery = function(req, res) {
 				updated : NOW
     }).then(function(result) {
         console.log('created queries', result);
-        res.jsonp(result);
+        res.jsonp({
+            status: 200,
+            data: {
+                'reference_id': '#123456789',
+            },
+            error: {}
+        });
     }).catch(function(err) {
         console.log('Could not create queries record');
         console.log('err: %j', err);
@@ -74,7 +80,29 @@ exports.getQuery = function(req, res) {
         }
     }).then(function(queries) {
         console.log(queries);
-        res.jsonp(queries);
+        res.jsonp({
+            status: 200,
+            data: {
+                "user_id" : 21,     
+                "type" : 'ask_expert',     
+                "name" : 'Jai',
+                "email " : 'jai@gmail.com',            
+                "category" : 'Cements',
+                "productcode" : "P10001",
+                "product_id " : 1,
+                "stage_of_construction" : 'Planning',
+                "state" : 'Karnataka',
+                "city" : 'Bangalore',  
+                "pincode" : null,
+                "preferred_date" : "21/11/2020", 
+                "preferred_time" : '10 AM - 11 AM',    
+                "description" : 'Lorem ipsum',
+                "status" : 'submitted',
+                "status_description" : null,  
+                "lang" : "en",
+                "slug" : null 
+            }
+        });
     }).catch(function(err) {
         console.log('could not fetch queries');
         console.log('err: %j', err);
@@ -87,7 +115,54 @@ exports.getAllQueries = function(req, res) {
     /* Query DB using sequelize api for all Queries*/
     Query.findAll().then(function(queries) {
         /*Return an array of Queries */
-        res.jsonp(queries);
+        res.jsonp({
+            status: 200,
+            data: [
+                {
+                    "user_id" : 21,     
+                    "type" : 'ask_expert',     
+                    "name" : 'Jai',
+                    "email " : 'jai@gmail.com',            
+                    "category" : 'Cements',
+                    "productcode" : "P10001",
+                    "product_name": "Prism Duratech Cement",
+                    "product_id " : 1,
+                    "stage_of_construction" : 'Planning',
+                    "state" : 'Karnataka',
+                    "city" : 'Bangalore',  
+                    "pincode" : null,
+                    "preferred_date" : "21/11/2020", 
+                    "preferred_time" : '10 AM - 11 AM',    
+                    "description" : 'Lorem ipsum',
+                    "status" : 'submitted',
+                    "status_description" : null,  
+                    "lang" : "en",
+                    "slug" : null 
+                },
+                {
+                    "user_id" : 22,     
+                    "type" : 'ask_expert',     
+                    "name" : 'Jai',
+                    "email " : 'jai@gmail.com',            
+                    "category" : 'Cements',
+                    "productcode" : "P10002",
+                    "product_id " : 2,
+                    "product_name": "Prism Champion Plus",
+                    "stage_of_construction" : 'Planning',
+                    "state" : 'Karnataka',
+                    "city" : 'Bangalore',  
+                    "pincode" : null,
+                    "preferred_date" : "21/11/2020", 
+                    "preferred_time" : '10 AM - 11 AM',    
+                    "description" : 'Lorem ipsum',
+                    "status" : 'submitted',
+                    "status_description" : null,  
+                    "lang" : "en",
+                    "slug" : null 
+                }
+            ],
+            error: {}
+        });
     }).catch(function(err) {
         console.log('could not fetch all queries');
         console.log('err: %j', err);
