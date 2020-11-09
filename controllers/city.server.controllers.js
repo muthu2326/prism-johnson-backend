@@ -2,43 +2,40 @@
 
 var Sequelize = require('sequelize');
 var db = require('../db/connection/db');
-
+var slugify = require('slugify')
+const {
+    v4: uuidv4
+} = require('uuid');
 /* var EntityModel = require('../models/init-models'); 
  * var Entity = EntityModel.initModels(db.getDbConnection())
  */
 
 var CityModel = require('../models/init-models');
-var City = CityModel.initModels(db.getDbConnection())
+var City = CityModel.initModels(db).city
 
 /*
  ** Beans generated CRR*UD controller methods.
  */
 
 /*Create city record.*/
-exports.createCity = function(req, res) {
+exports.createCity = function (req, res) {
     // Log entry.
     console.log('City Controller: entering createCity ');
 
-    // var v = new lib.Validator [{"id:number");
-
-    // if (!v.run(req.body)) {
-    //     return res.status(400).send({
-    //         error: v.errors
-    //     });
-    // }
+    let slug = slugify(`${uuidv4().slice(4, 12)} ${req.body.name.slice(0,5)}`)
+    let NOW = new Date()
 
     City.create({
-        id : req.body.id,
-				name : req.body.name,
-				lang : req.body.lang,
-				slug : req.body.slug,
-				state_id : req.body.state_id,
-				created : req.body.created,
-				updated : req.body.updated
-    }).then(function(result) {
+        name: req.body.name,
+        lang: req.body.lang,
+        slug: slug,
+        state_id: req.body.state_id,
+        created: NOW,
+        updated: NOW
+    }).then(function (result) {
         console.log('created city', result);
         res.jsonp(result);
-    }).catch(function(err) {
+    }).catch(function (err) {
         console.log('Could not create city record');
         console.log('err: %j', err);
     });
@@ -47,7 +44,7 @@ exports.createCity = function(req, res) {
 
 
 /*Get a single city */
-exports.getCity = function(req, res) {
+exports.getCity = function (req, res) {
     var city_id = req.params.city_id;
     console.log('City Controller: entering getCity ');
     /*Validate for a null id*/
@@ -60,23 +57,23 @@ exports.getCity = function(req, res) {
         where: {
             id: city_id
         }
-    }).then(function(city) {
+    }).then(function (city) {
         console.log(city);
         res.jsonp(city);
-    }).catch(function(err) {
+    }).catch(function (err) {
         console.log('could not fetch city');
         console.log('err: %j', err);
     });
 } /*End of getCity*/
 
 /*Get all Cities */
-exports.getAllCities = function(req, res) {
+exports.getAllCities = function (req, res) {
     console.log('City Controller: entering getAllCities');
     /* Query DB using sequelize api for all Cities*/
-    City.findAll().then(function(cities) {
+    City.findAll().then(function (cities) {
         /*Return an array of Cities */
         res.jsonp(cities);
-    }).catch(function(err) {
+    }).catch(function (err) {
         console.log('could not fetch all cities');
         console.log('err: %j', err);
     });
@@ -84,28 +81,29 @@ exports.getAllCities = function(req, res) {
 
 
 /*Update city record.*/
-exports.updateCity = function(req, res) {
+exports.updateCity = function (req, res) {
     // Log entry.
     console.log('City Controller: entering updateCity ');
 
     var city_id = req.params.city_id;
+    let NOW = new Date()
+
     City.update({
-        id : req.body.id,
-				name : req.body.name,
-				lang : req.body.lang,
-				slug : req.body.slug,
-				state_id : req.body.state_id,
-				created : req.body.created,
-				updated : req.body.updated
+        id: req.body.id,
+        name: req.body.name,
+        lang: req.body.lang,
+        slug: req.body.slug,
+        state_id: req.body.state_id,
+        updated: NOW
     }, {
         where: {
             /* city table primary key */
             id: city_id
         }
-    }).then(function(result) {
+    }).then(function (result) {
         console.log('updated city', result);
         res.send("city updated successfully");
-    }).catch(function(err) {
+    }).catch(function (err) {
         console.log('Could not update city record');
         console.log('err: %j', err);
     });
@@ -113,7 +111,7 @@ exports.updateCity = function(req, res) {
 } /*End of updateCity*/
 
 /*Delete a single city */
-exports.deleteCity = function(req, res) {
+exports.deleteCity = function (req, res) {
     console.log('City Controller: entering deleteCity ');
 
     var city_id = req.params.city_id;
@@ -127,10 +125,10 @@ exports.deleteCity = function(req, res) {
         where: {
             id: city_id
         }
-    }).then(function(city) {
+    }).then(function (city) {
         console.log(city);
         res.jsonp(city);
-    }).catch(function(err) {
+    }).catch(function (err) {
         console.log('could not delete city');
         console.log('err: %j', err);
 
@@ -139,7 +137,7 @@ exports.deleteCity = function(req, res) {
 
 
 /*Get all Cities for pagination */
-exports.getAllCitiesForPagination = function(req, res) {
+exports.getAllCitiesForPagination = function (req, res) {
     console.log('City Controller: entering getAllCitiesForPagination');
     var itemsPerPage = parseInt(req.params.itemsPerPage);
     var pageNo = parseInt(req.params.pageNo);
@@ -149,17 +147,17 @@ exports.getAllCitiesForPagination = function(req, res) {
     City.findAll({
         offset: offset,
         limit: itemsPerPage
-    }).then(function(cities) {
+    }).then(function (cities) {
         /*Return an array of cities */
         res.jsonp(cities);
-    }).catch(function(err) {
+    }).catch(function (err) {
         console.log('could not fetch all cities for pagination');
         console.log('err: %j', err);
     });
 }; /*End of getAllCitiesForPagination*/
 
 /*Get all sorted Cities  */
-exports.getAllCitiesSortedByColumn = function(req, res) {
+exports.getAllCitiesSortedByColumn = function (req, res) {
     console.log('Page Controller: entering getAllCitiesSortedByColumn');
     var itemsPerPage = parseInt(req.params.itemsPerPage);
     var pageNo = parseInt(req.params.pageNo);
@@ -174,17 +172,17 @@ exports.getAllCitiesSortedByColumn = function(req, res) {
         offset: offset,
         limit: itemsPerPage,
         order: order
-    }).then(function(cities) {
+    }).then(function (cities) {
         /*Return an array of Cities */
         res.jsonp(cities);
-    }).catch(function(err) {
+    }).catch(function (err) {
         console.log('could not fetch all Cities for sorting');
         console.log('err: %j', err);
     });
 }; /*End of getAllCitiesSortedByColumn*/
 
 /*Get all filtered Cities */
-exports.getAllCitiesFilteredByColumn = function(req, res) {
+exports.getAllCitiesFilteredByColumn = function (req, res) {
     console.log('Page Controller: entering getAllCitiesFilteredByColumn');
     var itemsPerPage = parseInt(req.params.itemsPerPage);
     var pageNo = parseInt(req.params.pageNo);
@@ -202,10 +200,10 @@ exports.getAllCitiesFilteredByColumn = function(req, res) {
 
     console.log("offset is " + offset);
     /* Query DB using sequelize api for all Pages offset : offset , limit : itemsPerPage ,order : order ,*/
-    City.findAll(criteria).then(function(cities) {
+    City.findAll(criteria).then(function (cities) {
         /*Return an array of pages */
         res.jsonp(cities);
-    }).catch(function(err) {
+    }).catch(function (err) {
         console.log('could not fetch all Cities for filtering');
         console.log('err: %j', err);
     });
@@ -213,7 +211,7 @@ exports.getAllCitiesFilteredByColumn = function(req, res) {
 
 
 /*Get all Cities by search text */
-exports.getAllCitiesBySearchText = function(req, res) {
+exports.getAllCitiesBySearchText = function (req, res) {
     console.log('City Controller: entering getAllCitiesBySearchText');
     var itemsPerPage = parseInt(req.params.itemsPerPage);
     var pageNo = parseInt(req.params.pageNo);
@@ -222,7 +220,7 @@ exports.getAllCitiesBySearchText = function(req, res) {
     var searchText = req.params.searchText;
     var like = "%" + searchText + "%";
     var criteria = {
-        where: Sequelize.where(Sequelize.fn("concat", Sequelize.col('id'),Sequelize.col('name'),Sequelize.col('lang'),Sequelize.col('slug'),Sequelize.col('state_id'),Sequelize.col('created'),Sequelize.col('updated')), {
+        where: Sequelize.where(Sequelize.fn("concat", Sequelize.col('id'), Sequelize.col('name'), Sequelize.col('lang'), Sequelize.col('slug'), Sequelize.col('state_id'), Sequelize.col('created'), Sequelize.col('updated')), {
             like: like
         })
     };
@@ -230,10 +228,10 @@ exports.getAllCitiesBySearchText = function(req, res) {
     criteria['limit'] = itemsPerPage;
 
     /* Query DB using sequelize api for all cities*/
-    City.findAll(criteria).then(function(cities) {
+    City.findAll(criteria).then(function (cities) {
         /*Return an array of pages */
         res.jsonp(cities);
-    }).catch(function(err) {
+    }).catch(function (err) {
         console.log('could not fetch all cities for search');
         console.log('err: %j', err);
     });

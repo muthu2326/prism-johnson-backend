@@ -50,6 +50,10 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.STRING(200),
       allowNull: true
     },
+    address: {
+      type: DataTypes.TEXT,
+      allowNull: true
+    },
     state: {
       type: DataTypes.STRING(200),
       allowNull: true

@@ -11,6 +11,7 @@
     "user_already_exist": "User already exist",
     "no_users_found": "No users found",
     "no_queries_found": "No queries found",
+    "no_states_found": "No states found",
     "user_deleted": "Successfully removed user",
     "user_updated": "Successfully updated user",
 
