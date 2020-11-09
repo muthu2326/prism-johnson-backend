@@ -45,9 +45,9 @@ exports.createQuery = function(req, res) {
     log.info(`inside find user check`)
 
     findUser(req.body.user_id, 'user', function(err, response) {
-        log.info(`inside find user response`, err, response)
+        log.info(`inside find user response`, JSON.stringify(err), JSON.stringify(response))
         if(err){
-            log.info(`inside find user err`, err)
+            log.info(`inside find user err`, JSON.stringify(err))
             res.status(400).jsonp({
                 status: 400,
                 data: {},
@@ -57,7 +57,7 @@ exports.createQuery = function(req, res) {
             });
             return;
         }else if(response){
-            log.info(`inside find user response if block`)
+            log.info(`inside find user response if block`, JSON.stringify(response))
             let slug = slugify(`${uuidv4().slice(4, 12)} ${req.body.email.slice(0,5)}`)
             Query.create({
                 id: Math.random().toString(10).slice(3,15),

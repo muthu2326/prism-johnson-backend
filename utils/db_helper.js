@@ -1,5 +1,6 @@
 
 var db = require('../db/connection/db');
+const log = require('../utils/logger').get();
 
 var UserModel = require('../models/init-models');
 var User = UserModel.initModels(db).user
@@ -12,6 +13,7 @@ exports.checkDuplicateUser = (email, role, cb) => {
             role: role
         }
     }).then(function(user) {
+        log.info('Find User DB helper', JSON.stringify(user))
         console.log(user);
         if(user != null){
             console.log('found user')
@@ -19,6 +21,7 @@ exports.checkDuplicateUser = (email, role, cb) => {
                 isDuplicate: true,
                 data: user
             }
+            log.info('Find User DB helper callback true', JSON.stringify(data))
             cb(null, data) // user exist with same email and role
             return;
         }else{
@@ -26,6 +29,7 @@ exports.checkDuplicateUser = (email, role, cb) => {
                 isDuplicate: false,
                 data: null
             }
+            log.info('Find User DB helper callback false', JSON.stringify(data))
             cb(null, data) // new user
             return;
         }
@@ -36,6 +40,7 @@ exports.checkDuplicateUser = (email, role, cb) => {
             isDuplicate: false,
             data: null
         }
+        log.info('Find User DB helper callback catch', JSON.stringify(err))
         cb(null, data) // new user
         return;
     });
