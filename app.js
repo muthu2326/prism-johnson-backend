@@ -24,6 +24,7 @@ var dealersRouter = require('./routes/dealer.server.routes')
 var bannerRouter = require('./routes/banner.server.routes')
 var articlesRouter = require('./routes/articles.server.routes')
 var authRouter = require('./routes/auth.server.routes')
+var queryRouter = require('./routes/queries.server.routes')
 
 var config = require('config');
 var app = express();
@@ -80,6 +81,7 @@ app.use('/api/v1/auth', authRouter);
 app.use('/api/v1/banner', bannerRouter);
 app.use('/api/v1/dealer', dealersRouter);
 app.use('/api/v1/articles', articlesRouter);
+app.use('/api/v1/queries', queryRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

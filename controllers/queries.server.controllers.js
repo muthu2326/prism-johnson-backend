@@ -7,11 +7,8 @@ var db = require('../db/connection/db');
  * var Entity = EntityModel.initModels(db.getDbConnection())
  */
 
-// var QueryModel = require('../models/init-models');
-// var Query = QueryModel.initModels(db.getDbConnection())
-
-var db1 = require('../models');
-var Query = db1.quries
+var QueryModel = require('../models/init-models');
+var Query = QueryModel.initModels(db).quries;
 
 /*
  ** Beans generated CRR*UD controller methods.
@@ -31,28 +28,29 @@ exports.createQuery = function(req, res) {
     // }
     let NOW = new Date()
     Query.create({
-        id : req.body.id,
-				type : req.body.type,
-				name : req.body.name,
-				email : req.body.email,
-				category : req.body.category,
-				product : req.body.product,
-				stage_of_construction : req.body.stage_of_construction,
-				state : req.body.state,
-				description : req.body.description,
-				status : req.body.status,
-				status_description : req.body.status_description,
-				lang : req.body.lang,
-				reference : req.body.reference,
-				user_id : req.body.user_id,
-				created : NOW,
-				updated : NOW
+        id: Math.random().toString(10).slice(3,15),
+        type : req.body.type,
+        name : req.body.name,
+        email : req.body.email,
+        category : req.body.category,
+        product : req.body.product,
+        stage_of_construction : req.body.stage_of_construction,
+        state : req.body.state,
+        description : req.body.description,
+        status : req.body.status,
+        status_description : req.body.status_description,
+        lang : req.body.lang,
+        reference : req.body.reference,
+        user_id : req.body.user_id,
+        created : NOW,
+        updated : NOW
     }).then(function(result) {
         console.log('created queries', result);
         res.jsonp({
             status: 200,
             data: {
                 'reference_id': '#123456789',
+                result: result
             },
             error: {}
         });
