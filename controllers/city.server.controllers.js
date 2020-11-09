@@ -18,7 +18,8 @@ var StateModel = require('../models/init-models');
 var State = StateModel.initModels(db).state
 
 // City.belongsTo(State);
-// State.hasMany(City);
+// db.user.belongsTo(db.city_master, {foreignKey: 'city_id'});
+City.belongsTo(State, {foreignKey: 'state_id'});
 
 /*
  ** Beans generated CRR*UD controller methods.
@@ -77,7 +78,9 @@ exports.getCity = function (req, res) {
 exports.getAllCities = function (req, res) {
     console.log('City Controller: entering getAllCities');
     /* Query DB using sequelize api for all Cities*/
-    City.findAll().then(function (cities) {
+    City.findAll({
+        include: State
+    }).then(function (cities) {
         /*Return an array of Cities */
         if (cities.length > 0) {
             res.status(200).jsonp({

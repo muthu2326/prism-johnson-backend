@@ -14,6 +14,11 @@ var message = require('../utils/message.json');
 var StateModel = require('../models/init-models');
 var State = StateModel.initModels(db).state
 
+var CityModel = require('../models/init-models');
+var City = CityModel.initModels(db).city
+
+State.hasMany(City, {foreignKey: 'state_id'});
+
 /*
  ** Beans generated CRR*UD controller methods.
  */
@@ -74,7 +79,9 @@ exports.getState = function (req, res) {
 exports.getAllStates = function (req, res) {
     console.log('State Controller: entering getAllStates');
     /* Query DB using sequelize api for all states*/
-    State.findAll().then(function (states) {
+    State.findAll({
+        include: City
+    }).then(function (states) {
         /*Return an array of states */
         if (states.length > 0) {
             res.status(200).jsonp({

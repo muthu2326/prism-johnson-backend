@@ -7,11 +7,8 @@ var db = require('../db/connection/db');
  * var Entity = EntityModel.initModels(db.getDbConnection())
  */
 
-// var ContentModel = require('../models/init-models');
-// var Content = ContentModel.initModels(db.getDbConnection())
-
-var db1 = require('../models');
-var Content = db1.content
+var ContentModel = require('../models/init-models');
+var Content = ContentModel.initModels(db).content
 
 /*
  ** Beans generated CRR*UD controller methods.

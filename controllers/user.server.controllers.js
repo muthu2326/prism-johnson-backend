@@ -22,6 +22,9 @@ var {
 var UserModel = require('../models/init-models');
 var User = UserModel.initModels(db).user
 
+var CityModel = require('../models/init-models');
+var City = CityModel.initModels(db).city
+
 /*
  ** Beans generated CRR*UD controller methods.
  */
@@ -235,7 +238,7 @@ exports.getUser = function (req, res) {
         where: {
             id: user_id,
             lang: lang
-        }
+        },
     }).then(function (user) {
         console.log(user);
         if (user != null) {
@@ -256,7 +259,8 @@ exports.getUser = function (req, res) {
             });
             return;
         }
-    }).catch(function (err) {
+    })
+    .catch(function (err) {
         console.log('could not fetch user');
         console.log('err: %j', err);
         res.status(500).jsonp({

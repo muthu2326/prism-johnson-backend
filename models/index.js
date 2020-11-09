@@ -29,4 +29,5 @@ db.queries = require('./quries.js')(sequelize, Sequelize);
 // db.user.belongsTo(db.city_master, {foreignKey: 'city_id'});
 // db.city_master.hasMany(db.dealer, {foreignKey: 'city_id'});
 
+
 module.exports = db;
