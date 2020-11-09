@@ -73,7 +73,7 @@ exports.createUser = function (req, res) {
                 address: req.body.address,
                 mobile: req.body.mobile,
                 pincode: req.body.pincode,
-                stage_of_planning: req.body.stage_of_planning,
+                stage_of_construction: req.body.stage_of_construction,
                 role: req.body.role.toLowerCase(),
                 slug: req.body.slug ? req.body.slug : slug,
                 state_id: req.body.state_id,
@@ -165,7 +165,7 @@ exports.userRegistration = function (req, res) {
                 address: req.body.address,
                 mobile: req.body.mobile,
                 pincode: req.body.pincode,
-                stage_of_planning: req.body.stage_of_planning,
+                stage_of_construction: req.body.stage_of_construction,
                 role: req.body.role.toLowerCase(),
                 slug: req.body.slug ? req.body.slug : slug,
                 state_id: req.body.state_id,
@@ -376,7 +376,7 @@ exports.updateUser = function (req, res) {
                     address: req.body.address,
                     mobile: req.body.mobile,
                     pincode: req.body.pincode,
-                    stage_of_planning: req.body.stage_of_planning,
+                    stage_of_construction: req.body.stage_of_construction,
                     role: req.body.role.toLowerCase(),
                     state_id: req.body.state_id,
                     city_id: JSON.stringify(req.body.city_id),
@@ -438,7 +438,7 @@ exports.updateUser = function (req, res) {
             mobile: req.body.mobile,
             password: result.data.password,
             pincode: req.body.pincode,
-            stage_of_planning: req.body.stage_of_planning,
+            stage_of_construction: req.body.stage_of_construction,
             role: req.body.role,
             state_id: req.body.state_id,
             city_id: JSON.stringify(req.body.city_id),
@@ -624,7 +624,7 @@ exports.getAllUsersBySearchText = function (req, res) {
     var searchText = req.params.searchText;
     var like = "%" + searchText + "%";
     var criteria = {
-        where: Sequelize.where(Sequelize.fn("concat", Sequelize.col('id'), Sequelize.col('name'), Sequelize.col('email'), Sequelize.col('password'), Sequelize.col('reset_pasword_link_sent'), Sequelize.col('address'), Sequelize.col('mobile'), Sequelize.col('pincode'), Sequelize.col('stage_of_planning'), Sequelize.col('role'), Sequelize.col('reference'), Sequelize.col('city_id'), Sequelize.col('lang'), Sequelize.col('created'), Sequelize.col('updated')), {
+        where: Sequelize.where(Sequelize.fn("concat", Sequelize.col('id'), Sequelize.col('name'), Sequelize.col('email'), Sequelize.col('password'), Sequelize.col('reset_pasword_link_sent'), Sequelize.col('address'), Sequelize.col('mobile'), Sequelize.col('pincode'), Sequelize.col('stage_of_construction'), Sequelize.col('role'), Sequelize.col('reference'), Sequelize.col('city_id'), Sequelize.col('lang'), Sequelize.col('created'), Sequelize.col('updated')), {
             like: like
         })
     };
