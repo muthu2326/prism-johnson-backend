@@ -2,6 +2,7 @@
 
 var Sequelize = require('sequelize');
 var db = require('../db/connection/db');
+var message = require('../utils/message.json');
 var slugify = require('slugify')
 const {
     v4: uuidv4
@@ -12,6 +13,13 @@ const {
 
 var CityModel = require('../models/init-models');
 var City = CityModel.initModels(db).city
+
+var StateModel = require('../models/init-models');
+var State = StateModel.initModels(db).state
+
+City.belongsTo(State);
+State.hasMany(City);
+
 /*
  ** Beans generated CRR*UD controller methods.
  */
