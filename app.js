@@ -23,6 +23,7 @@ var userRouter = require('./routes/user.server.routes')
 var dealersRouter = require('./routes/dealer.server.routes')
 var bannerRouter = require('./routes/banner.server.routes')
 var articlesRouter = require('./routes/articles.server.routes')
+var authRouter = require('./routes/auth.server.routes')
 
 var config = require('config');
 var app = express();
@@ -73,8 +74,9 @@ app.use(express.static(path.join(__dirname, 'public')));
 // app.use('/enquiries', enquiriesRouter);
 // app.use('/media-assets', mediaAssetRouter);
 
-app.use('/api/v1/cms', contentRouter);
+app.use('/api/v1/pages', contentRouter);
 app.use('/api/v1/users', userRouter);
+app.use('/api/v1/auth', authRouter);
 app.use('/api/v1/banner', bannerRouter);
 app.use('/api/v1/dealer', dealersRouter);
 app.use('/api/v1/articles', articlesRouter);

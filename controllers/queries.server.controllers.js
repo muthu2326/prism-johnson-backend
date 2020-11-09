@@ -1,7 +1,7 @@
 /*Beans Copyright info*/
 
 var Sequelize = require('sequelize');
-var db = require('../db/db');
+var db = require('../db/connection/db');
 
 /* var EntityModel = require('../models/init-models'); 
  * var Entity = EntityModel.initModels(db.getDbConnection())

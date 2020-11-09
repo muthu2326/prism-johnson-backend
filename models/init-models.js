@@ -13,8 +13,11 @@ var _product = require("./product");
 var _state = require("./state");
 var _user = require("./user");
 var _sub_description = require("./sub_description");
+// var sequelize = require('../db/connection/db')
+// initModels(sequelize)
 
 function initModels(sequelize) {
+  console.log('Invoked init modles', sequelize)
   var articles = _articles(sequelize, DataTypes);
   var banner = _banner(sequelize, DataTypes);
   var credentials = _credentials(sequelize, DataTypes);

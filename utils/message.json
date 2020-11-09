@@ -1,13 +1,15 @@
 {
-    "server_error_message" : {
-        "code" : "server_error",
-        "message" : "Server error, please try again later"
-    },
-    "missing_mandatory_fields": {
-        "data": {},
-        "error": {
-            "message": "Missing mandatory fields"
-        },
-        "status": 400
-    }
+    "success": "success",
+    "server_error_message": "Server error, please try again later",
+    "missing_fields": "Missing mandatory fields",
+    "something_went_wrong": "Something went wrong",
+    "invalid_get_request": "Invalid request",
+    "user_not_found": "User not found",
+    "missing_email": "Email is mandatory field",
+    "missing_password": "Password is mandatory field",
+    "invalid_login_credentials": "Invalid email or password",
+    "user_already_exist": "User already exist",
+    "no_users_found": "No users found",
+    "user_deleted": "Successfully removed user",
+    "user_updated": "Successfully updated user"
 }

@@ -2,11 +2,11 @@
     "env":"development",
     "log_level":"trace",
     "db": {
-        "database": "prismjohnson",
+        "database": "prism_johnson",
         "host": "localhost",
         "port": 3306,
-        "user": "prismjohnson",
-        "password": "Prism123!"
+        "user": "prism_johnson",
+        "password": "prism123!"
     },
     "sequelize": {
         "operatorsAliases": {

@@ -1,7 +1,7 @@
 /*Beans Copyright info*/
 
 var Sequelize = require('sequelize');
-var db = require('../db/db');
+var db = require('../db/connection/db');
 
 console.log('db', db)
 
@@ -9,11 +9,11 @@ console.log('db', db)
  * var Entity = EntityModel.initModels(db.getDbConnection())
  */
 
-// var ArticleModel = require('../models/init-models');
-// var Article = ArticleModel.initModels(db.getDbConnection())
+var ArticleModel = require('../models/init-models');
+var Article = ArticleModel.initModels(db)
 
-var db1 = require('../models');
-var Article = db1.articles
+// var db1 = require('../models');
+// var Article = db1.models.articles
 
 /*
  ** Beans generated CRR*UD controller methods.

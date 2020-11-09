@@ -17,6 +17,10 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.STRING(200),
       allowNull: true
     },
+    password: {
+      type: DataTypes.STRING(200),
+      allowNull: true
+    },
     reset_pasword_link_sent: {
       type: DataTypes.INTEGER(4),
       allowNull: true,
