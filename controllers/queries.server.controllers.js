@@ -49,8 +49,8 @@ exports.createQuery = function(req, res) {
         res.jsonp({
             status: 200,
             data: {
-                'reference_id': '#123456789',
-                result: result
+                reference_id : `#${result.id}`,
+                msg: 'success'
             },
             error: {}
         });
