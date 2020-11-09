@@ -1,12 +1,12 @@
 {
-    "env":"staging",
-    "log_level":"debug",
+    "env":"development",
+    "log_level":"trace",
     "db": {
-        "database": "prism_johnson",
+        "database": "prismjohnson",
         "host": "localhost",
         "port": 3306,
-        "user": "prism_johnson",
-        "password": "pr!5wj0hns0N"
+        "user": "prismjohnson",
+        "password": "Prism123!"
     },
     "sequelize": {
         "operatorsAliases": {
