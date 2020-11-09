@@ -1,5 +1,5 @@
 /*Beans Copyright info*/
-
+const log = require('../utils/logger').get();
 var Sequelize = require('sequelize');
 var db = require('../db/connection/db');
 var { findUser } = require('../utils/db_helper')
@@ -27,8 +27,10 @@ exports.createQuery = function(req, res) {
     console.log('req body :: ', req.body)
     console.log('req params :: ', req.params)
     console.log('req query :: ', req.query)
+    log.info(`req.body, req.params, req.query ${JSON.stringify(req.body)} ${JSON.stringify(req.params)} ${JSON.stringify(req.query)}`)
 
     if(!req.body.email || !req.body.name){
+        log.info(`inside mandatory field check`)
         res.status(400).jsonp({
             status: 400,
             data: {},
@@ -40,9 +42,12 @@ exports.createQuery = function(req, res) {
     }
 
     let NOW = new Date()
+    log.info(`inside find user check`)
 
     findUser(req.body.user_id, 'user', function(err, response) {
+        log.info(`inside find user response`, err, response)
         if(err){
+            log.info(`inside find user err`, err)
             res.status(400).jsonp({
                 status: 400,
                 data: {},
@@ -52,6 +57,7 @@ exports.createQuery = function(req, res) {
             });
             return;
         }else if(response){
+            log.info(`inside find user response if block`)
             let slug = slugify(`${uuidv4().slice(4, 12)} ${req.body.email.slice(0,5)}`)
             Query.create({
                 id: Math.random().toString(10).slice(3,15),
@@ -78,6 +84,7 @@ exports.createQuery = function(req, res) {
                 created : NOW,
                 updated : NOW
             }).then(function(result) {
+                log.info(`inside create user response ${JSON.stringify(result)}`)
                 console.log('created queries', result);
                 res.jsonp({
                     status: 200,
@@ -88,6 +95,7 @@ exports.createQuery = function(req, res) {
                     error: {}
                 });
             }).catch(function(err) {
+                log.info(`inside create user catch block ${JSON.stringify(err)}`)
                 console.log('Could not create queries record');
                 console.log('err: %j', err);
                 res.jsonp({
