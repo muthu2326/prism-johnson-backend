@@ -4,6 +4,7 @@
     "missing_fields": "Missing mandatory fields",
     "something_went_wrong": "Something went wrong",
     "invalid_get_request": "Invalid request",
+    "invalid_user": "Invalid user",
     "user_not_found": "User not found",
     "missing_email": "Email is mandatory field",
     "missing_password": "Password is mandatory field",

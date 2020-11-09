@@ -52,7 +52,7 @@ exports.createQuery = function(req, res) {
                 status: 400,
                 data: {},
                 error: {
-                    msg: message.no_users_found
+                    msg: message.invalid_user
                 }
             });
             return;
@@ -107,6 +107,15 @@ exports.createQuery = function(req, res) {
                     }
                 });
             });
+        }else{
+            res.jsonp({
+                status: 400,
+                data: {},
+                error: {
+                    msg : message.invalid_user,
+                }
+            });
+            return;
         }
     })
 
