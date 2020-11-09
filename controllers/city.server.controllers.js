@@ -17,8 +17,8 @@ var City = CityModel.initModels(db).city
 var StateModel = require('../models/init-models');
 var State = StateModel.initModels(db).state
 
-City.belongsTo(State);
-State.hasMany(City);
+// City.belongsTo(State);
+// State.hasMany(City);
 
 /*
  ** Beans generated CRR*UD controller methods.
