@@ -199,7 +199,10 @@ exports.getAllQueries = function(req, res) {
     Query.findAll({
         where: {
             lang: lang
-        }
+        },
+        order: [
+            ['created', 'DESC']
+        ]
     }).then(function(queries) {
         /*Return an array of Queries */
         if(queries.length > 0){
