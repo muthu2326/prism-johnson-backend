@@ -1,14 +1,14 @@
 /*Beans Copyright info*/
 
 var Sequelize = require('sequelize');
-var db = require('../db');
+var db = require('../db/connection/db');
 
 /* var EntityModel = require('../models/init-models'); 
  * var Entity = EntityModel.initModels(db.getDbConnection())
  */
 
 var DealerModel = require('../models/init-models');
-var Dealer = DealerModel.initModels(db.getDbConnection())
+var Dealer = DealerModel.initModels(db).dealer
 
 /*
  ** Beans generated CRR*UD controller methods.
