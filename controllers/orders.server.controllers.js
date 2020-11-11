@@ -88,6 +88,7 @@ exports.createOrder = function (req, res) {
                         err: err
                     }
                 });
+                return;
             });
         }else{
             res.jsonp({
@@ -119,10 +120,23 @@ exports.getOrder = function (req, res) {
         }
     }).then(function (order) {
         console.log(order);
-        res.jsonp(order);
+        res.status(200).jsonp({
+            status: 200,
+            data: order,
+            error: {}
+        });
+        return;
     }).catch(function (err) {
         console.log('could not fetch Order');
         console.log('err: %j', err);
+        res.jsonp({
+            status: 500,
+            data: {},
+            error: {
+                msg : message.something_went_wrong,
+                err: err
+            }
+        });
     });
 } /*End of getOrder*/
 
