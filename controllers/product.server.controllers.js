@@ -2,6 +2,11 @@
 
 var Sequelize = require('sequelize');
 var db = require('../db/connection/db');
+var message = require('../utils/message.json');
+var slugify = require('slugify')
+const {
+    v4: uuidv4
+} = require('uuid');
 
 /* var EntityModel = require('../models/init-models'); 
  * var Entity = EntityModel.initModels(db.getDbConnection())
@@ -18,27 +23,46 @@ var Product = ProductModel.initModels(db).product
 exports.createProduct = function(req, res) {
     // Log entry.
     console.log('Product Controller: entering createProduct ');
+    console.log('Order Controller: entering createOrder ');
+    console.log('Query Controller: entering createQuery ');
+    console.log('req body :: ', req.body)
+    console.log('req params :: ', req.params)
+    console.log('req query :: ', req.query)
+
+    let productcode;
+    if(req.body.slug == null || req.body.slug == ''){
+        productcode = `PC${Math.random().toString(10).slice(3,10)}`
+    }else{
+        productcode = req.body.productcode
+    }
+    let slug = slugify(`${uuidv4().slice(4, 12)} ${productcode}`)
+
+    console.log('product-code', productcode)
 
     Product.create({
         id : req.body.id,
-				productcode : req.body.productcode,
-				media_type : req.body.media_type,
-				media_url : req.body.media_url,
-				title : req.body.title,
-				short_description : req.body.short_description,
-				description : req.body.description,
-				lang : req.body.lang,
-				slug : req.body.slug,
-				created : req.body.created,
-				updated : req.body.updated,
-				created_by : req.body.created_by,
-				updated_by : req.body.updated_by,
-				pincode : req.body.pincode,
-				csv_file_name : req.body.csv_file_name,
-				features : req.body.features
+        productcode : productcode,
+        media_type : req.body.media_type,
+        media_url : req.body.media_url,
+        title : req.body.title,
+        short_description : req.body.short_description,
+        description : req.body.description,
+        lang : req.body.lang,
+        slug : req.body.slug ? req.body.slug : slug,
+        created : req.body.created,
+        updated : req.body.updated,
+        created_by : req.body.created_by,
+        updated_by : req.body.updated_by,
+        pincode : req.body.pincode,
+        csv_file_name : req.body.csv_file_name,
+        features : req.body.features
     }).then(function(result) {
         console.log('created product', result);
-        res.jsonp(result);
+        res.jsonp({
+            status: 200,
+            data: result,
+            error: {}
+        });
     }).catch(function(err) {
         console.log('Could not create product record');
         console.log('err: %j', err);
@@ -49,24 +73,49 @@ exports.createProduct = function(req, res) {
 
 /*Get a single product */
 exports.getProduct = function(req, res) {
-    var product_id = req.params.product_id;
+    // var product_id = req.params.product_id;
     console.log('Product Controller: entering getProduct ');
     /*Validate for a null id*/
-    if (!product_id) {
-        res.status(400).send("product ID is null");
+
+    if (!req.params.slug) {
+        res.status(400).jsonp({
+            status: 400,
+            data: {},
+            error: {
+                msg: message.invalid_get_request
+            }
+        });
         return;
     }
+
+    let lang = req.query.lang ? req.query.lang : 'en'
+    let slug = req.params.slug
     /* Query DB using sequelize api for a single product*/
     Product.findOne({
         where: {
-            id: product_id
+            slug: slug,
+            lang: lang
         }
     }).then(function(product) {
         console.log(product);
-        res.jsonp(product);
+        res.status(200).jsonp({
+            status: 200,
+            data: product,
+            error: {}
+        });
+        return;
     }).catch(function(err) {
         console.log('could not fetch product');
         console.log('err: %j', err);
+        res.status(500).jsonp({
+            status: 500,
+            data: {},
+            error: {
+                msg: message.something_went_wrong,
+                err: err
+            }
+        });
+        return;
     });
 } /*End of getProduct*/
 
@@ -74,12 +123,49 @@ exports.getProduct = function(req, res) {
 exports.getAllProducts = function(req, res) {
     console.log('Product Controller: entering getAllProducts');
     /* Query DB using sequelize api for all Products*/
-    Product.findAll().then(function(products) {
+    console.log('Query Controller: entering getAllQueries');
+    console.log('req params :: ', req.params)
+    console.log('req query :: ', req.query)
+
+    let lang = req.query.lang ? req.query.lang : 'en'
+    console.log('lang', lang)
+    
+    Product.findAll({
+        where: {
+            lang: lang
+        },
+        order: [
+            ['created', 'DESC']
+        ]
+    }).then(function(products) {
         /*Return an array of Products */
-        res.jsonp(products);
+        if(products.length > 0){
+            res.status(200).jsonp({
+                status: 200,
+                data: products,
+                error: {}
+            });
+        }else{
+            res.status(400).jsonp({
+                status: 400,
+                data: [],
+                error: {
+                    msg: message.no_products_found
+                }
+            });
+        }
     }).catch(function(err) {
         console.log('could not fetch all products');
         console.log('err: %j', err);
+        res.status(500).jsonp({
+            status: 500,
+            data: {},
+            error: {
+                msg: message.something_went_wrong,
+                err: err
+            }
+        });
+        return;
     });
 }; /*End of getAllProducts*/
 

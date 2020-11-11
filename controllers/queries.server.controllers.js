@@ -79,7 +79,7 @@ exports.createQuery = function(req, res) {
                 status : req.body.status,
                 status_description : req.body.status_description,
                 lang : req.body.lang ? req.body.lang : 'en',
-                slug : slug,
+                slug : req.body.slug ? req.body.slug : slug,
                 user_id : req.body.user_id,
                 created : NOW,
                 updated : NOW

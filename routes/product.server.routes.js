@@ -12,7 +12,7 @@ var upload = multer(); // for parsing multipart/form-data
 router.post('/', upload.array(), /*auth.isAuthenticated,*/ Product.createProduct);
 
 /*Get single product*/
-router.get('/:product_id' , Product.getProduct);
+router.get('/:slug' , Product.getProduct);
 
 /*Get all Products.*/
 router.get('/' , Product.getAllProducts);
