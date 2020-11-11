@@ -95,28 +95,46 @@ exports.getProduct = function(req, res) {
         where: {
             slug: slug,
             lang: lang
-        }
-    }).then(function(product) {
-        console.log(product);
-        res.status(200).jsonp({
-            status: 200,
-            data: product,
-            error: {}
+        },
+        raw: true
+    }
+    ).then(function(product) {
+        Product.findAll({
+            where: {
+                lang: lang
+            },
+            raw: true,
+            order: [
+                ['created', 'DESC']
+            ]
+        })
+        .then(function(products) {
+            console.log('products', products.length)
+            let list = products.filter((item) => {
+                return item.productcode != product.productcode
+            })
+            product.related_products = list
+            product.price = 450
+            res.status(200).jsonp({
+                status: 200,
+                data: product,
+                error: {}
+            });
+        })
+        .catch(function(err) {
+            console.log('could not fetch product');
+            console.log('err: %j', err);
+            res.status(500).jsonp({
+                status: 500,
+                data: {},
+                error: {
+                    msg: message.something_went_wrong,
+                    err: err
+                }
+            });
+            return;
         });
-        return;
-    }).catch(function(err) {
-        console.log('could not fetch product');
-        console.log('err: %j', err);
-        res.status(500).jsonp({
-            status: 500,
-            data: {},
-            error: {
-                msg: message.something_went_wrong,
-                err: err
-            }
-        });
-        return;
-    });
+    })
 } /*End of getProduct*/
 
 /*Get all Products */

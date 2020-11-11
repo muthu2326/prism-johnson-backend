@@ -195,46 +195,58 @@ exports.getAllQueries = function(req, res) {
     }
 
     let type = req.query.type ? req.query.type : 'ask_expert'
+    let slugs = []
+    i = 0;
+    let slug;
+    while(i < 9999){
+        slug = slugify(`${uuidv4().slice(4, 12)}`)
+        slugs.push(slug)
+        i++
+    }
 
-    /* Query DB using sequelize api for all Queries*/
-    Query.findAll({
-        where: {
-            lang: lang,
-            type: type
-        },
-        order: [
-            ['created', 'DESC']
-        ]
-    }).then(function(queries) {
-        /*Return an array of Queries */
-        if(queries.length > 0){
-            res.status(200).jsonp({
-                status: 200,
-                data: queries,
-                error: {}
-            });
-        }else{
-            res.status(400).jsonp({
-                status: 400,
-                data: [],
-                error: {
-                    msg: message.no_queries_found
-                }
-            });
-        }
-    }).catch(function(err) {
-        console.log('could not fetch all queries');
-        console.log('err: %j', err);
-        res.status(500).jsonp({
-            status: 500,
-            data: {},
-            error: {
-                msg: message.something_went_wrong,
-                err: err
-            }
-        });
+    if(slugs.length >= 9950){
+        res.status(200).send(slugs)
         return;
-    });
+    }
+    /* Query DB using sequelize api for all Queries*/
+    // Query.findAll({
+    //     where: {
+    //         lang: lang,
+    //         type: type
+    //     },
+    //     order: [
+    //         ['created', 'DESC']
+    //     ]
+    // }).then(function(queries) {
+    //     /*Return an array of Queries */
+    //     if(queries.length > 0){
+    //         res.status(200).jsonp({
+    //             status: 200,
+    //             data: queries,
+    //             error: {}
+    //         });
+    //     }else{
+    //         res.status(400).jsonp({
+    //             status: 400,
+    //             data: [],
+    //             error: {
+    //                 msg: message.no_queries_found
+    //             }
+    //         });
+    //     }
+    // }).catch(function(err) {
+    //     console.log('could not fetch all queries');
+    //     console.log('err: %j', err);
+    //     res.status(500).jsonp({
+    //         status: 500,
+    //         data: {},
+    //         error: {
+    //             msg: message.something_went_wrong,
+    //             err: err
+    //         }
+    //     });
+    //     return;
+    // });
 }; /*End of getAllQueries*/
 
 
