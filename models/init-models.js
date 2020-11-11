@@ -4,7 +4,7 @@ var _banner = require("./banner");
 var _credentials = require("./credentials");
 var _content = require("./content");
 var _dealer = require("./dealer");
-var _order = require("./order");
+var _orders = require("./orders");
 var _product_mrp_list = require("./product_mrp_list");
 var _city = require("./city");
 var _quries = require("./quries");
@@ -13,8 +13,6 @@ var _product = require("./product");
 var _state = require("./state");
 var _user = require("./user");
 var _sub_description = require("./sub_description");
-// var sequelize = require('../db/connection/db')
-// initModels(sequelize)
 
 function initModels(sequelize) {
   console.log('Invoked init modles', sequelize)
@@ -23,7 +21,7 @@ function initModels(sequelize) {
   var credentials = _credentials(sequelize, DataTypes);
   var content = _content(sequelize, DataTypes);
   var dealer = _dealer(sequelize, DataTypes);
-  var order = _order(sequelize, DataTypes);
+  var orders = _orders(sequelize, DataTypes);
   var product_mrp_list = _product_mrp_list(sequelize, DataTypes);
   var city = _city(sequelize, DataTypes);
   var quries = _quries(sequelize, DataTypes);
@@ -39,7 +37,7 @@ function initModels(sequelize) {
     credentials,
     content,
     dealer,
-    order,
+    orders,
     product_mrp_list,
     city,
     quries,

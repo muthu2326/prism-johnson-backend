@@ -26,6 +26,10 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.STRING(200),
       allowNull: true
     },
+    region: {
+      type: DataTypes.STRING(200),
+      allowNull: true
+    },
     state: {
       type: DataTypes.STRING(200),
       allowNull: true
@@ -36,6 +40,10 @@ module.exports = function(sequelize, DataTypes) {
     },
     price: {
       type: DataTypes.FLOAT,
+      allowNull: true
+    },
+    pincode: {
+      type: DataTypes.STRING(255),
       allowNull: true
     },
     city: {

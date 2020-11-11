@@ -34,7 +34,7 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.STRING(100),
       allowNull: true
     },
-    stage_of_planning: {
+    stage_of_construction: {
       type: DataTypes.STRING(200),
       allowNull: true
     },

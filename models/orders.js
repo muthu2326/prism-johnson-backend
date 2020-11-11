@@ -2,10 +2,9 @@
 
 const Sequelize = require('sequelize');
 module.exports = function(sequelize, DataTypes) {
-  return sequelize.define('order', {
+  return sequelize.define('orders', {
     id: {
-      autoIncrement: true,
-      type: DataTypes.INTEGER(11),
+      type: DataTypes.STRING(200),
       allowNull: false,
       primaryKey: true
     },
@@ -51,6 +50,15 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.FLOAT,
       allowNull: true
     },
+    user_id: {
+      type: DataTypes.INTEGER(11),
+      allowNull: true,
+      references: {
+        model: 'user',
+        key: 'id'
+      },
+      unique: "fk_orders_user_id"
+    },
     stage_of_construction: {
       type: DataTypes.STRING(200),
       allowNull: true
@@ -67,11 +75,11 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.STRING(100),
       allowNull: true
     },
-    user_address: {
+    address: {
       type: DataTypes.TEXT,
       allowNull: true
     },
-    delivery_address: {
+    site_address: {
       type: DataTypes.TEXT,
       allowNull: true
     },
@@ -109,7 +117,7 @@ module.exports = function(sequelize, DataTypes) {
     }
   }, {
     sequelize,
-    tableName: 'order',
+    tableName: 'orders',
     timestamps: false
     });
 };

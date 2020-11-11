@@ -2,24 +2,33 @@
 
 const Sequelize = require('sequelize');
 module.exports = function(sequelize, DataTypes) {
-  return sequelize.define('quries', {
+  return sequelize.define('orders', {
     id: {
       type: DataTypes.STRING(200),
       allowNull: false,
       primaryKey: true
     },
-    user_id: {
+    product_id: {
       type: DataTypes.INTEGER(11),
       allowNull: true,
       references: {
-        model: 'user',
+        model: 'product',
         key: 'id'
       },
-      unique: "fk_user_id"
+      unique: "fk_order_product_id"
     },
-    type: {
-      type: DataTypes.STRING(200),
+    productcode: {
+      type: DataTypes.STRING(100),
       allowNull: true
+    },
+    dealer_id: {
+      type: DataTypes.INTEGER(11),
+      allowNull: true,
+      references: {
+        model: 'dealer',
+        key: 'id'
+      },
+      unique: "fk_order__dealer_id"
     },
     name: {
       type: DataTypes.STRING(500),
@@ -29,25 +38,29 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.STRING(200),
       allowNull: true
     },
-    category: {
+    mobile: {
       type: DataTypes.STRING(200),
       allowNull: true
     },
-    product_id: {
+    quantity: {
+      type: DataTypes.INTEGER(11),
+      allowNull: true
+    },
+    price: {
+      type: DataTypes.FLOAT,
+      allowNull: true
+    },
+    user_id: {
       type: DataTypes.INTEGER(11),
       allowNull: true,
       references: {
-        model: 'product',
+        model: 'user',
         key: 'id'
       },
-      unique: "fk_product_id"
+      unique: "fk_orders_user_id"
     },
     stage_of_construction: {
       type: DataTypes.STRING(200),
-      allowNull: true
-    },
-    address: {
-      type: DataTypes.TEXT,
       allowNull: true
     },
     state: {
@@ -62,11 +75,11 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.STRING(100),
       allowNull: true
     },
-    preferred_date: {
-      type: DataTypes.DATEONLY,
+    address: {
+      type: DataTypes.TEXT,
       allowNull: true
     },
-    description: {
+    site_address: {
       type: DataTypes.TEXT,
       allowNull: true
     },
@@ -94,25 +107,17 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.DATE,
       allowNull: true
     },
-    mobile: {
-      type: DataTypes.STRING(100),
+    updated_by: {
+      type: DataTypes.INTEGER(11),
       allowNull: true
     },
-    preferred_time: {
-      type: DataTypes.STRING(100),
-      allowNull: true
-    },
-    product_name: {
-      type: DataTypes.STRING(200),
-      allowNull: true
-    },
-    productcode: {
+    updated_by_role: {
       type: DataTypes.STRING(200),
       allowNull: true
     }
   }, {
     sequelize,
-    tableName: 'quries',
+    tableName: 'orders',
     timestamps: false
     });
 };

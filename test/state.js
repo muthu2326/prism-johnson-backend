@@ -28,6 +28,10 @@ module.exports = function(sequelize, DataTypes) {
     updated: {
       type: DataTypes.DATE,
       allowNull: true
+    },
+    cities_list: {
+      type: DataTypes.JSON,
+      allowNull: true
     }
   }, {
     sequelize,

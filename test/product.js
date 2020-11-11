@@ -56,6 +56,18 @@ module.exports = function(sequelize, DataTypes) {
     updated_by: {
       type: DataTypes.INTEGER(11),
       allowNull: true
+    },
+    pincode: {
+      type: DataTypes.STRING(100),
+      allowNull: true
+    },
+    csv_file_name: {
+      type: DataTypes.TEXT,
+      allowNull: true
+    },
+    features: {
+      type: DataTypes.JSON,
+      allowNull: true
     }
   }, {
     sequelize,
