@@ -1,17 +1,14 @@
 /*Beans Copyright info*/
 
 var Sequelize = require('sequelize');
-var db = require('../db/connection/db');
+var db = require('../db');
 
 /* var EntityModel = require('../models/init-models'); 
  * var Entity = EntityModel.initModels(db.getDbConnection())
  */
 
-// var DealerModel = require('../models/init-models');
-// var Dealer = DealerModel.initModels(db.getDbConnection())
-
-var db1 = require('../models');
-var Dealer = db1.dealer
+var DealerModel = require('../models/init-models');
+var Dealer = DealerModel.initModels(db.getDbConnection())
 
 /*
  ** Beans generated CRR*UD controller methods.
@@ -22,17 +19,8 @@ exports.createDealer = function(req, res) {
     // Log entry.
     console.log('Dealer Controller: entering createDealer ');
 
-    // var v = new lib.Validator [{"id:number");
-
-    // if (!v.run(req.body)) {
-    //     return res.status(400).send({
-    //         error: v.errors
-    //     });
-    // }
-    let NOW = new Date()
     Dealer.create({
         id : req.body.id,
-				state_id : req.body.state_id,
 				region : req.body.region,
 				branch : req.body.branch,
 				territory : req.body.territory,
@@ -40,15 +28,16 @@ exports.createDealer = function(req, res) {
 				name : req.body.name,
 				pincode : req.body.pincode,
 				address : req.body.address,
-				city_id : req.body.city_id,
-				contact_no : req.body.contact_no,
 				email : req.body.email,
 				password : req.body.password,
 				reset_pasword_link_sent : req.body.reset_pasword_link_sent,
 				lang : req.body.lang,
 				slug : req.body.slug,
-				created : NOW,
-				updated : NOW
+				created : req.body.created,
+				updated : req.body.updated,
+				contact_no : req.body.contact_no,
+				cities : req.body.cities,
+				state : req.body.state
     }).then(function(result) {
         console.log('created dealer', result);
         res.jsonp(result);
@@ -105,7 +94,6 @@ exports.updateDealer = function(req, res) {
     var dealer_id = req.params.dealer_id;
     Dealer.update({
         id : req.body.id,
-				state_id : req.body.state_id,
 				region : req.body.region,
 				branch : req.body.branch,
 				territory : req.body.territory,
@@ -113,15 +101,16 @@ exports.updateDealer = function(req, res) {
 				name : req.body.name,
 				pincode : req.body.pincode,
 				address : req.body.address,
-				city_id : req.body.city_id,
-				contact_no : req.body.contact_no,
 				email : req.body.email,
 				password : req.body.password,
 				reset_pasword_link_sent : req.body.reset_pasword_link_sent,
 				lang : req.body.lang,
 				slug : req.body.slug,
 				created : req.body.created,
-				updated : req.body.updated
+				updated : req.body.updated,
+				contact_no : req.body.contact_no,
+				cities : req.body.cities,
+				state : req.body.state
     }, {
         where: {
             /* dealer table primary key */
@@ -247,7 +236,7 @@ exports.getAllDealersBySearchText = function(req, res) {
     var searchText = req.params.searchText;
     var like = "%" + searchText + "%";
     var criteria = {
-        where: Sequelize.where(Sequelize.fn("concat", Sequelize.col('id'),Sequelize.col('state_id'),Sequelize.col('region'),Sequelize.col('branch'),Sequelize.col('territory'),Sequelize.col('dealer_code'),Sequelize.col('name'),Sequelize.col('pincode'),Sequelize.col('address'),Sequelize.col('city_id'),Sequelize.col('contact_no'),Sequelize.col('email'),Sequelize.col('password'),Sequelize.col('reset_pasword_link_sent'),Sequelize.col('lang'),Sequelize.col('slug'),Sequelize.col('created'),Sequelize.col('updated')), {
+        where: Sequelize.where(Sequelize.fn("concat", Sequelize.col('id'),Sequelize.col('region'),Sequelize.col('branch'),Sequelize.col('territory'),Sequelize.col('dealer_code'),Sequelize.col('name'),Sequelize.col('pincode'),Sequelize.col('address'),Sequelize.col('email'),Sequelize.col('password'),Sequelize.col('reset_pasword_link_sent'),Sequelize.col('lang'),Sequelize.col('slug'),Sequelize.col('created'),Sequelize.col('updated'),Sequelize.col('contact_no'),Sequelize.col('cities'),Sequelize.col('state')), {
             like: like
         })
     };

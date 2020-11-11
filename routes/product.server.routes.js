@@ -1,0 +1,40 @@
+/*Beans Copyright info*/
+var express = require('express');
+var router = express.Router();
+var Product = require('../controllers/product.server.controllers');
+var multer = require('multer');
+var upload = multer(); // for parsing multipart/form-data
+
+
+/* BEANS code generated for CRR*UD. */
+
+/*Create product record*/
+router.post('/', upload.array(), /*auth.isAuthenticated,*/ Product.createProduct);
+
+/*Get single product*/
+router.get('/:product_id' , Product.getProduct);
+
+/*Get all Products.*/
+router.get('/' , Product.getAllProducts);
+
+/*Update an product record*/
+router.post('/:product_id', upload.array(), /*auth.isAuthenticated,*/ Product.updateProduct);
+
+/*Delete product */
+router.delete('/:product_id', /*auth.isAuthenticated,*/ Product.deleteProduct);
+
+/*For pagination*/
+router.get('/:itemsPerPage/:pageNo' , Product.getAllProductsForPagination);
+
+/*For sorting*/
+router.get('/sort/:itemsPerPage/:pageNo/:colname/:orderBy' , Product.getAllProductsSortedByColumn);
+
+/*For filtering*/
+router.get('/filter/:itemsPerPage/:pageNo/:colname/:filterText' , Product.getAllProductsFilteredByColumn);
+
+/*For Searching*/
+router.get('/search/:itemsPerPage/:pageNo/:colname/:searchText' , Product.getAllProductsBySearchText);
+
+
+
+module.exports = router;
