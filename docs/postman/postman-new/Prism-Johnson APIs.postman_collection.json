@@ -12,7 +12,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"name\" : \"Rahul\",\n    \"email\" : \"rahul@gmail.com\",\n    \"password\" : \"welcome2\",\n    \"reset_pasword_link_sent\" : 0,\n    \"address\" : \"ram puram b-21\",\n    \"mobile\" : \"9066125393\",\n    \"pincode\" : 560023,\n    \"stage_of_planning\" : \"Planning\",\n    \"role\" : \"user\",\n    \"reference\" : null,\n    \"city_id\" : 2,\n    \"lang\" : \"eng\"\n}",
+					"raw": "{\n    \"name\" : \"Jai\",\n    \"email\" : \"jai@gmail.com\",\n    \"address\" : \"XXX 1st main punjab\",\n    \"mobile\" : \"12344555\",\n    \"pincode\" : 560026,\n    \"stage_of_planning\" : \"Planning\",\n    \"role\" : \"user\",\n    \"state_id\": 1,\n    \"city_id\" : 2,\n    \"lang\" : \"eng\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -35,10 +35,19 @@
 			"response": []
 		},
 		{
-			"name": "Get all users",
+			"name": "Create admin/TTE",
 			"request": {
-				"method": "GET",
+				"method": "POST",
 				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\" : \"Shreyas\",\n    \"email\" : \"shreyas@gmail.com\",\n    \"address\" : \"XXX 1st main punjab\",\n    \"mobile\" : \"12344555\",\n    \"pincode\" : 560026,\n    \"role\" : \"admin\",\n    \"state_id\": 1,\n    \"city_id\" : [1, 2, 3],\n    \"lang\" : \"eng\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
 				"url": {
 					"raw": "{{base-url}}/api/v1/users",
 					"host": [
@@ -48,6 +57,388 @@
 						"api",
 						"v1",
 						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "User Login",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\" : \"shreyas@gmail.com\",\n    \"password\" : \"shreyas@gmail.com\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base-url}}/api/v1/auth/login",
+					"host": [
+						"{{base-url}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"auth",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create State",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\" : \"Maharastra\",\n    \"lang\" : \"eng\",\n    \"slug\" : null\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base-url}}/api/v1/state",
+					"host": [
+						"{{base-url}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"state"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create City",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\" : \"Mumabi\",\n    \"state_id\": 7,\n    \"lang\" : \"eng\",\n    \"slug\" : null\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base-url}}/api/v1/city",
+					"host": [
+						"{{base-url}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"city"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get all users",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base-url}}/api/v1/users?lang=eng&role=user",
+					"host": [
+						"{{base-url}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"users"
+					],
+					"query": [
+						{
+							"key": "lang",
+							"value": "eng"
+						},
+						{
+							"key": "role",
+							"value": "user"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Place order",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"product_id\": 1,\n    \"productcode\": \"P10001\",\n    \"dealer_id\": null,\n    \"user_id\": 31,\n    \"name\": \"Ram\",\n    \"email\": \"ram@gmail.com\",\n    \"mobile\": \"1234567890\",\n    \"quantity\": 2,\n    \"price\": 700,\n    \"stage_of_construction\": \"Planning\",\n    \"state\": \"Karnataka\",\n    \"city\": \"Bangalore\",\n    \"pincode\": \"560021\",\n    \"address\": \"Malleshwaram Bangalore\",\n    \"site_address\": \"Malleshwaram Bangalore\",\n    \"status\": \"Submited\",\n    \"status_description\": null,\n    \"lang\": \"en\",\n    \"slug\": null\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base-url}}/api/v1/orders",
+					"host": [
+						"{{base-url}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"orders"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Get all products",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"product_id\": 1,\n    \"productcode\": \"P10001\",\n    \"dealer_id\": null,\n    \"user_id\": 31,\n    \"name\": \"Ram\",\n    \"email\": \"ram@gmail.com\",\n    \"mobile\": \"1234567890\",\n    \"quantity\": 2,\n    \"price\": 700,\n    \"stage_of_construction\": \"Planning\",\n    \"state\": \"Karnataka\",\n    \"city\": \"Bangalore\",\n    \"pincode\": \"560021\",\n    \"address\": \"Malleshwaram Bangalore\",\n    \"site_address\": \"Malleshwaram Bangalore\",\n    \"status\": \"Submited\",\n    \"status_description\": null,\n    \"lang\": \"en\",\n    \"slug\": null\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base-url}}/api/v1/orders",
+							"host": [
+								"{{base-url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"orders"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Methods",
+							"value": "GET,PUT,POST,DELETE,OPTIONS"
+						},
+						{
+							"key": "Access-Control-Allow-Headers",
+							"value": "Origin, Content-Type, Authorization, Accept,Content-Length, X-Requested-With, X-PINGOTHER"
+						},
+						{
+							"key": "Access-Control-Expose-Headers",
+							"value": "X-Total-Count"
+						},
+						{
+							"key": "X-Total-Count",
+							"value": "5000"
+						},
+						{
+							"key": "X-Content-Type-Options",
+							"value": "nosniff"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "71"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"47-qWInNQBOCt/TMc8p10nxBR9/hII\""
+						},
+						{
+							"key": "Date",
+							"value": "Wed, 11 Nov 2020 06:22:57 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"status\": 200,\n    \"data\": {\n        \"id\": \"#215918015116\",\n        \"msg\": \"success\"\n    },\n    \"error\": {}\n}"
+				}
+			]
+		},
+		{
+			"name": "Get all orders",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"product_id\": null,\n    \"productcode\": \"P10001\",\n    \"dealer_id\": null,\n    \"user_id\": 31,\n    \"name\": \"Ram\",\n    \"email\": \"ram@gmail.com\",\n    \"mobile\": \"1234567890\",\n    \"quantity\": 2,\n    \"price\": 700,\n    \"stage_of_construction\": \"Planning\",\n    \"state\": \"Karnataka\",\n    \"city\": \"Bangalore\",\n    \"pincode\": \"560021\",\n    \"address\": \"Malleshwaram Bangalore\",\n    \"site_address\": \"Malleshwaram Bangalore\",\n    \"status\": \"Assigned\",\n    \"status_description\": null,\n    \"lang\": \"en\",\n    \"slug\": null\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base-url}}/api/v1/orders?lang=en",
+					"host": [
+						"{{base-url}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"orders"
+					],
+					"query": [
+						{
+							"key": "lang",
+							"value": "en"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get all states",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base-url}}/api/v1/state",
+					"host": [
+						"{{base-url}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"state"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Get all states",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base-url}}/api/v1/state",
+							"host": [
+								"{{base-url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"state"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Mon, 09 Nov 2020 15:09:44 GMT"
+						},
+						{
+							"key": "Server",
+							"value": "Apache/2.4.29 (Ubuntu)"
+						},
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Methods",
+							"value": "GET,PUT,POST,DELETE,OPTIONS"
+						},
+						{
+							"key": "Access-Control-Allow-Headers",
+							"value": "Origin, Content-Type, Authorization, Accept,Content-Length, X-Requested-With, X-PINGOTHER"
+						},
+						{
+							"key": "Access-Control-Expose-Headers",
+							"value": "X-Total-Count"
+						},
+						{
+							"key": "X-Total-Count",
+							"value": "5000"
+						},
+						{
+							"key": "X-Content-Type-Options",
+							"value": "nosniff"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "2422"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"976-Q6AiN4/R8zi2kqmAUsDkIdceUXA\""
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5, max=100"
+						},
+						{
+							"key": "Connection",
+							"value": "Keep-Alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"status\": 200,\n    \"data\": [\n        {\n            \"id\": 2,\n            \"name\": \"Bihar\",\n            \"lang\": \"eng\",\n            \"slug\": \"7615-e4b-Bihar\",\n            \"created\": \"2020-11-09T12:49:53.000Z\",\n            \"updated\": \"2020-11-09T12:49:53.000Z\",\n            \"cities\": [\n                {\n                    \"id\": 1,\n                    \"name\": \"Sitamarhi\",\n                    \"lang\": \"eng\",\n                    \"slug\": \"fbc4-733-Sitam\",\n                    \"state_id\": 2,\n                    \"created\": \"2020-11-09T12:50:52.000Z\",\n                    \"updated\": \"2020-11-09T12:50:52.000Z\"\n                },\n                {\n                    \"id\": 2,\n                    \"name\": \"Muzaffarpur\",\n                    \"lang\": \"eng\",\n                    \"slug\": \"8ab8-dc2-Muzaf\",\n                    \"state_id\": 2,\n                    \"created\": \"2020-11-09T12:51:05.000Z\",\n                    \"updated\": \"2020-11-09T12:51:05.000Z\"\n                },\n                {\n                    \"id\": 3,\n                    \"name\": \"Vaishali\",\n                    \"lang\": \"eng\",\n                    \"slug\": \"5516-df4-Vaish\",\n                    \"state_id\": 2,\n                    \"created\": \"2020-11-09T12:51:16.000Z\",\n                    \"updated\": \"2020-11-09T12:51:16.000Z\"\n                },\n                {\n                    \"id\": 4,\n                    \"name\": \"Begusarai\",\n                    \"lang\": \"eng\",\n                    \"slug\": \"2c72-b6d-Begus\",\n                    \"state_id\": 2,\n                    \"created\": \"2020-11-09T12:51:24.000Z\",\n                    \"updated\": \"2020-11-09T12:51:24.000Z\"\n                },\n                {\n                    \"id\": 5,\n                    \"name\": \"Khagaria\",\n                    \"lang\": \"eng\",\n                    \"slug\": \"3af5-5a2-Khaga\",\n                    \"state_id\": 2,\n                    \"created\": \"2020-11-09T12:51:31.000Z\",\n                    \"updated\": \"2020-11-09T12:51:31.000Z\"\n                }\n            ]\n        },\n        {\n            \"id\": 3,\n            \"name\": \"Karnataka\",\n            \"lang\": \"eng\",\n            \"slug\": \"277b-6c5-Karna\",\n            \"created\": \"2020-11-09T12:49:59.000Z\",\n            \"updated\": \"2020-11-09T12:49:59.000Z\",\n            \"cities\": [\n                {\n                    \"id\": 6,\n                    \"name\": \"Bangalore\",\n                    \"lang\": \"eng\",\n                    \"slug\": \"ef92-e26-Banga\",\n                    \"state_id\": 3,\n                    \"created\": \"2020-11-09T12:52:27.000Z\",\n                    \"updated\": \"2020-11-09T12:52:27.000Z\"\n                },\n                {\n                    \"id\": 7,\n                    \"name\": \"Mangalore\",\n                    \"lang\": \"eng\",\n                    \"slug\": \"4fc7-f0b-Manga\",\n                    \"state_id\": 3,\n                    \"created\": \"2020-11-09T12:52:34.000Z\",\n                    \"updated\": \"2020-11-09T12:52:34.000Z\"\n                },\n                {\n                    \"id\": 8,\n                    \"name\": \"Mysore\",\n                    \"lang\": \"eng\",\n                    \"slug\": \"7456-f0e-Mysor\",\n                    \"state_id\": 3,\n                    \"created\": \"2020-11-09T12:52:40.000Z\",\n                    \"updated\": \"2020-11-09T12:52:40.000Z\"\n                },\n                {\n                    \"id\": 9,\n                    \"name\": \"Udupi\",\n                    \"lang\": \"eng\",\n                    \"slug\": \"5426-010-Udupi\",\n                    \"state_id\": 3,\n                    \"created\": \"2020-11-09T12:52:45.000Z\",\n                    \"updated\": \"2020-11-09T12:52:45.000Z\"\n                }\n            ]\n        },\n        {\n            \"id\": 7,\n            \"name\": \"Maharastra\",\n            \"lang\": \"eng\",\n            \"slug\": \"47a9-842-Mahar\",\n            \"created\": \"2020-11-09T12:54:11.000Z\",\n            \"updated\": \"2020-11-09T12:54:11.000Z\",\n            \"cities\": [\n                {\n                    \"id\": 10,\n                    \"name\": \"Mumabi\",\n                    \"lang\": \"eng\",\n                    \"slug\": \"cc40-69d-Mumab\",\n                    \"state_id\": 7,\n                    \"created\": \"2020-11-09T12:54:22.000Z\",\n                    \"updated\": \"2020-11-09T12:54:22.000Z\"\n                }\n            ]\n        },\n        {\n            \"id\": 4,\n            \"name\": \"MP\",\n            \"lang\": \"eng\",\n            \"slug\": \"5330-4e9-MP\",\n            \"created\": \"2020-11-09T12:50:04.000Z\",\n            \"updated\": \"2020-11-09T12:50:04.000Z\",\n            \"cities\": []\n        },\n        {\n            \"id\": 5,\n            \"name\": \"UP\",\n            \"lang\": \"eng\",\n            \"slug\": \"1719-6cc-UP\",\n            \"created\": \"2020-11-09T12:50:08.000Z\",\n            \"updated\": \"2020-11-09T12:50:08.000Z\",\n            \"cities\": []\n        },\n        {\n            \"id\": 6,\n            \"name\": \"Kerala\",\n            \"lang\": \"eng\",\n            \"slug\": \"d6a9-17b-Keral\",\n            \"created\": \"2020-11-09T12:53:59.000Z\",\n            \"updated\": \"2020-11-09T12:53:59.000Z\",\n            \"cities\": []\n        }\n    ],\n    \"error\": {}\n}"
+				}
+			]
+		},
+		{
+			"name": "Get all cities",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base-url}}/api/v1/city",
+					"host": [
+						"{{base-url}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"city"
 					]
 				}
 			},
@@ -80,7 +471,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"name\" : \"Fahul\",\n    \"email\" : \"rahul@gmail.com\",\n    \"password\" : \"welcome2\",\n    \"reset_pasword_link_sent\" : 0,\n    \"address\" : \"ram puram b-21\",\n    \"mobile\" : \"9066125393\",\n    \"pincode\" : 560023,\n    \"stage_of_planning\" : \"Planning\",\n    \"role\" : \"user\",\n    \"reference\" : null,\n    \"city_id\" : 2,\n    \"lang\" : \"eng\"\n}",
+					"raw": "{\n    \"name\" : \"Kavya\",\n    \"email\" : \"jai1@gmail.com\",\n    \"resetEmail\": true,\n    \"reset_pasword_link_sent\" : 0,\n    \"address\" : \"XXX 1st main punjab\",\n    \"mobile\" : \"12344555\",\n    \"pincode\" : 560026,\n    \"stage_of_planning\" : \"Planning\",\n    \"role\" : \"user\",\n    \"state_id\": 1,\n    \"city_id\" : 2,\n    \"lang\" : \"eng\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -108,7 +499,7 @@
 				"method": "DELETE",
 				"header": [],
 				"url": {
-					"raw": "{{base-url}}/api/v1/users/1",
+					"raw": "{{base-url}}/api/v1/users/{{user_id}}",
 					"host": [
 						"{{base-url}}"
 					],
@@ -116,7 +507,7 @@
 						"api",
 						"v1",
 						"users",
-						"1"
+						"{{user_id}}"
 					]
 				}
 			},
@@ -257,7 +648,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"title\": \"T1\",\n    \"type\": \"intro\",\n    \"media_type\": \"Image\",\n    \"media_url\": \"http://img1\",\n    \"griha_nirman_description\": \"हिंदी टायपिंग\",\n    \"contact_address\": \"XX street, 2nd Main Banglore\",\n    \"contact_email\": \"prism@contact.com\",\n    \"contact_toll_free_number\": \"1800-111-233\",\n    \"lang\": \"eng\"\n}",
+					"raw": "{\n    \"title\": \"Intoduction\",\n    \"type\": \"intro\",\n    \"media_type\": \"Image\",\n    \"media_url\": \"http://img1\",\n    \"griha_nirman_description\": \"Lorem Ipsum is simply dummy text of the printing and typesetting industry.\",\n    \"contact_address\": \"XX street, 2nd Main Banglore\",\n    \"contact_email\": \"prism@contact.com\",\n    \"contact_toll_free_number\": \"1800-111-233\",\n    \"lang\": \"eng\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -458,6 +849,118 @@
 						"api",
 						"v1",
 						"articles"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get query by ID",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base-url}}/api/v1/queries/{{query_id}}?type=ask_expert",
+					"host": [
+						"{{base-url}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"queries",
+						"{{query_id}}"
+					],
+					"query": [
+						{
+							"key": "type",
+							"value": "ask_expert"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create a query",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"user_id\" : 34,     \n    \"type\" : \"ask_expert\",     \n    \"name\" : \"Jai\",\n    \"email\" : \"ram4@gmail.com\",   \n    \"product_name\": \"Cememt duratech\",         \n    \"category\" : \"Cements\",\n    \"mobile\": \"1234567890\",\n    \"productcode\" : \"P10002\",\n    \"product_id\" : 1,\n    \"slug\": null,\n    \"address\": \"Sriram puram bangalore\",\n    \"stage_of_construction\" : \"Planning\",\n    \"state\" : \"Karnataka\",\n    \"city\" : \"Bangalore\",  \n    \"pincode\" : null,\n    \"preferred_date\" : \"11/21/2020\", \n    \"preferred_time\": \"10 AM - 11 AM\",    \n    \"description\" : \"Lorem ipsum\",\n    \"status\" : \"submitted\",\n    \"status_description\" : null,  \n    \"lang\" : \"en\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base-url}}/api/v1/queries",
+					"host": [
+						"{{base-url}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"queries"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update ask expert query",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"user_id\": 31,\n    \"type\": \"ask_expert\",\n    \"name\": \"Jai\",\n    \"email\": \"ram4@gmail.com\",\n    \"category\": \"Cements\",\n    \"productcode\": \"P10002\",\n    \"product_id\": null,\n    \"stage_of_construction\": \"Planning\",\n    \"state\": \"Karnataka\",\n    \"city\": \"Bangalore\",\n    \"pincode\": null,\n    \"preferred_date\": \"2020-11-21\",\n    \"description\": \"Lorem ipsum\",\n    \"status\": \"completed\",\n    \"status_description\": \"Loreal ipsum\",\n    \"lang\": \"en\",\n    \"slug\": \"d6b6-563-ram4@\",\n    \"created\": \"2020-11-09T11:38:54.000Z\",\n    \"updated\": \"2020-11-09T11:38:54.000Z\",\n    \"mobile\": \"1234567890\",\n    \"preferred_time\": \"10 AM - 11 AM\",\n    \"product_name\": \"Cememt duratech\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base-url}}/api/v1/queries/{{query_id}}",
+					"host": [
+						"{{base-url}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"queries",
+						"{{query_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get all ask expert queries",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base-url}}/api/v1/queries?type=ask_expert&lang=en",
+					"host": [
+						"{{base-url}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"queries"
+					],
+					"query": [
+						{
+							"key": "type",
+							"value": "ask_expert"
+						},
+						{
+							"key": "lang",
+							"value": "en"
+						}
 					]
 				}
 			},

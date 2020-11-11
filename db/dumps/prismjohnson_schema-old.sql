@@ -252,7 +252,7 @@ DROP TABLE IF EXISTS `quries`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `quries` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` varchar(200) NOT NULL,
   `user_id` int(11) DEFAULT NULL,
   `type` varchar(200) CHARACTER SET utf8 DEFAULT NULL,
   `name` varchar(500) CHARACTER SET utf8 DEFAULT NULL,
@@ -264,7 +264,7 @@ CREATE TABLE `quries` (
   `state` varchar(200) CHARACTER SET utf8 DEFAULT NULL,
   `city` varchar(200) CHARACTER SET utf8 DEFAULT NULL,
   `pincode` varchar(100) CHARACTER SET utf8 DEFAULT NULL,
-  `preferred_date` datetime DEFAULT NULL,
+  `preferred_date` date DEFAULT NULL,
   `description` text CHARACTER SET utf8,
   `status` varchar(200) CHARACTER SET utf8 DEFAULT NULL,
   `status_description` text CHARACTER SET utf8,
@@ -272,12 +272,14 @@ CREATE TABLE `quries` (
   `slug` varchar(200) CHARACTER SET utf8 DEFAULT NULL,
   `created` datetime DEFAULT NULL,
   `updated` datetime DEFAULT NULL,
+  `mobile` varchar(100) DEFAULT NULL,
+  `preferred_time` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `fk_user_id_idx` (`user_id`),
   KEY `fk_product_id_idx` (`product_id`),
   CONSTRAINT `fk_product_id` FOREIGN KEY (`product_id`) REFERENCES `product` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_user_id` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -376,8 +378,9 @@ CREATE TABLE `user` (
   `city_id` text CHARACTER SET utf8,
   `created` datetime DEFAULT NULL,
   `updated` datetime DEFAULT NULL,
+  `password` varchar(200) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -389,4 +392,4 @@ CREATE TABLE `user` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-11-06 21:29:18
+-- Dump completed on 2020-11-09 13:44:18

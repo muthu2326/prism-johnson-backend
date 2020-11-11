@@ -133,10 +133,33 @@ exports.getAllOrders = function (req, res) {
     /* Query DB using sequelize api for all Orders*/
     Order.findAll().then(function (orders) {
         /*Return an array of Orders */
-        res.jsonp(orders);
+        if(orders.length > 0){
+            res.status(200).jsonp({
+                status: 200,
+                data: orders,
+                error: {}
+            });
+        }else{
+            res.status(400).jsonp({
+                status: 400,
+                data: [],
+                error: {
+                    msg: message.no_orders_found
+                }
+            });
+        }
     }).catch(function (err) {
         console.log('could not fetch all Orders');
         console.log('err: %j', err);
+        res.status(500).jsonp({
+            status: 500,
+            data: {},
+            error: {
+                msg: message.something_went_wrong,
+                err: err
+            }
+        });
+        return;
     });
 }; /*End of getAllOrders*/
 
