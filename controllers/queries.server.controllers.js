@@ -142,26 +142,13 @@ exports.getQuery = function(req, res) {
         return;
     }
 
-    if (!req.query.type) {
-        res.status(400).jsonp({
-            status: 400,
-            data: {},
-            error: {
-                msg: message.invalid_get_request
-            }
-        });
-        return;
-    }
-
     let lang = req.query.lang ? req.query.lang : 'en'
-    let type = req.query.type ? req.query.type : 'ask_expert'
 
     /* Query DB using sequelize api for a single queries*/
     Query.findOne({
         where: {
             id: queries_id,
-            lang: lang,
-            type: type
+            lang: lang
         }
     }).then(function(queries) {
         console.log(queries);
@@ -195,10 +182,24 @@ exports.getAllQueries = function(req, res) {
     let lang = req.query.lang ? req.query.lang : 'en'
     console.log('lang', lang)
 
+    if (!req.query.type) {
+        res.status(400).jsonp({
+            status: 400,
+            data: {},
+            error: {
+                msg: message.invalid_get_request
+            }
+        });
+        return;
+    }
+
+    let type = req.query.type ? req.query.type : 'ask_expert'
+
     /* Query DB using sequelize api for all Queries*/
     Query.findAll({
         where: {
-            lang: lang
+            lang: lang,
+            type: type
         },
         order: [
             ['created', 'DESC']

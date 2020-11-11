@@ -3,8 +3,6 @@
 var Sequelize = require('sequelize');
 var db = require('../db/connection/db');
 
-console.log('db', db)
-
 // var BannerModel = require('../models/init-models');
 // var Banner = BannerModel.initModels(db.getDbConnection())
 

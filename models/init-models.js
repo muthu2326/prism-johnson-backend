@@ -15,7 +15,6 @@ var _user = require("./user");
 var _sub_description = require("./sub_description");
 
 function initModels(sequelize) {
-  console.log('Invoked init modles', sequelize)
   var articles = _articles(sequelize, DataTypes);
   var banner = _banner(sequelize, DataTypes);
   var credentials = _credentials(sequelize, DataTypes);
