@@ -9,6 +9,8 @@ var db = require('../db/connection/db');
 
 var DealerModel = require('../models/init-models');
 var Dealer = DealerModel.initModels(db).dealer
+const bcrypt = require('bcrypt');
+const saltRounds = 10;
 
 /*
  ** Beans generated CRR*UD controller methods.
@@ -19,28 +21,40 @@ exports.createDealer = function(req, res) {
     // Log entry.
     console.log('Dealer Controller: entering createDealer ');
 
+    console.log('req body :: ', req.body)
+    console.log('req params :: ', req.params)
+    console.log('req query :: ', req.query)
+    let NOW = new Date()
+    let slug = slugify(`${uuidv4().slice(4, 15)}`)
+    let password = bcrypt.hashSync(req.body.password ? req.body.password : req.body.email, saltRounds);
+
     Dealer.create({
-        id : req.body.id,
-				region : req.body.region,
-				branch : req.body.branch,
-				territory : req.body.territory,
-				dealer_code : req.body.dealer_code,
-				name : req.body.name,
-				pincode : req.body.pincode,
-				address : req.body.address,
-				email : req.body.email,
-				password : req.body.password,
-				reset_pasword_link_sent : req.body.reset_pasword_link_sent,
-				lang : req.body.lang,
-				slug : req.body.slug,
-				created : req.body.created,
-				updated : req.body.updated,
-				contact_no : req.body.contact_no,
-				cities : req.body.cities,
-				state : req.body.state
+        region : req.body.region,
+        branch : req.body.branch,
+        territory : req.body.territory,
+        dealer_code : req.body.dealer_code,
+        name : req.body.name,
+        pincode : req.body.pincode,
+        address : req.body.address,
+        email : req.body.email,
+        password : password,
+        reset_pasword_link_sent : req.body.reset_pasword_link_sent,
+        lang : req.body.lang,
+        slug : req.body.slug ? req.body.slug : slug,
+        created : NOW,
+        updated : NOW,
+        contact_no : req.body.contact_no,
+        cities : req.body.cities,
+        state : req.body.state
     }).then(function(result) {
         console.log('created dealer', result);
-        res.jsonp(result);
+        delete user.dataValues.password
+            res.status(200).jsonp({
+                status: 200,
+                data: user,
+                error: {},
+            });
+            return;
     }).catch(function(err) {
         console.log('Could not create dealer record');
         console.log('err: %j', err);

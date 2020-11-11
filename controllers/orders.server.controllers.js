@@ -24,7 +24,6 @@ var Order = OrderModel.initModels(db).orders
 exports.createOrder = function (req, res) {
     // Log entry.
     console.log('Order Controller: entering createOrder ');
-    console.log('Query Controller: entering createQuery ');
     console.log('req body :: ', req.body)
     console.log('req params :: ', req.params)
     console.log('req query :: ', req.query)
@@ -168,10 +167,13 @@ exports.getAllOrders = function (req, res) {
 exports.updateOrder = function (req, res) {
     // Log entry.
     console.log('Order Controller: entering updateOrder ');
+    console.log('req body :: ', req.body)
+    console.log('req params :: ', req.params)
+    console.log('req query :: ', req.query)
+    let NOW = new Date()
 
     var order_id = req.params.order_id;
     Order.update({
-        id: req.body.id,
         product_id : req.body.product_id,
         productcode : req.body.productcode,
         dealer_id : req.body.dealer_id,
@@ -188,10 +190,7 @@ exports.updateOrder = function (req, res) {
         site_address : req.body.site_address,
         status : req.body.status,
         status_description : req.body.status_description,
-        lang : req.body.lang,
-        slug : req.body.slug,
-        created : req.body.created,
-        updated : req.body.updated,
+        updated : NOW,
         updated_by : req.body.updated_by,
         updated_by_role : req.body.updated_by_role
     }, {
@@ -201,10 +200,25 @@ exports.updateOrder = function (req, res) {
         }
     }).then(function (result) {
         console.log('updated Order', result);
-        res.send("Order updated successfully");
+        res.status(200).jsonp({
+            status: 200,
+            data: {
+                msg: `${message.updated_order} ${req.params.order_id}`
+            },
+            error: {}
+        });
     }).catch(function (err) {
         console.log('Could not update Order record');
         console.log('err: %j', err);
+        res.status(500).jsonp({
+            status: 500,
+            data: {},
+            error: {
+                msg: message.something_went_wrong,
+                err: err
+            }
+        });
+        return;
     });
 
 } /*End of updateOrder*/

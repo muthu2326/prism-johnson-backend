@@ -20,7 +20,10 @@
     "user_updated": "Successfully updated user",
 
     "updated_query": "Successfully updated query",
-    "removed_query": "Successfully removed query"
+    "removed_query": "Successfully removed query",
+
+    "updated_order": "Successfully updated order"
+    
 
 
 }
