@@ -187,8 +187,8 @@ exports.getAllOrders = function (req, res) {
                 error: {}
             });
         }else{
-            res.status(400).jsonp({
-                status: 400,
+            res.status(200).jsonp({
+                status: 200,
                 data: [],
                 error: {
                     msg: message.no_orders_found
