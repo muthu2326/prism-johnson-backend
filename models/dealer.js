@@ -9,10 +9,6 @@ module.exports = function(sequelize, DataTypes) {
       allowNull: false,
       primaryKey: true
     },
-    state_id: {
-      type: DataTypes.INTEGER(11),
-      allowNull: true
-    },
     region: {
       type: DataTypes.STRING(200),
       allowNull: true
@@ -42,14 +38,6 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.TEXT,
       allowNull: true
     },
-    city_id: {
-      type: DataTypes.INTEGER(11),
-      allowNull: true
-    },
-    contact_no: {
-      type: DataTypes.STRING(100),
-      allowNull: true
-    },
     email: {
       type: DataTypes.STRING(200),
       allowNull: true
@@ -77,6 +65,18 @@ module.exports = function(sequelize, DataTypes) {
     },
     updated: {
       type: DataTypes.DATE,
+      allowNull: true
+    },
+    contact_no: {
+      type: DataTypes.STRING(100),
+      allowNull: true
+    },
+    cities: {
+      type: DataTypes.JSON,
+      allowNull: true
+    },
+    state: {
+      type: DataTypes.STRING(200),
       allowNull: true
     }
   }, {

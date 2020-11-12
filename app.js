@@ -83,7 +83,7 @@ app.use('/api/v1/pages', contentRouter);
 app.use('/api/v1/users', userRouter);
 app.use('/api/v1/auth', authRouter);
 app.use('/api/v1/banner', bannerRouter);
-app.use('/api/v1/dealer', dealersRouter);
+app.use('/api/v1/dealers', dealersRouter);
 app.use('/api/v1/articles', articlesRouter);
 app.use('/api/v1/queries', queryRouter);
 app.use('/api/v1/state', stateRouter);

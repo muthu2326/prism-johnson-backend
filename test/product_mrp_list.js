@@ -22,32 +22,28 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.STRING(100),
       allowNull: true
     },
-    branch: {
-      type: DataTypes.STRING(200),
+    postal_office: {
+      type: DataTypes.TEXT,
       allowNull: true
     },
-    region: {
-      type: DataTypes.STRING(200),
+    taluk: {
+      type: DataTypes.TEXT,
       allowNull: true
     },
-    state: {
-      type: DataTypes.STRING(200),
-      allowNull: true
-    },
-    territory: {
+    city: {
       type: DataTypes.STRING(255),
       allowNull: true
     },
-    price: {
-      type: DataTypes.FLOAT,
+    state: {
+      type: DataTypes.STRING(255),
       allowNull: true
     },
     pincode: {
       type: DataTypes.STRING(255),
       allowNull: true
     },
-    city: {
-      type: DataTypes.STRING(200),
+    price: {
+      type: DataTypes.FLOAT,
       allowNull: true
     },
     lang: {

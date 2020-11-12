@@ -1,7 +1,12 @@
 /*Beans Copyright info*/
 
 var Sequelize = require('sequelize');
+var slugify = require('slugify')
+const {
+    v4: uuidv4
+} = require('uuid');
 var db = require('../db/connection/db');
+var message = require('../utils/message.json');
 
 /* var EntityModel = require('../models/init-models'); 
  * var Entity = EntityModel.initModels(db.getDbConnection())
@@ -34,6 +39,7 @@ exports.createDealer = function(req, res) {
         territory : req.body.territory,
         dealer_code : req.body.dealer_code,
         name : req.body.name,
+        state: req.body.state,
         pincode : req.body.pincode,
         address : req.body.address,
         email : req.body.email,
@@ -48,16 +54,24 @@ exports.createDealer = function(req, res) {
         state : req.body.state
     }).then(function(result) {
         console.log('created dealer', result);
-        delete user.dataValues.password
             res.status(200).jsonp({
                 status: 200,
-                data: user,
+                data: result,
                 error: {},
             });
             return;
     }).catch(function(err) {
         console.log('Could not create dealer record');
         console.log('err: %j', err);
+        res.status(500).jsonp({
+            status: 500,
+            data: {},
+            error: {
+                msg: message.something_went_wrong,
+                err: err
+            }
+        });
+        return;
     });
 
 } /*End of createDealer*/
@@ -73,32 +87,145 @@ exports.getDealer = function(req, res) {
         return;
     }
     /* Query DB using sequelize api for a single dealer*/
+    let lang = req.query.lang ? req.query.lang.toLowerCase() : 'en';
     Dealer.findOne({
         where: {
-            id: dealer_id
+            id: dealer_id,
+            lang: lang
         }
     }).then(function(dealer) {
         console.log(dealer);
-        res.jsonp(dealer);
+        res.status(200).jsonp({
+            status: 200,
+            data: dealer,
+            error: {}
+        });
+        return;
     }).catch(function(err) {
         console.log('could not fetch dealer');
         console.log('err: %j', err);
+        res.status(500).jsonp({
+            status: 500,
+            data: {},
+            error: {
+                msg: message.something_went_wrong,
+                err: err
+            }
+        });
+        return;
     });
 } /*End of getDealer*/
 
 /*Get all Dealers */
 exports.getAllDealers = function(req, res) {
     console.log('Dealer Controller: entering getAllDealers');
+    let lang = req.query.lang ? req.query.lang.toLowerCase() : 'en';
     /* Query DB using sequelize api for all Dealers*/
-    Dealer.findAll().then(function(dealers) {
+    Dealer.findAll({
+        where: {
+            lang: lang
+        }
+    }).then(function(dealers) {
         /*Return an array of Dealers */
-        res.jsonp(dealers);
+        if (dealers.length > 0) {
+            dealers.forEach(dealer => {
+                delete dealer.dataValues.password
+            });
+            res.status(200).jsonp({
+                status: 200,
+                data: dealers,
+                error: {}
+            });
+            return;
+        } else {
+            res.status(400).jsonp({
+                status: 400,
+                data: [],
+                error: {
+                    msg: message.no_dealers_found
+                }
+            });
+            return;
+        }
     }).catch(function(err) {
         console.log('could not fetch all dealers');
         console.log('err: %j', err);
+        res.status(500).jsonp({
+            status: 500,
+            data: {},
+            error: {
+                msg: message.something_went_wrong,
+                err: err
+            }
+        });
+        return;
     });
 }; /*End of getAllDealers*/
 
+exports.dealerLocator = function(req, res) {
+    console.log('Dealer Controller: entering dealerLocator');
+    console.log('req.query', req.query)
+    let lang = req.query.lang ? req.query.lang.toLowerCase() : 'en';
+    let state = req.query.state
+    let city = req.query.city
+    let pincode = req.query.pincode
+    /* Query DB using sequelize api for all Dealers*/
+    let where_condition;
+
+    if(pincode){
+        where_condition = {
+            lang: lang,
+            pincode: pincode
+        }
+    }else if(state != null && city != null){
+        where_condition = {
+            lang: lang,
+            state: state,
+            city: city
+        }
+    }else{
+        where_condition = {
+            lang: lang
+        }
+    }
+    Dealer.findAll({
+        where: where_condition
+    }).then(function(dealers) {
+        /*Return an array of Dealers */
+        if (dealers.length > 0) {
+            dealers.forEach(dealer => {
+                delete dealer.dataValues.password
+            });
+            res.status(200).jsonp({
+                status: 200,
+                data: dealers,
+                error: {}
+            });
+            return;
+        } else {
+            res.status(400).jsonp({
+                status: 400,
+                data: [],
+                error: {
+                    msg: message.no_dealers_found
+                }
+            });
+            return;
+        }
+    }).catch(function(err) {
+        console.log('could not fetch all dealers');
+        console.log('err: %j', err);
+        res.status(500).jsonp({
+            status: 500,
+            data: {},
+            error: {
+                msg: message.something_went_wrong,
+                err: err
+            }
+        });
+        return;
+    });
+}; /*End of getAllDealers*/
 
 /*Update dealer record.*/
 exports.updateDealer = function(req, res) {

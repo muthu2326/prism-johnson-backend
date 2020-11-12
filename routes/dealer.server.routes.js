@@ -17,6 +17,8 @@ router.get('/:dealer_id' , Dealer.getDealer);
 /*Get all Dealers.*/
 router.get('/' , Dealer.getAllDealers);
 
+router.get('/locator' , Dealer.dealerLocator);
+
 /*Update an dealer record*/
 router.post('/:dealer_id', upload.array(), /*auth.isAuthenticated,*/ Dealer.updateDealer);
 

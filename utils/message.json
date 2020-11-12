@@ -11,6 +11,7 @@
     "invalid_login_credentials": "Invalid email or password",
     "user_already_exist": "User already exist",
     "no_users_found": "No users found",
+    "no_dealers_found": "No dealers found",
     "no_queries_found": "No queries found",
     "no_orders_found": "No orders found",
     "no_products_found": "No products found",

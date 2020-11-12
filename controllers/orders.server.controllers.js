@@ -16,6 +16,10 @@ console.log('db')
 var OrderModel = require('../models/init-models');
 var Order = OrderModel.initModels(db).orders
 
+var DealerModel = require('../models/init-models');
+var Dealer = DealerModel.initModels(db).dealer
+
+Dealer.belongsTo(Order, {foreignKey: 'dealer_id'});
 /*
  ** Beans generated CRR*UD controller methods.
  */
@@ -144,7 +148,33 @@ exports.getOrder = function (req, res) {
 exports.getAllOrders = function (req, res) {
     console.log('Order Controller: entering getAllOrders');
     /* Query DB using sequelize api for all Orders*/
-    Order.findAll().then(function (orders) {
+
+    let dealer_id = req.query.dealer
+    let lang = req.query.lang ? req.query.lang.toLowerCase() : 'en';
+    let cities = req.query.cities
+    let where_condition;
+
+    if(dealer_id){
+        where_condition = {
+            dealer_id: dealer_id,
+            lang: lang
+        }
+    }else if(cities){
+        where_condition = {
+            cities: {
+                $in: cities
+            },
+            lang: lang
+        }
+    }else{
+        where_condition = {
+            lang: lang
+        }
+    }
+
+    Order.findAll({
+        where: where_condition
+    }).then(function (orders) {
         /*Return an array of Orders */
         if(orders.length > 0){
             res.status(200).jsonp({
