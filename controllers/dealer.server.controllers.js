@@ -186,7 +186,7 @@ exports.dealerLocator = function(req, res) {
         where_condition = {
             lang: lang,
             state: state,
-            city: city
+            cities: city
         }
     }else{
         where_condition = {
@@ -195,7 +195,7 @@ exports.dealerLocator = function(req, res) {
     }
 
     console.log('where_condition', where_condition)
-    
+
     Dealer.findAll({
         where: where_condition
     }).then(function(dealers) {
