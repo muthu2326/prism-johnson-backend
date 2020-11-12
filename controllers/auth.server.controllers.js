@@ -70,6 +70,7 @@ exports.login = function(req, res) {
             console.log(user);
             let check_password = bcrypt.compareSync(req.body.password, user.password);
             delete user.dataValues.password
+            user.dataValues.cities = user.dataValues.city_id? user.dataValues.city_id.split(",") : [];
             if(check_password){
                 res.status(200).jsonp({
                     status: 200,
