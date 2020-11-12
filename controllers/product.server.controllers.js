@@ -26,8 +26,6 @@ var ProductMRP = ProductMRPModel.initModels(db).product_mrp_list;
 exports.createProduct = function(req, res) {
     // Log entry.
     console.log('Product Controller: entering createProduct ');
-    console.log('Order Controller: entering createOrder ');
-    console.log('Query Controller: entering createQuery ');
     console.log('req body :: ', req.body)
     console.log('req params :: ', req.params)
     console.log('req query :: ', req.query)
@@ -41,6 +39,7 @@ exports.createProduct = function(req, res) {
     let slug = slugify(`${uuidv4().slice(4, 12)} ${productcode}`)
 
     console.log('product-code', productcode)
+    let NOW = new Date()
 
     Product.create({
         id : req.body.id,
@@ -52,11 +51,10 @@ exports.createProduct = function(req, res) {
         description : req.body.description,
         lang : req.body.lang,
         slug : req.body.slug ? req.body.slug : slug,
-        created : req.body.created,
-        updated : req.body.updated,
+        created : NOW,
+        updated : NOW,
         created_by : req.body.created_by,
         updated_by : req.body.updated_by,
-        pincode : req.body.pincode,
         csv_file_name : req.body.csv_file_name,
         features : req.body.features
     }).then(function(result) {
@@ -69,6 +67,14 @@ exports.createProduct = function(req, res) {
     }).catch(function(err) {
         console.log('Could not create product record');
         console.log('err: %j', err);
+        res.status(500).jsonp({
+            status: 500,
+            data: {},
+            error: {
+                msg: message.something_went_wrong
+            }
+        });
+        return;
     });
 
 } /*End of createProduct*/
@@ -220,25 +226,36 @@ exports.getAllProducts = function(req, res) {
 exports.updateProduct = function(req, res) {
     // Log entry.
     console.log('Product Controller: entering updateProduct ');
+    console.log('req body :: ', req.body)
+    console.log('req params :: ', req.params)
+    console.log('req query :: ', req.query)
 
     var product_id = req.params.product_id;
+    let NOW = new Date()
+
+    if (!req.params.product_id) {
+        console.log('missing product_id in params')
+        res.status(400).jsonp({
+            status: 400,
+            data: {},
+            message: message.invalid_get_request
+        });
+        return
+    }
+
     Product.update({
-        id : req.body.id,
-				productcode : req.body.productcode,
-				media_type : req.body.media_type,
-				media_url : req.body.media_url,
-				title : req.body.title,
-				short_description : req.body.short_description,
-				description : req.body.description,
-				lang : req.body.lang,
-				slug : req.body.slug,
-				created : req.body.created,
-				updated : req.body.updated,
-				created_by : req.body.created_by,
-				updated_by : req.body.updated_by,
-				pincode : req.body.pincode,
-				csv_file_name : req.body.csv_file_name,
-				features : req.body.features
+        productcode : req.body.productcode,
+        media_type : req.body.media_type,
+        media_url : req.body.media_url,
+        title : req.body.title,
+        short_description : req.body.short_description,
+        description : req.body.description,
+        lang : req.body.lang,
+        updated : NOW,
+        created_by : req.body.created_by,
+        updated_by : req.body.updated_by,
+        csv_file_name : req.body.csv_file_name,
+        features : req.body.features
     }, {
         where: {
             /* product table primary key */
@@ -246,23 +263,42 @@ exports.updateProduct = function(req, res) {
         }
     }).then(function(result) {
         console.log('updated product', result);
-        res.send("product updated successfully");
+        res.status(200).jsonp({
+            status: 200,
+            data: {
+                msg: `${message.updated_product} ${req.params.product_id}`
+            },
+            error: {}
+        });
     }).catch(function(err) {
         console.log('Could not update product record');
         console.log('err: %j', err);
+        res.status(500).jsonp({
+            status: 500,
+            data: {},
+            error: {
+                msg: message.something_went_wrong
+            }
+        });
+        return;
     });
-
 } /*End of updateProduct*/
 
 /*Delete a single product */
 exports.deleteProduct = function(req, res) {
     console.log('Product Controller: entering deleteProduct ');
+    console.log('reqest params :: ', req.params)
 
     var product_id = req.params.product_id;
     /*Validate for a null product_id*/
-    if (!product_id) {
-        res.status(400).send("product ID is null");
-        return;
+    if (!req.params.product_id) {
+        console.log('missing product_id in params')
+        res.status(400).jsonp({
+            status: 400,
+            data: {},
+            message: message.invalid_get_request
+        });
+        return
     }
     /* Delete product record*/
     Product.destroy({
@@ -270,12 +306,34 @@ exports.deleteProduct = function(req, res) {
             id: product_id
         }
     }).then(function(product) {
-        console.log(product);
-        res.jsonp(product);
+        if (product != null) {
+            res.status(200).jsonp({
+                status: 200,
+                data: {
+                    msg: `${message.product_deleted} ${req.params.product_id}`
+                },
+                error: {}
+            });
+        } else {
+            res.status(400).jsonp({
+                status: 400,
+                data: {},
+                error: {
+                    msg: message.product_not_found
+                }
+            });
+        }
     }).catch(function(err) {
         console.log('could not delete product');
         console.log('err: %j', err);
-
+        res.status(500).jsonp({
+            status: 500,
+            data: {},
+            error: {
+                msg: message.something_went_wrong,
+                err: err
+            }
+        });
     });
 } /*End of deleteProduct*/
 
