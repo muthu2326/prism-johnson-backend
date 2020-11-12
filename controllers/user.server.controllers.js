@@ -172,7 +172,7 @@ exports.userRegistration = function (req, res) {
                 role: req.body.role.toLowerCase(),
                 slug: req.body.slug ? req.body.slug : slug,
                 state_id: req.body.state_id,
-                city_id: req.body.city_id,
+                city_id: JSON.stringify(req.body.city_id),
                 lang: lang,
                 created: NOW,
                 updated: NOW
