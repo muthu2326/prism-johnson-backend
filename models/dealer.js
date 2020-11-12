@@ -72,7 +72,7 @@ module.exports = function(sequelize, DataTypes) {
       allowNull: true
     },
     cities: {
-      type: DataTypes.JSON,
+      type: DataTypes.STRING(200),
       allowNull: true
     },
     state: {

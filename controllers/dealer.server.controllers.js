@@ -1,5 +1,5 @@
 /*Beans Copyright info*/
-
+const log = require('../utils/logger').get();
 var Sequelize = require('sequelize');
 var slugify = require('slugify')
 const {
@@ -170,6 +170,7 @@ exports.getAllDealers = function(req, res) {
 exports.dealerLocator = function(req, res) {
     console.log('Dealer Controller: entering dealerLocator');
     console.log('req.query', req.query)
+    log.info(`req.body, req.params, req.query ${JSON.stringify(req.query)}`)
     let lang = req.query.lang ? req.query.lang.toLowerCase() : 'en';
     let state = req.query.state
     let city = req.query.city
@@ -195,6 +196,7 @@ exports.dealerLocator = function(req, res) {
     }
 
     console.log('where_condition', where_condition)
+    log.info(`req.body, req.params, req.query ${JSON.stringify(where_condition)}`)
 
     Dealer.findAll({
         where: where_condition
