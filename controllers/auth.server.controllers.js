@@ -110,6 +110,10 @@ exports.login = function(req, res) {
             let check_password = bcrypt.compareSync(req.body.password, user.password);
             delete user.dataValues.password;
             user.dataValues.role = `dealer`;
+            let thisDealerCities = user.dataValues.cities;
+            delete user.dataValues.cities;
+            user.dataValues.cities = [];
+            user.dataValues.cities.push(thisDealerCities);
             if(check_password){
                 res.status(200).jsonp({
                     status: 200,
@@ -130,6 +134,7 @@ exports.login = function(req, res) {
         }).catch(function(err) {
             console.log('could not fetch user');
             console.log('err: %j', err);
+            console.log(err);
             res.status(500).jsonp({
                 status: 500,
                 data: {},
