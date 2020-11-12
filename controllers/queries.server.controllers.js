@@ -209,44 +209,44 @@ exports.getAllQueries = function(req, res) {
         return;
     }
     /* Query DB using sequelize api for all Queries*/
-    // Query.findAll({
-    //     where: {
-    //         lang: lang,
-    //         type: type
-    //     },
-    //     order: [
-    //         ['created', 'DESC']
-    //     ]
-    // }).then(function(queries) {
-    //     /*Return an array of Queries */
-    //     if(queries.length > 0){
-    //         res.status(200).jsonp({
-    //             status: 200,
-    //             data: queries,
-    //             error: {}
-    //         });
-    //     }else{
-    //         res.status(400).jsonp({
-    //             status: 400,
-    //             data: [],
-    //             error: {
-    //                 msg: message.no_queries_found
-    //             }
-    //         });
-    //     }
-    // }).catch(function(err) {
-    //     console.log('could not fetch all queries');
-    //     console.log('err: %j', err);
-    //     res.status(500).jsonp({
-    //         status: 500,
-    //         data: {},
-    //         error: {
-    //             msg: message.something_went_wrong,
-    //             err: err
-    //         }
-    //     });
-    //     return;
-    // });
+    Query.findAll({
+        where: {
+            lang: lang,
+            type: type
+        },
+        order: [
+            ['created', 'DESC']
+        ]
+    }).then(function(queries) {
+        /*Return an array of Queries */
+        if(queries.length > 0){
+            res.status(200).jsonp({
+                status: 200,
+                data: queries,
+                error: {}
+            });
+        }else{
+            res.status(400).jsonp({
+                status: 400,
+                data: [],
+                error: {
+                    msg: message.no_queries_found
+                }
+            });
+        }
+    }).catch(function(err) {
+        console.log('could not fetch all queries');
+        console.log('err: %j', err);
+        res.status(500).jsonp({
+            status: 500,
+            data: {},
+            error: {
+                msg: message.something_went_wrong,
+                err: err
+            }
+        });
+        return;
+    });
 }; /*End of getAllQueries*/
 
 

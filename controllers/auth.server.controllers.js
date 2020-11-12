@@ -22,7 +22,7 @@ var State = StateModel.initModels(db).state
 var CityModel = require('../models/init-models');
 var City = CityModel.initModels(db).city
 
-User.belongsTo(State, {foreignKey: 'id'});
+State.belongsTo(State, {foreignKey: 'state_id'});
 State.hasMany(City, {foreignKey: 'state_id'});
 
 exports.login = function(req, res) {
