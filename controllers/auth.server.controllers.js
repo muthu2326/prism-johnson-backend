@@ -108,7 +108,8 @@ exports.login = function(req, res) {
         }).then(function(user) {
             console.log(user);
             let check_password = bcrypt.compareSync(req.body.password, user.password);
-            delete user.dataValues.password
+            delete user.dataValues.password;
+            user.dataValues.role = `dealer`;
             if(check_password){
                 res.status(200).jsonp({
                     status: 200,
