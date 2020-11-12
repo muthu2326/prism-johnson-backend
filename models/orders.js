@@ -114,6 +114,10 @@ module.exports = function(sequelize, DataTypes) {
     updated_by_role: {
       type: DataTypes.STRING(200),
       allowNull: true
+    },
+    product_name: {
+      type: DataTypes.TEXT,
+      allowNull: true
     }
   }, {
     sequelize,

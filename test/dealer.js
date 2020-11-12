@@ -61,23 +61,21 @@ module.exports = function(sequelize, DataTypes) {
     },
     created: {
       type: DataTypes.DATE,
-      allowNull: true,
-      defaultValue: Sequelize.literal('CURRENT_TIMESTAMP')
+      allowNull: true
     },
     updated: {
       type: DataTypes.DATE,
-      allowNull: true,
-      defaultValue: Sequelize.literal('CURRENT_TIMESTAMP')
+      allowNull: true
     },
     contact_no: {
       type: DataTypes.STRING(100),
       allowNull: true
     },
-    cities: {
+    state: {
       type: DataTypes.STRING(200),
       allowNull: true
     },
-    state: {
+    cities: {
       type: DataTypes.STRING(200),
       allowNull: true
     }

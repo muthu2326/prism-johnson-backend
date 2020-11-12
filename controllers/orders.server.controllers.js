@@ -51,6 +51,7 @@ exports.createOrder = function (req, res) {
                 id: Math.random().toString(10).slice(3,15),
                 product_id: req.body.product_id,
                 productcode: req.body.productcode,
+                product_name: req.body.product_name,
                 dealer_id: req.body.dealer_id,
                 user_id: req.body.user_id,
                 name: req.body.name,
@@ -224,6 +225,7 @@ exports.updateOrder = function (req, res) {
     Order.update({
         product_id : req.body.product_id,
         productcode : req.body.productcode,
+        product_name: req.body.product_name,
         dealer_id : req.body.dealer_id,
         name : req.body.name,
         email : req.body.email,
