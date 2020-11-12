@@ -193,6 +193,9 @@ exports.dealerLocator = function(req, res) {
             lang: lang
         }
     }
+
+    console.log('where_condition', where_condition)
+    
     Dealer.findAll({
         where: where_condition
     }).then(function(dealers) {
