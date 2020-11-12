@@ -195,19 +195,7 @@ exports.getAllQueries = function(req, res) {
     }
 
     let type = req.query.type ? req.query.type : 'ask_expert'
-    let slugs = []
-    i = 0;
-    let slug;
-    while(i < 9999){
-        slug = slugify(`${uuidv4().slice(4, 12)}`)
-        slugs.push(slug)
-        i++
-    }
 
-    if(slugs.length >= 9950){
-        res.status(200).send(slugs)
-        return;
-    }
     /* Query DB using sequelize api for all Queries*/
     Query.findAll({
         where: {
