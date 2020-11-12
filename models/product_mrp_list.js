@@ -22,24 +22,28 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.STRING(100),
       allowNull: true
     },
-    branch: {
-      type: DataTypes.STRING(200),
+    postal_office: {
+      type: DataTypes.TEXT,
+      allowNull: true
+    },
+    taluk: {
+      type: DataTypes.TEXT,
+      allowNull: true
+    },
+    city: {
+      type: DataTypes.STRING(255),
       allowNull: true
     },
     state: {
-      type: DataTypes.STRING(200),
+      type: DataTypes.STRING(255),
       allowNull: true
     },
-    territory: {
+    pincode: {
       type: DataTypes.STRING(255),
       allowNull: true
     },
     price: {
       type: DataTypes.FLOAT,
-      allowNull: true
-    },
-    city: {
-      type: DataTypes.STRING(200),
       allowNull: true
     },
     lang: {
@@ -52,11 +56,13 @@ module.exports = function(sequelize, DataTypes) {
     },
     created: {
       type: DataTypes.DATE,
-      allowNull: true
+      allowNull: true,
+      defaultValue: Sequelize.literal('CURRENT_TIMESTAMP')
     },
     updated: {
       type: DataTypes.DATE,
-      allowNull: true
+      allowNull: true,
+      defaultValue: Sequelize.literal('CURRENT_TIMESTAMP')
     }
   }, {
     sequelize,

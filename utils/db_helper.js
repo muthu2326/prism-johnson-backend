@@ -5,6 +5,9 @@ const log = require('../utils/logger').get();
 var UserModel = require('../models/init-models');
 var User = UserModel.initModels(db).user
 
+var DealerModel = require('../models/init-models');
+var Dealer = DealerModel.initModels(db).dealer
+
 exports.checkDuplicateUser = (email, role, cb) => {
     console.log('inside checkDuplicateUser', email, role)
     User.findOne({
@@ -55,6 +58,27 @@ exports.findUser = (user_id, role, cb) => {
     }).then(function(user) {
         console.log(user);
         if(user != null){
+            console.log('found user')
+            cb(null, true)
+        }else{
+            cb(false, null)
+        }
+    }).catch(function(err) {
+        console.log('could not fetch user');
+        console.log('err: %j', err);
+        cb(false, null) // new user
+        return;
+    });
+}
+
+exports.findDealer = (dealer_id, cb) => {
+    Dealer.findOne({
+        where: {
+           id: dealer_id
+        }
+    }).then(function(dealer) {
+        console.log(dealer);
+        if(dealer != null){
             console.log('found user')
             cb(null, true)
         }else{
