@@ -15,6 +15,9 @@ const {
 var ProductModel = require('../models/init-models');
 var Product = ProductModel.initModels(db).product
 
+var ProductMRPModel = require('../models/init-models');
+var ProductMRP = ProductMRPModel.initModels(db).product_mrp_list;
+
 /*
  ** Beans generated CRR*UD controller methods.
  */
@@ -97,38 +100,63 @@ exports.getProduct = function(req, res) {
             lang: lang
         },
         raw: true
-    }
-    ).then(function(product) {
-        Product.findAll({
-            where: {
-                lang: lang
-            },
-            raw: true,
-            order: [
-                ['created', 'DESC']
-            ]
-        })
-        .then(function(products) {
-            console.log('products', products.length)
-            let list = products.filter((item) => {
-                return item.productcode != product.productcode
+    }).then(function(product) {
+        // TODO:: handle no pincode
+        ProductMRP.findOne({
+            attributes: ['price'],
+            where : {
+                productcode: product.productcode,
+                pincode:req.query.pincode ? req.query.pincode: '851111'
+            }
+        }).then(p => {
+            if(p) {
+                product.price = p.price;
+            } else {
+                product.price = 450;
+            }
+            Product.findAll({
+                where: {
+                    lang: lang
+                },
+                raw: true,
+                order: [
+                    ['created', 'DESC']
+                ]
             })
-            product.related_products = list
-            product.price = 450
-            res.status(200).jsonp({
-                status: 200,
-                data: product,
-                error: {}
+            .then(function(products) {
+                console.log('products', products.length)
+                let list = products.filter((item) => {
+                    return item.productcode != product.productcode
+                })
+                product.related_products = list
+                res.status(200).jsonp({
+                    status: 200,
+                    data: product,
+                    error: {}
+                });
+            })
+            .catch(function(err) {
+                console.log('could not fetch product');
+                console.log('err: %j', err);
+                res.status(500).jsonp({
+                    status: 500,
+                    data: {},
+                    error: {
+                        msg: message.something_went_wrong,
+                        err: err
+                    }
+                });
+                return;
             });
         })
         .catch(function(err) {
-            console.log('could not fetch product');
+            console.log('could not fetch product price');
             console.log('err: %j', err);
             res.status(500).jsonp({
                 status: 500,
                 data: {},
                 error: {
-                    msg: message.something_went_wrong,
+                    msg: 'pincode is required to fetch product price',
                     err: err
                 }
             });
