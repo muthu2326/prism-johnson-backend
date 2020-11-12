@@ -1,6 +1,7 @@
 /*Beans Copyright info*/
 
 var Sequelize = require('sequelize');
+const Op = Sequelize.Op;
 var db = require('../db/connection/db');
 var { findUser } = require('../utils/db_helper')
 var message = require('../utils/message.json');
@@ -154,6 +155,7 @@ exports.getAllOrders = function (req, res) {
     let cities = req.query.cities
     let where_condition;
 
+    console.log('cities', cities)
     if(dealer_id){
         where_condition = {
             dealer_id: dealer_id,
@@ -161,8 +163,8 @@ exports.getAllOrders = function (req, res) {
         }
     }else if(cities){
         where_condition = {
-            cities: {
-                $in: cities
+            city: {
+                [Op.in]: cities
             },
             lang: lang
         }
@@ -171,6 +173,8 @@ exports.getAllOrders = function (req, res) {
             lang: lang
         }
     }
+
+    console.log('where_condition', where_condition)
 
     Order.findAll({
         where: where_condition

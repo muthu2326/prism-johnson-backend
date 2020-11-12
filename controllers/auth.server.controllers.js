@@ -13,6 +13,18 @@ var message  = require('../utils/message.json')
 var UserModel = require('../models/init-models');
 var User = UserModel.initModels(db).user
 
+var DealerModel = require('../models/init-models');
+var Dealer = DealerModel.initModels(db).dealer
+
+var StateModel = require('../models/init-models');
+var State = StateModel.initModels(db).state
+
+var CityModel = require('../models/init-models');
+var City = CityModel.initModels(db).city
+
+User.belongsTo(State, {foreignKey: 'id'});
+State.hasMany(City, {foreignKey: 'state_id'});
+
 exports.login = function(req, res) {
 
     console.log('User Controller: entering Login ');
@@ -45,43 +57,106 @@ exports.login = function(req, res) {
     }
 
     var email = req.body.email
+    var role = req.body.role
     /* Query DB using sequelize api for a single user*/
-    User.findOne({
-        where: {
-            email: email
-        }
-    }).then(function(user) {
-        console.log(user);
-        let check_password = bcrypt.compareSync(req.body.password, user.password);
-        delete user.dataValues.password
-        if(check_password){
-            res.status(200).jsonp({
-                status: 200,
-                data: user,
-                message: message.success
-            });
-            return;
-        }else{
-            res.status(400).jsonp({
-                status: 400,
+
+    if(role != 'dealer'){
+        User.findOne({
+            where: {
+                email: email,
+                role: role
+            },
+        }).then(function(user) {
+            console.log(user);
+            let check_password = bcrypt.compareSync(req.body.password, user.password);
+            delete user.dataValues.password
+            if(check_password){
+                console.log('cities array', JSON.parse(user.dataValues.city_id))
+                State.findOne({
+                    where: {
+                        id: user.dataValues.state_id
+                    },
+                    include: [City],
+                    raw: true
+                }).then(function (state) {
+                    console.log('ddd',state)
+                    user.dataValues.state = {
+                        id: state.id,
+                        name: state.name,
+                        cities: state.cities
+                    }
+                    console.log(user);
+                    res.status(200).jsonp({
+                        status: 200,
+                        data: user,
+                        message: message.success
+                    });
+                    return;
+                }).catch(function (err) {
+                    console.log('could not fetch State');
+                    console.log('err: %j', err);
+                });
+            }else{
+                res.status(400).jsonp({
+                    status: 400,
+                    data: {},
+                    error: {
+                        msg: message.invalid_login_credentials
+                    }
+                });
+                return;
+            }
+        }).catch(function(err) {
+            console.log('could not fetch user');
+            console.log('err: %j', err);
+            res.status(500).jsonp({
+                status: 500,
                 data: {},
                 error: {
-                    msg: message.invalid_login_credentials
+                    msg: message.something_went_wrong,
+                    err: err
                 }
             });
             return;
-        }
-    }).catch(function(err) {
-        console.log('could not fetch user');
-        console.log('err: %j', err);
-        res.status(500).jsonp({
-            status: 500,
-            data: {},
-            error: {
-                msg: message.something_went_wrong,
-                err: err
-            }
         });
-        return;
-    });
+    }else{
+        Dealer.findOne({
+            where: {
+                email: email
+            }
+        }).then(function(user) {
+            console.log(user);
+            let check_password = bcrypt.compareSync(req.body.password, user.password);
+            delete user.dataValues.password
+            if(check_password){
+                res.status(200).jsonp({
+                    status: 200,
+                    data: user,
+                    message: message.success
+                });
+                return;
+            }else{
+                res.status(400).jsonp({
+                    status: 400,
+                    data: {},
+                    error: {
+                        msg: message.invalid_login_credentials
+                    }
+                });
+                return;
+            }
+        }).catch(function(err) {
+            console.log('could not fetch user');
+            console.log('err: %j', err);
+            res.status(500).jsonp({
+                status: 500,
+                data: {},
+                error: {
+                    msg: message.something_went_wrong,
+                    err: err
+                }
+            });
+            return;
+        });
+    }
 } /*End of user login*/
