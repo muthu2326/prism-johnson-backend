@@ -20,7 +20,7 @@ var Order = OrderModel.initModels(db).orders
 var DealerModel = require('../models/init-models');
 var Dealer = DealerModel.initModels(db).dealer
 
-Dealer.belongsTo(Order, {foreignKey: 'dealer_id'});
+Order.belongsTo(Dealer, {foreignKey: 'dealer_id'});
 /*
  ** Beans generated CRR*UD controller methods.
  */
@@ -122,7 +122,8 @@ exports.getOrder = function (req, res) {
     Order.findOne({
         where: {
             id: order_id
-        }
+        },
+        include: Dealer
     }).then(function (order) {
         console.log(order);
         res.status(200).jsonp({
@@ -152,7 +153,7 @@ exports.getAllOrders = function (req, res) {
 
     let dealer_id = req.query.dealer
     let lang = req.query.lang ? req.query.lang.toLowerCase() : 'en';
-    let cities = req.query.cities
+    let cities = req.query.cities.split(',')
     let where_condition;
 
     console.log('cities', cities)
@@ -163,9 +164,7 @@ exports.getAllOrders = function (req, res) {
         }
     }else if(cities){
         where_condition = {
-            city: {
-                [Op.in]: cities
-            },
+            city: cities,
             lang: lang
         }
     }else{
@@ -177,7 +176,8 @@ exports.getAllOrders = function (req, res) {
     console.log('where_condition', where_condition)
 
     Order.findAll({
-        where: where_condition
+        where: where_condition,
+        include: Dealer
     }).then(function (orders) {
         /*Return an array of Orders */
         if(orders.length > 0){
