@@ -22,8 +22,7 @@ var State = StateModel.initModels(db).state
 var CityModel = require('../models/init-models');
 var City = CityModel.initModels(db).city
 
-State.belongsTo(State, {foreignKey: 'state_id'});
-State.hasMany(City, {foreignKey: 'state_id'});
+User.belongsTo(State, {foreignKey: 'state_id'});
 
 exports.login = function(req, res) {
 
@@ -66,36 +65,18 @@ exports.login = function(req, res) {
                 email: email,
                 role: role
             },
+            include: State
         }).then(function(user) {
             console.log(user);
             let check_password = bcrypt.compareSync(req.body.password, user.password);
             delete user.dataValues.password
             if(check_password){
-                console.log('cities array', JSON.parse(user.dataValues.city_id))
-                State.findOne({
-                    where: {
-                        id: user.dataValues.state_id
-                    },
-                    include: [City],
-                    raw: true
-                }).then(function (state) {
-                    console.log('ddd',state)
-                    user.dataValues.state = {
-                        id: state.id,
-                        name: state.name,
-                        cities: state.cities
-                    }
-                    console.log(user);
-                    res.status(200).jsonp({
-                        status: 200,
-                        data: user,
-                        message: message.success
-                    });
-                    return;
-                }).catch(function (err) {
-                    console.log('could not fetch State');
-                    console.log('err: %j', err);
+                res.status(200).jsonp({
+                    status: 200,
+                    data: user,
+                    message: message.success
                 });
+                return;
             }else{
                 res.status(400).jsonp({
                     status: 400,
