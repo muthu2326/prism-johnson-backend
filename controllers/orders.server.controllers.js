@@ -153,7 +153,7 @@ exports.getAllOrders = function (req, res) {
 
     let dealer_id = req.query.dealer
     let lang = req.query.lang ? req.query.lang.toLowerCase() : 'en';
-    let cities = req.query.cities.split(',')
+    let cities = req.query.cities
     let where_condition;
 
     console.log('cities', cities)
@@ -164,7 +164,7 @@ exports.getAllOrders = function (req, res) {
         }
     }else if(cities){
         where_condition = {
-            city: cities,
+            city: cities.split(','),
             lang: lang
         }
     }else{
