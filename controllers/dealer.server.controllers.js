@@ -31,7 +31,12 @@ exports.createDealer = function(req, res) {
     console.log('req query :: ', req.query)
     let NOW = new Date()
     let slug = slugify(`${uuidv4().slice(4, 15)}`)
-    let password = bcrypt.hashSync(req.body.password ? req.body.password : req.body.email, saltRounds);
+    let password;
+    if(req.body.email){
+        password = bcrypt.hashSync(req.body.password ? req.body.password : req.body.email, saltRounds);
+    }else{
+        password = bcrypt.hashSync(req.body.password ? req.body.password : req.body.mobile, saltRounds);   
+    }
 
     Dealer.create({
         region : req.body.region,
