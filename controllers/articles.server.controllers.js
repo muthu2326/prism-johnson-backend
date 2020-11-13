@@ -62,7 +62,9 @@ exports.createArticle = function(req, res) {
                     description: item.description,
                     features: item.features,
                     lang: item.lang ? item.lang: 'en',
-                    slug: item.slug? item.slug : slug
+                    slug: item.slug? item.slug : slug,
+                    created: NOW,
+                    updated: NOW
                 }
             })
             Section.bulkCreate(sections)
@@ -127,7 +129,8 @@ exports.getArticle = function(req, res) {
         where: {
             id: slug,
             lang: lang
-        }
+        },
+        include: Section
     }).then(function(articles) {
         console.log(articles);
         res.jsonp({
@@ -188,30 +191,29 @@ exports.getAllArticles = function(req, res) {
             category: category,
             lang: lang
         },
-        include: Section
+        include: Section,
     }).then(function(articles) {
         /*Return an array of Articles */
-        let response = []
-        articles.forEach(article => {
-            let sections_response = []
-            article.sections.forEach((section) => {
-                let obj = {}
-                obj.id = section.id
-                delete section.id
-                obj.value = section
-                sections_response.push(obj)
+        console.log('articles', articles.length)
+        articles.forEach((item) => {
+            console.log('item value for section\n')
+            console.log(item.dataValues.sections[0].dataValues)
+            let obj = {}
+            item.dataValues.sections.forEach((section, j) => {
+                obj.id = section.dataValues.id
+                obj.value = section.dataValues
+                delete item.dataValues.sections[j].dataValues
+                item.dataValues.sections[j].dataValues = obj
             })
-            article.sections = sections_response
-            response.push(article)
-        });
+        })
         res.jsonp({
             status: 200,
-            data: response,
+            data: articles,
             error: {}
         });
     }).catch(function(err) {
         console.log('could not fetch all articles');
-        console.log('err: %j', err);
+        console.log('err:', err);
         res.status(500).jsonp({
             status: 500,
             data: {},
