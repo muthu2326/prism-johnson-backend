@@ -79,7 +79,7 @@ exports.createQuery = function(req, res) {
                 description : req.body.description,
                 status : req.body.status,
                 status_description : req.body.status_description,
-                lang : req.body.lang ? req.body.lang : 'en',
+                lang : req.body.lang,
                 slug : req.body.slug ? req.body.slug : slug,
                 user_id : req.body.user_id,
                 created : NOW,
@@ -143,7 +143,18 @@ exports.getQuery = function(req, res) {
         return;
     }
 
-    let lang = req.query.lang ? req.query.lang : 'en'
+    if (!req.query.lang) {
+        res.status(400).jsonp({
+            status: 400,
+            data: {},
+            error: {
+                msg: message.invalid_get_request
+            }
+        });
+        return;
+    }
+
+    let lang = req.query.lang
 
     /* Query DB using sequelize api for a single queries*/
     Query.findOne({
@@ -153,6 +164,7 @@ exports.getQuery = function(req, res) {
         }
     }).then(function(queries) {
         console.log(queries);
+
         res.status(200).jsonp({
             status: 200,
             data: queries,
@@ -180,7 +192,6 @@ exports.getAllQueries = function(req, res) {
     console.log('req params :: ', req.params)
     console.log('req query :: ', req.query)
 
-    let lang = req.query.lang ? req.query.lang : 'en'
     console.log('lang', lang)
 
     if (!req.query.type) {
@@ -194,7 +205,19 @@ exports.getAllQueries = function(req, res) {
         return;
     }
 
+    if (!req.query.lang) {
+        res.status(400).jsonp({
+            status: 400,
+            data: {},
+            error: {
+                msg: message.invalid_get_request
+            }
+        });
+        return;
+    }
+
     let type = req.query.type ? req.query.type : 'ask_expert'
+    let lang = req.query.lang ? req.query.lang : 'en'
 
     /* Query DB using sequelize api for all Queries*/
     Query.findAll({
@@ -247,7 +270,6 @@ exports.updateQuery = function(req, res) {
     console.log('req body :: ', req.body)
 
     var queries_id = req.params.queries_id;
-    let lang = req.query.lang ? req.query.lang : 'en'
     let NOW = new Date()
 
     if (!queries_id) {
@@ -261,6 +283,18 @@ exports.updateQuery = function(req, res) {
         return;
     }
 
+    if (!req.query.lang) {
+        res.status(400).jsonp({
+            status: 400,
+            data: {},
+            error: {
+                msg: message.invalid_get_request
+            }
+        });
+        return;
+    }
+
+    let lang = req.query.lang ? req.query.lang : 'en'
 
     Query.update({
         type : req.body.type,
@@ -333,7 +367,6 @@ exports.deleteQuery = function(req, res) {
         });
         return;
     }
-
 
     if (!req.query.lang) {
         res.status(400).jsonp({

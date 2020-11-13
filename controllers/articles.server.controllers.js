@@ -33,7 +33,6 @@ exports.createArticle = function(req, res) {
 
     let NOW = new Date()
     let slug = slugify(`${uuidv4().slice(4, 12)}`)
-    let lang = req.query.lang ? req.query.lang : 'en'
 
     Article.create({
         type : req.body.type,
@@ -43,7 +42,7 @@ exports.createArticle = function(req, res) {
         title : req.body.title,
         short_description : req.body.short_description,
         description : req.body.description,
-        lang : lang,
+        lang : req.body.lang,
         slug : req.body.slug? req.body.slug : slug,
         created : NOW,
         updated : NOW
@@ -167,7 +166,7 @@ exports.getArticle = function(req, res) {
         }else{
             res.jsonp({
                 status: 200,
-                data: article,
+                data: {},
                 error: {}
             });
         }
@@ -228,23 +227,31 @@ exports.getAllArticles = function(req, res) {
     }).then(function(articles) {
         /*Return an array of Articles */
         console.log('articles', articles.length)
-        articles.forEach((item) => {
-            console.log('item value for section\n')
-            console.log(item.dataValues.sections[0].dataValues)
-            item.dataValues.sections.forEach((section, j) => {
-                let obj = {}
-                obj.id = section.dataValues.id
-                delete section.dataValues.id
-                obj.value = section.dataValues
-                delete item.dataValues.sections[j].dataValues
-                item.dataValues.sections[j].dataValues = obj
+        if(articles.length > 0){
+            articles.forEach((item) => {
+                console.log('item value for section\n')
+                console.log(item.dataValues.sections[0].dataValues)
+                item.dataValues.sections.forEach((section, j) => {
+                    let obj = {}
+                    obj.id = section.dataValues.id
+                    delete section.dataValues.id
+                    obj.value = section.dataValues
+                    delete item.dataValues.sections[j].dataValues
+                    item.dataValues.sections[j].dataValues = obj
+                })
             })
-        })
-        res.jsonp({
-            status: 200,
-            data: articles,
-            error: {}
-        });
+            res.jsonp({
+                status: 200,
+                data: articles,
+                error: {}
+            });
+        }else{
+            res.jsonp({
+                status: 200,
+                data: [],
+                error: {}
+            });
+        }
     }).catch(function(err) {
         console.log('could not fetch all articles');
         console.log('err:', err);
