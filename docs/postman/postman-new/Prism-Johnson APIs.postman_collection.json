@@ -12,7 +12,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"name\" : \"Jai\",\n    \"email\" : \"jai@gmail.com\",\n    \"address\" : \"XXX 1st main punjab\",\n    \"mobile\" : \"12344555\",\n    \"pincode\" : 560026,\n    \"stage_of_planning\" : \"Planning\",\n    \"role\" : \"user\",\n    \"state_id\": 1,\n    \"city_id\" : 2,\n    \"lang\" : \"eng\"\n}",
+					"raw": "{\n    \"name\" : \"Admin\",\n    \"email\" : \"admin@gmail.com\",\n    \"address\" : \"XXX 1st main bihar\",\n    \"mobile\" : \"12345678\",\n    \"pincode\" : \"230041\",\n    \"stage_of_planning\" : null,\n    \"role\" : \"admin\",\n    \"state_id\": 12,\n    \"city_id\" : \"GAYA\",\n    \"lang\" : \"eng\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -20,15 +20,14 @@
 					}
 				},
 				"url": {
-					"raw": "{{base-url}}/api/v1/users/register",
+					"raw": "{{base-url}}/api/v1/users",
 					"host": [
 						"{{base-url}}"
 					],
 					"path": [
 						"api",
 						"v1",
-						"users",
-						"register"
+						"users"
 					]
 				}
 			},
@@ -41,7 +40,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"name\" : \"Shreyas\",\n    \"email\" : \"shreyas@gmail.com\",\n    \"address\" : \"XXX 1st main punjab\",\n    \"mobile\" : \"12344555\",\n    \"pincode\" : 560026,\n    \"role\" : \"admin\",\n    \"state_id\": 1,\n    \"city_id\" : [1, 2, 3],\n    \"lang\" : \"eng\"\n}",
+					"raw": "{\n    \"name\" : \"Admin\",\n    \"email\" : \"admin@gmail.com\",\n    \"address\" : \"XXX 1st main bihar\",\n    \"mobile\" : \"12345678\",\n    \"pincode\" : \"230041\",\n    \"stage_of_planning\" : null,\n    \"role\" : \"admin\",\n    \"state_id\": 12,\n    \"city_id\" : \"GAYA\",\n    \"lang\" : \"eng\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -69,7 +68,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"name\" : \"shreyas@gmail.com\",\n    \"password\" : \"shreyas@gmail.com\"\n}",
+					"raw": "{\n    \"email\" : \"raj@gmail.com\",\n    \"password\" : \"raj@gmail.com\",\n    \"role\": \"user\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -89,7 +88,174 @@
 					]
 				}
 			},
-			"response": []
+			"response": [
+				{
+					"name": "User Login role user",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\" : \"raj@gmail.com\",\n    \"password\" : \"raj@gmail.com\",\n    \"role\": \"user\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base-url}}/api/v1/auth/login",
+							"host": [
+								"{{base-url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"auth",
+								"login"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Methods",
+							"value": "GET,PUT,POST,DELETE,OPTIONS"
+						},
+						{
+							"key": "Access-Control-Allow-Headers",
+							"value": "Origin, Content-Type, Authorization, Accept,Content-Length, X-Requested-With, X-PINGOTHER"
+						},
+						{
+							"key": "Access-Control-Expose-Headers",
+							"value": "X-Total-Count"
+						},
+						{
+							"key": "X-Total-Count",
+							"value": "5000"
+						},
+						{
+							"key": "X-Content-Type-Options",
+							"value": "nosniff"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "406"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"196-SqULbFfIUJbxwXK7evj4/8jMg6g\""
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 12 Nov 2020 02:39:06 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"status\": 200,\n    \"data\": {\n        \"id\": 32,\n        \"name\": \"Raj\",\n        \"email\": \"raj@gmail.com\",\n        \"reset_pasword_link_sent\": 0,\n        \"address\": \"XXX 1st main punjab\",\n        \"mobile\": \"12344555\",\n        \"pincode\": \"560026\",\n        \"stage_of_construction\": null,\n        \"role\": \"user\",\n        \"slug\": \"b132-acb-raj@g\",\n        \"lang\": \"eng\",\n        \"state_id\": 3,\n        \"city_id\": \"[2]\",\n        \"created\": \"2020-11-12T02:22:16.000Z\",\n        \"updated\": \"2020-11-12T02:22:16.000Z\",\n        \"state\": {\n            \"id\": 3,\n            \"name\": \"Karnataka\"\n        }\n    },\n    \"message\": \"success\"\n}"
+				},
+				{
+					"name": "User Login role dealer",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\" : \"adarshjaiswal17@gmail.com\",\n    \"password\" : \"adarshjaiswal17@gmail.com\",\n    \"role\": \"dealer\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base-url}}/api/v1/auth/login",
+							"host": [
+								"{{base-url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"auth",
+								"login"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Methods",
+							"value": "GET,PUT,POST,DELETE,OPTIONS"
+						},
+						{
+							"key": "Access-Control-Allow-Headers",
+							"value": "Origin, Content-Type, Authorization, Accept,Content-Length, X-Requested-With, X-PINGOTHER"
+						},
+						{
+							"key": "Access-Control-Expose-Headers",
+							"value": "X-Total-Count"
+						},
+						{
+							"key": "X-Total-Count",
+							"value": "5000"
+						},
+						{
+							"key": "X-Content-Type-Options",
+							"value": "nosniff"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "455"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"1c7-8ZapbhbrZOpRzex61BnQYi4D9+I\""
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 12 Nov 2020 02:45:35 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"status\": 200,\n    \"data\": {\n        \"id\": 11,\n        \"region\": \"VRNS\",\n        \"branch\": \"AZAMGARH\",\n        \"territory\": \"AZAMGARH\",\n        \"dealer_code\": \"014D000148\",\n        \"name\": \"JAISWAL CEMENT\",\n        \"pincode\": \"276137\",\n        \"address\": \"MAHARAJGANJ, AZAMGARH , AZAMGARH\",\n        \"email\": \"adarshjaiswal17@gmail.com\",\n        \"reset_pasword_link_sent\": 0,\n        \"lang\": \"en\",\n        \"slug\": \"4e27-bf27-4\",\n        \"created\": \"2020-11-12T01:35:54.000Z\",\n        \"updated\": \"2020-11-12T01:35:54.000Z\",\n        \"contact_no\": \"9919100491\",\n        \"cities\": \"AZAMGARH\",\n        \"state\": \"UP\"\n    },\n    \"message\": \"success\"\n}"
+				}
+			]
 		},
 		{
 			"name": "Create State",
@@ -126,7 +292,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"name\" : \"Mumabi\",\n    \"state_id\": 7,\n    \"lang\" : \"eng\",\n    \"slug\" : null\n}",
+					"raw": "{\n    \"name\" : \"Mangalore\",\n    \"state_id\": 3,\n    \"lang\" : \"eng\",\n    \"slug\" : null\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -177,13 +343,315 @@
 			"response": []
 		},
 		{
+			"name": "Get all dealers",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base-url}}/api/v1/dealers?lang=en",
+					"host": [
+						"{{base-url}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"dealers"
+					],
+					"query": [
+						{
+							"key": "lang",
+							"value": "en"
+						}
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Get all dealers by pincode",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base-url}}/api/v1/dealers?pincode=211001",
+							"host": [
+								"{{base-url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"dealers"
+							],
+							"query": [
+								{
+									"key": "pincode",
+									"value": "211001"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Methods",
+							"value": "GET,PUT,POST,DELETE,OPTIONS"
+						},
+						{
+							"key": "Access-Control-Allow-Headers",
+							"value": "Origin, Content-Type, Authorization, Accept,Content-Length, X-Requested-With, X-PINGOTHER"
+						},
+						{
+							"key": "Access-Control-Expose-Headers",
+							"value": "X-Total-Count"
+						},
+						{
+							"key": "X-Total-Count",
+							"value": "5000"
+						},
+						{
+							"key": "X-Content-Type-Options",
+							"value": "nosniff"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "894"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"37e-oO/7I1pqWOrLW+DMTnPT+gTu24g\""
+						},
+						{
+							"key": "Date",
+							"value": "Wed, 11 Nov 2020 19:58:05 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"status\": 200,\n    \"data\": [\n        {\n            \"id\": 5,\n            \"region\": \"ALBD\",\n            \"branch\": \"ALLAHABAD\",\n            \"territory\": \"ALLAHABAD CITY\",\n            \"dealer_code\": \"002D000029\",\n            \"name\": \"JAI SHAKTI TRADERS\",\n            \"pincode\": \"211001\",\n            \"address\": \"JAYANTIPUR SULEMSARAI, ALLAHABAD , ALLAHABAD\",\n            \"email\": \"jaishaktigpcd.prism@gmail.com\",\n            \"reset_pasword_link_sent\": 0,\n            \"lang\": \"en\",\n            \"slug\": \"4dac-a549-4\",\n            \"created\": \"2020-11-11T19:43:55.000Z\",\n            \"updated\": \"2020-11-11T19:43:55.000Z\",\n            \"contact_no\": \"9415644024\",\n            \"cities\": null,\n            \"state\": null\n        },\n        {\n            \"id\": 6,\n            \"region\": \"ALBD\",\n            \"branch\": \"ALLAHABAD\",\n            \"territory\": \"ALLAHABAD CITY\",\n            \"dealer_code\": \"002D000048\",\n            \"name\": \"NAVEEN CEMENT AGENCY\",\n            \"pincode\": \"211001\",\n            \"address\": \"22-B/1, KATRA ROAD, ALLAHABAD , ALLAHABAD\",\n            \"email\": \"naveencement@gmail.com\",\n            \"reset_pasword_link_sent\": 0,\n            \"lang\": \"en\",\n            \"slug\": \"c430-f8db-4\",\n            \"created\": \"2020-11-11T19:45:19.000Z\",\n            \"updated\": \"2020-11-11T19:45:19.000Z\",\n            \"contact_no\": \"9450597963\",\n            \"cities\": null,\n            \"state\": null\n        }\n    ],\n    \"error\": {}\n}"
+				}
+			]
+		},
+		{
+			"name": "Dealer locator",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base-url}}/api/v1/dealers/locator?state=up&city=jaunpur&lang=en",
+					"host": [
+						"{{base-url}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"dealers",
+						"locator"
+					],
+					"query": [
+						{
+							"key": "state",
+							"value": "up"
+						},
+						{
+							"key": "city",
+							"value": "jaunpur"
+						},
+						{
+							"key": "lang",
+							"value": "en"
+						}
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Dealer locator by pincode",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base-url}}/api/v1/dealers?pincode=211001",
+							"host": [
+								"{{base-url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"dealers"
+							],
+							"query": [
+								{
+									"key": "pincode",
+									"value": "211001"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Methods",
+							"value": "GET,PUT,POST,DELETE,OPTIONS"
+						},
+						{
+							"key": "Access-Control-Allow-Headers",
+							"value": "Origin, Content-Type, Authorization, Accept,Content-Length, X-Requested-With, X-PINGOTHER"
+						},
+						{
+							"key": "Access-Control-Expose-Headers",
+							"value": "X-Total-Count"
+						},
+						{
+							"key": "X-Total-Count",
+							"value": "5000"
+						},
+						{
+							"key": "X-Content-Type-Options",
+							"value": "nosniff"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "908"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"38c-o4+hV1Xi5YcNgo+f6PAgVNrhCGM\""
+						},
+						{
+							"key": "Date",
+							"value": "Wed, 11 Nov 2020 20:29:12 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"status\": 200,\n    \"data\": [\n        {\n            \"id\": 7,\n            \"region\": \"ALBD\",\n            \"branch\": \"ALLAHABAD\",\n            \"territory\": \"ALLAHABAD CITY\",\n            \"dealer_code\": \"002D000048\",\n            \"name\": \"NAVEEN CEMENT AGENCY\",\n            \"pincode\": \"211001\",\n            \"address\": \"22-B/1, KATRA ROAD, ALLAHABAD , ALLAHABAD\",\n            \"email\": \"naveencement@gmail.com\",\n            \"reset_pasword_link_sent\": 0,\n            \"lang\": \"en\",\n            \"slug\": \"69c1-609f-4\",\n            \"created\": \"2020-11-11T20:26:10.000Z\",\n            \"updated\": \"2020-11-11T20:26:10.000Z\",\n            \"contact_no\": \"9450597963\",\n            \"cities\": \"ALLAHABAD\",\n            \"state\": \"UP\"\n        },\n        {\n            \"id\": 8,\n            \"region\": \"ALBD\",\n            \"branch\": \"ALLAHABAD\",\n            \"territory\": \"ALLAHABAD CITY\",\n            \"dealer_code\": \"002D000029\",\n            \"name\": \"JAI SHAKTI TRADERS\",\n            \"pincode\": \"211001\",\n            \"address\": \"JAYANTIPUR SULEMSARAI, ALLAHABAD , ALLAHABAD\",\n            \"email\": \"jaishaktigpcd.prism@gmail.com\",\n            \"reset_pasword_link_sent\": 0,\n            \"lang\": \"en\",\n            \"slug\": \"408e-5d72-4\",\n            \"created\": \"2020-11-11T20:26:30.000Z\",\n            \"updated\": \"2020-11-11T20:26:30.000Z\",\n            \"contact_no\": \"9415644024\",\n            \"cities\": \"ALLAHABAD\",\n            \"state\": \"UP\"\n        }\n    ],\n    \"error\": {}\n}"
+				},
+				{
+					"name": "Dealer locator by state and city",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base-url}}/api/v1/dealers?state=up&city=allahabad?lang=en",
+							"host": [
+								"{{base-url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"dealers"
+							],
+							"query": [
+								{
+									"key": "state",
+									"value": "up"
+								},
+								{
+									"key": "city",
+									"value": "allahabad?lang=en"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Methods",
+							"value": "GET,PUT,POST,DELETE,OPTIONS"
+						},
+						{
+							"key": "Access-Control-Allow-Headers",
+							"value": "Origin, Content-Type, Authorization, Accept,Content-Length, X-Requested-With, X-PINGOTHER"
+						},
+						{
+							"key": "Access-Control-Expose-Headers",
+							"value": "X-Total-Count"
+						},
+						{
+							"key": "X-Total-Count",
+							"value": "5000"
+						},
+						{
+							"key": "X-Content-Type-Options",
+							"value": "nosniff"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "908"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"38c-o4+hV1Xi5YcNgo+f6PAgVNrhCGM\""
+						},
+						{
+							"key": "Date",
+							"value": "Wed, 11 Nov 2020 20:28:04 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"status\": 200,\n    \"data\": [\n        {\n            \"id\": 7,\n            \"region\": \"ALBD\",\n            \"branch\": \"ALLAHABAD\",\n            \"territory\": \"ALLAHABAD CITY\",\n            \"dealer_code\": \"002D000048\",\n            \"name\": \"NAVEEN CEMENT AGENCY\",\n            \"pincode\": \"211001\",\n            \"address\": \"22-B/1, KATRA ROAD, ALLAHABAD , ALLAHABAD\",\n            \"email\": \"naveencement@gmail.com\",\n            \"reset_pasword_link_sent\": 0,\n            \"lang\": \"en\",\n            \"slug\": \"69c1-609f-4\",\n            \"created\": \"2020-11-11T20:26:10.000Z\",\n            \"updated\": \"2020-11-11T20:26:10.000Z\",\n            \"contact_no\": \"9450597963\",\n            \"cities\": \"ALLAHABAD\",\n            \"state\": \"UP\"\n        },\n        {\n            \"id\": 8,\n            \"region\": \"ALBD\",\n            \"branch\": \"ALLAHABAD\",\n            \"territory\": \"ALLAHABAD CITY\",\n            \"dealer_code\": \"002D000029\",\n            \"name\": \"JAI SHAKTI TRADERS\",\n            \"pincode\": \"211001\",\n            \"address\": \"JAYANTIPUR SULEMSARAI, ALLAHABAD , ALLAHABAD\",\n            \"email\": \"jaishaktigpcd.prism@gmail.com\",\n            \"reset_pasword_link_sent\": 0,\n            \"lang\": \"en\",\n            \"slug\": \"408e-5d72-4\",\n            \"created\": \"2020-11-11T20:26:30.000Z\",\n            \"updated\": \"2020-11-11T20:26:30.000Z\",\n            \"contact_no\": \"9415644024\",\n            \"cities\": \"ALLAHABAD\",\n            \"state\": \"UP\"\n        }\n    ],\n    \"error\": {}\n}"
+				}
+			]
+		},
+		{
 			"name": "Place order",
 			"request": {
 				"method": "POST",
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"product_id\": 1,\n    \"productcode\": \"P10001\",\n    \"dealer_id\": null,\n    \"user_id\": 31,\n    \"name\": \"Ram\",\n    \"email\": \"ram@gmail.com\",\n    \"mobile\": \"1234567890\",\n    \"quantity\": 2,\n    \"price\": 700,\n    \"stage_of_construction\": \"Planning\",\n    \"state\": \"Karnataka\",\n    \"city\": \"Bangalore\",\n    \"pincode\": \"560021\",\n    \"address\": \"Malleshwaram Bangalore\",\n    \"site_address\": \"Malleshwaram Bangalore\",\n    \"status\": \"Submited\",\n    \"status_description\": null,\n    \"lang\": \"en\",\n    \"slug\": null\n}",
+					"raw": "{\n    \"product_id\": 10,\n    \"productcode\": \"PC4497679\",\n    \"dealer_id\": 13,\n    \"user_id\": 31,\n    \"name\": \"Rahil\",\n    \"email\": \"rahil@gmail.com\",\n    \"mobile\": \"1234567890\",\n    \"quantity\": 2,\n    \"price\": 700,\n    \"stage_of_construction\": \"Planning\",\n    \"state\": \"Karnataka\",\n    \"city\": \"Bangalore\",\n    \"pincode\": \"560021\",\n    \"address\": \"Malleshwaram Bangalore\",\n    \"site_address\": \"Malleshwaram Bangalore\",\n    \"status\": \"Submited\",\n    \"status_description\": null,\n    \"lang\": \"en\",\n    \"slug\": null\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -288,22 +756,246 @@
 			]
 		},
 		{
-			"name": "Get all orders",
-			"protocolProfileBehavior": {
-				"disableBodyPruning": true
-			},
+			"name": "Update order / Assign Dealer",
 			"request": {
-				"method": "GET",
+				"method": "POST",
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"product_id\": null,\n    \"productcode\": \"P10001\",\n    \"dealer_id\": null,\n    \"user_id\": 31,\n    \"name\": \"Ram\",\n    \"email\": \"ram@gmail.com\",\n    \"mobile\": \"1234567890\",\n    \"quantity\": 2,\n    \"price\": 700,\n    \"stage_of_construction\": \"Planning\",\n    \"state\": \"Karnataka\",\n    \"city\": \"Bangalore\",\n    \"pincode\": \"560021\",\n    \"address\": \"Malleshwaram Bangalore\",\n    \"site_address\": \"Malleshwaram Bangalore\",\n    \"status\": \"Assigned\",\n    \"status_description\": null,\n    \"lang\": \"en\",\n    \"slug\": null\n}",
+					"raw": "{\n    \"product_id\": 10,\n    \"productcode\": \"PC4497679\",\n    \"dealer_id\": 7,\n    \"name\": \"Rahil\",\n    \"email\": \"rahil@gmail.com\",\n    \"mobile\": \"1234567890\",\n    \"quantity\": 2,\n    \"price\": 700,\n    \"user_id\": 31,\n    \"stage_of_construction\": \"Planning\",\n    \"state\": \"Karnataka\",\n    \"city\": \"Bangalore\",\n    \"pincode\": \"560021\",\n    \"address\": \"Malleshwaram Bangalore\",\n    \"site_address\": \"Malleshwaram Bangalore\",\n    \"status\": \"Assigned\",\n    \"status_description\": null,\n    \"lang\": \"en\",\n    \"slug\": \"1cbe-04a-rahil\",\n    \"updated_by\": 1,\n    \"updated_by_role\": \"admin\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
 						}
 					}
 				},
+				"url": {
+					"raw": "{{base-url}}/api/v1/orders/{{order_id}}?lang=en",
+					"host": [
+						"{{base-url}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"orders",
+						"{{order_id}}"
+					],
+					"query": [
+						{
+							"key": "lang",
+							"value": "en"
+						}
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Update order / Assign Dealer",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"product_id\": 10,\n    \"productcode\": \"PC4497679\",\n    \"dealer_id\": 7,\n    \"name\": \"Rahil\",\n    \"email\": \"rahil@gmail.com\",\n    \"mobile\": \"1234567890\",\n    \"quantity\": 2,\n    \"price\": 700,\n    \"user_id\": 31,\n    \"stage_of_construction\": \"Planning\",\n    \"state\": \"Karnataka\",\n    \"city\": \"Bangalore\",\n    \"pincode\": \"560021\",\n    \"address\": \"Malleshwaram Bangalore\",\n    \"site_address\": \"Malleshwaram Bangalore\",\n    \"status\": \"Assigned\",\n    \"status_description\": null,\n    \"lang\": \"en\",\n    \"slug\": \"1cbe-04a-rahil\",\n    \"updated_by\": 1,\n    \"updated_by_role\": \"admin\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base-url}}/api/v1/orders/{{order_id}}?lang=en",
+							"host": [
+								"{{base-url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"orders",
+								"{{order_id}}"
+							],
+							"query": [
+								{
+									"key": "lang",
+									"value": "en"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Methods",
+							"value": "GET,PUT,POST,DELETE,OPTIONS"
+						},
+						{
+							"key": "Access-Control-Allow-Headers",
+							"value": "Origin, Content-Type, Authorization, Accept,Content-Length, X-Requested-With, X-PINGOTHER"
+						},
+						{
+							"key": "Access-Control-Expose-Headers",
+							"value": "X-Total-Count"
+						},
+						{
+							"key": "X-Total-Count",
+							"value": "5000"
+						},
+						{
+							"key": "X-Content-Type-Options",
+							"value": "nosniff"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "82"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"52-bfVrNqDiMWr2TYVPAPe42ZSssoE\""
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 12 Nov 2020 00:43:47 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"status\": 200,\n    \"data\": {\n        \"msg\": \"Successfully updated order 113078238939\"\n    },\n    \"error\": {}\n}"
+				}
+			]
+		},
+		{
+			"name": "Create Dealer",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"region\": \"VRNS\",\n    \"branch\": \"AZAMGARH\",\n    \"territory\": \"AZAMGARH\",\n    \"dealer_code\": \"014D000141\",\n    \"name\": \"JAISWAL CEMENT\",\n    \"pincode\": \"276132\",\n    \"address\": \"MAHARAJGANJ, AZAMGARH , AZAMGARH\",\n    \"email\": \"adarshjaiswal17@gmail.com\",\n    \"reset_pasword_link_sent\": 0,\n    \"lang\": \"en\",\n    \"slug\": null,\n    \"contact_no\": \"9919100491\",\n    \"cities\": \"AZAMGARH\",\n    \"state\": \"UP\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base-url}}/api/v1/dealers",
+					"host": [
+						"{{base-url}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"dealers"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Get all products",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"product_id\": 1,\n    \"productcode\": \"P10001\",\n    \"dealer_id\": null,\n    \"user_id\": 31,\n    \"name\": \"Ram\",\n    \"email\": \"ram@gmail.com\",\n    \"mobile\": \"1234567890\",\n    \"quantity\": 2,\n    \"price\": 700,\n    \"stage_of_construction\": \"Planning\",\n    \"state\": \"Karnataka\",\n    \"city\": \"Bangalore\",\n    \"pincode\": \"560021\",\n    \"address\": \"Malleshwaram Bangalore\",\n    \"site_address\": \"Malleshwaram Bangalore\",\n    \"status\": \"Submited\",\n    \"status_description\": null,\n    \"lang\": \"en\",\n    \"slug\": null\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base-url}}/api/v1/orders",
+							"host": [
+								"{{base-url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"orders"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Methods",
+							"value": "GET,PUT,POST,DELETE,OPTIONS"
+						},
+						{
+							"key": "Access-Control-Allow-Headers",
+							"value": "Origin, Content-Type, Authorization, Accept,Content-Length, X-Requested-With, X-PINGOTHER"
+						},
+						{
+							"key": "Access-Control-Expose-Headers",
+							"value": "X-Total-Count"
+						},
+						{
+							"key": "X-Total-Count",
+							"value": "5000"
+						},
+						{
+							"key": "X-Content-Type-Options",
+							"value": "nosniff"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "71"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"47-qWInNQBOCt/TMc8p10nxBR9/hII\""
+						},
+						{
+							"key": "Date",
+							"value": "Wed, 11 Nov 2020 06:22:57 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"status\": 200,\n    \"data\": {\n        \"id\": \"#215918015116\",\n        \"msg\": \"success\"\n    },\n    \"error\": {}\n}"
+				}
+			]
+		},
+		{
+			"name": "Get all orders",
+			"request": {
+				"method": "GET",
+				"header": [],
 				"url": {
 					"raw": "{{base-url}}/api/v1/orders?lang=en",
 					"host": [
@@ -322,7 +1014,198 @@
 					]
 				}
 			},
-			"response": []
+			"response": [
+				{
+					"name": "Get all orders for TTE of his cities",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base-url}}/api/v1/orders?lang=en&cities=Bangalore,Mangalore",
+							"host": [
+								"{{base-url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"orders"
+							],
+							"query": [
+								{
+									"key": "lang",
+									"value": "en"
+								},
+								{
+									"key": "cities",
+									"value": "Bangalore,Mangalore"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Methods",
+							"value": "GET,PUT,POST,DELETE,OPTIONS"
+						},
+						{
+							"key": "Access-Control-Allow-Headers",
+							"value": "Origin, Content-Type, Authorization, Accept,Content-Length, X-Requested-With, X-PINGOTHER"
+						},
+						{
+							"key": "Access-Control-Expose-Headers",
+							"value": "X-Total-Count"
+						},
+						{
+							"key": "X-Total-Count",
+							"value": "5000"
+						},
+						{
+							"key": "X-Content-Type-Options",
+							"value": "nosniff"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "2118"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"846-vrPrvR8YIiKlN9iyDORCJEOEHCQ\""
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 12 Nov 2020 04:59:18 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"status\": 200,\n    \"data\": [\n        {\n            \"id\": \"222406417531\",\n            \"product_id\": 10,\n            \"productcode\": \"PC4497679\",\n            \"dealer_id\": 11,\n            \"name\": \"Rahil\",\n            \"email\": \"rahil@gmail.com\",\n            \"mobile\": \"1234567890\",\n            \"quantity\": 2,\n            \"price\": 700,\n            \"user_id\": 31,\n            \"stage_of_construction\": \"Planning\",\n            \"state\": \"Karnataka\",\n            \"city\": \"Bangalore\",\n            \"pincode\": \"560021\",\n            \"address\": \"Malleshwaram Bangalore\",\n            \"site_address\": \"Malleshwaram Bangalore\",\n            \"status\": \"Submited\",\n            \"status_description\": null,\n            \"lang\": \"en\",\n            \"slug\": \"50a5-130-rahil\",\n            \"created\": \"2020-11-12T02:06:27.000Z\",\n            \"updated\": \"2020-11-12T02:06:27.000Z\",\n            \"updated_by\": null,\n            \"updated_by_role\": null,\n            \"dealer\": {\n                \"id\": 11,\n                \"region\": \"VRNS\",\n                \"branch\": \"AZAMGARH\",\n                \"territory\": \"AZAMGARH\",\n                \"dealer_code\": \"014D000148\",\n                \"name\": \"JAISWAL CEMENT\",\n                \"pincode\": \"276137\",\n                \"address\": \"MAHARAJGANJ, AZAMGARH , AZAMGARH\",\n                \"email\": \"adarshjaiswal17@gmail.com\",\n                \"password\": \"$2b$10$740Eg7PU04L2RC0McFTB6.PklR06HUc8O3RVQ4qRzCpSoZ2r/Iojm\",\n                \"reset_pasword_link_sent\": 0,\n                \"lang\": \"en\",\n                \"slug\": \"4e27-bf27-4\",\n                \"created\": \"2020-11-12T01:35:54.000Z\",\n                \"updated\": \"2020-11-12T01:35:54.000Z\",\n                \"contact_no\": \"9919100491\",\n                \"cities\": \"AZAMGARH\",\n                \"state\": \"UP\"\n            }\n        },\n        {\n            \"id\": \"651172341319\",\n            \"product_id\": 10,\n            \"productcode\": \"PC4497679\",\n            \"dealer_id\": 13,\n            \"name\": \"Rahil\",\n            \"email\": \"rahil@gmail.com\",\n            \"mobile\": \"1234567890\",\n            \"quantity\": 2,\n            \"price\": 700,\n            \"user_id\": 31,\n            \"stage_of_construction\": \"Planning\",\n            \"state\": \"Karnataka\",\n            \"city\": \"Bangalore\",\n            \"pincode\": \"560021\",\n            \"address\": \"Malleshwaram Bangalore\",\n            \"site_address\": \"Malleshwaram Bangalore\",\n            \"status\": \"Submited\",\n            \"status_description\": null,\n            \"lang\": \"en\",\n            \"slug\": \"e209-928-rahil\",\n            \"created\": \"2020-11-12T02:07:47.000Z\",\n            \"updated\": \"2020-11-12T02:07:47.000Z\",\n            \"updated_by\": null,\n            \"updated_by_role\": null,\n            \"dealer\": {\n                \"id\": 13,\n                \"region\": \"VRNS\",\n                \"branch\": \"AZAMGARH\",\n                \"territory\": \"AZAMGARH\",\n                \"dealer_code\": \"014D000141\",\n                \"name\": \"JAISWAL CEMENT\",\n                \"pincode\": \"276132\",\n                \"address\": \"MAHARAJGANJ, AZAMGARH , AZAMGARH\",\n                \"email\": \"adarshjaiswal17@gmail.com\",\n                \"password\": \"$2b$10$uiu1mu6NjwgiOAgmmFLCC.NQuLPYXItaP26W/CJR7CTKaJlcRjxym\",\n                \"reset_pasword_link_sent\": 0,\n                \"lang\": \"en\",\n                \"slug\": \"6446-79dc-4\",\n                \"created\": \"2020-11-12T02:07:14.000Z\",\n                \"updated\": \"2020-11-12T02:07:14.000Z\",\n                \"contact_no\": \"9919100491\",\n                \"cities\": \"AZAMGARH\",\n                \"state\": \"UP\"\n            }\n        }\n    ],\n    \"error\": {}\n}"
+				}
+			]
+		},
+		{
+			"name": "Get order by id",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base-url}}/api/v1/orders/419352176667?lang=en",
+					"host": [
+						"{{base-url}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"orders",
+						"419352176667"
+					],
+					"query": [
+						{
+							"key": "lang",
+							"value": "en"
+						}
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Get all orders Copy",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base-url}}/api/v1/orders/419352176667?lang=en",
+							"host": [
+								"{{base-url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"orders",
+								"419352176667"
+							],
+							"query": [
+								{
+									"key": "lang",
+									"value": "en"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Methods",
+							"value": "GET,PUT,POST,DELETE,OPTIONS"
+						},
+						{
+							"key": "Access-Control-Allow-Headers",
+							"value": "Origin, Content-Type, Authorization, Accept,Content-Length, X-Requested-With, X-PINGOTHER"
+						},
+						{
+							"key": "Access-Control-Expose-Headers",
+							"value": "X-Total-Count"
+						},
+						{
+							"key": "X-Total-Count",
+							"value": "5000"
+						},
+						{
+							"key": "X-Content-Type-Options",
+							"value": "nosniff"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "572"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"23c-MsB0HGnpf/wNN9TCRvtdNkWpXtY\""
+						},
+						{
+							"key": "Date",
+							"value": "Wed, 11 Nov 2020 20:52:10 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"status\": 200,\n    \"data\": {\n        \"id\": \"419352176667\",\n        \"product_id\": 10,\n        \"productcode\": \"PC4497679\",\n        \"dealer_id\": 8,\n        \"name\": \"Ram\",\n        \"email\": \"ram@gmail.com\",\n        \"mobile\": \"1234567890\",\n        \"quantity\": 2,\n        \"price\": 700,\n        \"user_id\": 31,\n        \"stage_of_construction\": \"Planning\",\n        \"state\": \"Karnataka\",\n        \"city\": \"Bangalore\",\n        \"pincode\": \"560021\",\n        \"address\": \"Malleshwaram Bangalore\",\n        \"site_address\": \"Malleshwaram Bangalore\",\n        \"status\": \"Submited\",\n        \"status_description\": null,\n        \"lang\": \"en\",\n        \"slug\": \"7648-45d-ram@g\",\n        \"created\": \"2020-11-11T20:31:29.000Z\",\n        \"updated\": \"2020-11-11T20:31:29.000Z\",\n        \"updated_by\": null,\n        \"updated_by_role\": null\n    },\n    \"error\": {}\n}"
+				}
+			]
 		},
 		{
 			"name": "Get all states",
@@ -514,34 +1397,6 @@
 			"response": []
 		},
 		{
-			"name": "Create Banner",
-			"request": {
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\n    \"media_type\" : \"Image\",\n    \"title\" : \"Product\",\n    \"description\" : \"Lorem Ipsum is simply dummy text of the printing and typesetting industry.\",\n    \"media_url\" : \"https:///img\",\n    \"lang\" : \"eng\"\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "{{base-url}}/api/v1/banner",
-					"host": [
-						"{{base-url}}"
-					],
-					"path": [
-						"api",
-						"v1",
-						"banner"
-					]
-				}
-			},
-			"response": []
-		},
-		{
 			"name": "Update Banner By Id",
 			"request": {
 				"method": "POST",
@@ -648,7 +1503,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"title\": \"Intoduction\",\n    \"type\": \"intro\",\n    \"media_type\": \"Image\",\n    \"media_url\": \"http://img1\",\n    \"griha_nirman_description\": \"Lorem Ipsum is simply dummy text of the printing and typesetting industry.\",\n    \"contact_address\": \"XX street, 2nd Main Banglore\",\n    \"contact_email\": \"prism@contact.com\",\n    \"contact_toll_free_number\": \"1800-111-233\",\n    \"lang\": \"eng\"\n}",
+					"raw": "{\n    \"title\" : \"aaa\",                    \n    \"type \" : null,                \n    \"griha_nirman_description\" : \"loreal ipsum\",\n    \"contact_address\" : \"aaaaaaaaaaa\",\n    \"grih_nirma_img_url\" : \"http:/img1\",      \n    \"contact_email\" : \"xx@gmail.com\",           \n    \"contact_toll_free_number\" : \"1234-456-899\",\n    \"intro_description\" : [\n        {\n            \"id\": 1,\n            \"value\": \"ttt\"\n        }\n    ],\n    \"order_how_it_works\": [\n        {\n            \"id\": 1,\n            \"value\": \"loreal ipsum\"\n        }\n    ],\n    \"banner_image_urls\" : [\"img1\",\"img2\"],      \n    \"lang\" : \"en\",      \n    \"slug\" : null,                               \n    \"created_by\" : 1,              \n    \"updated_by\" : 1\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -656,18 +1511,109 @@
 					}
 				},
 				"url": {
-					"raw": "{{base-url}}/api/v1/cms",
+					"raw": "{{base-url}}/api/v1/pages",
 					"host": [
 						"{{base-url}}"
 					],
 					"path": [
 						"api",
 						"v1",
-						"cms"
+						"pages"
 					]
 				}
 			},
-			"response": []
+			"response": [
+				{
+					"name": "Create Home Page Content",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"title\" : \"aaa\",                    \n    \"type \" : null,                \n    \"griha_nirman_description\" : \"loreal ipsum\",\n    \"contact_address\" : \"aaaaaaaaaaa\",\n    \"grih_nirma_img_url\" : \"http:/img1\",      \n    \"contact_email\" : \"xx@gmail.com\",           \n    \"contact_toll_free_number\" : \"1234-456-899\",\n    \"intro_description\" : [\n        {\n            \"id\": 1,\n            \"value\": \"ttt\"\n        }\n    ],\n    \"order_how_it_works\": [\n        {\n            \"id\": 1,\n            \"value\": \"loreal ipsum\"\n        }\n    ],\n    \"banner_image_urls\" : [\"img1\",\"img2\"],      \n    \"lang\" : \"en\",      \n    \"slug\" : null,                               \n    \"created_by\" : 1,              \n    \"updated_by\" : 1\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base-url}}/api/v1/pages",
+							"host": [
+								"{{base-url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"pages"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Fri, 13 Nov 2020 14:31:11 GMT"
+						},
+						{
+							"key": "Server",
+							"value": "Apache/2.4.29 (Ubuntu)"
+						},
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Methods",
+							"value": "GET,PUT,POST,DELETE,OPTIONS"
+						},
+						{
+							"key": "Access-Control-Allow-Headers",
+							"value": "Origin, Content-Type, Authorization, Accept,Content-Length, X-Requested-With, X-PINGOTHER"
+						},
+						{
+							"key": "Access-Control-Expose-Headers",
+							"value": "X-Total-Count"
+						},
+						{
+							"key": "X-Total-Count",
+							"value": "5000"
+						},
+						{
+							"key": "X-Content-Type-Options",
+							"value": "nosniff"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "507"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"1fb-jxwKAIRodijgl0SozhRN98iHgR8\""
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5, max=100"
+						},
+						{
+							"key": "Connection",
+							"value": "Keep-Alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"status\": 200,\n    \"data\": {\n        \"id\": 14,\n        \"title\": \"aaa\",\n        \"griha_nirman_description\": \"loreal ipsum\",\n        \"contact_address\": \"aaaaaaaaaaa\",\n        \"grih_nirma_img_url\": \"http:/img1\",\n        \"order_how_it_works\": [\n            {\n                \"id\": 1,\n                \"value\": \"loreal ipsum\"\n            }\n        ],\n        \"contact_email\": \"xx@gmail.com\",\n        \"contact_toll_free_number\": \"1234-456-899\",\n        \"intro_description\": [\n            {\n                \"id\": 1,\n                \"value\": \"ttt\"\n            }\n        ],\n        \"banner_image_urls\": [\n            \"img1\",\n            \"img2\"\n        ],\n        \"lang\": \"en\",\n        \"slug\": \"2f21-78d\",\n        \"created\": \"2020-11-13T14:31:11.489Z\",\n        \"updated\": \"2020-11-13T14:31:11.489Z\",\n        \"created_by\": 1,\n        \"updated_by\": 1\n    },\n    \"error\": {}\n}"
+				}
+			]
 		},
 		{
 			"name": "Update Home Page Content",
@@ -676,7 +1622,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"title\": \"T2\",\n    \"type\": \"intro\",\n    \"media_type\": \"Image\",\n    \"media_url\": \"http://img1\",\n    \"griha_nirman_description\": \"Lorem Ipsum is simply dummy text of the printing and typesetting industry.\",\n    \"contact_address\": \"XX street, 2nd Main Banglore\",\n    \"contact_email\": \"prism@contact.com\",\n    \"contact_toll_free_number\": \"1800-111-233\",\n    \"lang\": \"eng\"\n}",
+					"raw": "{\n        \"id\": 13,\n        \"title\": \"aaa\",\n        \"griha_nirman_description\": \"loreal ipsum\",\n        \"contact_address\": \"aaaaaaaaaaa\",\n        \"grih_nirma_img_url\": \"http:/img1\",\n        \"order_how_it_works\": [\n            {\n                \"id\": 1,\n                \"value\": \"loreal ipsum\"\n            }\n        ],\n        \"contact_email\": \"xx@gmail.com\",\n        \"contact_toll_free_number\": \"1234-456-899\",\n        \"intro_description\": [\n            {\n                \"id\": 1,\n                \"value\": \"ttt\"\n            }\n        ],\n        \"banner_image_urls\": [\n            \"img1\",\n            \"img2\"\n        ],\n        \"lang\": \"en\",\n        \"slug\": \"635d-3dd\",\n        \"created\": \"2020-11-13T14:18:51.394Z\",\n        \"updated\": \"2020-11-13T14:18:51.394Z\",\n        \"created_by\": 1,\n        \"updated_by\": 1\n    }",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -684,19 +1630,125 @@
 					}
 				},
 				"url": {
-					"raw": "{{base-url}}/api/v1/cms/{{cms_data_id}}",
+					"raw": "{{base-url}}/api/v1/pages/14/?lang=en",
 					"host": [
 						"{{base-url}}"
 					],
 					"path": [
 						"api",
 						"v1",
-						"cms",
-						"{{cms_data_id}}"
+						"pages",
+						"14",
+						""
+					],
+					"query": [
+						{
+							"key": "lang",
+							"value": "en"
+						}
 					]
 				}
 			},
-			"response": []
+			"response": [
+				{
+					"name": "Update Home Page Content",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n        \"id\": 13,\n        \"title\": \"aaa\",\n        \"griha_nirman_description\": \"loreal ipsum\",\n        \"contact_address\": \"aaaaaaaaaaa\",\n        \"grih_nirma_img_url\": \"http:/img1\",\n        \"order_how_it_works\": [\n            {\n                \"id\": 1,\n                \"value\": \"loreal ipsum\"\n            }\n        ],\n        \"contact_email\": \"xx@gmail.com\",\n        \"contact_toll_free_number\": \"1234-456-899\",\n        \"intro_description\": [\n            {\n                \"id\": 1,\n                \"value\": \"ttt\"\n            }\n        ],\n        \"banner_image_urls\": [\n            \"img1\",\n            \"img2\"\n        ],\n        \"lang\": \"en\",\n        \"slug\": \"635d-3dd\",\n        \"created\": \"2020-11-13T14:18:51.394Z\",\n        \"updated\": \"2020-11-13T14:18:51.394Z\",\n        \"created_by\": 1,\n        \"updated_by\": 1\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base-url}}/api/v1/pages/14/?lang=en",
+							"host": [
+								"{{base-url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"pages",
+								"14",
+								""
+							],
+							"query": [
+								{
+									"key": "lang",
+									"value": "en"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Fri, 13 Nov 2020 14:31:31 GMT"
+						},
+						{
+							"key": "Server",
+							"value": "Apache/2.4.29 (Ubuntu)"
+						},
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Methods",
+							"value": "GET,PUT,POST,DELETE,OPTIONS"
+						},
+						{
+							"key": "Access-Control-Allow-Headers",
+							"value": "Origin, Content-Type, Authorization, Accept,Content-Length, X-Requested-With, X-PINGOTHER"
+						},
+						{
+							"key": "Access-Control-Expose-Headers",
+							"value": "X-Total-Count"
+						},
+						{
+							"key": "X-Total-Count",
+							"value": "5000"
+						},
+						{
+							"key": "X-Content-Type-Options",
+							"value": "nosniff"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "66"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"42-wKnG9YE5GjqRRaeo8G4PBl6opZI\""
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5, max=100"
+						},
+						{
+							"key": "Connection",
+							"value": "Keep-Alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"status\": 200,\n    \"data\": \"Successfully updated content 14\",\n    \"error\": {}\n}"
+				}
+			]
 		},
 		{
 			"name": "Get Home Page Content By Id",
@@ -704,19 +1756,138 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{base-url}}/api/v1/cms/{{cms_data_id}}",
+					"raw": "{{base-url}}/api/v1/pages/10?lang=en",
 					"host": [
 						"{{base-url}}"
 					],
 					"path": [
 						"api",
 						"v1",
-						"cms",
-						"{{cms_data_id}}"
+						"pages",
+						"10"
+					],
+					"query": [
+						{
+							"key": "lang",
+							"value": "en"
+						}
 					]
 				}
 			},
 			"response": []
+		},
+		{
+			"name": "Get Home Page Content",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base-url}}/api/v1/pages?lang=en",
+					"host": [
+						"{{base-url}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"pages"
+					],
+					"query": [
+						{
+							"key": "lang",
+							"value": "en"
+						}
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Get Home Page Content",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base-url}}/api/v1/pages?lang=en",
+							"host": [
+								"{{base-url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"pages"
+							],
+							"query": [
+								{
+									"key": "lang",
+									"value": "en"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Fri, 13 Nov 2020 14:31:16 GMT"
+						},
+						{
+							"key": "Server",
+							"value": "Apache/2.4.29 (Ubuntu)"
+						},
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Methods",
+							"value": "GET,PUT,POST,DELETE,OPTIONS"
+						},
+						{
+							"key": "Access-Control-Allow-Headers",
+							"value": "Origin, Content-Type, Authorization, Accept,Content-Length, X-Requested-With, X-PINGOTHER"
+						},
+						{
+							"key": "Access-Control-Expose-Headers",
+							"value": "X-Total-Count"
+						},
+						{
+							"key": "X-Total-Count",
+							"value": "5000"
+						},
+						{
+							"key": "X-Content-Type-Options",
+							"value": "nosniff"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "521"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"209-MkQlp9EYtX8xoy7DsG3IcsFsowI\""
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5, max=100"
+						},
+						{
+							"key": "Connection",
+							"value": "Keep-Alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"status\": 200,\n    \"data\": [\n        {\n            \"id\": 14,\n            \"title\": \"aaa\",\n            \"type\": null,\n            \"griha_nirman_description\": \"loreal ipsum\",\n            \"contact_address\": \"aaaaaaaaaaa\",\n            \"grih_nirma_img_url\": \"http:/img1\",\n            \"contact_email\": \"xx@gmail.com\",\n            \"contact_toll_free_number\": \"1234-456-899\",\n            \"intro_description\": [\n                {\n                    \"id\": 1,\n                    \"value\": \"ttt\"\n                }\n            ],\n            \"banner_image_urls\": [\n                \"img1\",\n                \"img2\"\n            ],\n            \"lang\": \"en\",\n            \"slug\": \"2f21-78d\",\n            \"created\": \"2020-11-13T14:31:11.000Z\",\n            \"updated\": \"2020-11-13T14:31:11.000Z\",\n            \"created_by\": 1,\n            \"updated_by\": 1,\n            \"order_how_it_works\": [\n                {\n                    \"id\": 1,\n                    \"value\": \"loreal ipsum\"\n                }\n            ]\n        }\n    ],\n    \"error\": {}\n}"
+				}
+			]
 		},
 		{
 			"name": "Delete Home Page Content By Id",
@@ -724,15 +1895,22 @@
 				"method": "DELETE",
 				"header": [],
 				"url": {
-					"raw": "{{base-url}}/api/v1/cms/{{cms_data_id}}",
+					"raw": "{{base-url}}/api/v1/pages/14/?lang=en",
 					"host": [
 						"{{base-url}}"
 					],
 					"path": [
 						"api",
 						"v1",
-						"cms",
-						"{{cms_data_id}}"
+						"pages",
+						"14",
+						""
+					],
+					"query": [
+						{
+							"key": "lang",
+							"value": "en"
+						}
 					]
 				}
 			},
@@ -860,7 +2038,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{base-url}}/api/v1/queries/{{query_id}}?type=ask_expert",
+					"raw": "{{base-url}}/api/v1/queries/812296940425?type=ask_expert",
 					"host": [
 						"{{base-url}}"
 					],
@@ -868,7 +2046,7 @@
 						"api",
 						"v1",
 						"queries",
-						"{{query_id}}"
+						"812296940425"
 					],
 					"query": [
 						{
@@ -957,6 +2135,1179 @@
 							"key": "type",
 							"value": "ask_expert"
 						},
+						{
+							"key": "lang",
+							"value": "en"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Product",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"productcode\": null,\n    \"media_type\": \"image\",\n    \"media_url\": \"http://img1\",\n    \"title\": \"Prism Champion Duratech Cement\",\n    \"short_description\": \"Prism Johnson Limited produces special blend of Portland Pozzolana Cement and markets it under the popular brand name “Champion”..\",\n    \"description\": null,\n    \"lang\": \"en\",\n    \"slug\": null,\n    \"created_by\": null,\n    \"updated_by\": null,\n    \"pincode\": null,\n    \"csv_file_name\": null,\n    \"features\": [\n        {\n            \"id\": 1,\n            \"value\": \"This Cement is a finely-ground blend of high-quality clinker and carefully selected reactive silica-processed fly-ash\"\n        },\n        {\n            \"id\": 2,\n            \"value\": \"In fact, selecting the right ingredients and blending them uniformly and intimately is what gives the cement a high level of initial and 28 days strength.\"\n        },\n        {\n            \"id\": 3,\n            \"value\": \"It is the most commonly used cement for a wide range of applications. These applications cover ordinary standard, high strength concrete, masonry, plastering works and structural applications.\"\n        }\n    ]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base-url}}/api/v1/products",
+					"host": [
+						"{{base-url}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"products"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Create Product for 1st language",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"productcode\": null,\n    \"media_type\": \"image\",\n    \"media_url\": \"http://img1\",\n    \"title\": \"प्रिज्म चैंपियन सीमेंट\",\n    \"short_description\": \"प्रिज्म जॉनसन लिमिटेड प्रसिद्द ब्रांड प्रिज्म चैंपियन के अंतर्गत पोर्टलैंड पोजोलाना सीमेंट बनाता है.\",\n    \"description\": null,\n    \"lang\": \"hi\",\n    \"slug\": null,\n    \"created_by\": null,\n    \"updated_by\": null,\n    \"pincode\": null,\n    \"csv_file_name\": null,\n    \"features\": [\n        {\n            \"id\": 1,\n            \"value\": \"यह बहुत ही महीन पीसा हुआ सीमेंट उच्च क्वालिटी के क्लिंकर के साथ उच्च तकनीक द्वारा चुनी हुयी सिलिका के सम्मिश्रण से बनता है.सही सामग्रियों का चुनाव एवं उन्नत तरीके से बनाया हुआ सीमेंट शुरूआती समय में तथा २८ दिन में उच्च ताकत देता है.\"\n        },\n        {\n            \"id\": 2,\n            \"value\": \"यह सीमेंट हर प्रकार के निर्माण कार्यों में उपयोगी है. इस सीमेंट को सामान्य कार्य के लिए, उच्च ताकत कि कंक्रीट बनाने में, चुनाई, प्लास्टर तथा ढांचा बनाने जैसे कार्यों में उपयोगी है.\"\n        }\n    ]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base-url}}/api/v1/products",
+							"host": [
+								"{{base-url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"products"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Methods",
+							"value": "GET,PUT,POST,DELETE,OPTIONS"
+						},
+						{
+							"key": "Access-Control-Allow-Headers",
+							"value": "Origin, Content-Type, Authorization, Accept,Content-Length, X-Requested-With, X-PINGOTHER"
+						},
+						{
+							"key": "Access-Control-Expose-Headers",
+							"value": "X-Total-Count"
+						},
+						{
+							"key": "X-Total-Count",
+							"value": "5000"
+						},
+						{
+							"key": "X-Content-Type-Options",
+							"value": "nosniff"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "1737"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"6c9-LcMb3yEZ1hKRANOVPD842CpAR3M\""
+						},
+						{
+							"key": "Date",
+							"value": "Wed, 11 Nov 2020 08:42:16 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"status\": 200,\n    \"data\": {\n        \"id\": 10,\n        \"productcode\": \"PC4497679\",\n        \"media_type\": \"image\",\n        \"media_url\": \"http://img1\",\n        \"title\": \"प्रिज्म चैंपियन सीमेंट\",\n        \"short_description\": \"प्रिज्म जॉनसन लिमिटेड प्रसिद्द ब्रांड प्रिज्म चैंपियन के अंतर्गत पोर्टलैंड पोजोलाना सीमेंट बनाता है.\",\n        \"description\": null,\n        \"lang\": \"hi\",\n        \"slug\": \"e0e7-eed-PC4497679\",\n        \"created_by\": null,\n        \"updated_by\": null,\n        \"pincode\": null,\n        \"csv_file_name\": null,\n        \"features\": [\n            {\n                \"id\": 1,\n                \"value\": \"यह बहुत ही महीन पीसा हुआ सीमेंट उच्च क्वालिटी के क्लिंकर के साथ उच्च तकनीक द्वारा चुनी हुयी सिलिका के सम्मिश्रण से बनता है.सही सामग्रियों का चुनाव एवं उन्नत तरीके से बनाया हुआ सीमेंट शुरूआती समय में तथा २८ दिन में उच्च ताकत देता है.\"\n            },\n            {\n                \"id\": 2,\n                \"value\": \"यह सीमेंट हर प्रकार के निर्माण कार्यों में उपयोगी है. इस सीमेंट को सामान्य कार्य के लिए, उच्च ताकत कि कंक्रीट बनाने में, चुनाई, प्लास्टर तथा ढांचा बनाने जैसे कार्यों में उपयोगी है.\"\n            }\n        ]\n    },\n    \"error\": {}\n}"
+				},
+				{
+					"name": "Create Product for second lang ",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"productcode\": \"PC4497679\",\n    \"media_type\": \"image\",\n    \"media_url\": \"http://img1\",\n    \"title\": \"Prism Champion Cement\",\n    \"short_description\": \"Prism Johnson Limited produces special blend of Portland Pozzolana Cement and markets it under the popular brand name “Champion”..\",\n    \"description\": null,\n    \"lang\": \"en\",\n    \"slug\": \"e0e7-eed-PC4497679\",\n    \"created_by\": null,\n    \"updated_by\": null,\n    \"pincode\": null,\n    \"csv_file_name\": null,\n    \"features\": [\n        {\n            \"id\": 1,\n            \"value\": \"This Cement is a finely-ground blend of high-quality clinker and carefully selected reactive silica-processed fly-ash\"\n        },\n        {\n            \"id\": 2,\n            \"value\": \"In fact, selecting the right ingredients and blending them uniformly and intimately is what gives the cement a high level of initial and 28 days strength.\"\n        },\n        {\n            \"id\": 3,\n            \"value\": \"It is the most commonly used cement for a wide range of applications. These applications cover ordinary standard, high strength concrete, masonry, plastering works and structural applications.\"\n        }\n    ]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base-url}}/api/v1/products",
+							"host": [
+								"{{base-url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"products"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Methods",
+							"value": "GET,PUT,POST,DELETE,OPTIONS"
+						},
+						{
+							"key": "Access-Control-Allow-Headers",
+							"value": "Origin, Content-Type, Authorization, Accept,Content-Length, X-Requested-With, X-PINGOTHER"
+						},
+						{
+							"key": "Access-Control-Expose-Headers",
+							"value": "X-Total-Count"
+						},
+						{
+							"key": "X-Total-Count",
+							"value": "5000"
+						},
+						{
+							"key": "X-Content-Type-Options",
+							"value": "nosniff"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "971"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"3cb-szAMgZRvAfcEFOTD/+V5elqqzi0\""
+						},
+						{
+							"key": "Date",
+							"value": "Wed, 11 Nov 2020 08:45:06 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"status\": 200,\n    \"data\": {\n        \"id\": 11,\n        \"productcode\": \"PC4497679\",\n        \"media_type\": \"image\",\n        \"media_url\": \"http://img1\",\n        \"title\": \"Prism Champion Cement\",\n        \"short_description\": \"Prism Johnson Limited produces special blend of Portland Pozzolana Cement and markets it under the popular brand name “Champion”..\",\n        \"description\": null,\n        \"lang\": \"en\",\n        \"slug\": \"e0e7-eed-PC4497679\",\n        \"created_by\": null,\n        \"updated_by\": null,\n        \"pincode\": null,\n        \"csv_file_name\": null,\n        \"features\": [\n            {\n                \"id\": 1,\n                \"value\": \"This Cement is a finely-ground blend of high-quality clinker and carefully selected reactive silica-processed fly-ash\"\n            },\n            {\n                \"id\": 2,\n                \"value\": \"In fact, selecting the right ingredients and blending them uniformly and intimately is what gives the cement a high level of initial and 28 days strength.\"\n            },\n            {\n                \"id\": 3,\n                \"value\": \"It is the most commonly used cement for a wide range of applications. These applications cover ordinary standard, high strength concrete, masonry, plastering works and structural applications.\"\n            }\n        ]\n    },\n    \"error\": {}\n}"
+				}
+			]
+		},
+		{
+			"name": "Create Article",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"type\": \"our_service\",\n    \"category\": \"cement\",\n    \"media_type\": \"image\",\n    \"media_url\": \"https://prism-johnson-cement-media-assets.s3.ap-south-1.amazonaws.com/our-services-assets/individual_home_builders.png\",\n    \"title\": \"Solution for Individual Home Builders\",\n    \"description\": \"The aim of the company is to enlighten IHBs on the complexities involved in construction, effective planning to achieve economy and finally constructing\",\n    \"lang\": \"en\",\n    \"slug\": null,\n    \"sections\": [\n        {\n            \"id\": 1,\n            \"value\": {\n                \"media_type\": \"image\",\n                \"media_url\": \"https://prism-johnson-cement-media-assets.s3.ap-south-1.amazonaws.com/our-services-assets/individual_home_builders_1.png\",\n                \"title\": \"Ghar aapka, zimmedari hamaari\",\n                \"description\": \"Sabse surakshit ghar can’t be made only with best cement. It also requires the right mentoring, accessories and sand. We take care of all these and provide you a full building solution, rather than just cement. We provide you these for free along with our cement. We provide the following services in this package\",\n                \"slug\": null,\n                \"lang\": \"en\",\n                \"features\": [\n                    {\n                        \"id\": 1,\n                        \"value\": \"Accessories provided- Cover blocks and shuttering tape\"\n                    },\n                    {\n                        \"id\": 2,\n                        \"value\": \"Site Monitoring include- Slab Monitoring, Mason training and IHB Training\"\n                    },\n                    {\n                        \"id\": 3,\n                        \"value\": \"Sand Quality Test\"\n                    }\n                ]\n            }\n        },\n        {\n            \"id\": 2,\n            \"value\": {\n                \"media_type\": \"image\",\n                \"media_url\": \"https://prism-johnson-cement-media-assets.s3.ap-south-1.amazonaws.com/our-services-assets/individual_home_builders_2.png\",\n                \"title\": \"Hum hai na\",\n                \"description\": \"We will always have your back, may it be in terms of training masons, guiding you or on-site slab monitoring. Along with this we will also help you ensure the best quality of sand to help you make the best homes. Services provided are in the form of following\",\n                \"slug\": null,\n                \"lang\": \"en\",\n                \"features\": [\n                    {\n                        \"id\": 4,\n                        \"value\": \"Site Monitoring\"\n                    },\n                    {\n                        \"id\": 5,\n                        \"value\": \"Sand Quality Test\"\n                    }\n                ]\n            }\n        },\n        {\n            \"id\": 3,\n            \"value\": {\n                \"media_type\": \"image\",\n                \"media_url\": \"https://prism-johnson-cement-media-assets.s3.ap-south-1.amazonaws.com/our-services-assets/individual_home_builders_3.png\",\n                \"title\": \"Hum sath hain\",\n                \"description\": \"We will always be with you and help you check the quality of your sand and aggregates and tell you about good construction practices as per the requirements of your construction stage. Services offered are as follows\",\n                \"slug\": null,\n                \"lang\": \"en\",\n                \"features\": [\n                    {\n                        \"id\": 6,\n                        \"value\": \"Site Visits\"\n                    },\n                    {\n                        \"id\": 7,\n                        \"value\": \"Sand Quality Test\"\n                    }\n                ]\n            }\n        }\n    ]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base-url}}/api/v1/articles",
+					"host": [
+						"{{base-url}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"articles"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Create Article for 1st lang - example = english",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"type\": \"our_services\",\n    \"category\": \"cement\",\n    \"media_type\": \"image\",\n    \"media_url\": \"http://img1\",\n    \"title\": \"Individual Home Builders\",\n    \"description\": \"The aim of the company is to enlighten IHBs on the complexities involved in construction, effective planning to achieve economy and finally constructing a strong and durable house with superior quality materials without any time overrun. Services to home builders are enumerated as below :-\",\n    \"lang\": \"en\",\n    \"slug\": null,\n    \"sections\": [\n        {\n            \"id\": 1,\n            \"value\": {\n                \"media_type\": \"image\",\n                \"media_url\": \"https://prism-johnson-cement-media-assets.s3.ap-south-1.amazonaws.com/cement-products/Bitmap%402x.png?response-content-disposition=inline&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEE4aCmFwLXNvdXRoLTEiRjBEAiBl3BfyhNWa78KbclIBs2f2c6%2FM2PYXKJVhOWw%2BcFVThwIgDhHGQTIrauTVrTr6w1XEFzERM7wU2jWArHvdeIlF%2Bpkq5gIIuP%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FARAAGgw0NDE0ODc0OTM4MjgiDCm69fPGg4%2BQFV24SSq6AhAcFP6S%2BP8sZMPPC2yKNB%2FTkKpc5BVYUFHWq5GNr%2BRfGrUUKR3OVGlJQ7%2BP%2FH7uaxduzpZxlnq0eZAKAlvFuKcNnd1zC1H4VY3Bfn1SpT8keOcU1uAONampsss%2Fyq3DnreHl0PdFXN4dOdWG%2B0tg%2FIREQgf6VOvXNlM6RbiU8vaQiTMmCROyaLizCILsWkWg2hZT4OBlFIeq8Phbvt5LlciS5tIUZeHD41gTdl8Ugz9nTz0pkNgVTSjueXAzBQPYLUcv%2BMiZnu3v417ZzFOLKZQWAjEXCP%2FEwfURBx1aAPMGT%2BZvJDbqs37DBedz1X%2FGfSNLcaAu%2FtwYe5eyvHEBHry5jao4k3QUPVnRZ%2BFXbLMwofM31hvB356ol2Kh4pWkKFLZfK5kQddHW%2Fb8OsbHan%2FK%2BdNemxhz14GMIvMuP0FOrECx85%2FedehtuIpGBGMtoQu%2FAgGlQ%2BuTo%2Bc66y4e2rrK62PCJwhJI32ba45Rka2o%2B2lCTfN8irPYfoP3bV0kOkRzrx%2BVgBVRtq%2FdNxX9ls56QRPgQiLiID3kbSmfYUiqbpOBzqnozVe2%2BgELV4Hd4BFEtxJ3WuSQp2m5rn9TAcwiHBb3gM00AlSE0lQa4ijL%2FPEkrFpBn2oSPT0V4r6U39GHP%2BsdJevQXGS8h4AdD2z7aBA45Vhw8mJ3pbfCHXgl%2Bp1H6mHeKPUNQjY2oucBNwyJBlyQwQMq6EGq0fYDb1k4LvdCY%2FTfkkJOEhetqK8R6jwaAuVipQZEP2nTJ3dpOTYZDCAom5Z8C9bfePDtmlqkOxjLoy%2B%2B2AKo8CsT2BLcuF%2BmqYxiko3SJeBs6hno9SCfKU%3D&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20201113T062600Z&X-Amz-SignedHeaders=host&X-Amz-Expires=300&X-Amz-Credential=ASIAWNSVURLCIL3QZ7VO%2F20201113%2Fap-south-1%2Fs3%2Faws4_request&X-Amz-Signature=3467134cf383833db0125173b845345d777539ca3149b70f2067af0587cf7b61\",\n                \"title\": \"\",\n                \"description\": \"The aim of the company is to enlighten IHBs on the complexities involved in construction, effective planning to achieve economy and finally constructing a strong and durable house with superior quality materials without any time overrun. Services to home builders are enumerated as below :-\",\n                \"slug\": null,\n                \"lang\": \"en\",\n                \"features\": [\n                    {\n                        \"id\": 1,\n                        \"value\": \"Construction tips\"\n                    },\n                    {\n                        \"id\": 2,\n                        \"value\": \"Planning\"\n                    },\n                    {\n                        \"id\": 3,\n                        \"value\": \"Cost Effective packages- We also provide technical support services in the form of various lucrative packages, some of them have been listed down below:-\"\n                    }\n                ]\n            }\n        }\n    ]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base-url}}/api/v1/articles",
+							"host": [
+								"{{base-url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"articles"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Fri, 13 Nov 2020 10:04:40 GMT"
+						},
+						{
+							"key": "Server",
+							"value": "Apache/2.4.29 (Ubuntu)"
+						},
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Methods",
+							"value": "GET,PUT,POST,DELETE,OPTIONS"
+						},
+						{
+							"key": "Access-Control-Allow-Headers",
+							"value": "Origin, Content-Type, Authorization, Accept,Content-Length, X-Requested-With, X-PINGOTHER"
+						},
+						{
+							"key": "Access-Control-Expose-Headers",
+							"value": "X-Total-Count"
+						},
+						{
+							"key": "X-Total-Count",
+							"value": "5000"
+						},
+						{
+							"key": "X-Content-Type-Options",
+							"value": "nosniff"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "88"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"58-rQfx/gOBzhVazo2ThMEfcOgdOwU\""
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5, max=100"
+						},
+						{
+							"key": "Connection",
+							"value": "Keep-Alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"status\": 200,\n    \"data\": {\n        \"id\": \"Successfully created article 3\",\n        \"msg\": \"success\"\n    },\n    \"error\": {}\n}"
+				}
+			]
+		},
+		{
+			"name": "Update Article",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"id\": 15,\n    \"category\": \"cement\",\n    \"type\": \"our_service\",\n    \"media_type\": \"image\",\n    \"media_url\": \"https://prism-johnson-cement-media-assets.s3.ap-south-1.amazonaws.com/our-services-assets/individual_home_builders.png\",\n    \"title\": \"Solution for Individual Home Builders\",\n    \"short_description\": null,\n    \"description\": \"The aim of the company is to enlighten IHBs on the complexities involved in construction, effective planning to achieve economy and finally constructing\",\n    \"lang\": \"en\",\n    \"slug\": \"ebf6-adb\",\n    \"created\": \"2020-11-13T12:22:45.000Z\",\n    \"updated\": \"2020-11-13T12:22:45.000Z\",\n    \"sections\": [\n        {\n            \"id\": 13,\n            \"value\": {\n                \"type\": null,\n                \"article_id\": 15,\n                \"media_type\": \"image\",\n                \"media_url\": null,\n                \"sub_title\": \"Ghar aapka, zimmedari hamaari\",\n                \"sub_description\": null,\n                \"description\": \"Sabse surakshit ghar can’t be made only with best cement. It also requires the right mentoring, accessories and sand. We take care of all these and provide you a full building solution, rather than just cement. We provide you these for free along with our cement. We provide the following services in this package\",\n                \"lang\": \"en\",\n                \"slug\": \"fd0c-87e\",\n                \"created\": \"2020-11-13T12:22:45.000Z\",\n                \"updated\": \"2020-11-13T12:22:45.000Z\",\n                \"features\": [\n                    {\n                        \"id\": 1,\n                        \"value\": \"Accessories provided- Cover blocks and shuttering tape\"\n                    },\n                    {\n                        \"id\": 2,\n                        \"value\": \"Site Monitoring include- Slab Monitoring, Mason training and IHB Training\"\n                    },\n                    {\n                        \"id\": 3,\n                        \"value\": \"Sand Quality Test\"\n                    }\n                ]\n            }\n        },\n        {\n            \"id\": 14,\n            \"value\": {\n                \"type\": null,\n                \"article_id\": 15,\n                \"media_type\": \"image\",\n                \"media_url\": null,\n                \"sub_title\": \"Hum hai na\",\n                \"sub_description\": null,\n                \"description\": \"We will always have your back, may it be in terms of training masons, guiding you or on-site slab monitoring. Along with this we will also help you ensure the best quality of sand to help you make the best homes. Services provided are in the form of following\",\n                \"lang\": \"en\",\n                \"slug\": \"772b-a93\",\n                \"created\": \"2020-11-13T12:22:45.000Z\",\n                \"updated\": \"2020-11-13T12:22:45.000Z\",\n                \"features\": [\n                    {\n                        \"id\": 4,\n                        \"value\": \"Site Monitoring\"\n                    },\n                    {\n                        \"id\": 5,\n                        \"value\": \"Sand Quality Test\"\n                    }\n                ]\n            }\n        },\n        {\n            \"id\": 15,\n            \"value\": {\n                \"type\": null,\n                \"article_id\": 15,\n                \"media_type\": \"image\",\n                \"media_url\": null,\n                \"sub_title\": \"Hum sath hain\",\n                \"sub_description\": null,\n                \"description\": \"We will always be with you and help you check the quality of your sand and aggregates and tell you about good construction practices as per the requirements of your construction stage. Services offered are as follows\",\n                \"lang\": \"en\",\n                \"slug\": \"a1cd-62c\",\n                \"created\": \"2020-11-13T12:22:45.000Z\",\n                \"updated\": \"2020-11-13T12:22:45.000Z\",\n                \"features\": [\n                    {\n                        \"id\": 6,\n                        \"value\": \"Site Visits\"\n                    },\n                    {\n                        \"id\": 7,\n                        \"value\": \"Sand Quality Test\"\n                    }\n                ]\n            }\n        }\n    ]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base-url}}/api/v1/articles/15?lang=en",
+					"host": [
+						"{{base-url}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"articles",
+						"15"
+					],
+					"query": [
+						{
+							"key": "lang",
+							"value": "en"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update Product",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"productcode\": \"PC0015844\",\n    \"media_type\": \"image\",\n    \"media_url\": \"https://prism-johnson-cement-media-assets.s3.ap-south-1.amazonaws.com/cement-products/cement_3.png\",\n    \"title\": \"प्रिज्म चैंपियन सीमेंट\",\n    \"short_description\": \"प्रिज्म जॉनसन लिमिटेड प्रसिद्द ब्रांड प्रिज्म चैंपियन के अंतर्गत पोर्टलैंड पोजोलाना सीमेंट बनाता है.\",\n    \"description\": null,\n    \"lang\": \"hi\",\n    \"slug\": \"8c47-37f-PC0015844\",\n    \"created\": \"2020-11-12T04:27:40.000Z\",\n    \"updated\": \"2020-11-12T04:27:58.000Z\",\n    \"csv_file_name\": null,\n    \"features\": [\n        {\n            \"id\": 1,\n            \"value\": \"यह बहुत ही महीन पीसा हुआ सीमेंट उच्च क्वालिटी के क्लिंकर के साथ उच्च तकनीक द्वारा चुनी हुयी सिलिका के सम्मिश्रण से बनता है.सही सामग्रियों का चुनाव एवं उन्नत तरीके से बनाया हुआ सीमेंट शुरूआती समय में तथा २८ दिन में उच्च ताकत देता है.\"\n        },\n        {\n            \"id\": 2,\n            \"value\": \"यह सीमेंट हर प्रकार के निर्माण कार्यों में उपयोगी है. इस सीमेंट को सामान्य कार्य के लिए, उच्च ताकत कि कंक्रीट बनाने में, चुनाई, प्लास्टर तथा ढांचा बनाने जैसे कार्यों में उपयोगी है.\"\n        }\n    ]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base-url}}/api/v1/products/{{product_id}}",
+					"host": [
+						"{{base-url}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"products",
+						"{{product_id}}"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Update Product hindi",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"productcode\": \"PC0015844\",\n    \"media_type\": \"image\",\n    \"media_url\": \"https://prism-johnson-cement-media-assets.s3.ap-south-1.amazonaws.com/cement-products/cement_3.png\",\n    \"title\": \"प्रिज्म चैंपियन सीमेंट\",\n    \"short_description\": \"प्रिज्म जॉनसन लिमिटेड प्रसिद्द ब्रांड प्रिज्म चैंपियन के अंतर्गत पोर्टलैंड पोजोलाना सीमेंट बनाता है.\",\n    \"description\": null,\n    \"lang\": \"hi\",\n    \"slug\": \"8c47-37f-PC0015844\",\n    \"created\": \"2020-11-12T04:27:40.000Z\",\n    \"updated\": \"2020-11-12T04:27:58.000Z\",\n    \"csv_file_name\": null,\n    \"features\": [\n        {\n            \"id\": 1,\n            \"value\": \"यह बहुत ही महीन पीसा हुआ सीमेंट उच्च क्वालिटी के क्लिंकर के साथ उच्च तकनीक द्वारा चुनी हुयी सिलिका के सम्मिश्रण से बनता है.सही सामग्रियों का चुनाव एवं उन्नत तरीके से बनाया हुआ सीमेंट शुरूआती समय में तथा २८ दिन में उच्च ताकत देता है.\"\n        },\n        {\n            \"id\": 2,\n            \"value\": \"यह सीमेंट हर प्रकार के निर्माण कार्यों में उपयोगी है. इस सीमेंट को सामान्य कार्य के लिए, उच्च ताकत कि कंक्रीट बनाने में, चुनाई, प्लास्टर तथा ढांचा बनाने जैसे कार्यों में उपयोगी है.\"\n        }\n    ]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base-url}}/api/v1/products/{{product_id}}",
+							"host": [
+								"{{base-url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"products",
+								"{{product_id}}"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Methods",
+							"value": "GET,PUT,POST,DELETE,OPTIONS"
+						},
+						{
+							"key": "Access-Control-Allow-Headers",
+							"value": "Origin, Content-Type, Authorization, Accept,Content-Length, X-Requested-With, X-PINGOTHER"
+						},
+						{
+							"key": "Access-Control-Expose-Headers",
+							"value": "X-Total-Count"
+						},
+						{
+							"key": "X-Total-Count",
+							"value": "5000"
+						},
+						{
+							"key": "X-Content-Type-Options",
+							"value": "nosniff"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "73"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"49-HjD2FLofyh/LEld5bTLNbT9GWyc\""
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 12 Nov 2020 13:59:37 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"status\": 200,\n    \"data\": {\n        \"msg\": \"Successfully updated product 6\"\n    },\n    \"error\": {}\n}"
+				},
+				{
+					"name": "Create Product for second lang ",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"productcode\": \"PC4497679\",\n    \"media_type\": \"image\",\n    \"media_url\": \"http://img1\",\n    \"title\": \"Prism Champion Cement\",\n    \"short_description\": \"Prism Johnson Limited produces special blend of Portland Pozzolana Cement and markets it under the popular brand name “Champion”..\",\n    \"description\": null,\n    \"lang\": \"en\",\n    \"slug\": \"e0e7-eed-PC4497679\",\n    \"created_by\": null,\n    \"updated_by\": null,\n    \"pincode\": null,\n    \"csv_file_name\": null,\n    \"features\": [\n        {\n            \"id\": 1,\n            \"value\": \"This Cement is a finely-ground blend of high-quality clinker and carefully selected reactive silica-processed fly-ash\"\n        },\n        {\n            \"id\": 2,\n            \"value\": \"In fact, selecting the right ingredients and blending them uniformly and intimately is what gives the cement a high level of initial and 28 days strength.\"\n        },\n        {\n            \"id\": 3,\n            \"value\": \"It is the most commonly used cement for a wide range of applications. These applications cover ordinary standard, high strength concrete, masonry, plastering works and structural applications.\"\n        }\n    ]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base-url}}/api/v1/products",
+							"host": [
+								"{{base-url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"products"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Methods",
+							"value": "GET,PUT,POST,DELETE,OPTIONS"
+						},
+						{
+							"key": "Access-Control-Allow-Headers",
+							"value": "Origin, Content-Type, Authorization, Accept,Content-Length, X-Requested-With, X-PINGOTHER"
+						},
+						{
+							"key": "Access-Control-Expose-Headers",
+							"value": "X-Total-Count"
+						},
+						{
+							"key": "X-Total-Count",
+							"value": "5000"
+						},
+						{
+							"key": "X-Content-Type-Options",
+							"value": "nosniff"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "971"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"3cb-szAMgZRvAfcEFOTD/+V5elqqzi0\""
+						},
+						{
+							"key": "Date",
+							"value": "Wed, 11 Nov 2020 08:45:06 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"status\": 200,\n    \"data\": {\n        \"id\": 11,\n        \"productcode\": \"PC4497679\",\n        \"media_type\": \"image\",\n        \"media_url\": \"http://img1\",\n        \"title\": \"Prism Champion Cement\",\n        \"short_description\": \"Prism Johnson Limited produces special blend of Portland Pozzolana Cement and markets it under the popular brand name “Champion”..\",\n        \"description\": null,\n        \"lang\": \"en\",\n        \"slug\": \"e0e7-eed-PC4497679\",\n        \"created_by\": null,\n        \"updated_by\": null,\n        \"pincode\": null,\n        \"csv_file_name\": null,\n        \"features\": [\n            {\n                \"id\": 1,\n                \"value\": \"This Cement is a finely-ground blend of high-quality clinker and carefully selected reactive silica-processed fly-ash\"\n            },\n            {\n                \"id\": 2,\n                \"value\": \"In fact, selecting the right ingredients and blending them uniformly and intimately is what gives the cement a high level of initial and 28 days strength.\"\n            },\n            {\n                \"id\": 3,\n                \"value\": \"It is the most commonly used cement for a wide range of applications. These applications cover ordinary standard, high strength concrete, masonry, plastering works and structural applications.\"\n            }\n        ]\n    },\n    \"error\": {}\n}"
+				}
+			]
+		},
+		{
+			"name": "Get all products",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base-url}}/api/v1/products?lang=en",
+					"host": [
+						"{{base-url}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"products"
+					],
+					"query": [
+						{
+							"key": "lang",
+							"value": "en"
+						}
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Get all products english",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base-url}}/api/v1/products?lang=en",
+							"host": [
+								"{{base-url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"products"
+							],
+							"query": [
+								{
+									"key": "lang",
+									"value": "en"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Methods",
+							"value": "GET,PUT,POST,DELETE,OPTIONS"
+						},
+						{
+							"key": "Access-Control-Allow-Headers",
+							"value": "Origin, Content-Type, Authorization, Accept,Content-Length, X-Requested-With, X-PINGOTHER"
+						},
+						{
+							"key": "Access-Control-Expose-Headers",
+							"value": "X-Total-Count"
+						},
+						{
+							"key": "X-Total-Count",
+							"value": "5000"
+						},
+						{
+							"key": "X-Content-Type-Options",
+							"value": "nosniff"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "1769"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"6e9-zrWAG5PTJFi1su6I1qfjsr/OPsE\""
+						},
+						{
+							"key": "Date",
+							"value": "Wed, 11 Nov 2020 08:49:20 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"status\": 200,\n    \"data\": [\n        {\n            \"id\": 10,\n            \"productcode\": \"PC4497679\",\n            \"media_type\": \"image\",\n            \"media_url\": \"http://img1\",\n            \"title\": \"प्रिज्म चैंपियन सीमेंट\",\n            \"short_description\": \"प्रिज्म जॉनसन लिमिटेड प्रसिद्द ब्रांड प्रिज्म चैंपियन के अंतर्गत पोर्टलैंड पोजोलाना सीमेंट बनाता है.\",\n            \"description\": null,\n            \"lang\": \"hi\",\n            \"slug\": \"e0e7-eed-PC4497679\",\n            \"created\": null,\n            \"updated\": null,\n            \"created_by\": null,\n            \"updated_by\": null,\n            \"pincode\": null,\n            \"csv_file_name\": null,\n            \"features\": [\n                {\n                    \"id\": 1,\n                    \"value\": \"यह बहुत ही महीन पीसा हुआ सीमेंट उच्च क्वालिटी के क्लिंकर के साथ उच्च तकनीक द्वारा चुनी हुयी सिलिका के सम्मिश्रण से बनता है.सही सामग्रियों का चुनाव एवं उन्नत तरीके से बनाया हुआ सीमेंट शुरूआती समय में तथा २८ दिन में उच्च ताकत देता है.\"\n                },\n                {\n                    \"id\": 2,\n                    \"value\": \"यह सीमेंट हर प्रकार के निर्माण कार्यों में उपयोगी है. इस सीमेंट को सामान्य कार्य के लिए, उच्च ताकत कि कंक्रीट बनाने में, चुनाई, प्लास्टर तथा ढांचा बनाने जैसे कार्यों में उपयोगी है.\"\n                }\n            ]\n        }\n    ],\n    \"error\": {}\n}"
+				},
+				{
+					"name": "Get all products hindi",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base-url}}/api/v1/products?lang=hi",
+							"host": [
+								"{{base-url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"products"
+							],
+							"query": [
+								{
+									"key": "lang",
+									"value": "hi"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Methods",
+							"value": "GET,PUT,POST,DELETE,OPTIONS"
+						},
+						{
+							"key": "Access-Control-Allow-Headers",
+							"value": "Origin, Content-Type, Authorization, Accept,Content-Length, X-Requested-With, X-PINGOTHER"
+						},
+						{
+							"key": "Access-Control-Expose-Headers",
+							"value": "X-Total-Count"
+						},
+						{
+							"key": "X-Total-Count",
+							"value": "5000"
+						},
+						{
+							"key": "X-Content-Type-Options",
+							"value": "nosniff"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "1769"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"6e9-zrWAG5PTJFi1su6I1qfjsr/OPsE\""
+						},
+						{
+							"key": "Date",
+							"value": "Wed, 11 Nov 2020 08:49:20 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"status\": 200,\n    \"data\": [\n        {\n            \"id\": 10,\n            \"productcode\": \"PC4497679\",\n            \"media_type\": \"image\",\n            \"media_url\": \"http://img1\",\n            \"title\": \"प्रिज्म चैंपियन सीमेंट\",\n            \"short_description\": \"प्रिज्म जॉनसन लिमिटेड प्रसिद्द ब्रांड प्रिज्म चैंपियन के अंतर्गत पोर्टलैंड पोजोलाना सीमेंट बनाता है.\",\n            \"description\": null,\n            \"lang\": \"hi\",\n            \"slug\": \"e0e7-eed-PC4497679\",\n            \"created\": null,\n            \"updated\": null,\n            \"created_by\": null,\n            \"updated_by\": null,\n            \"pincode\": null,\n            \"csv_file_name\": null,\n            \"features\": [\n                {\n                    \"id\": 1,\n                    \"value\": \"यह बहुत ही महीन पीसा हुआ सीमेंट उच्च क्वालिटी के क्लिंकर के साथ उच्च तकनीक द्वारा चुनी हुयी सिलिका के सम्मिश्रण से बनता है.सही सामग्रियों का चुनाव एवं उन्नत तरीके से बनाया हुआ सीमेंट शुरूआती समय में तथा २८ दिन में उच्च ताकत देता है.\"\n                },\n                {\n                    \"id\": 2,\n                    \"value\": \"यह सीमेंट हर प्रकार के निर्माण कार्यों में उपयोगी है. इस सीमेंट को सामान्य कार्य के लिए, उच्च ताकत कि कंक्रीट बनाने में, चुनाई, प्लास्टर तथा ढांचा बनाने जैसे कार्यों में उपयोगी है.\"\n                }\n            ]\n        }\n    ],\n    \"error\": {}\n}"
+				}
+			]
+		},
+		{
+			"name": "Get one product",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base-url}}/api/v1/products/{{slug}}?lang=en",
+					"host": [
+						"{{base-url}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"products",
+						"{{slug}}"
+					],
+					"query": [
+						{
+							"key": "lang",
+							"value": "en"
+						}
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Get all products hindi",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base-url}}/api/v1/products?lang=hi",
+							"host": [
+								"{{base-url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"products"
+							],
+							"query": [
+								{
+									"key": "lang",
+									"value": "hi"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Methods",
+							"value": "GET,PUT,POST,DELETE,OPTIONS"
+						},
+						{
+							"key": "Access-Control-Allow-Headers",
+							"value": "Origin, Content-Type, Authorization, Accept,Content-Length, X-Requested-With, X-PINGOTHER"
+						},
+						{
+							"key": "Access-Control-Expose-Headers",
+							"value": "X-Total-Count"
+						},
+						{
+							"key": "X-Total-Count",
+							"value": "5000"
+						},
+						{
+							"key": "X-Content-Type-Options",
+							"value": "nosniff"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "1769"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"6e9-zrWAG5PTJFi1su6I1qfjsr/OPsE\""
+						},
+						{
+							"key": "Date",
+							"value": "Wed, 11 Nov 2020 08:49:20 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"status\": 200,\n    \"data\": [\n        {\n            \"id\": 10,\n            \"productcode\": \"PC4497679\",\n            \"media_type\": \"image\",\n            \"media_url\": \"http://img1\",\n            \"title\": \"प्रिज्म चैंपियन सीमेंट\",\n            \"short_description\": \"प्रिज्म जॉनसन लिमिटेड प्रसिद्द ब्रांड प्रिज्म चैंपियन के अंतर्गत पोर्टलैंड पोजोलाना सीमेंट बनाता है.\",\n            \"description\": null,\n            \"lang\": \"hi\",\n            \"slug\": \"e0e7-eed-PC4497679\",\n            \"created\": null,\n            \"updated\": null,\n            \"created_by\": null,\n            \"updated_by\": null,\n            \"pincode\": null,\n            \"csv_file_name\": null,\n            \"features\": [\n                {\n                    \"id\": 1,\n                    \"value\": \"यह बहुत ही महीन पीसा हुआ सीमेंट उच्च क्वालिटी के क्लिंकर के साथ उच्च तकनीक द्वारा चुनी हुयी सिलिका के सम्मिश्रण से बनता है.सही सामग्रियों का चुनाव एवं उन्नत तरीके से बनाया हुआ सीमेंट शुरूआती समय में तथा २८ दिन में उच्च ताकत देता है.\"\n                },\n                {\n                    \"id\": 2,\n                    \"value\": \"यह सीमेंट हर प्रकार के निर्माण कार्यों में उपयोगी है. इस सीमेंट को सामान्य कार्य के लिए, उच्च ताकत कि कंक्रीट बनाने में, चुनाई, प्लास्टर तथा ढांचा बनाने जैसे कार्यों में उपयोगी है.\"\n                }\n            ]\n        }\n    ],\n    \"error\": {}\n}"
+				},
+				{
+					"name": "Get all products english",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base-url}}/api/v1/products?lang=en",
+							"host": [
+								"{{base-url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"products"
+							],
+							"query": [
+								{
+									"key": "lang",
+									"value": "en"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Methods",
+							"value": "GET,PUT,POST,DELETE,OPTIONS"
+						},
+						{
+							"key": "Access-Control-Allow-Headers",
+							"value": "Origin, Content-Type, Authorization, Accept,Content-Length, X-Requested-With, X-PINGOTHER"
+						},
+						{
+							"key": "Access-Control-Expose-Headers",
+							"value": "X-Total-Count"
+						},
+						{
+							"key": "X-Total-Count",
+							"value": "5000"
+						},
+						{
+							"key": "X-Content-Type-Options",
+							"value": "nosniff"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "1769"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"6e9-zrWAG5PTJFi1su6I1qfjsr/OPsE\""
+						},
+						{
+							"key": "Date",
+							"value": "Wed, 11 Nov 2020 08:49:20 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"status\": 200,\n    \"data\": [\n        {\n            \"id\": 10,\n            \"productcode\": \"PC4497679\",\n            \"media_type\": \"image\",\n            \"media_url\": \"http://img1\",\n            \"title\": \"प्रिज्म चैंपियन सीमेंट\",\n            \"short_description\": \"प्रिज्म जॉनसन लिमिटेड प्रसिद्द ब्रांड प्रिज्म चैंपियन के अंतर्गत पोर्टलैंड पोजोलाना सीमेंट बनाता है.\",\n            \"description\": null,\n            \"lang\": \"hi\",\n            \"slug\": \"e0e7-eed-PC4497679\",\n            \"created\": null,\n            \"updated\": null,\n            \"created_by\": null,\n            \"updated_by\": null,\n            \"pincode\": null,\n            \"csv_file_name\": null,\n            \"features\": [\n                {\n                    \"id\": 1,\n                    \"value\": \"यह बहुत ही महीन पीसा हुआ सीमेंट उच्च क्वालिटी के क्लिंकर के साथ उच्च तकनीक द्वारा चुनी हुयी सिलिका के सम्मिश्रण से बनता है.सही सामग्रियों का चुनाव एवं उन्नत तरीके से बनाया हुआ सीमेंट शुरूआती समय में तथा २८ दिन में उच्च ताकत देता है.\"\n                },\n                {\n                    \"id\": 2,\n                    \"value\": \"यह सीमेंट हर प्रकार के निर्माण कार्यों में उपयोगी है. इस सीमेंट को सामान्य कार्य के लिए, उच्च ताकत कि कंक्रीट बनाने में, चुनाई, प्लास्टर तथा ढांचा बनाने जैसे कार्यों में उपयोगी है.\"\n                }\n            ]\n        }\n    ],\n    \"error\": {}\n}"
+				}
+			]
+		},
+		{
+			"name": "Get all articles by category and type",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base-url}}/api/v1/articles?lang=en&type=our_service&category=cement",
+					"host": [
+						"{{base-url}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"articles"
+					],
+					"query": [
+						{
+							"key": "lang",
+							"value": "en"
+						},
+						{
+							"key": "type",
+							"value": "our_service"
+						},
+						{
+							"key": "category",
+							"value": "cement"
+						}
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Get all articles by category and type",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base-url}}/api/v1/articles?lang=en&type=our_services&category=cement",
+							"host": [
+								"{{base-url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"articles"
+							],
+							"query": [
+								{
+									"key": "lang",
+									"value": "en"
+								},
+								{
+									"key": "type",
+									"value": "our_services"
+								},
+								{
+									"key": "category",
+									"value": "cement"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Methods",
+							"value": "GET,PUT,POST,DELETE,OPTIONS"
+						},
+						{
+							"key": "Access-Control-Allow-Headers",
+							"value": "Origin, Content-Type, Authorization, Accept,Content-Length, X-Requested-With, X-PINGOTHER"
+						},
+						{
+							"key": "Access-Control-Expose-Headers",
+							"value": "X-Total-Count"
+						},
+						{
+							"key": "X-Total-Count",
+							"value": "5000"
+						},
+						{
+							"key": "X-Content-Type-Options",
+							"value": "nosniff"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "1403"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"57b-+Du9uvq8N3x4QIltOT9nRXhigJA\""
+						},
+						{
+							"key": "Date",
+							"value": "Fri, 13 Nov 2020 10:31:21 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"status\": 200,\n    \"data\": [\n        {\n            \"id\": 12,\n            \"category\": \"cement\",\n            \"type\": \"our_service\",\n            \"media_type\": \"image\",\n            \"media_url\": \"http://img1\",\n            \"title\": \"Individual Home Builders\",\n            \"short_description\": null,\n            \"description\": \"The aim of the company is to enlighten IHBs on the complexities involved in construction, effective planning to achieve economy and finally constructing a strong and durable house with superior quality materials without any time overrun. Services to home builders are enumerated as below :-\",\n            \"lang\": \"en\",\n            \"slug\": \"5aa7-b64\",\n            \"created\": \"2020-11-13T09:41:30.000Z\",\n            \"updated\": \"2020-11-13T10:31:16.000Z\",\n            \"sections\": [\n                {\n                    \"id\": 6,\n                    \"value\": {\n                        \"type\": null,\n                        \"article_id\": 12,\n                        \"media_type\": \"video\",\n                        \"media_url\": null,\n                        \"sub_title\": null,\n                        \"sub_description\": null,\n                        \"description\": \"The aim of the company is to enlighten IHBs on the complexities involved in construction, effective planning to achieve economy and finally constructing a strong and durable house with superior quality materials without any time overrun. Services to home builders are enumerated as below :-\",\n                        \"lang\": \"en\",\n                        \"slug\": \"a1ee-48a\",\n                        \"created\": \"2020-11-13T09:41:30.000Z\",\n                        \"updated\": \"2020-11-13T10:31:16.000Z\",\n                        \"features\": [\n                            {\n                                \"id\": 1,\n                                \"value\": \"Construction tips\"\n                            },\n                            {\n                                \"id\": 2,\n                                \"value\": \"Planning\"\n                            },\n                            {\n                                \"id\": 3,\n                                \"value\": \"Cost Effective packages- We also provide technical support services in the form of various lucrative packages, some of them have been listed down below:-\"\n                            }\n                        ]\n                    }\n                }\n            ]\n        }\n    ],\n    \"error\": {}\n}"
+				}
+			]
+		},
+		{
+			"name": "Get one article",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base-url}}/api/v1/articles/{{slug}}?lang=en&type=our_services",
+					"host": [
+						"{{base-url}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"articles",
+						"{{slug}}"
+					],
+					"query": [
+						{
+							"key": "lang",
+							"value": "en"
+						},
+						{
+							"key": "type",
+							"value": "our_services"
+						}
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Get one article",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base-url}}/api/v1/articles/{{slug}}?lang=en&type=our_service",
+							"host": [
+								"{{base-url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"articles",
+								"{{slug}}"
+							],
+							"query": [
+								{
+									"key": "lang",
+									"value": "en"
+								},
+								{
+									"key": "type",
+									"value": "our_service"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Methods",
+							"value": "GET,PUT,POST,DELETE,OPTIONS"
+						},
+						{
+							"key": "Access-Control-Allow-Headers",
+							"value": "Origin, Content-Type, Authorization, Accept,Content-Length, X-Requested-With, X-PINGOTHER"
+						},
+						{
+							"key": "Access-Control-Expose-Headers",
+							"value": "X-Total-Count"
+						},
+						{
+							"key": "X-Total-Count",
+							"value": "5000"
+						},
+						{
+							"key": "X-Content-Type-Options",
+							"value": "nosniff"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "2510"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"9ce-4P2ztlAL5+iMWGVmzNxtrDId+8w\""
+						},
+						{
+							"key": "Date",
+							"value": "Fri, 13 Nov 2020 13:26:32 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"status\": 200,\n    \"data\": {\n        \"id\": 15,\n        \"category\": \"cement\",\n        \"type\": \"our_service\",\n        \"media_type\": \"image\",\n        \"media_url\": \"https://prism-johnson-cement-media-assets.s3.ap-south-1.amazonaws.com/our-services-assets/individual_home_builders.png\",\n        \"title\": \"Solution for Individual Home Builders\",\n        \"short_description\": null,\n        \"description\": \"The aim of the company is to enlighten IHBs on the complexities involved in construction, effective planning to achieve economy and finally constructing\",\n        \"lang\": \"en\",\n        \"slug\": \"ebf6-adb\",\n        \"created\": \"2020-11-13T12:22:45.000Z\",\n        \"updated\": \"2020-11-13T12:23:21.000Z\",\n        \"sections\": [\n            {\n                \"id\": 13,\n                \"value\": {\n                    \"type\": null,\n                    \"article_id\": 15,\n                    \"media_type\": \"image\",\n                    \"media_url\": null,\n                    \"sub_title\": null,\n                    \"sub_description\": null,\n                    \"description\": \"Sabse surakshit ghar can’t be made only with best cement. It also requires the right mentoring, accessories and sand. We take care of all these and provide you a full building solution, rather than just cement. We provide you these for free along with our cement. We provide the following services in this package\",\n                    \"lang\": \"en\",\n                    \"slug\": \"fd0c-87e\",\n                    \"created\": \"2020-11-13T12:22:45.000Z\",\n                    \"updated\": \"2020-11-13T12:23:21.000Z\",\n                    \"features\": [\n                        {\n                            \"id\": 1,\n                            \"value\": \"Accessories provided- Cover blocks and shuttering tape\"\n                        },\n                        {\n                            \"id\": 2,\n                            \"value\": \"Site Monitoring include- Slab Monitoring, Mason training and IHB Training\"\n                        },\n                        {\n                            \"id\": 3,\n                            \"value\": \"Sand Quality Test\"\n                        }\n                    ]\n                }\n            },\n            {\n                \"id\": 14,\n                \"value\": {\n                    \"type\": null,\n                    \"article_id\": 15,\n                    \"media_type\": \"image\",\n                    \"media_url\": null,\n                    \"sub_title\": null,\n                    \"sub_description\": null,\n                    \"description\": \"We will always have your back, may it be in terms of training masons, guiding you or on-site slab monitoring. Along with this we will also help you ensure the best quality of sand to help you make the best homes. Services provided are in the form of following\",\n                    \"lang\": \"en\",\n                    \"slug\": \"772b-a93\",\n                    \"created\": \"2020-11-13T12:22:45.000Z\",\n                    \"updated\": \"2020-11-13T12:23:21.000Z\",\n                    \"features\": [\n                        {\n                            \"id\": 4,\n                            \"value\": \"Site Monitoring\"\n                        },\n                        {\n                            \"id\": 5,\n                            \"value\": \"Sand Quality Test\"\n                        }\n                    ]\n                }\n            },\n            {\n                \"id\": 15,\n                \"value\": {\n                    \"type\": null,\n                    \"article_id\": 15,\n                    \"media_type\": \"image\",\n                    \"media_url\": null,\n                    \"sub_title\": null,\n                    \"sub_description\": null,\n                    \"description\": \"We will always be with you and help you check the quality of your sand and aggregates and tell you about good construction practices as per the requirements of your construction stage. Services offered are as follows\",\n                    \"lang\": \"en\",\n                    \"slug\": \"a1cd-62c\",\n                    \"created\": \"2020-11-13T12:22:45.000Z\",\n                    \"updated\": \"2020-11-13T12:23:21.000Z\",\n                    \"features\": [\n                        {\n                            \"id\": 6,\n                            \"value\": \"Site Visits\"\n                        },\n                        {\n                            \"id\": 7,\n                            \"value\": \"Sand Quality Test\"\n                        }\n                    ]\n                }\n            }\n        ]\n    },\n    \"error\": {}\n}"
+				}
+			]
+		},
+		{
+			"name": "Delete article",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{base-url}}/api/v1/articles/89?lang=en",
+					"host": [
+						"{{base-url}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"articles",
+						"89"
+					],
+					"query": [
 						{
 							"key": "lang",
 							"value": "en"
