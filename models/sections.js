@@ -57,6 +57,10 @@ module.exports = function(sequelize, DataTypes) {
     updated: {
       type: DataTypes.DATE,
       allowNull: true
+    },
+    features: {
+      type: DataTypes.JSON,
+      allowNull: true
     }
   }, {
     sequelize,
