@@ -261,6 +261,7 @@ exports.updateQuery = function(req, res) {
         return;
     }
 
+
     Query.update({
         type : req.body.type,
         name : req.body.name,
@@ -333,7 +334,20 @@ exports.deleteQuery = function(req, res) {
         return;
     }
 
+
+    if (!req.query.lang) {
+        res.status(400).jsonp({
+            status: 400,
+            data: {},
+            error: {
+                msg: message.invalid_get_request
+            }
+        });
+        return;
+    }
+
     /* Delete queries record*/
+
     Query.destroy({
         where: {
             id: queries_id,

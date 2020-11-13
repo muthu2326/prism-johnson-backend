@@ -372,10 +372,22 @@ exports.deleteArticle = function(req, res) {
         return;
     }
 
+    if (!req.query.lang) {
+        res.status(400).jsonp({
+            status: 400,
+            data: {},
+            error: {
+                msg: message.invalid_get_request
+            }
+        });
+        return;
+    }
+
     /* Delete articles record*/
     Article.destroy({
         where: {
-            id: articles_id
+            id: articles_id,
+            lang: req.query.lang 
         }
     }).then(function(article) {
         console.log(article);
