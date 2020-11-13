@@ -2,6 +2,11 @@
 
 var Sequelize = require('sequelize');
 var db = require('../db/connection/db');
+var message = require('../utils/message.json');
+var slugify = require('slugify')
+const {
+    v4: uuidv4
+} = require('uuid');
 
 /* var EntityModel = require('../models/init-models'); 
  * var Entity = EntityModel.initModels(db.getDbConnection())
@@ -18,17 +23,14 @@ var Content = ContentModel.initModels(db).content
 exports.createContent = function (req, res) {
     // Log entry.
     console.log('Content Controller: entering createContent ');
+    console.log('req body :: ', req.body)
+    console.log('req params :: ', req.params)
+    console.log('req query :: ', req.query)
+    let slug = slugify(`${uuidv4().slice(4, 12)}`)
+    let lang = req.query.lang ? req.query.lang : 'en'
 
-    // var v = new lib.Validator [{"id:number");
-
-    // if (!v.run(req.body)) {
-    //     return res.status(400).send({
-    //         error: v.errors
-    //     });
-    // }
     let NOW = new Date()
     Content.create({
-        id: req.body.id,
         title: req.body.title,
         type: req.body.type,
         media_type: req.body.media_type,
@@ -37,18 +39,31 @@ exports.createContent = function (req, res) {
         contact_address: req.body.contact_address,
         contact_email: req.body.contact_email,
         contact_toll_free_number: req.body.contact_toll_free_number,
-        lang: req.body.lang,
-        slug: req.body.slug,
+        lang: lang,
+        slug: slug,
         created: NOW,
         updated: NOW,
         created_by: req.body.created_by,
         updated_by: req.body.updated_by
     }).then(function (result) {
         console.log('created content', result);
-        res.jsonp(result);
+        res.jsonp({
+            status: 200,
+            data: result,
+            error: {}
+        });
     }).catch(function (err) {
         console.log('Could not create content record');
         console.log('err: %j', err);
+        res.status(500).jsonp({
+            status: 500,
+            data: {},
+            error: {
+                msg: message.something_went_wrong,
+                err: err
+            }
+        });
+        return;
     });
 
 } /*End of createContent*/
@@ -56,37 +71,81 @@ exports.createContent = function (req, res) {
 
 /*Get a single content */
 exports.getContent = function (req, res) {
-    var content_id = req.params.content_id;
+    var slug = req.params.slug;
     console.log('Content Controller: entering getContent ');
+    console.log('req params :: ', req.params)
+    console.log('req query :: ', req.query)
     /*Validate for a null id*/
-    if (!content_id) {
-        res.status(400).send("content ID is null");
+    if (!slug) {
+        res.status(400).jsonp({
+            status: 400,
+            data: {},
+            error: {
+                msg: message.invalid_get_request
+            }
+        });
         return;
     }
     /* Query DB using sequelize api for a single content*/
     Content.findOne({
         where: {
-            id: content_id
+            slug: slug,
+            lang: lang
         }
     }).then(function (content) {
         console.log(content);
-        res.jsonp(content);
+        res.status(200).jsonp({
+            status: 200,
+            data: content,
+            error: {}
+        });
+        return
     }).catch(function (err) {
         console.log('could not fetch content');
         console.log('err: %j', err);
+        res.status(500).jsonp({
+            status: 500,
+            data: {},
+            error: {
+                msg: message.something_went_wrong,
+                err: err
+            }
+        });
+        return;
     });
 } /*End of getContent*/
 
 /*Get all Contents */
 exports.getAllContents = function (req, res) {
     console.log('Content Controller: entering getAllContents');
+    console.log('req params :: ', req.params)
+    console.log('req query :: ', req.query)
+
+    let lang = req.query.lang ? req.query.lang : 'en'
     /* Query DB using sequelize api for all Contents*/
-    Content.findAll().then(function (contents) {
+    Content.findAll({
+        where: {
+            lang: lang
+        }
+    }).then(function (contents) {
         /*Return an array of Contents */
-        res.jsonp(contents);
+        res.status(200).jsonp({
+            status: 200,
+            data: contents,
+            error: {}
+        });
     }).catch(function (err) {
         console.log('could not fetch all contents');
-        console.log('err: %j', err);
+        console.log('err:', err);
+        res.status(500).jsonp({
+            status: 500,
+            data: {},
+            error: {
+                msg: message.something_went_wrong,
+                err: err
+            }
+        });
+        return;
     });
 }; /*End of getAllContents*/
 
