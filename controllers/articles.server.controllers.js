@@ -55,14 +55,14 @@ exports.createArticle = function(req, res) {
             let sections = req.body.sections.map((item) => {
                 slug = slugify(`${uuidv4().slice(4, 12)}`)
                 return {
-                    type: item.type,
+                    type: item.value.type,
                     article_id: article_id,
-                    media_type: item.media_type,
-                    sub_title: item.title,
-                    description: item.description,
-                    features: item.features,
-                    lang: item.lang ? item.lang: 'en',
-                    slug: item.slug? item.slug : slug,
+                    media_type: item.value.media_type,
+                    sub_title: item.value.title,
+                    description: item.value.description,
+                    features: item.value.features,
+                    lang: item.value.lang ? item.value.lang: 'en',
+                    slug: item.value.slug? item.value.slug : slug,
                     created: NOW,
                     updated: NOW
                 }
@@ -81,6 +81,7 @@ exports.createArticle = function(req, res) {
                 return;
             })
         }else{
+            result.sections = []
             res.jsonp({
                 status: 200,
                 data: [],
@@ -253,20 +254,35 @@ exports.getAllArticles = function(req, res) {
 exports.updateArticle = function(req, res) {
     // Log entry.
     console.log('Article Controller: entering updateArticle ');
+    console.log('req body :: ', req.body)
+    console.log('req params :: ', req.params)
+    console.log('req query :: ', req.query)
+
+    let NOW = new Date()
 
     var articles_id = req.params.articles_id;
+
+    if (!req.params.articles_id) {
+        res.status(400).jsonp({
+            status: 400,
+            data: {},
+            error: {
+                msg: message.invalid_get_request
+            }
+        });
+        return;
+    }
+
     Article.update({
-        id : req.body.id,
-				type : req.body.type,
-				media_type : req.body.media_type,
-				media_url : req.body.media_url,
-				title : req.body.title,
-				short_description : req.body.short_description,
-				description : req.body.description,
-				lang : req.body.lang,
-				slug : req.body.slug,
-				created : req.body.created,
-				updated : req.body.updated
+        type : req.body.type,
+        category: req.body.category,
+        media_type : req.body.media_type,
+        media_url : req.body.media_url,
+        title : req.body.title,
+        short_description : req.body.short_description,
+        description : req.body.description,
+        lang : req.body.lang,
+        updated : NOW
     }, {
         where: {
             /* articles table primary key */
@@ -274,10 +290,66 @@ exports.updateArticle = function(req, res) {
         }
     }).then(function(result) {
         console.log('updated articles', result);
-        res.send("articles updated successfully");
+        if(req.body.sections.length > 0){
+            let sections = req.body.sections.map((item) => {
+                return {
+                    id: item.id,
+                    type: item.value.type,
+                    article_id: item.value.article_id,
+                    media_type: item.value.media_type,
+                    sub_title: item.value.title,
+                    description: item.value.description,
+                    features: item.value.features,
+                    lang: item.value.lang,
+                    updated: NOW
+                }
+            })
+            console.log('sections', sections.length)
+            Section.bulkCreate(sections, {updateOnDuplicate: ["name"]})
+            .then(function(data){
+                result.dataValues.sections = data
+                res.jsonp({
+                    status: 200,
+                    data: {
+                        id: `${message.article_updated} ${result.id}`,
+                        msg: 'success'
+                    },
+                    error: {}
+                });
+                return;
+            })
+            .catch(function(err) {
+                console.log('could not update sections');
+                console.log('err: %j', err);
+                res.status(500).jsonp({
+                    status: 500,
+                    data: {},
+                    error: {
+                        msg: message.something_went_wrong
+                    }
+                });
+                return;
+            });
+        }else{
+            result.sections = []
+            res.jsonp({
+                status: 200,
+                data: result,
+                error: {}
+            });
+            return;
+        }
     }).catch(function(err) {
         console.log('Could not update articles record');
         console.log('err: %j', err);
+        res.status(500).jsonp({
+            status: 500,
+            data: {},
+            error: {
+                msg: message.something_went_wrong
+            }
+        });
+        return;
     });
 
 } /*End of updateArticle*/
@@ -287,11 +359,19 @@ exports.deleteArticle = function(req, res) {
     console.log('Article Controller: entering deleteArticle ');
 
     var articles_id = req.params.articles_id;
-    /*Validate for a null articles_id*/
-    if (!articles_id) {
-        res.status(400).send("articles ID is null");
+
+     /*Validate for a null articles_id*/
+    if (!req.params.articles_id) {
+        res.status(400).jsonp({
+            status: 400,
+            data: {},
+            error: {
+                msg: message.invalid_get_request
+            }
+        });
         return;
     }
+
     /* Delete articles record*/
     Article.destroy({
         where: {
@@ -299,11 +379,25 @@ exports.deleteArticle = function(req, res) {
         }
     }).then(function(article) {
         console.log(article);
-        res.jsonp(article);
+        res.jsonp({
+            status: 200,
+            data: {
+                msg: `${message.article_deleted} ${req.params.product_id}`
+            },
+            error: {}
+        });
+        return;
     }).catch(function(err) {
         console.log('could not delete article');
         console.log('err: %j', err);
-
+        res.status(500).jsonp({
+            status: 500,
+            data: {},
+            error: {
+                msg: message.something_went_wrong
+            }
+        });
+        return;
     });
 } /*End of deleteArticle*/
 

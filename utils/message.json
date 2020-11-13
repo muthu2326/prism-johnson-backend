@@ -26,7 +26,8 @@
     "updated_order": "Successfully updated order",
     "updated_product": "Successfully updated product",
     "product_deleted": "Successfully removed product",
-    "product_not_found": "Product not found"
+    "product_not_found": "Product not found",
 
-
+    "article_updated": "Successfully updated article",
+    "article_deleted": "Successfully removed product"
 }
