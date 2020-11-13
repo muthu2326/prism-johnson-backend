@@ -166,7 +166,13 @@ exports.getArticle = function(req, res) {
         }else{
             res.jsonp({
                 status: 200,
-                data: {},
+                data: {
+                    title: "",
+                    description: "",
+                    media_type: "image",
+                    media_url: null,
+                    sections: [],
+                },
                 error: {}
             });
         }

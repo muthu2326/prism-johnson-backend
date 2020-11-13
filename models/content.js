@@ -17,19 +17,15 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.STRING(200),
       allowNull: true
     },
-    media_type: {
-      type: DataTypes.STRING(200),
-      allowNull: true
-    },
-    media_url: {
-      type: DataTypes.TEXT,
-      allowNull: true
-    },
     griha_nirman_description: {
       type: DataTypes.TEXT,
       allowNull: true
     },
     contact_address: {
+      type: DataTypes.TEXT,
+      allowNull: true
+    },
+    grih_nirma_img_url: {
       type: DataTypes.TEXT,
       allowNull: true
     },
@@ -39,6 +35,14 @@ module.exports = function(sequelize, DataTypes) {
     },
     contact_toll_free_number: {
       type: DataTypes.STRING(200),
+      allowNull: true
+    },
+    intro_description: {
+      type: DataTypes.JSON,
+      allowNull: true
+    },
+    banner_image_urls: {
+      type: DataTypes.JSON,
       allowNull: true
     },
     lang: {
@@ -63,6 +67,10 @@ module.exports = function(sequelize, DataTypes) {
     },
     updated_by: {
       type: DataTypes.INTEGER(11),
+      allowNull: true
+    },
+    order_how_it_works: {
+      type: DataTypes.JSON,
       allowNull: true
     }
   }, {
