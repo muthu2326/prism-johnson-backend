@@ -148,19 +148,28 @@ exports.getArticle = function(req, res) {
         include: Section
     }).then(function(article) {
         console.log(article);
-        let obj = {}
-        article.dataValues.sections.forEach((section, j) => {
-            obj.id = section.dataValues.id
-            delete section.dataValues.id
-            obj.value = section.dataValues
-            delete article.dataValues.sections[j].dataValues
-            article.dataValues.sections[j].dataValues = obj
-        })
-        res.jsonp({
-            status: 200,
-            data: article,
-            error: {}
-        });
+        if(article != null){
+            console.log('article.dataValues.sections', article.dataValues.sections.length)
+            article.dataValues.sections.forEach((section, j) => {
+                let obj = {}
+                obj.id = section.dataValues.id
+                delete section.dataValues.id
+                obj.value = section.dataValues
+                delete article.dataValues.sections[j].dataValues
+                article.dataValues.sections[j].dataValues = obj
+            })
+            res.jsonp({
+                status: 200,
+                data: article,
+                error: {}
+            });
+        }else{
+            res.jsonp({
+                status: 200,
+                data: article,
+                error: {}
+            });
+        }
     }).catch(function(err) {
         console.log('could not fetch article');
         console.log('err:', err);
@@ -221,8 +230,8 @@ exports.getAllArticles = function(req, res) {
         articles.forEach((item) => {
             console.log('item value for section\n')
             console.log(item.dataValues.sections[0].dataValues)
-            let obj = {}
             item.dataValues.sections.forEach((section, j) => {
+                let obj = {}
                 obj.id = section.dataValues.id
                 delete section.dataValues.id
                 obj.value = section.dataValues
@@ -406,7 +415,8 @@ exports.deleteArticle = function(req, res) {
             status: 500,
             data: {},
             error: {
-                msg: message.something_went_wrong
+                msg: message.something_went_wrong,
+                err
             }
         });
         return;
