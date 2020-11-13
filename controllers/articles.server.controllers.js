@@ -305,9 +305,9 @@ exports.updateArticle = function(req, res) {
                 }
             })
             console.log('sections', sections.length)
-            Section.bulkCreate(sections, {updateOnDuplicate: ["name"]})
+            Section.bulkCreate(sections, {updateOnDuplicate: ["type", "media_type", "sub_title", "description", "features", "lang", "updated"]})
             .then(function(data){
-                result.dataValues.sections = data
+                console.log(data.length)
                 res.jsonp({
                     status: 200,
                     data: {
@@ -320,7 +320,7 @@ exports.updateArticle = function(req, res) {
             })
             .catch(function(err) {
                 console.log('could not update sections');
-                console.log('err: %j', err);
+                console.log('err:', err);
                 res.status(500).jsonp({
                     status: 500,
                     data: {},
@@ -341,7 +341,7 @@ exports.updateArticle = function(req, res) {
         }
     }).catch(function(err) {
         console.log('Could not update articles record');
-        console.log('err: %j', err);
+        console.log('err:', err);
         res.status(500).jsonp({
             status: 500,
             data: {},
