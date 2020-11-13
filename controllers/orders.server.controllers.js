@@ -178,6 +178,7 @@ exports.getAllOrders = function (req, res) {
 
     Order.findAll({
         where: where_condition,
+        order: [['created', 'DESC']],
         include: Dealer
     }).then(function (orders) {
         /*Return an array of Orders */
