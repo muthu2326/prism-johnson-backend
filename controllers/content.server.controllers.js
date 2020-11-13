@@ -247,8 +247,6 @@ exports.updateContent = function (req, res) {
         return;
     }
 
-    let lang = req.query.lang ? req.query.lang : 'en'
-
 
     let NOW = new Date()
     Content.update({
