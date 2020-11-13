@@ -58,6 +58,7 @@ exports.createArticle = function(req, res) {
                     type: item.value.type,
                     article_id: article_id,
                     media_type: item.value.media_type,
+                    media_url: item.value.media_url,
                     sub_title: item.value.title,
                     description: item.value.description,
                     features: item.value.features,
@@ -396,7 +397,7 @@ exports.deleteArticle = function(req, res) {
 
     /* Delete articles record*/
 
-    Section
+    Section.findAll()
     Article.destroy({
         where: {
             id: articles_id,
