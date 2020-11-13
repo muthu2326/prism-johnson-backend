@@ -122,25 +122,47 @@ exports.getArticle = function(req, res) {
         });
         return;
     }
+
+    if (!req.query.type) {
+        res.status(400).jsonp({
+            status: 400,
+            data: {},
+            error: {
+                msg: message.invalid_get_request
+            }
+        });
+        return;
+    }
+
     /* Query DB using sequelize api for a single articles*/
     let lang = req.query.lang ? req.query.lang : 'en'
-
+    let type = req.query.type   
+    
     Article.findOne({
         where: {
-            id: slug,
+            slug: slug,
+            type: type,
             lang: lang
         },
         include: Section
-    }).then(function(articles) {
-        console.log(articles);
+    }).then(function(article) {
+        console.log(article);
+        let obj = {}
+        article.dataValues.sections.forEach((section, j) => {
+            obj.id = section.dataValues.id
+            delete section.dataValues.id
+            obj.value = section.dataValues
+            delete article.dataValues.sections[j].dataValues
+            article.dataValues.sections[j].dataValues = obj
+        })
         res.jsonp({
             status: 200,
-            data: articles,
+            data: article,
             error: {}
         });
     }).catch(function(err) {
-        console.log('could not fetch articles');
-        console.log('err: %j', err);
+        console.log('could not fetch article');
+        console.log('err:', err);
         res.status(500).jsonp({
             status: 500,
             data: {},
@@ -201,6 +223,7 @@ exports.getAllArticles = function(req, res) {
             let obj = {}
             item.dataValues.sections.forEach((section, j) => {
                 obj.id = section.dataValues.id
+                delete section.dataValues.id
                 obj.value = section.dataValues
                 delete item.dataValues.sections[j].dataValues
                 item.dataValues.sections[j].dataValues = obj
