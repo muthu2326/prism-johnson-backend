@@ -355,7 +355,8 @@ exports.updateArticle = function(req, res) {
             status: 500,
             data: {},
             error: {
-                msg: message.something_went_wrong
+                msg: message.something_went_wrong,
+                err: err
             }
         });
         return;
@@ -386,13 +387,16 @@ exports.deleteArticle = function(req, res) {
             status: 400,
             data: {},
             error: {
-                msg: message.invalid_get_request
+                msg: message.invalid_get_request,
+                err: err
             }
         });
         return;
     }
 
     /* Delete articles record*/
+
+    Section
     Article.destroy({
         where: {
             id: articles_id,
