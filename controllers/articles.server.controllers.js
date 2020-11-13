@@ -311,7 +311,7 @@ exports.updateArticle = function(req, res) {
                 res.jsonp({
                     status: 200,
                     data: {
-                        id: `${message.article_updated} ${result.id}`,
+                        id: `${message.article_updated} ${articles_id}`,
                         msg: 'success'
                     },
                     error: {}
