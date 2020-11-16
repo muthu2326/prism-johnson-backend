@@ -2,60 +2,47 @@
 
 const Sequelize = require('sequelize');
 module.exports = function(sequelize, DataTypes) {
-  return sequelize.define('product_mrp_list', {
+  return sequelize.define('testimonial', {
     id: {
       autoIncrement: true,
       type: DataTypes.INTEGER(11),
       allowNull: false,
       primaryKey: true
     },
-    product_id: {
-      type: DataTypes.INTEGER(11),
-      allowNull: true,
-      references: {
-        model: 'product',
-        key: 'id'
-      },
-      unique: "fk_product_mrp_list_product_id"
-    },
-    productcode: {
-      type: DataTypes.STRING(100),
+    name: {
+      type: DataTypes.TEXT,
       allowNull: true
     },
-    branch: {
-      type: DataTypes.STRING(200),
+    media_url: {
+      type: DataTypes.TEXT,
       allowNull: true
     },
-    region: {
-      type: DataTypes.STRING(200),
-      allowNull: true
-    },
-    state: {
-      type: DataTypes.STRING(200),
-      allowNull: true
-    },
-    territory: {
+    media_type: {
       type: DataTypes.STRING(255),
       allowNull: true
     },
-    price: {
-      type: DataTypes.FLOAT,
+    profession: {
+      type: DataTypes.TEXT,
       allowNull: true
     },
-    pincode: {
+    testimonial: {
+      type: DataTypes.TEXT,
+      allowNull: true
+    },
+    email: {
       type: DataTypes.STRING(255),
       allowNull: true
     },
-    city: {
-      type: DataTypes.STRING(200),
+    slug: {
+      type: DataTypes.STRING(45),
       allowNull: true
     },
     lang: {
       type: DataTypes.STRING(100),
       allowNull: true
     },
-    slug: {
-      type: DataTypes.STRING(200),
+    mobile: {
+      type: DataTypes.STRING(255),
       allowNull: true
     },
     created: {
@@ -70,7 +57,7 @@ module.exports = function(sequelize, DataTypes) {
     }
   }, {
     sequelize,
-    tableName: 'product_mrp_list',
+    tableName: 'testimonial',
     timestamps: false
     });
 };

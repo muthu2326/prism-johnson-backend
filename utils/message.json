@@ -32,5 +32,9 @@
     "article_deleted": "Successfully removed product",
 
     "content_updated": "Successfully updated content",
-    "content_deleted": "Successfully removed content"
+    "content_deleted": "Successfully removed content",
+
+    "testimonial_updated": "Successfully updated testimonial",
+    "testimonial_deleted": "Successfully removed testimonial",
+    "testimonial_not_found": "Testimonial not found"
 }

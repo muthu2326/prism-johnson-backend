@@ -13,6 +13,7 @@ var _product = require("./product");
 var _state = require("./state");
 var _user = require("./user");
 var _sub_description = require("./sub_description");
+var _testimonial = require("./testimonial");
 
 function initModels(sequelize) {
   var articles = _articles(sequelize, DataTypes);
@@ -29,6 +30,7 @@ function initModels(sequelize) {
   var state = _state(sequelize, DataTypes);
   var user = _user(sequelize, DataTypes);
   var sub_description = _sub_description(sequelize, DataTypes);
+  var testimonial = _testimonial(sequelize, DataTypes);
 
   return {
     articles,
@@ -45,6 +47,7 @@ function initModels(sequelize) {
     state,
     user,
     sub_description,
+    testimonial,
   };
 }
 module.exports = { initModels };
