@@ -229,13 +229,18 @@ exports.getAllArticles = function(req, res) {
             category: category,
             lang: lang
         },
-        include: Section,
+        include: {
+            Model: Section,
+            where: {
+                lang: lang
+            }
+        }
     }).then(function(articles) {
         /*Return an array of Articles */
         console.log('articles', articles.length)
         if(articles.length > 0){
             articles.forEach((item) => {
-                console.log('item value for section\n', item.dataValues.sections[0])
+                // console.log('item value for section\n', item.dataValues.sections[0])
                 //console.log(item.dataValues.sections[0].dataValues)
                 item.dataValues.sections.forEach((section, j) => {
                     if(section.dataValues.lang == lang){
