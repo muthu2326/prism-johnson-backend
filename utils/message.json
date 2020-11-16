@@ -29,5 +29,8 @@
     "product_not_found": "Product not found",
 
     "article_updated": "Successfully updated article",
-    "article_deleted": "Successfully removed product"
+    "article_deleted": "Successfully removed product",
+
+    "content_updated": "Successfully updated content",
+    "content_deleted": "Successfully removed content"
 }

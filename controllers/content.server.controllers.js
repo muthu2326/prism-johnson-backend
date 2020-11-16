@@ -273,13 +273,13 @@ exports.updateContent = function (req, res) {
         console.log('updated content', result);
         res.status(200).jsonp({
             status: 200,
-            data: `Successfully updated content ${content_id}`,
+            data: `${message.content_updated} ${content_id}`,
             error: {}
         });
         return;
     }).catch(function (err) {
         console.log('Could not update content record');
-        console.log('err: %j', err);
+        console.log('err:', err);
         res.status(500).jsonp({
             status: 500,
             data: {},
@@ -334,13 +334,15 @@ exports.deleteContent = function (req, res) {
         console.log(content);
         res.status(200).jsonp({
             status: 200,
-            data: result,
+            data: {
+                msg: `${message.content_deleted} ${req.params.content_id}`
+            },
             error: {}
         });
         return;
     }).catch(function (err) {
         console.log('could not delete content');
-        console.log('err: %j', err);
+        console.log('err:', err);
         res.status(500).jsonp({
             status: 500,
             data: {},
