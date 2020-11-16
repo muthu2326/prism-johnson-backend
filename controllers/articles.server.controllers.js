@@ -145,7 +145,12 @@ exports.getArticle = function(req, res) {
             type: type,
             lang: lang
         },
-        include: Section
+        include: [{
+            model: Section,
+            where: {
+                lang: lang
+            }
+        }]
     }).then(function(article) {
         console.log(article);
         if(article != null){
