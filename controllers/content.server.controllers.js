@@ -30,7 +30,7 @@ exports.createContent = function (req, res) {
 
     let NOW = new Date()
     let slug = slugify(`${uuidv4().slice(4, 12)}`)
-    let lang = req.query.lang ? req.query.lang : 'en'
+    let lang = req.body.lang ? req.body.lang : 'en'
 
     Content.create({
         title: req.body.title,
