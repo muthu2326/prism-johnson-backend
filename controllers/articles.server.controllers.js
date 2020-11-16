@@ -229,12 +229,12 @@ exports.getAllArticles = function(req, res) {
             category: category,
             lang: lang
         },
-        include: {
-            Model: Section,
+        include: [{
+            model: Section,
             where: {
                 lang: lang
             }
-        }
+        }]
     }).then(function(articles) {
         /*Return an array of Articles */
         console.log('articles', articles.length)
@@ -243,14 +243,12 @@ exports.getAllArticles = function(req, res) {
                 // console.log('item value for section\n', item.dataValues.sections[0])
                 //console.log(item.dataValues.sections[0].dataValues)
                 item.dataValues.sections.forEach((section, j) => {
-                    if(section.dataValues.lang == lang){
-                        let obj = {}
-                        obj.id = section.dataValues.id
-                        delete section.dataValues.id
-                        obj.value = section.dataValues
-                        delete item.dataValues.sections[j].dataValues
-                        item.dataValues.sections[j].dataValues = obj
-                    }   
+                    let obj = {}
+                    obj.id = section.dataValues.id
+                    delete section.dataValues.id
+                    obj.value = section.dataValues
+                    delete item.dataValues.sections[j].dataValues
+                    item.dataValues.sections[j].dataValues = obj
                 })
             })
             res.jsonp({
