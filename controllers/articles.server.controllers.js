@@ -235,15 +235,17 @@ exports.getAllArticles = function(req, res) {
         console.log('articles', articles.length)
         if(articles.length > 0){
             articles.forEach((item) => {
-                console.log('item value for section\n')
-                console.log(item.dataValues.sections[0].dataValues)
+                console.log('item value for section\n', item.dataValues.sections[0])
+                //console.log(item.dataValues.sections[0].dataValues)
                 item.dataValues.sections.forEach((section, j) => {
-                    let obj = {}
-                    obj.id = section.dataValues.id
-                    delete section.dataValues.id
-                    obj.value = section.dataValues
-                    delete item.dataValues.sections[j].dataValues
-                    item.dataValues.sections[j].dataValues = obj
+                    if(section.dataValues.lang == lang){
+                        let obj = {}
+                        obj.id = section.dataValues.id
+                        delete section.dataValues.id
+                        obj.value = section.dataValues
+                        delete item.dataValues.sections[j].dataValues
+                        item.dataValues.sections[j].dataValues = obj
+                    }   
                 })
             })
             res.jsonp({
