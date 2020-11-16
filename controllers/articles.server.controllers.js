@@ -265,7 +265,8 @@ exports.getAllArticles = function(req, res) {
             status: 500,
             data: {},
             error: {
-                msg: message.something_went_wrong
+                msg: message.something_went_wrong,
+                err: err
             }
         });
         return;
