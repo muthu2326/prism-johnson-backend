@@ -435,12 +435,10 @@ exports.updateUser = function (req, res) {
         })
     } else {
         let NOW = new Date()
-        let password = bcrypt.hashSync(req.body.password, saltRounds);
         User.update({
             name: req.body.name,
             address: req.body.address,
             mobile: req.body.mobile,
-            password: password,
             pincode: req.body.pincode,
             stage_of_construction: req.body.stage_of_construction,
             role: req.body.role,

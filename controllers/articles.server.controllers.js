@@ -421,36 +421,102 @@ exports.deleteArticle = function(req, res) {
     }
 
     /* Delete articles record*/
-
-    Section.findAll()
-    Article.destroy({
+    let sections_ids = []
+    Section.findAll({
         where: {
-            id: articles_id,
-            lang: req.query.lang 
+            article_id: articles_id
         }
-    }).then(function(article) {
-        console.log(article);
-        res.jsonp({
-            status: 200,
-            data: {
-                msg: `${message.article_deleted} ${req.params.product_id}`
-            },
-            error: {}
-        });
-        return;
-    }).catch(function(err) {
-        console.log('could not delete article');
-        console.log('err: %j', err);
+    })
+    .then((sections) => {
+        if(sections.length > 0){
+            sections.forEach((item) => {
+                if(item.lang == req.query.lang){
+                    sections_ids.push(item.id)
+                }
+            })
+            console.log('sections length', sections_ids)
+            Section.destroy({
+                where: {
+                    id: sections_ids
+                }
+            }).then((data) => {
+                console.log('deleted sections', data)
+                Article.destroy({
+                    where: {
+                        id: articles_id,
+                        lang: req.query.lang 
+                    }
+                }).then(function(article) {
+                    console.log('deleted article response', article);
+                    res.jsonp({
+                        status: 200,
+                        data: {
+                            msg: `${message.article_deleted} ${req.params.articles_id}`
+                        },
+                        error: {}
+                    });
+                    return;
+                }).catch(function(err) {
+                    console.log('could not delete article');
+                    console.log('err: %j', err);
+                    res.status(500).jsonp({
+                        status: 500,
+                        data: {},
+                        error: {
+                            msg: message.something_went_wrong,
+                            err
+                        }
+                    });
+                    return;
+                });
+            })
+            .catch((err) => {
+                console.log('removed all sections for article_id', articles_id)
+            })
+        }else{
+            Article.destroy({
+                where: {
+                    id: articles_id,
+                    lang: req.query.lang 
+                }
+            }).then(function(article) {
+                console.log(article);
+                res.jsonp({
+                    status: 200,
+                    data: {
+                        msg: `${message.article_deleted} ${req.params.product_id}`
+                    },
+                    error: {}
+                });
+                return;
+            }).catch(function(err) {
+                console.log('could not delete article');
+                console.log('err: %j', err);
+                res.status(500).jsonp({
+                    status: 500,
+                    data: {},
+                    error: {
+                        msg: message.something_went_wrong,
+                        err
+                    }
+                });
+                return;
+            });
+        }
+    }).catch((err) => {
+        console.log('err in geting all sections for article_id', articles_id)
+        console.log(err)
         res.status(500).jsonp({
             status: 500,
             data: {},
             error: {
                 msg: message.something_went_wrong,
-                err
+                err: err
             }
         });
         return;
-    });
+    })
+    return;
 } /*End of deleteArticle*/
 
 
