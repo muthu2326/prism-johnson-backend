@@ -424,15 +424,14 @@ exports.deleteArticle = function(req, res) {
     let sections_ids = []
     Section.findAll({
         where: {
-            article_id: articles_id
+            article_id: articles_id,
+            lang: req.query.lang
         }
     })
     .then((sections) => {
         if(sections.length > 0){
             sections.forEach((item) => {
-                if(item.lang == req.query.lang){
-                    sections_ids.push(item.id)
-                }
+                sections_ids.push(item.id)
             })
             console.log('sections length', sections_ids)
             Section.destroy({
