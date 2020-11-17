@@ -187,7 +187,7 @@ exports.getAllProducts = function(req, res) {
             lang: lang
         },
         order: [
-            ['created', 'DESC']
+            ['id', 'DESC']
         ]
     }).then(function(products) {
         /*Return an array of Products */
