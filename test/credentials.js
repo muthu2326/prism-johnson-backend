@@ -13,13 +13,19 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.STRING(200),
       allowNull: true
     },
-    field_name: {
-      type: DataTypes.STRING(200),
+    value: {
+      type: DataTypes.JSON,
       allowNull: true
     },
-    value: {
-      type: DataTypes.TEXT,
-      allowNull: true
+    created: {
+      type: DataTypes.DATE,
+      allowNull: true,
+      defaultValue: Sequelize.literal('CURRENT_TIMESTAMP')
+    },
+    updated: {
+      type: DataTypes.DATE,
+      allowNull: true,
+      defaultValue: Sequelize.literal('CURRENT_TIMESTAMP')
     }
   }, {
     sequelize,

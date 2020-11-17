@@ -4,6 +4,7 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 const log = require('./utils/logger').get();
+const nodemailer = require("nodemailer");
 var allowlist = ['http://localhost:3000', 'http://prism-johnson.digiapt.com']
 
 // var indexRouter = require('./routes-old/index');
@@ -30,6 +31,7 @@ var cityRouter = require('./routes/city.server.routes')
 var productRouter = require('./routes/product.server.routes')
 var orderRouter = require('./routes/orders.server.routes')
 var testimonialRouter = require('./routes/testimonial.server.routes')
+var credentialsRouter = require('./routes/credentials.server.routes')
 
 var config = require('config');
 var app = express();
@@ -92,6 +94,7 @@ app.use('/api/v1/city', cityRouter);
 app.use('/api/v1/products', productRouter);
 app.use('/api/v1/orders', orderRouter);
 app.use('/api/v1/testimonials', testimonialRouter);
+app.use('/api/v1/credentials', credentialsRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

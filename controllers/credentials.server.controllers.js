@@ -1,17 +1,19 @@
 /*Beans Copyright info*/
 
 var Sequelize = require('sequelize');
-var db = require('../db/db');
+var db = require('../db/connection/db');
+var message = require('../utils/message.json');
+var slugify = require('slugify')
+const {
+    v4: uuidv4
+} = require('uuid');
 
 /* var EntityModel = require('../models/init-models'); 
  * var Entity = EntityModel.initModels(db.getDbConnection())
  */
 
-// var CredentialModel = require('../models/init-models');
-// var Credential = CredentialModel.initModels(db.getDbConnection())
-
-var db1 = require('../models');
-var Credential = db1.credentials
+var CredentialModel = require('../models/init-models');
+var Credential = CredentialModel.initModels(db).credentials;
 
 /*
  ** Beans generated CRR*UD controller methods.
@@ -21,26 +23,39 @@ var Credential = db1.credentials
 exports.createCredential = function(req, res) {
     // Log entry.
     console.log('Credential Controller: entering createCredential ');
+    console.log('req body :: ', req.body)
+    console.log('req params :: ', req.params)
+    console.log('req query :: ', req.query)
 
-    // var v = new lib.Validator [{"id:number");
-
-    // if (!v.run(req.body)) {
-    //     return res.status(400).send({
-    //         error: v.errors
-    //     });
-    // }
-
+    let NOW = new Date()
     Credential.create({
-        id : req.body.id,
-				type : req.body.type,
-				field_name : req.body.field_name,
-				value : req.body.value
+        type : req.body.type,
+        value : req.body.value,
+        created: NOW,
+        updated: NOW
     }).then(function(result) {
         console.log('created credentials', result);
-        res.jsonp(result);
+        res.jsonp({
+            status: 200,
+            data: {
+                id: `Successfully created credentials ${result.id}`,
+                msg: 'success'
+            },
+            error: {}
+        });
+        return;
     }).catch(function(err) {
         console.log('Could not create credentials record');
-        console.log('err: %j', err);
+        console.log('err:', err);
+        res.status(500).jsonp({
+            status: 500,
+            data: {},
+            error: {
+                msg: message.something_went_wrong,
+                err: err
+            }
+        });
+        return;
     });
 
 } /*End of createCredential*/
@@ -48,24 +63,48 @@ exports.createCredential = function(req, res) {
 
 /*Get a single credentials */
 exports.getCredential = function(req, res) {
-    var credentials_id = req.params.credentials_id;
+    var type = req.params.type;
+
     console.log('Credential Controller: entering getCredential ');
     /*Validate for a null id*/
-    if (!credentials_id) {
+    if (!type) {
         res.status(400).send("credentials ID is null");
         return;
     }
     /* Query DB using sequelize api for a single credentials*/
     Credential.findOne({
         where: {
-            id: credentials_id
+            type: type
         }
     }).then(function(credentials) {
         console.log(credentials);
-        res.jsonp(credentials);
+        if(credentials != null){
+            res.jsonp({
+                status: 200,
+                data: credentials,
+                error: {}
+            });
+            return;
+        }else{
+            res.jsonp({
+                status: 200,
+                data: {},
+                error: {}
+            });
+            return;
+        }
     }).catch(function(err) {
         console.log('could not fetch credentials');
-        console.log('err: %j', err);
+        console.log('err:', err);
+        res.status(500).jsonp({
+            status: 500,
+            data: {},
+            error: {
+                msg: message.something_went_wrong,
+                err: err
+            }
+        });
+        return;
     });
 } /*End of getCredential*/
 
@@ -75,10 +114,33 @@ exports.getAllCredentials = function(req, res) {
     /* Query DB using sequelize api for all Credentials*/
     Credential.findAll().then(function(credentials) {
         /*Return an array of Credentials */
-        res.jsonp(credentials);
+        if(credentials.length > 0){
+            res.jsonp({
+                status: 200,
+                data: credentials,
+                error: {}
+            });
+            return;
+        }else{
+            res.jsonp({
+                status: 200,
+                data: [],
+                error: {}
+            });
+            return;
+        }
     }).catch(function(err) {
         console.log('could not fetch all credentials');
         console.log('err: %j', err);
+        res.status(500).jsonp({
+            status: 500,
+            data: {},
+            error: {
+                msg: message.something_went_wrong,
+                err: err
+            }
+        });
+        return;
     });
 }; /*End of getAllCredentials*/
 
@@ -89,11 +151,28 @@ exports.updateCredential = function(req, res) {
     console.log('Credential Controller: entering updateCredential ');
 
     var credentials_id = req.params.credentials_id;
+
+    if (!req.params.credentials_id) {
+        res.status(400).jsonp({
+            status: 400,
+            data: {},
+            error: {
+                msg: message.invalid_get_request
+            }
+        });
+        return;
+    }
+
+    console.log('req body :: ', req.body)
+    console.log('req params :: ', req.params)
+    console.log('req query :: ', req.query)
+
+    let NOW = new Date()
+
     Credential.update({
-        id : req.body.id,
-				type : req.body.type,
-				field_name : req.body.field_name,
-				value : req.body.value
+        type : req.body.type,
+        value : req.body.value,
+        updated: NOW
     }, {
         where: {
             /* credentials table primary key */
@@ -101,10 +180,26 @@ exports.updateCredential = function(req, res) {
         }
     }).then(function(result) {
         console.log('updated credentials', result);
-        res.send("credentials updated successfully");
+        res.jsonp({
+            status: 200,
+            data: {
+                msg: `credentials updated successfully`
+            },
+            error: {}
+        });
+        return;
     }).catch(function(err) {
         console.log('Could not update credentials record');
-        console.log('err: %j', err);
+        console.log('err:', err);
+        res.status(500).jsonp({
+            status: 500,
+            data: {},
+            error: {
+                msg: message.something_went_wrong,
+                err: err
+            }
+        });
+        return;
     });
 
 } /*End of updateCredential*/
@@ -114,11 +209,19 @@ exports.deleteCredential = function(req, res) {
     console.log('Credential Controller: entering deleteCredential ');
 
     var credentials_id = req.params.credentials_id;
+    
     /*Validate for a null credentials_id*/
-    if (!credentials_id) {
-        res.status(400).send("credentials ID is null");
+    if (!req.params.credentials_id) {
+        res.status(400).jsonp({
+            status: 400,
+            data: {},
+            error: {
+                msg: message.invalid_get_request
+            }
+        });
         return;
     }
+
     /* Delete credentials record*/
     Credential.destroy({
         where: {

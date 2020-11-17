@@ -12,7 +12,7 @@ var upload = multer(); // for parsing multipart/form-data
 router.post('/', upload.array(), /*auth.isAuthenticated,*/ Credential.createCredential);
 
 /*Get single credentials*/
-router.get('/:credentials_id' , Credential.getCredential);
+router.get('/:type' , Credential.getCredential);
 
 /*Get all Credentials.*/
 router.get('/' , Credential.getAllCredentials);
