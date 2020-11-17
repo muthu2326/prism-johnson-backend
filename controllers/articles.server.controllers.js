@@ -330,6 +330,7 @@ exports.updateArticle = function(req, res) {
                     id: item.id,
                     type: item.value.type,
                     article_id: item.value.article_id,
+                    media_url: item.value.media_url,
                     media_type: item.value.media_type,
                     sub_title: item.value.title,
                     description: item.value.description,
