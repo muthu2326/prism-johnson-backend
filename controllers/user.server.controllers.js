@@ -356,7 +356,6 @@ exports.updateUser = function (req, res) {
 
     var user_id = req.params.user_id;
     let NOW = new Date()
-    let password;
     if (req.body.resetEmail) {
         checkDuplicateUser(req.body.email.toLowerCase(), req.body.role.toLowerCase(), function (err, result) {
             if (err) {
@@ -372,7 +371,7 @@ exports.updateUser = function (req, res) {
             }
             if (!result.isDuplicate) {
                 console.log('inside dupcheck result false')
-                password = bcrypt.hashSync(req.body.email, saltRounds);
+                let password = bcrypt.hashSync(req.body.email, saltRounds);
                 User.update({
                     name: req.body.name,
                     email: req.body.email.toLowerCase(),
@@ -436,11 +435,12 @@ exports.updateUser = function (req, res) {
         })
     } else {
         let NOW = new Date()
+        let password = bcrypt.hashSync(req.body.password, saltRounds);
         User.update({
             name: req.body.name,
             address: req.body.address,
             mobile: req.body.mobile,
-            password: req.body.password,
+            password: password,
             pincode: req.body.pincode,
             stage_of_construction: req.body.stage_of_construction,
             role: req.body.role,
