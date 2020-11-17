@@ -192,8 +192,6 @@ exports.getAllQueries = function(req, res) {
     console.log('req params :: ', req.params)
     console.log('req query :: ', req.query)
 
-    console.log('lang', lang)
-
     if (!req.query.type) {
         res.status(400).jsonp({
             status: 400,
