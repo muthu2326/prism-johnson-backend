@@ -67,8 +67,9 @@ exports.login = function(req, res) {
             },
             include: State
         }).then(function(user) {
-            console.log(user);
+            console.log(user.dataValues);
             let check_password = bcrypt.compareSync(req.body.password, user.password);
+            console.log('check password', check_password)
             delete user.dataValues.password
             user.dataValues.cities = user.dataValues.city_id? user.dataValues.city_id.split(",") : [];
             if(check_password){
@@ -109,6 +110,7 @@ exports.login = function(req, res) {
         }).then(function(user) {
             console.log(user);
             let check_password = bcrypt.compareSync(req.body.password, user.password);
+            console.log('check password', check_password)
             delete user.dataValues.password;
             user.dataValues.role = `dealer`;
             let thisDealerCities = user.dataValues.cities;
