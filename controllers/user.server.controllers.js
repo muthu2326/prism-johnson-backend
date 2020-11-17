@@ -440,7 +440,7 @@ exports.updateUser = function (req, res) {
             name: req.body.name,
             address: req.body.address,
             mobile: req.body.mobile,
-            password: req.data.password,
+            password: req.body.password,
             pincode: req.body.pincode,
             stage_of_construction: req.body.stage_of_construction,
             role: req.body.role,
