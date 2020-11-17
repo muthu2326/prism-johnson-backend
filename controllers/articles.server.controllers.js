@@ -340,7 +340,7 @@ exports.updateArticle = function(req, res) {
                 }
             })
             console.log('sections', sections.length)
-            Section.bulkCreate(sections, {updateOnDuplicate: ["type", "media_type", "sub_title", "description", "features", "lang", "updated"]})
+            Section.bulkCreate(sections, {updateOnDuplicate: ["type", "media_type", "media_url", "sub_title", "description", "features", "lang", "updated"]})
             .then(function(data){
                 console.log(data.length)
                 res.jsonp({
