@@ -483,7 +483,7 @@ exports.deleteArticle = function(req, res) {
                 res.jsonp({
                     status: 200,
                     data: {
-                        msg: `${message.article_deleted} ${req.params.product_id}`
+                        msg: `${message.article_deleted} ${req.params.articles_id}`
                     },
                     error: {}
                 });
