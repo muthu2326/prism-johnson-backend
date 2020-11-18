@@ -79,8 +79,8 @@ exports.createUser = function (req, res) {
                 stage_of_construction: req.body.stage_of_construction,
                 role: req.body.role.toLowerCase(),
                 slug: req.body.slug ? req.body.slug : slug,
-                state_id: req.body.state_id,
-                city_id: req.body.city_id,
+                state: req.body.state,
+                cities: req.body.cities,
                 lang: lang,
                 created: NOW,
                 updated: NOW
@@ -171,8 +171,8 @@ exports.userRegistration = function (req, res) {
                 stage_of_construction: req.body.stage_of_construction,
                 role: req.body.role.toLowerCase(),
                 slug: req.body.slug ? req.body.slug : slug,
-                state_id: req.body.state_id,
-                city_id: JSON.stringify(req.body.city_id),
+                state: req.body.state,
+                cities: req.body.cities,
                 lang: lang,
                 created: NOW,
                 updated: NOW
@@ -381,8 +381,8 @@ exports.updateUser = function (req, res) {
                     pincode: req.body.pincode,
                     stage_of_construction: req.body.stage_of_construction,
                     role: req.body.role.toLowerCase(),
-                    state_id: req.body.state_id,
-                    city_id: JSON.stringify(req.body.city_id),
+                    state: req.body.state,
+                    cities: req.body.cities,
                     updated: NOW
                 }, {
                     where: {
@@ -442,8 +442,8 @@ exports.updateUser = function (req, res) {
             pincode: req.body.pincode,
             stage_of_construction: req.body.stage_of_construction,
             role: req.body.role,
-            state_id: req.body.state_id,
-            city_id: JSON.stringify(req.body.city_id),
+            state: req.body.state,
+            cities: req.body.cities,
             updated: NOW
         }, {
             where: {

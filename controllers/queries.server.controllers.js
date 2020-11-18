@@ -275,7 +275,7 @@ exports.getAllQueries = function(req, res) {
             console.log(user);
             if (user != null) {
                 console.log('found tte')
-                cities = user.dataValues.city_id.split(',')
+                cities = user.dataValues.cities
                 console.log('cities found for tte', cities)
                 where_condition = {
                     lang: lang,

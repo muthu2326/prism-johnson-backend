@@ -50,12 +50,12 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.STRING(100),
       allowNull: true
     },
-    state_id: {
-      type: DataTypes.INTEGER(11),
+    cities: {
+      type: DataTypes.JSON,
       allowNull: true
     },
-    city_id: {
-      type: DataTypes.TEXT,
+    state: {
+      type: DataTypes.STRING(255),
       allowNull: true
     },
     created: {

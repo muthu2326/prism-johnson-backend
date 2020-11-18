@@ -5,6 +5,7 @@ const saltRounds = 10;
 
 var db = require('../db/connection/db');
 var message  = require('../utils/message.json')
+var { sendEmail } = require('../utils/notification_helper')
 
 /* var EntityModel = require('../models/init-models'); 
  * var Entity = EntityModel.initModels(db.getDbConnection())
@@ -21,8 +22,6 @@ var State = StateModel.initModels(db).state
 
 var CityModel = require('../models/init-models');
 var City = CityModel.initModels(db).city
-
-User.belongsTo(State, {foreignKey: 'state_id'});
 
 exports.login = function(req, res) {
 
@@ -64,8 +63,7 @@ exports.login = function(req, res) {
             where: {
                 email: email,
                 role: role
-            },
-            include: State
+            }
         }).then(function(user) {
             console.log(user.dataValues);
             let check_password = bcrypt.compareSync(req.body.password, user.password);
@@ -150,3 +148,89 @@ exports.login = function(req, res) {
         });
     }
 } /*End of user login*/
+
+
+exports.forgotPassword = function(req, res) {
+    console.log('User Controller: forgotPassword ');
+    console.log('request body :: ', req.body)
+
+    if(!req.body.email){
+        console.log('missing email')
+        res.status(400).jsonp({
+            status: 400,
+            data: {},
+            error: {
+                msg: message.missing_email
+            }
+        });
+        return;
+    }
+
+    let email = req.body.email
+    
+    User.findOne({
+        where: {
+            email: email
+        },
+        include: State
+    }).then(function(user) {
+        if(user != null){
+            let name = user.dataValues.name
+            let body = `<html><body>Hi ${name}, <br><br>Please click here to reset your password <a href="https://www.w3schools.com">Click here</a></body></html>`
+            sendEmail(email, "Reset Password",body)
+            console.log('sent email')
+            res.status(200).jsonp({
+                status: 200,
+                data: {
+                    msg: message.success
+                },
+               error: {}
+            });
+            return;
+        }else{
+            Dealer.findOne({
+                where: {
+                    email: email
+                }
+            }).then(function(dealer) {
+                console.log(dealer);
+                if(dealer != null){
+                    let name = user.dataValues.name
+                    let body = `<html><body>Hi ${name}, <br><br>Please click here to reset your password <a href="">Click here<></body></html>`
+                    sendEmail(email, "Reset Password",body)
+                    console.log('sent email')
+                    res.status(200).jsonp({
+                        status: 200,
+                        data: {
+                            msg: message.success
+                        },
+                       error: {}
+                    });
+                    return;
+                }else{
+                    res.status(400).jsonp({
+                        status: 400,
+                        data: {},
+                        error: {
+                            msg: message.user_not_found
+                        }
+                    });
+                    return;
+                }
+            })
+        }
+    }).catch(function(err) {
+        console.log('could not fetch user');
+        console.log('err:', err);
+        res.status(500).jsonp({
+            status: 500,
+            data: {},
+            error: {
+                msg: message.something_went_wrong,
+                err: err
+            }
+        });
+        return;
+    });
+
+}

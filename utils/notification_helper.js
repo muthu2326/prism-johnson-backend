@@ -26,10 +26,9 @@ exports.sendEmail = (to, subject, body) => {
             });
             transporter.sendMail({
                 from: "cement.itservices@prismjohnson.in", // sender address
-                to: "muthu.r@digiapt.com", // list of receivers
-                subject: "Hello ✔", // Subject line
-                text: "Hello world?", // plain text body
-                html: "<b>Hello world?</b>", // html body
+                to: to,
+                subject: subject,
+                html: body
             });
         }else{
             console.log('no nodemailer credentials', credentials)

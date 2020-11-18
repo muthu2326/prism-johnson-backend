@@ -17,10 +17,6 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.STRING(200),
       allowNull: true
     },
-    password: {
-      type: DataTypes.STRING(200),
-      allowNull: true
-    },
     reset_pasword_link_sent: {
       type: DataTypes.INTEGER(4),
       allowNull: true,
@@ -54,12 +50,12 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.STRING(100),
       allowNull: true
     },
-    state_id: {
-      type: DataTypes.INTEGER(11),
+    cities: {
+      type: DataTypes.JSON,
       allowNull: true
     },
-    city_id: {
-      type: DataTypes.TEXT,
+    state: {
+      type: DataTypes.STRING(255),
       allowNull: true
     },
     created: {
@@ -68,6 +64,10 @@ module.exports = function(sequelize, DataTypes) {
     },
     updated: {
       type: DataTypes.DATE,
+      allowNull: true
+    },
+    password: {
+      type: DataTypes.STRING(200),
       allowNull: true
     }
   }, {
