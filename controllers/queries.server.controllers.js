@@ -16,6 +16,8 @@ const {
 var QueryModel = require('../models/init-models');
 var Query = QueryModel.initModels(db).quries;
 
+var UserModel = require('../models/init-models');
+var User = UserModel.initModels(db).user
 /*
  ** Beans generated CRR*UD controller methods.
  */
@@ -217,45 +219,125 @@ exports.getAllQueries = function(req, res) {
     let type = req.query.type ? req.query.type : 'ask_expert'
     let lang = req.query.lang ? req.query.lang : 'en'
 
-    /* Query DB using sequelize api for all Queries*/
-    Query.findAll({
-        where: {
+    let tte_id = req.query.tte_id
+
+    let where_condition;
+    let cities;
+
+    if(!tte_id){
+        where_condition = {
             lang: lang,
             type: type
-        },
-        order: [
-            ['created', 'DESC']
-        ]
-    }).then(function(queries) {
-        /*Return an array of Queries */
-        if(queries.length > 0){
-            res.status(200).jsonp({
-                status: 200,
-                data: queries,
-                error: {}
-            });
-        }else{
-            res.status(200).jsonp({
-                status: 200,
-                data: [],
+        }
+        // console.log('trying to execute the code')
+        Query.findAll({
+            where: where_condition,
+            order: [
+                ['created', 'DESC']
+            ]
+        }).then(function(queries) {
+            /*Return an array of Queries */
+            if(queries.length > 0){
+                res.status(200).jsonp({
+                    status: 200,
+                    data: queries,
+                    error: {}
+                });
+            }else{
+                res.status(200).jsonp({
+                    status: 200,
+                    data: [],
+                    error: {
+                        msg: message.no_queries_found
+                    }
+                });
+            }
+        }).catch(function(err) {
+            console.log('could not fetch all queries');
+            console.log('err:', err);
+            res.status(500).jsonp({
+                status: 500,
+                data: {},
                 error: {
-                    msg: message.no_queries_found
+                    msg: message.something_went_wrong,
+                    err: err
                 }
             });
-        }
-    }).catch(function(err) {
-        console.log('could not fetch all queries');
-        console.log('err: %j', err);
-        res.status(500).jsonp({
-            status: 500,
-            data: {},
-            error: {
-                msg: message.something_went_wrong,
-                err: err
-            }
+            return;
         });
-        return;
-    });
+    }else{
+        User.findOne({
+            where: {
+                id: tte_id,
+                role: 'tte'
+            },
+        }).then(function (user) {
+            console.log(user);
+            if (user != null) {
+                console.log('found tte')
+                cities = user.dataValues.city_id.split(',')
+                console.log('cities found for tte', cities)
+                where_condition = {
+                    lang: lang,
+                    type: type,
+                    city: cities
+                }
+                Query.findAll({
+                    where: where_condition,
+                    order: [
+                        ['created', 'DESC']
+                    ]
+                }).then(function(queries) {
+                    /*Return an array of Queries */
+                    console.log('queries.length', queries.length)
+                    if(queries.length > 0){
+                        console.log('success')
+                        res.status(200).jsonp({
+                            status: 200,
+                            data: queries,
+                            error: {}
+                        });
+                        return;
+                    }else{
+                        console.log('empty')
+                        res.status(200).jsonp({
+                            status: 200,
+                            data: [],
+                            error: {
+                                msg: message.no_queries_found
+                            }
+                        });
+                        return;
+                    }
+                })
+            }else{
+                console.log('user not found');
+                res.status(400).jsonp({                   
+                    status: 400,
+                    data: {},
+                    error: {
+                        msg: message.user_not_found
+                    }
+                });
+                return;
+            }
+        }).catch(function(err) {
+            console.log('could not fetch all queries');
+            console.log('err:', err);
+            console.log('error in catch block')
+            res.status(500).jsonp({
+                status: 500,
+                data: {},
+                error: {
+                    msg: message.something_went_wrong,
+                    err: err
+                }
+            });
+            return;
+        });
+    }
+
+    /* Query DB using sequelize api for all Queries*/
 }; /*End of getAllQueries*/
 
 
