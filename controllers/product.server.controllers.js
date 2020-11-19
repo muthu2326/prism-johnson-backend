@@ -261,6 +261,15 @@ exports.importProductPriceCSV = function (req, res) {
                             return;
                         }
                     })
+                }else{
+                    res.status(400).jsonp({
+                        status: 400,
+                        data: {},
+                        error: {
+                            msg: `No products found to update the prices`
+                        }
+                    });
+                    return;
                 }
             })
         })

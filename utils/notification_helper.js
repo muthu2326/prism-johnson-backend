@@ -25,7 +25,7 @@ exports.sendEmail = (to, subject, body) => {
                 },
             });
             transporter.sendMail({
-                from: "cement.itservices@prismjohnson.in", // sender address
+                from: 'Prism Cement Services <cement.itservices@prismjohnson.in>', // sender address
                 to: to,
                 subject: subject,
                 html: body
