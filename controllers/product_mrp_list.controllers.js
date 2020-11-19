@@ -74,7 +74,35 @@ exports.getProductMRP = function (req, res) {
 exports.getAllProductMRPs = function (req, res) {
     console.log('ProductMRP Controller: entering getAllProductMRPs');
     /* Query DB using sequelize api for all ProductMRPs*/
-    ProductMRP.findAll()
+
+    let limit = Number(req.query.limit ? req.query.limit : 0);
+    let state = req.query.state ? req.query.state : null
+    let condition;
+
+    if(state != null & limit > 0){
+        condition = {
+            where : {
+                state: state,
+            },
+            limit: limit
+        }
+    }else if(state != null& limit == 0){
+        condition = {
+            where : {
+                state: state
+            }
+        }
+    }else if(state == null & limit > 0){
+        condition = {
+            limit : limit
+        }
+    }else{
+        condition = {
+            where: {}
+        }
+    }
+
+    ProductMRP.findAll(condition)
     .then(function (ProductMRPs) {
         /*Return an array of ProductMRPs */
         if (ProductMRPs.length > 0) {
