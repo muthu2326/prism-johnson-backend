@@ -201,7 +201,7 @@ exports.forgotPassword = function(req, res) {
                     res.status(200).jsonp({
                         status: 200,
                         data: {
-                            msg: message.success
+                            msg: `Successfully sent reset password link to your email ${email}`
                         },
                        error: {}
                     });
