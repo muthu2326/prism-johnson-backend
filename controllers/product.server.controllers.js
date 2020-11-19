@@ -202,14 +202,13 @@ exports.importProductPriceCSV = function (req, res) {
                 }
             }).then(function (products) {
                 if (products.length > 0) {
-                    let prouct_price = []
+                    let product_price = []
                     fs.createReadStream(req.file.path)
                         .pipe(csv.parse({
                             headers: true
                         }))
                     .on("data", function (data) {
                         console.log('csv data: ')
-                        console.log(data)
                         if (data) {
                             products.forEach((item) => {
                                 let product_name = item.title
@@ -228,7 +227,7 @@ exports.importProductPriceCSV = function (req, res) {
                                         created: NOW,
                                         updated: NOW
                                     }
-                                    prouct_price.push(obj)
+                                    product_price.push(obj)
                                 }
                             })
                         }
@@ -236,16 +235,31 @@ exports.importProductPriceCSV = function (req, res) {
                     .on("end", function () {
                         fs.unlinkSync(req.file.path); // remove temp file
                         console.log('end of csv')
-                        ProductMRP.bulkCreate(prouct_price)
+                        console.log('sample object in product_price array', product_price[0])
+                        console.log('prices array length', product_price.length)
+                        if(product_price.length > 0){
+                            ProductMRP.bulkCreate(product_price)
                             .then(function (prices) {
                                 console.log('created bulkdata length',prices.length)
-                                res.jsonp({
+                                res.status(200).jsonp({
                                     status: 200,
-                                    data: prices,
+                                    data: {
+                                        msg: `Successfully created ${prices.length} price records for ${products.length} products`
+                                    },
                                     error: {}
                                 });
                                 return;
                             })
+                        }else{
+                            res.status(400).jsonp({
+                                status: 400,
+                                data: {},
+                                error: {
+                                    msg: `No data found to price records for ${products.length} products`
+                                }
+                            });
+                            return;
+                        }
                     })
                 }
             })
