@@ -12,7 +12,7 @@ var message = require('../utils/message.json');
  */
 
 var ProductMRPModel = require('../models/init-models');
-var ProductMRP = ProductMRPModel.initModels(db).ProductMRP
+var ProductMRP = ProductMRPModel.initModels(db).product_mrp_list
 
 /*
  ** Beans generated CRR*UD controller methods.
@@ -74,14 +74,16 @@ exports.getProductMRP = function (req, res) {
 exports.getAllProductMRPs = function (req, res) {
     console.log('ProductMRP Controller: entering getAllProductMRPs');
     /* Query DB using sequelize api for all ProductMRPs*/
-    ProductMRP.findAll({
-        include: City
-    }).then(function (ProductMRPs) {
+    ProductMRP.findAll()
+    .then(function (ProductMRPs) {
         /*Return an array of ProductMRPs */
         if (ProductMRPs.length > 0) {
             res.status(200).jsonp({
                 status: 200,
-                data: ProductMRPs,
+                data: {
+                    count: ProductMRPs.length,
+                    prices_list: ProductMRPs
+                },
                 error: {}
             });
             return;
