@@ -4,7 +4,7 @@ var router = express.Router();
 var Product = require('../controllers/product.server.controllers');
 var ProductsMRP = require('../controllers/product_mrp_list.controllers');
 var multer = require('multer');
-var upload = multer({ dest: 'tmp/csv/' }); // for parsing multipart/form-data
+var upload = multer({ dest: 'tmp/product/csv/' }); // for parsing multipart/form-data
 
 
 /* BEANS code generated for CRR*UD. */

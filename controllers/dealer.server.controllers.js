@@ -7,6 +7,8 @@ const {
 } = require('uuid');
 var db = require('../db/connection/db');
 var message = require('../utils/message.json');
+const fs = require('fs');
+const csv = require('fast-csv');
 
 /* var EntityModel = require('../models/init-models'); 
  * var Entity = EntityModel.initModels(db.getDbConnection())
@@ -173,6 +175,69 @@ exports.getAllDealers = function(req, res) {
         return;
     });
 }; /*End of getAllDealers*/
+
+exports.importDealersDataCSV = function (req, res) {
+    console.log('Dealer Controller: entering importDealersDataCSV');
+    let NOW = new Date()
+    console.log('req.file', req.file)
+
+    if (!req.file) {
+        res.status(400).jsonp({
+            status: 400,
+            data: {},
+            error: {
+                msg: message.invalid_get_request
+            }
+        });
+        return;
+    }
+
+    fs.createReadStream(req.file.path)
+        .pipe(csv.parse({
+            headers: true
+        }))
+    .on("data", function (data) {
+        console.log('csv data: dealer')
+        //console.log(data)
+    })
+    .on("end", function () {
+        fs.unlinkSync(req.file.path);
+        Dealer.findAll().then(function(dealers) {
+            /*Return an array of Dealers */
+            if (dealers.length > 0) {
+                res.status(200).jsonp({
+                    status: 200,
+                    data: {
+                        msg: `Successfully created ${dealers.length} records`
+                    },
+                    error: {}
+                });
+                return;
+            } else {
+                res.status(400).jsonp({
+                    status: 400,
+                    data: {},
+                    error: {
+                        msg: `No dealers data found for creation`
+                    }
+                });
+                return;
+            }
+        }).catch(function(err) {
+            console.log('could not fetch all dealers');
+            console.log('err:', err);
+            res.status(500).jsonp({
+                status: 500,
+                data: {},
+                error: {
+                    msg: message.something_went_wrong,
+                    err: err
+                }
+            });
+            return;
+        });
+    })
+}
 
 exports.dealerLocator = function(req, res) {
     console.log('Dealer Controller: entering dealerLocator');

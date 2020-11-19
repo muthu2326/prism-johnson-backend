@@ -3,7 +3,7 @@ var express = require('express');
 var router = express.Router();
 var Dealer = require('../controllers/dealer.server.controllers');
 var multer = require('multer');
-var upload = multer(); // for parsing multipart/form-data
+var upload = multer({ dest: 'tmp/dealercsv/' }); // for parsing multipart/form-data
 
 
 /* BEANS code generated for CRR*UD. */
@@ -20,7 +20,7 @@ router.get('/:dealer_id' , Dealer.getDealer);
 /*Get all Dealers.*/
 router.get('/' , Dealer.getAllDealers);
 
-
+router.post('/upload/dealers', upload.single('file'), /*auth.isAuthenticated,*/ Dealer.importDealersDataCSV);
 
 /*Update an dealer record*/
 router.post('/:dealer_id', upload.array(), /*auth.isAuthenticated,*/ Dealer.updateDealer);
