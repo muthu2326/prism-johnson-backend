@@ -14,8 +14,13 @@ router.post('/', upload.array(), /*auth.isAuthenticated,*/ User.createUser);
 /*Create User on registration*/
 router.post('/register', upload.array(), /*auth.isAuthenticated,*/ User.userRegistration);
 
+
+router.get('/count/orders' , User.getAllUsersAndOrdersCount);
+
 /*Get single user*/
 router.get('/:user_id' , User.getUser);
+
+
 
 /*Get all Users.*/
 router.get('/' , User.getAllUsers);

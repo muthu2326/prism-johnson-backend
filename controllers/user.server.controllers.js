@@ -6,6 +6,7 @@ const {
     v4: uuidv4
 } = require('uuid');
 const bcrypt = require('bcrypt');
+var async = require('async');
 const saltRounds = 10;
 
 
@@ -22,8 +23,8 @@ var {
 var UserModel = require('../models/init-models');
 var User = UserModel.initModels(db).user
 
-var CityModel = require('../models/init-models');
-var City = CityModel.initModels(db).city
+var OrderModel = require('../models/init-models');
+var Order = OrderModel.initModels(db).orders
 
 /*
  ** Beans generated CRR*UD controller methods.
@@ -541,6 +542,70 @@ exports.deleteUser = function (req, res) {
     });
 } /*End of deleteUser*/
 
+exports.getAllUsersAndOrdersCount = function (req, res) {
+    console.log('User Controller: entering getAllUsersAndOrdersCount');
+    console.log('request body :: ', req.query)
+    console.log('request body :: ', req.params)
+
+    let countObj = {};
+
+    async.parallel({
+        one: function (cb){
+            User.findAll({
+                role: 'user'
+            })
+            .then((users) => {
+                console.log('users found async', users.length)
+                cb(null, users)
+            }).catch((err) => {
+                console.log('err:', err);
+                cb(err, null)
+            })
+        },
+        two: function(cb){
+            Order.findAll()
+            .then((orders) => {
+                    console.log('orders found async', orders.length)
+                    cb(null, orders)
+            }).catch((err) => {
+                console.log('err:', err);
+                cb(err, null)
+            })
+        }
+    }, function(err, result){
+        if(err){
+            console.log('err in async parallel: ', err);
+            res.status(500).jsonp({
+                status: 500,
+                data: {},
+                error: {
+                    msg: message.something_went_wrong,
+                    err: err
+                }
+            });
+            return
+        }else{
+
+            let usersCount = result.one.length
+            let ordersSummited = result.two.filter((order) => order.status == 'Submitted')
+            let ordersAssigned = result.two.filter((order) => order.status == 'Assigned')
+            let ordersCompleted = result.two.filter((order) => order.status == 'Completed')
+            let ordersCancelled = result.two.filter((order) => order.status == 'Cancelled')
+
+            countObj.usersCount = usersCount
+            countObj.ordersPlaced = ordersSummited.length
+            countObj.ordersAssigned = ordersAssigned.length
+            countObj.ordersCompleted = ordersCompleted.length
+            countObj.ordersCancelled = ordersCancelled.length
+
+            res.status(200).jsonp({
+                status: 200,
+                data: countObj,
+                error: {}
+            });
+        }
+    })
+}
 
 /*Get all Users for pagination */
 exports.getAllUsersForPagination = function (req, res) {
