@@ -9,17 +9,16 @@ module.exports = function(sequelize, DataTypes) {
       allowNull: false,
       primaryKey: true
     },
-    product_id: {
-      type: DataTypes.INTEGER(11),
-      allowNull: true,
-      references: {
-        model: 'product',
-        key: 'id'
-      },
-      unique: "fk_product_mrp_list_product_id"
+    product_name: {
+      type: DataTypes.TEXT,
+      allowNull: true
     },
     productcode: {
-      type: DataTypes.STRING(100),
+      type: DataTypes.TEXT,
+      allowNull: true
+    },
+    price: {
+      type: DataTypes.FLOAT,
       allowNull: true
     },
     postal_office: {
@@ -40,14 +39,6 @@ module.exports = function(sequelize, DataTypes) {
     },
     pincode: {
       type: DataTypes.STRING(255),
-      allowNull: true
-    },
-    price: {
-      type: DataTypes.FLOAT,
-      allowNull: true
-    },
-    lang: {
-      type: DataTypes.STRING(100),
       allowNull: true
     },
     slug: {

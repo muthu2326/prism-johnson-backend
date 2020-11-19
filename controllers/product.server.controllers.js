@@ -7,6 +7,8 @@ var slugify = require('slugify')
 const {
     v4: uuidv4
 } = require('uuid');
+const fs = require('fs');
+const csv = require('fast-csv');
 
 /* var EntityModel = require('../models/init-models'); 
  * var Entity = EntityModel.initModels(db.getDbConnection())
@@ -23,7 +25,7 @@ var ProductMRP = ProductMRPModel.initModels(db).product_mrp_list;
  */
 
 /*Create product record.*/
-exports.createProduct = function(req, res) {
+exports.createProduct = function (req, res) {
     // Log entry.
     console.log('Product Controller: entering createProduct ');
     console.log('req body :: ', req.body)
@@ -31,9 +33,9 @@ exports.createProduct = function(req, res) {
     console.log('req query :: ', req.query)
 
     let productcode;
-    if(req.body.slug == null || req.body.slug == ''){
+    if (req.body.slug == null || req.body.slug == '') {
         productcode = `PC${Math.random().toString(10).slice(3,10)}`
-    }else{
+    } else {
         productcode = req.body.productcode
     }
     let slug = slugify(`${uuidv4().slice(4, 12)} ${productcode}`)
@@ -42,29 +44,29 @@ exports.createProduct = function(req, res) {
     let NOW = new Date()
 
     Product.create({
-        id : req.body.id,
-        productcode : productcode,
-        media_type : req.body.media_type,
-        media_url : req.body.media_url,
-        title : req.body.title,
-        short_description : req.body.short_description,
-        description : req.body.description,
-        lang : req.body.lang,
-        slug : req.body.slug ? req.body.slug : slug,
-        created : NOW,
-        updated : NOW,
-        created_by : req.body.created_by,
-        updated_by : req.body.updated_by,
-        csv_file_name : req.body.csv_file_name,
-        features : req.body.features
-    }).then(function(result) {
+        id: req.body.id,
+        productcode: productcode,
+        media_type: req.body.media_type,
+        media_url: req.body.media_url,
+        title: req.body.title,
+        short_description: req.body.short_description,
+        description: req.body.description,
+        lang: req.body.lang,
+        slug: req.body.slug ? req.body.slug : slug,
+        created: NOW,
+        updated: NOW,
+        created_by: req.body.created_by,
+        updated_by: req.body.updated_by,
+        csv_file_name: req.body.csv_file_name,
+        features: req.body.features
+    }).then(function (result) {
         console.log('created product', result);
         res.jsonp({
             status: 200,
             data: result,
             error: {}
         });
-    }).catch(function(err) {
+    }).catch(function (err) {
         console.log('Could not create product record');
         console.log('err: %j', err);
         res.status(500).jsonp({
@@ -81,7 +83,7 @@ exports.createProduct = function(req, res) {
 
 
 /*Get a single product */
-exports.getProduct = function(req, res) {
+exports.getProduct = function (req, res) {
     // var product_id = req.params.product_id;
     console.log('Product Controller: entering getProduct ');
     /*Validate for a null id*/
@@ -106,73 +108,164 @@ exports.getProduct = function(req, res) {
             lang: lang
         },
         raw: true
-    }).then(function(product) {
+    }).then(function (product) {
         // TODO:: handle no pincode
         ProductMRP.findOne({
-            attributes: ['price'],
-            where : {
-                productcode: product.productcode,
-                pincode:req.query.pincode ? req.query.pincode: '851111'
-            }
-        }).then(p => {
-            if(p) {
-                product.price = p.price;
-            } else {
-                product.price = 450;
-            }
-            Product.findAll({
+                attributes: ['price'],
                 where: {
-                    lang: lang
-                },
-                raw: true,
-                order: [
-                    ['created', 'DESC']
-                ]
+                    productcode: product.productcode,
+                    pincode: req.query.pincode ? req.query.pincode : '851111'
+                }
+            }).then(p => {
+                if (p) {
+                    product.price = p.price;
+                } else {
+                    product.price = 450;
+                }
+                Product.findAll({
+                        where: {
+                            lang: lang
+                        },
+                        raw: true,
+                        order: [
+                            ['created', 'DESC']
+                        ]
+                    })
+                    .then(function (products) {
+                        console.log('products', products.length)
+                        let list = products.filter((item) => {
+                            return item.productcode != product.productcode
+                        })
+                        product.related_products = list
+                        res.status(200).jsonp({
+                            status: 200,
+                            data: product,
+                            error: {}
+                        });
+                    })
+                    .catch(function (err) {
+                        console.log('could not fetch product');
+                        console.log('err: %j', err);
+                        res.status(500).jsonp({
+                            status: 500,
+                            data: {},
+                            error: {
+                                msg: message.something_went_wrong,
+                                err: err
+                            }
+                        });
+                        return;
+                    });
             })
-            .then(function(products) {
-                console.log('products', products.length)
-                let list = products.filter((item) => {
-                    return item.productcode != product.productcode
-                })
-                product.related_products = list
-                res.status(200).jsonp({
-                    status: 200,
-                    data: product,
-                    error: {}
-                });
-            })
-            .catch(function(err) {
-                console.log('could not fetch product');
+            .catch(function (err) {
+                console.log('could not fetch product price');
                 console.log('err: %j', err);
                 res.status(500).jsonp({
                     status: 500,
                     data: {},
                     error: {
-                        msg: message.something_went_wrong,
+                        msg: 'pincode is required to fetch product price',
                         err: err
                     }
                 });
                 return;
             });
+    })
+} /*End of getProduct*/
+
+exports.importProductPriceCSV = function (req, res) {
+    console.log('Product Controller: entering importProductPriceCSV');
+    let NOW = new Date()
+    console.log('req.file', req.file)
+
+    if (!req.file) {
+        res.status(400).jsonp({
+            status: 400,
+            data: {},
+            error: {
+                msg: message.invalid_get_request
+            }
+        });
+        return;
+    }
+
+    ProductMRP.destroy({
+            where: {},
+            truncate: true
         })
-        .catch(function(err) {
-            console.log('could not fetch product price');
-            console.log('err: %j', err);
+        .then((data) => {
+            console.log('deleted all records', data)
+            Product.findAll({
+                where: {
+                    lang: 'en'
+                }
+            }).then(function (products) {
+                if (products.length > 0) {
+                    let prouct_price = []
+                    fs.createReadStream(req.file.path)
+                        .pipe(csv.parse({
+                            headers: true
+                        }))
+                    .on("data", function (data) {
+                        console.log('csv data: ')
+                        console.log(data)
+                        if (data) {
+                            products.forEach((item) => {
+                                let product_name = item.title
+                                if (data.hasOwnProperty(`${product_name}`)) {
+                                    let slug = slugify(`${uuidv4().slice(4, 12)}`)
+                                    let obj = {
+                                        product_name: item.title,
+                                        productcode: item.productcode,
+                                        price: parseFloat(data[`${product_name}`]),
+                                        postal_office: data.PostalOffice,
+                                        taluk: data.Taluk,
+                                        city: data['City/District'],
+                                        state: data.State,
+                                        pincode: data.Pincode,
+                                        slug: slug,
+                                        created: NOW,
+                                        updated: NOW
+                                    }
+                                    prouct_price.push(obj)
+                                }
+                            })
+                        }
+                    })
+                    .on("end", function () {
+                        fs.unlinkSync(req.file.path); // remove temp file
+                        console.log('end of csv')
+                        ProductMRP.bulkCreate(prouct_price)
+                            .then(function (prices) {
+                                console.log('created bulkdata length',prices.length)
+                                res.jsonp({
+                                    status: 200,
+                                    data: prices,
+                                    error: {}
+                                });
+                                return;
+                            })
+                    })
+                }
+            })
+        })
+        .catch((err) => {
+            console.log('could not delete/ create new all product prices');
+            console.log('err:', err);
             res.status(500).jsonp({
                 status: 500,
                 data: {},
                 error: {
-                    msg: 'pincode is required to fetch product price',
+                    msg: message.something_went_wrong,
                     err: err
                 }
             });
             return;
-        });
-    })
-} /*End of getProduct*/
+        })
+}
 
 /*Get all Products */
-exports.getAllProducts = function(req, res) {
+exports.getAllProducts = function (req, res) {
     console.log('Product Controller: entering getAllProducts');
     /* Query DB using sequelize api for all Products*/
     console.log('Query Controller: entering getAllQueries');
@@ -181,7 +274,7 @@ exports.getAllProducts = function(req, res) {
 
     let lang = req.query.lang ? req.query.lang : 'en'
     console.log('lang', lang)
-    
+
     Product.findAll({
         where: {
             lang: lang
@@ -189,15 +282,15 @@ exports.getAllProducts = function(req, res) {
         order: [
             ['id', 'DESC']
         ]
-    }).then(function(products) {
+    }).then(function (products) {
         /*Return an array of Products */
-        if(products.length > 0){
+        if (products.length > 0) {
             res.status(200).jsonp({
                 status: 200,
                 data: products,
                 error: {}
             });
-        }else{
+        } else {
             res.status(200).jsonp({
                 status: 200,
                 data: [],
@@ -206,7 +299,7 @@ exports.getAllProducts = function(req, res) {
                 }
             });
         }
-    }).catch(function(err) {
+    }).catch(function (err) {
         console.log('could not fetch all products');
         console.log('err: %j', err);
         res.status(500).jsonp({
@@ -223,7 +316,7 @@ exports.getAllProducts = function(req, res) {
 
 
 /*Update product record.*/
-exports.updateProduct = function(req, res) {
+exports.updateProduct = function (req, res) {
     // Log entry.
     console.log('Product Controller: entering updateProduct ');
     console.log('req body :: ', req.body)
@@ -244,24 +337,24 @@ exports.updateProduct = function(req, res) {
     }
 
     Product.update({
-        productcode : req.body.productcode,
-        media_type : req.body.media_type,
-        media_url : req.body.media_url,
-        title : req.body.title,
-        short_description : req.body.short_description,
-        description : req.body.description,
-        lang : req.body.lang,
-        updated : NOW,
-        created_by : req.body.created_by,
-        updated_by : req.body.updated_by,
-        csv_file_name : req.body.csv_file_name,
-        features : req.body.features
+        productcode: req.body.productcode,
+        media_type: req.body.media_type,
+        media_url: req.body.media_url,
+        title: req.body.title,
+        short_description: req.body.short_description,
+        description: req.body.description,
+        lang: req.body.lang,
+        updated: NOW,
+        created_by: req.body.created_by,
+        updated_by: req.body.updated_by,
+        csv_file_name: req.body.csv_file_name,
+        features: req.body.features
     }, {
         where: {
             /* product table primary key */
             id: product_id
         }
-    }).then(function(result) {
+    }).then(function (result) {
         console.log('updated product', result);
         res.status(200).jsonp({
             status: 200,
@@ -270,7 +363,7 @@ exports.updateProduct = function(req, res) {
             },
             error: {}
         });
-    }).catch(function(err) {
+    }).catch(function (err) {
         console.log('Could not update product record');
         console.log('err: %j', err);
         res.status(500).jsonp({
@@ -285,7 +378,7 @@ exports.updateProduct = function(req, res) {
 } /*End of updateProduct*/
 
 /*Delete a single product */
-exports.deleteProduct = function(req, res) {
+exports.deleteProduct = function (req, res) {
     console.log('Product Controller: entering deleteProduct ');
     console.log('reqest params :: ', req.params)
 
@@ -305,7 +398,7 @@ exports.deleteProduct = function(req, res) {
         where: {
             id: product_id
         }
-    }).then(function(product) {
+    }).then(function (product) {
         if (product != null) {
             res.status(200).jsonp({
                 status: 200,
@@ -323,7 +416,7 @@ exports.deleteProduct = function(req, res) {
                 }
             });
         }
-    }).catch(function(err) {
+    }).catch(function (err) {
         console.log('could not delete product');
         console.log('err: %j', err);
         res.status(500).jsonp({
@@ -339,7 +432,7 @@ exports.deleteProduct = function(req, res) {
 
 
 /*Get all Products for pagination */
-exports.getAllProductsForPagination = function(req, res) {
+exports.getAllProductsForPagination = function (req, res) {
     console.log('Product Controller: entering getAllProductsForPagination');
     var itemsPerPage = parseInt(req.params.itemsPerPage);
     var pageNo = parseInt(req.params.pageNo);
@@ -349,17 +442,17 @@ exports.getAllProductsForPagination = function(req, res) {
     Product.findAll({
         offset: offset,
         limit: itemsPerPage
-    }).then(function(products) {
+    }).then(function (products) {
         /*Return an array of products */
         res.jsonp(products);
-    }).catch(function(err) {
+    }).catch(function (err) {
         console.log('could not fetch all products for pagination');
         console.log('err: %j', err);
     });
 }; /*End of getAllProductsForPagination*/
 
 /*Get all sorted Products  */
-exports.getAllProductsSortedByColumn = function(req, res) {
+exports.getAllProductsSortedByColumn = function (req, res) {
     console.log('Page Controller: entering getAllProductsSortedByColumn');
     var itemsPerPage = parseInt(req.params.itemsPerPage);
     var pageNo = parseInt(req.params.pageNo);
@@ -374,17 +467,17 @@ exports.getAllProductsSortedByColumn = function(req, res) {
         offset: offset,
         limit: itemsPerPage,
         order: order
-    }).then(function(products) {
+    }).then(function (products) {
         /*Return an array of Products */
         res.jsonp(products);
-    }).catch(function(err) {
+    }).catch(function (err) {
         console.log('could not fetch all Products for sorting');
         console.log('err: %j', err);
     });
 }; /*End of getAllProductsSortedByColumn*/
 
 /*Get all filtered Products */
-exports.getAllProductsFilteredByColumn = function(req, res) {
+exports.getAllProductsFilteredByColumn = function (req, res) {
     console.log('Page Controller: entering getAllProductsFilteredByColumn');
     var itemsPerPage = parseInt(req.params.itemsPerPage);
     var pageNo = parseInt(req.params.pageNo);
@@ -402,10 +495,10 @@ exports.getAllProductsFilteredByColumn = function(req, res) {
 
     console.log("offset is " + offset);
     /* Query DB using sequelize api for all Pages offset : offset , limit : itemsPerPage ,order : order ,*/
-    Product.findAll(criteria).then(function(products) {
+    Product.findAll(criteria).then(function (products) {
         /*Return an array of pages */
         res.jsonp(products);
-    }).catch(function(err) {
+    }).catch(function (err) {
         console.log('could not fetch all Products for filtering');
         console.log('err: %j', err);
     });
@@ -413,7 +506,7 @@ exports.getAllProductsFilteredByColumn = function(req, res) {
 
 
 /*Get all Products by search text */
-exports.getAllProductsBySearchText = function(req, res) {
+exports.getAllProductsBySearchText = function (req, res) {
     console.log('Product Controller: entering getAllProductsBySearchText');
     var itemsPerPage = parseInt(req.params.itemsPerPage);
     var pageNo = parseInt(req.params.pageNo);
@@ -422,7 +515,7 @@ exports.getAllProductsBySearchText = function(req, res) {
     var searchText = req.params.searchText;
     var like = "%" + searchText + "%";
     var criteria = {
-        where: Sequelize.where(Sequelize.fn("concat", Sequelize.col('id'),Sequelize.col('productcode'),Sequelize.col('media_type'),Sequelize.col('media_url'),Sequelize.col('title'),Sequelize.col('short_description'),Sequelize.col('description'),Sequelize.col('lang'),Sequelize.col('slug'),Sequelize.col('created'),Sequelize.col('updated'),Sequelize.col('created_by'),Sequelize.col('updated_by'),Sequelize.col('pincode'),Sequelize.col('csv_file_name'),Sequelize.col('features')), {
+        where: Sequelize.where(Sequelize.fn("concat", Sequelize.col('id'), Sequelize.col('productcode'), Sequelize.col('media_type'), Sequelize.col('media_url'), Sequelize.col('title'), Sequelize.col('short_description'), Sequelize.col('description'), Sequelize.col('lang'), Sequelize.col('slug'), Sequelize.col('created'), Sequelize.col('updated'), Sequelize.col('created_by'), Sequelize.col('updated_by'), Sequelize.col('pincode'), Sequelize.col('csv_file_name'), Sequelize.col('features')), {
             like: like
         })
     };
@@ -430,10 +523,10 @@ exports.getAllProductsBySearchText = function(req, res) {
     criteria['limit'] = itemsPerPage;
 
     /* Query DB using sequelize api for all products*/
-    Product.findAll(criteria).then(function(products) {
+    Product.findAll(criteria).then(function (products) {
         /*Return an array of pages */
         res.jsonp(products);
-    }).catch(function(err) {
+    }).catch(function (err) {
         console.log('could not fetch all products for search');
         console.log('err: %j', err);
     });

@@ -3,7 +3,7 @@ var express = require('express');
 var router = express.Router();
 var Product = require('../controllers/product.server.controllers');
 var multer = require('multer');
-var upload = multer(); // for parsing multipart/form-data
+var upload = multer({ dest: 'tmp/csv/' }); // for parsing multipart/form-data
 
 
 /* BEANS code generated for CRR*UD. */
@@ -16,6 +16,9 @@ router.get('/:slug' , Product.getProduct);
 
 /*Get all Products.*/
 router.get('/' , Product.getAllProducts);
+
+/*Update an product record*/
+router.post('/upload/price', upload.single('file'), /*auth.isAuthenticated,*/ Product.importProductPriceCSV);
 
 /*Update an product record*/
 router.post('/:product_id', upload.array(), /*auth.isAuthenticated,*/ Product.updateProduct);

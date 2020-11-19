@@ -88,7 +88,11 @@ exports.getDealer = function(req, res) {
     console.log('Dealer Controller: entering getDealer ');
     /*Validate for a null id*/
     if (!dealer_id) {
-        res.status(400).send("dealer ID is null");
+        res.status(400).jsonp({
+            status: 400,
+            data: {},
+            message: message.invalid_get_request
+        });
         return;
     }
     /* Query DB using sequelize api for a single dealer*/

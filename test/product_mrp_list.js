@@ -9,49 +9,36 @@ module.exports = function(sequelize, DataTypes) {
       allowNull: false,
       primaryKey: true
     },
-    product_id: {
-      type: DataTypes.INTEGER(11),
-      allowNull: true,
-      references: {
-        model: 'product',
-        key: 'id'
-      },
-      unique: "fk_product_mrp_list_product_id"
+    product_name: {
+      type: DataTypes.TEXT,
+      allowNull: true
     },
     productcode: {
-      type: DataTypes.STRING(100),
-      allowNull: true
-    },
-    branch: {
-      type: DataTypes.STRING(200),
-      allowNull: true
-    },
-    region: {
-      type: DataTypes.STRING(200),
-      allowNull: true
-    },
-    state: {
-      type: DataTypes.STRING(200),
-      allowNull: true
-    },
-    territory: {
-      type: DataTypes.STRING(255),
+      type: DataTypes.TEXT,
       allowNull: true
     },
     price: {
       type: DataTypes.FLOAT,
       allowNull: true
     },
-    pincode: {
-      type: DataTypes.STRING(255),
+    postal_office: {
+      type: DataTypes.TEXT,
+      allowNull: true
+    },
+    taluk: {
+      type: DataTypes.TEXT,
       allowNull: true
     },
     city: {
-      type: DataTypes.STRING(200),
+      type: DataTypes.STRING(255),
       allowNull: true
     },
-    lang: {
-      type: DataTypes.STRING(100),
+    state: {
+      type: DataTypes.STRING(255),
+      allowNull: true
+    },
+    pincode: {
+      type: DataTypes.STRING(255),
       allowNull: true
     },
     slug: {
