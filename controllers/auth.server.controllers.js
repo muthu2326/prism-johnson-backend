@@ -196,7 +196,7 @@ exports.forgotPassword = function(req, res) {
                 console.log(dealer);
                 if(dealer != null){
                     let name = user.dataValues.name
-                    let body = `<html><body>Hi ${name}, <br><br>Please click here to reset your password <a href="">Click here<></body></html>`
+                    let body = `<html><body>Hi ${name}, <br><br>Please click here to reset your password <a href="http://45.56.64.148:9192/auth/reset-pass">Click here<></body></html>`
                     sendEmail(email, "Reset Password",body)
                     console.log('sent email')
                     res.status(200).jsonp({
