@@ -115,7 +115,8 @@ exports.getProduct = function (req, res) {
                 where: {
                     productcode: product.productcode,
                     pincode: req.query.pincode ? req.query.pincode : '851111'
-                }
+                },
+                limit: 1
             }).then(p => {
                 if (p) {
                     product.price = p.price;
