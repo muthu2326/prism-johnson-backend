@@ -84,17 +84,20 @@ exports.createDealer = function(req, res) {
 
 /*Get a single dealer */
 exports.getDealer = function(req, res) {
-    var dealer_id = req.params.dealer_id;
     console.log('Dealer Controller: entering getDealer ');
-    /*Validate for a null id*/
+    var dealer_id = req.params.dealer_id;
+
     if (!dealer_id) {
         res.status(400).jsonp({
             status: 400,
             data: {},
-            message: message.invalid_get_request
+            error: {
+                msg: message.invalid_get_request
+            }
         });
         return;
     }
+    /*Validate for a null id*/
     /* Query DB using sequelize api for a single dealer*/
     let lang = req.query.lang ? req.query.lang.toLowerCase() : 'en';
     Dealer.findOne({
@@ -106,7 +109,7 @@ exports.getDealer = function(req, res) {
         console.log(dealer);
         res.status(200).jsonp({
             status: 200,
-            data: dealer,
+            data: dealer != null ? dealer : {},
             error: {}
         });
         return;
@@ -247,25 +250,34 @@ exports.updateDealer = function(req, res) {
     console.log('Dealer Controller: entering updateDealer ');
 
     var dealer_id = req.params.dealer_id;
+
+    if (!dealer_id) {
+        res.status(400).jsonp({
+            status: 400,
+            data: {},
+            error: {
+                msg: message.invalid_get_request
+            }
+        });
+        return;
+    }
+
+    let NOW = new Date()
+
     Dealer.update({
-        id : req.body.id,
-				region : req.body.region,
-				branch : req.body.branch,
-				territory : req.body.territory,
-				dealer_code : req.body.dealer_code,
-				name : req.body.name,
-				pincode : req.body.pincode,
-				address : req.body.address,
-				email : req.body.email,
-				password : req.body.password,
-				reset_pasword_link_sent : req.body.reset_pasword_link_sent,
-				lang : req.body.lang,
-				slug : req.body.slug,
-				created : req.body.created,
-				updated : req.body.updated,
-				contact_no : req.body.contact_no,
-				cities : req.body.cities,
-				state : req.body.state
+        region : req.body.region,
+        branch : req.body.branch,
+        territory : req.body.territory,
+        dealer_code : req.body.dealer_code,
+        name : req.body.name,
+        pincode : req.body.pincode,
+        address : req.body.address,
+        email : req.body.email,
+        lang : req.body.lang,
+        updated : NOW,
+        contact_no : req.body.contact_no,
+        cities : req.body.cities,
+        state : req.body.state
     }, {
         where: {
             /* dealer table primary key */
@@ -273,10 +285,37 @@ exports.updateDealer = function(req, res) {
         }
     }).then(function(result) {
         console.log('updated dealer', result);
-        res.send("dealer updated successfully");
+        if(result != 0){         
+            res.status(200).jsonp({
+                status: 200,
+                data: {
+                    msg: "successfully updated dealer " + dealer_id
+                },
+                error: {}
+            });
+            return;
+        }else{
+            res.status(200).jsonp({
+                status: 200,
+                data: {},
+                error: {
+                    msg: "Dealer not found for " + dealer_id
+                }
+            });
+            return;
+        }
     }).catch(function(err) {
         console.log('Could not update dealer record');
-        console.log('err: %j', err);
+        console.log('err:', err);
+        res.status(500).jsonp({
+            status: 500,
+            data: {},
+            error: {
+                msg: message.something_went_wrong,
+                err: err
+            }
+        });
+        return;
     });
 
 } /*End of updateDealer*/
@@ -287,8 +326,14 @@ exports.deleteDealer = function(req, res) {
 
     var dealer_id = req.params.dealer_id;
     /*Validate for a null dealer_id*/
-    if (!dealer_id) {
-        res.status(400).send("dealer ID is null");
+     if (!dealer_id) {
+        res.status(400).jsonp({
+            status: 400,
+            data: {},
+            error: {
+                msg: message.invalid_get_request
+            }
+        });
         return;
     }
     /* Delete dealer record*/
@@ -298,11 +343,26 @@ exports.deleteDealer = function(req, res) {
         }
     }).then(function(dealer) {
         console.log(dealer);
-        res.jsonp(dealer);
+        res.status(200).jsonp({
+            status: 200,
+            data: {
+                msg: "successfully removed dealer " + dealer_id
+            },
+            error: {}
+        });
+        return;
     }).catch(function(err) {
         console.log('could not delete dealer');
-        console.log('err: %j', err);
-
+        console.log('err:', err);
+        res.status(500).jsonp({
+            status: 500,
+            data: {},
+            error: {
+                msg: message.something_went_wrong,
+                err: err
+            }
+        });
+        return;
     });
 } /*End of deleteDealer*/
 
