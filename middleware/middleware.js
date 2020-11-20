@@ -24,7 +24,7 @@ exports.authenticate = (req, res, next) => {
         });
         return;
     }
-    let flag = true;
+    let flag = false;
     if(flag){
         if(token == 'user-qwert'){
             console.log('user role no session validation is required')
