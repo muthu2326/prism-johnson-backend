@@ -14,7 +14,7 @@ exports.authenticate = (req, res, next) => {
     console.log('req headers', req.headers)
 
     const token = req.headers.token;
-    let flag = false;
+    let flag = true;
     if(flag){
         if (!token) {
             res.status(401).jsonp({

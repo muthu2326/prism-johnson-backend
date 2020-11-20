@@ -372,11 +372,10 @@ exports.updateUser = function (req, res) {
             }
             if (!result.isDuplicate) {
                 console.log('inside dupcheck result false')
-                let password = bcrypt.hashSync(req.body.email, saltRounds);
+                
                 User.update({
                     name: req.body.name,
                     email: req.body.email.toLowerCase(),
-                    password: password,
                     address: req.body.address,
                     mobile: req.body.mobile,
                     pincode: req.body.pincode,
