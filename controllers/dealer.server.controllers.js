@@ -195,6 +195,14 @@ exports.importDealersDataCSV = function (req, res) {
     let dealers_list = []
     let lang = 'en';
 
+    res.status(201).jsonp({
+        status: 201,
+        data: {
+            msg: 'Your request is accepted'
+        },
+        error: {}
+    });
+
     fs.createReadStream(req.file.path)
         .pipe(csv.parse({
             headers: true
@@ -234,11 +242,6 @@ exports.importDealersDataCSV = function (req, res) {
         .on("end", function () {
             fs.unlinkSync(req.file.path);
             if (dealers_list.length > 0) {
-                res.status(200).jsonp({
-                    status: 200,
-                    data: dealers_list.length,
-                    error: {}
-                });
                 Dealer.bulkCreate(dealers_list, {
                         updateOnDuplicate: ["dealer_code", "name", "region", "branch", "territory", "pincode", "address", "email", "lang", "contact_no", "state", "cities"]
                     })
