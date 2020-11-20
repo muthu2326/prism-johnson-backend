@@ -14,6 +14,7 @@ var _state = require("./state");
 var _user = require("./user");
 var _sub_description = require("./sub_description");
 var _testimonial = require("./testimonial");
+var _session = require("./session");
 
 function initModels(sequelize) {
   var articles = _articles(sequelize, DataTypes);
@@ -31,6 +32,7 @@ function initModels(sequelize) {
   var user = _user(sequelize, DataTypes);
   var sub_description = _sub_description(sequelize, DataTypes);
   var testimonial = _testimonial(sequelize, DataTypes);
+  var session = _session(sequelize, DataTypes);
 
   return {
     articles,
@@ -48,6 +50,7 @@ function initModels(sequelize) {
     user,
     sub_description,
     testimonial,
+    session,
   };
 }
 module.exports = { initModels };

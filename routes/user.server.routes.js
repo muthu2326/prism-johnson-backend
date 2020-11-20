@@ -2,6 +2,7 @@
 var express = require('express');
 var router = express.Router();
 var User = require('../controllers/user.server.controllers');
+const {authenticate} = require('../middleware/middleware')
 var multer = require('multer');
 var upload = multer(); // for parsing multipart/form-data
 
@@ -19,8 +20,6 @@ router.get('/count/orders' , User.getAllUsersAndOrdersCount);
 
 /*Get single user*/
 router.get('/:user_id' , User.getUser);
-
-
 
 /*Get all Users.*/
 router.get('/' , User.getAllUsers);

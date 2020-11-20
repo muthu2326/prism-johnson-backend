@@ -36,5 +36,10 @@
 
     "testimonial_updated": "Successfully updated testimonial",
     "testimonial_deleted": "Successfully removed testimonial",
-    "testimonial_not_found": "Testimonial not found"
+    "testimonial_not_found": "Testimonial not found",
+
+    "session_expired": "Your session is expired, please re-login",
+    "authorization_not_found": "Authentication error. Token required.",
+    "invalid_authorization": "Authentication error. Token not found.",
+    "forbidden": "Your not authorized to perform this action"
 }

@@ -289,7 +289,7 @@ exports.getAllUsers = function (req, res) {
             }
         })
         .then(function (users) {
-            console.log('users', users)
+            console.log('users', users.length)
             /*Return an array of Users */
             if (users.length > 0) {
                 users.forEach(user => {
