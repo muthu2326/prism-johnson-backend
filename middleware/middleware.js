@@ -14,7 +14,7 @@ exports.authenticate = (req, res, next) => {
     console.log('req headers', req.headers)
 
     const token = req.headers.token;
-    let flag = true;
+    let flag = false;
     if(flag){
         if (!token) {
             res.status(401).jsonp({
@@ -46,6 +46,7 @@ exports.authenticate = (req, res, next) => {
                     if(NOW < session.dataValues.exipry_date){
                         console.log('session is valid')
                         console.log(JSON.stringify(session.dataValues))
+                        req.user_id = session.dataValues.user_id
                         next();
                     }else{
                         res.status(401).jsonp({

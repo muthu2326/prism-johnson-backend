@@ -191,11 +191,9 @@ exports.importDealersDataCSV = function (req, res) {
         });
         return;
     }
-
-    console.log('llllllllllllllllll')
     fs.createReadStream(req.file.path)
         .pipe(csv.parse({
-            headers: false
+            headers: true
         }))
     .on("data", function (data) {
         console.log('csv data: dealer')

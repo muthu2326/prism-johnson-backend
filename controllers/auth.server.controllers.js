@@ -394,3 +394,54 @@ exports.forgotPassword = function (req, res) {
     });
 
 }
+
+
+  
+  
+    // useEffect(() => {
+    // const msg = firebase.messaging();
+  
+    //   msg
+    //     .requestPermission()
+    //     .then(() => {
+    //       return msg.getToken();
+    //     })
+    //     .then((data) => {
+    //       console.warn("token", data);
+    //     });
+    // });
+
+exports.sendSinglenotification=function(token,topic){
+    var registrationToken = token;
+    var message = {
+      webpush: {
+        notification: {
+          title:"New Message!",
+          body:topic
+        },
+        fcm_options: {
+          link:"https://zero1-477bf.firebaseapp.com/users/my-account"
+        }
+      },
+      token: registrationToken
+    };
+  
+    admin.messaging().send(message)
+      .then((response) => {
+        console.log('Successfully sent message:', response);
+      })
+      .catch((error) => {
+        console.log('Error sending message:', error);
+      });
+  }
+
+exports.resetPassword = function (req, res) {
+    console.log('User Controller: resetPassword ');
+    console.log('request body :: ', req.body)
+    console.log('request params :: ', req.params)
+    console.log('request query :: ', req.query)
+
+    let user_id = req.user_id;
+
+    
+}
