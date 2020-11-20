@@ -198,7 +198,8 @@ exports.importDealersDataCSV = function (req, res) {
         }))
     .on("data", function (data) {
         console.log('csv data: dealer')
-        //console.log(data)
+        console.log(data)
+        return;
     })
     .on("end", function () {
         fs.unlinkSync(req.file.path);
