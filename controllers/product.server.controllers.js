@@ -176,7 +176,18 @@ exports.getProduct = function (req, res) {
         }else{
             res.status(200).jsonp({
                 status: 200,
-                data: {},
+                data: {
+                    csv_file_name: null,
+                    slug: null,
+                    media_type: "image",
+                    media_url: null,
+                    title: "",
+                    short_description: "",
+                    description: null,
+                    csv_file_name: null,
+                    features: [],
+                    productcode: null,
+                  },
                 error: {}
             });
         }
