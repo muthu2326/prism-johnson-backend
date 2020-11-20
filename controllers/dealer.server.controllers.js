@@ -192,17 +192,18 @@ exports.importDealersDataCSV = function (req, res) {
         return;
     }
 
+    console.log('llllllllllllllllll')
     fs.createReadStream(req.file.path)
         .pipe(csv.parse({
-            headers: true
+            headers: false
         }))
     .on("data", function (data) {
         console.log('csv data: dealer')
         console.log(data)
-        return;
     })
     .on("end", function () {
         fs.unlinkSync(req.file.path);
+        console.log('eeeeeeeeeeeeeeeee')
         Dealer.findAll().then(function(dealers) {
             /*Return an array of Dealers */
             if (dealers.length > 0) {

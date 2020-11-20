@@ -272,27 +272,25 @@ exports.forgotPassword = function (req, res) {
     }).then(function (user) {
         if (user != null) {
             let name = user.dataValues.name
-            let body = `<html><body>Hi ${name}, <br><br>Please click here to reset your password <a href="http://45.56.64.148:9192/auth/reset-pass">Click here</a></body></html>`
-            sendEmail(email, "Reset Password", body)
-            console.log('sent email')
-            res.status(200).jsonp({
-                status: 200,
-                data: {
-                    msg: `Successfully sent reset password link to your email ${email}`
-                },
-                error: {}
-            });
-            return;
-        } else {
-            Dealer.findOne({
-                where: {
-                    email: email
-                }
-            }).then(function (dealer) {
-                console.log(dealer);
-                if (dealer != null) {
-                    let name = dealer.dataValues.name
-                    let body = `<html><body>Hi ${name}, <br><br>Please click here to reset your password <a href="http://45.56.64.148:9192/auth/reset-pass">Click here<></body></html>`
+            let NOW = new Date()
+            let currentDatetime = new Date()
+            let token = uuidv4(12);
+            let expiry = currentDatetime.setDate(currentDatetime.getHours() + 1)
+            let session = {
+                user_id: user.dataValues.id,
+                email: user.dataValues.email,
+                role: user.dataValues.role,
+                token: token,
+                exipry_date: expiry,
+                created: NOW,
+                updated: NOW
+            }
+            Session.create(session)
+                .then((session) => {
+                    console.log('session created')
+                    console.log(session.dataValues)
+                    let tokenValue = session.dataValues.token
+                    let body = `<html><body>Hi ${name}, <br><br>Please click here to reset your password <a href="http://45.56.64.148:9192/auth/reset-pass?token=${tokenValue}">Click here</a><br><br>The link is valid for 1 hour</body></html>`
                     sendEmail(email, "Reset Password", body)
                     console.log('sent email')
                     res.status(200).jsonp({
@@ -303,6 +301,72 @@ exports.forgotPassword = function (req, res) {
                         error: {}
                     });
                     return;
+                })
+                .catch(function (err) {
+                    console.log('could not create session');
+                    console.log('err:', err);
+                    res.status(500).jsonp({
+                        status: 500,
+                        data: {},
+                        error: {
+                            msg: message.something_went_wrong,
+                            err: err
+                        }
+                    });
+                    return;
+                })
+        } else {
+            Dealer.findOne({
+                where: {
+                    email: email
+                }
+            }).then(function (dealer) {
+                console.log(dealer);
+                if (dealer != null) {
+                    let name = dealer.dataValues.name
+                    let NOW = new Date()
+                    let currentDatetime = new Date()
+                    let token = uuidv4(12);
+                    let expiry = currentDatetime.setDate(currentDatetime.getHours() + 1)
+                    let session = {
+                        user_id: dealer.dataValues.id,
+                        email: dealer.dataValues.email,
+                        role: dealer.dataValues.role,
+                        token: token,
+                        exipry_date: expiry,
+                        created: NOW,
+                        updated: NOW
+                    }
+                    Session.create(session)
+                        .then((session) => {
+                            console.log('session created')
+                            console.log(session.dataValues)
+                            let tokenValue = session.dataValues.token
+                            let body = `<html><body>Hi ${name}, <br><br>Please click here to reset your password <a href="http://45.56.64.148:9192/auth/reset-pass?token=${tokenValue}">Click here</a><br><br>The link is valid for 1 hour</body></html>`
+                            sendEmail(email, "Reset Password", body)
+                            console.log('sent email')
+                            res.status(200).jsonp({
+                                status: 200,
+                                data: {
+                                    msg: `Successfully sent reset password link to your email ${email}`
+                                },
+                                error: {}
+                            });
+                            return;
+                        })
+                        .catch(function (err) {
+                            console.log('could not create session');
+                            console.log('err:', err);
+                            res.status(500).jsonp({
+                                status: 500,
+                                data: {},
+                                error: {
+                                    msg: message.something_went_wrong,
+                                    err: err
+                                }
+                            });
+                            return;
+                        })
                 } else {
                     res.status(400).jsonp({
                         status: 400,
