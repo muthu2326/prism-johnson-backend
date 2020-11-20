@@ -4,29 +4,38 @@ var router = express.Router();
 var Dealer = require('../controllers/dealer.server.controllers');
 var multer = require('multer');
 var upload = multer({ dest: 'tmp/dealercsv/' }); // for parsing multipart/form-data
-
+const {
+    authenticate,
+    authorizeAdmin,
+    authorizeTTE,
+    authorizeDealer,
+    authorizeAll,
+    authorizeAdminTTE,
+    authorizeAdminDealer,
+    authorizeTTEDealer,
+} = require('../middleware/middleware');
 
 /* BEANS code generated for CRR*UD. */
 
 /*Create dealer record*/
-router.post('/', upload.array(), /*auth.isAuthenticated,*/ Dealer.createDealer);
+router.post('/', authenticate, upload.array(), Dealer.createDealer);
 
 /* Dealer locator */
-router.get('/locator' , Dealer.dealerLocator);
+router.get('/locator' , authenticate, Dealer.dealerLocator);
 
 /*Get single dealer*/
-router.get('/:dealer_id' , Dealer.getDealer);
+router.get('/:dealer_id' , authenticate, Dealer.getDealer);
 
 /*Get all Dealers.*/
-router.get('/' , Dealer.getAllDealers);
+router.get('/' , authenticate, Dealer.getAllDealers);
 
-router.post('/upload/dealers', upload.single('file'), /*auth.isAuthenticated,*/ Dealer.importDealersDataCSV);
+router.post('/upload/dealers', authenticate, upload.single('file'), Dealer.importDealersDataCSV);
 
 /*Update an dealer record*/
-router.post('/:dealer_id', upload.array(), /*auth.isAuthenticated,*/ Dealer.updateDealer);
+router.post('/:dealer_id', authenticate, upload.array(), Dealer.updateDealer);
 
 /*Delete dealer */
-router.delete('/:dealer_id', /*auth.isAuthenticated,*/ Dealer.deleteDealer);
+router.delete('/:dealer_id', authenticate, Dealer.deleteDealer);
 
 /*For pagination*/
 router.get('/:itemsPerPage/:pageNo' , Dealer.getAllDealersForPagination);

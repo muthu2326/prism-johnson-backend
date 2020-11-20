@@ -4,24 +4,33 @@ var router = express.Router();
 var Order = require('../controllers/orders.server.controllers');
 var multer = require('multer');
 var upload = multer(); // for parsing multipart/form-data
-
+const {
+    authenticate,
+    authorizeAdmin,
+    authorizeTTE,
+    authorizeDealer,
+    authorizeAll,
+    authorizeAdminTTE,
+    authorizeAdminDealer,
+    authorizeTTEDealer,
+} = require('../middleware/middleware');
 
 /* BEANS code generated for CRR*UD. */
 
 /*Create Order record*/
-router.post('/', upload.array(), /*auth.isAuthenticated,*/ Order.createOrder);
+router.post('/', authenticate, upload.array(), Order.createOrder);
 
 /*Get single order*/
-router.get('/:order_id' , Order.getOrder);
+router.get('/:order_id' , authenticate, Order.getOrder);
 
 /*Get all orders.*/
-router.get('/' , Order.getAllOrders);
+router.get('/' , authenticate, Order.getAllOrders);
 
 /*Update an order record*/
-router.post('/:order_id', upload.array(), /*auth.isAuthenticated,*/ Order.updateOrder);
+router.post('/:order_id', authenticate, upload.array(), Order.updateOrder);
 
 /*Delete order */
-router.delete('/:order_id', /*auth.isAuthenticated,*/ Order.deleteOrder);
+router.delete('/:order_id', authenticate, Order.deleteOrder);
 
 /*For pagination*/
 router.get('/:itemsPerPage/:pageNo' , Order.getAllOrdersForPagination);

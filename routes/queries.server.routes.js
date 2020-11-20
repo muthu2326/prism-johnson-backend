@@ -2,6 +2,16 @@
 var express = require('express');
 var router = express.Router();
 var Query = require('../controllers/queries.server.controllers');
+const {
+    authenticate,
+    authorizeAdmin,
+    authorizeTTE,
+    authorizeDealer,
+    authorizeAll,
+    authorizeAdminTTE,
+    authorizeAdminDealer,
+    authorizeTTEDealer,
+} = require('../middleware/middleware');
 var multer = require('multer');
 var upload = multer(); // for parsing multipart/form-data
 
@@ -9,19 +19,19 @@ var upload = multer(); // for parsing multipart/form-data
 /* BEANS code generated for CRR*UD. */
 
 /*Create queries record*/
-router.post('/', upload.array(), /*auth.isAuthenticated,*/ Query.createQuery);
+router.post('/', authenticate, upload.array(), Query.createQuery);
 
 /*Get single queries*/
-router.get('/:queries_id' , Query.getQuery);
+router.get('/:queries_id' , authenticate, Query.getQuery);
 
 /*Get all Queries.*/
-router.get('/' , Query.getAllQueries);
+router.get('/' , authenticate, Query.getAllQueries);
 
 /*Update an queries record*/
-router.post('/:queries_id', upload.array(), /*auth.isAuthenticated,*/ Query.updateQuery);
+router.post('/:queries_id', authenticate, upload.array(), Query.updateQuery);
 
 /*Delete queries */
-router.delete('/:queries_id', /*auth.isAuthenticated,*/ Query.deleteQuery);
+router.delete('/:queries_id', authenticate, Query.deleteQuery);
 
 /*For pagination*/
 router.get('/:itemsPerPage/:pageNo' , Query.getAllQueriesForPagination);

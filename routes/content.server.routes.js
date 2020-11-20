@@ -4,24 +4,33 @@ var router = express.Router();
 var Content = require('../controllers/content.server.controllers');
 var multer = require('multer');
 var upload = multer(); // for parsing multipart/form-data
-
+const {
+    authenticate,
+    authorizeAdmin,
+    authorizeTTE,
+    authorizeDealer,
+    authorizeAll,
+    authorizeAdminTTE,
+    authorizeAdminDealer,
+    authorizeTTEDealer,
+} = require('../middleware/middleware');
 
 /* BEANS code generated for CRR*UD. */
 
 /*Create content record*/
-router.post('/', upload.array(), /*auth.isAuthenticated,*/ Content.createContent);
+router.post('/', authenticate, upload.array(), /*auth.isAuthenticated,*/ Content.createContent);
 
 /*Get single content*/
-router.get('/:slug' , Content.getContent);
+router.get('/:slug' , authenticate, Content.getContent);
 
 /*Get all Contents.*/
-router.get('/' , Content.getAllContents);
+router.get('/' , authenticate, Content.getAllContents);
 
 /*Update an content record*/
-router.post('/:content_id', upload.array(), /*auth.isAuthenticated,*/ Content.updateContent);
+router.post('/:content_id', authenticate, upload.array(), /*auth.isAuthenticated,*/ Content.updateContent);
 
 /*Delete content */
-router.delete('/:content_id', /*auth.isAuthenticated,*/ Content.deleteContent);
+router.delete('/:content_id', authenticate, /*auth.isAuthenticated,*/ Content.deleteContent);
 
 /*For pagination*/
 router.get('/:itemsPerPage/:pageNo' , Content.getAllContentsForPagination);

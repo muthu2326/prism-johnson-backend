@@ -4,24 +4,33 @@ var router = express.Router();
 var Article = require('../controllers/articles.server.controllers');
 var multer = require('multer');
 var upload = multer(); // for parsing multipart/form-data
-
+const {
+    authenticate,
+    authorizeAdmin,
+    authorizeTTE,
+    authorizeDealer,
+    authorizeAll,
+    authorizeAdminTTE,
+    authorizeAdminDealer,
+    authorizeTTEDealer,
+} = require('../middleware/middleware');
 
 /* BEANS code generated for CRR*UD. */
 
 /*Create articles record*/
-router.post('/', upload.array(), /*auth.isAuthenticated,*/ Article.createArticle);
+router.post('/', authenticate, upload.array(), Article.createArticle);
 
 /*Get single articles*/
-router.get('/:slug' , Article.getArticle);
+router.get('/:slug' , authenticate, Article.getArticle);
 
 /*Get all Articles.*/
-router.get('/' , Article.getAllArticles);
+router.get('/' , authenticate, Article.getAllArticles);
 
 /*Update an articles record*/
-router.post('/:articles_id', upload.array(), /*auth.isAuthenticated,*/ Article.updateArticle);
+router.post('/:articles_id', authenticate, upload.array(), Article.updateArticle);
 
 /*Delete articles */
-router.delete('/:articles_id', /*auth.isAuthenticated,*/ Article.deleteArticle);
+router.delete('/:articles_id', authenticate, Article.deleteArticle);
 
 /*For pagination*/
 router.get('/:itemsPerPage/:pageNo' , Article.getAllArticlesForPagination);

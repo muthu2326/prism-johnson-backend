@@ -2,6 +2,16 @@
 var express = require('express');
 var router = express.Router();
 var State = require('../controllers/state.server.controllers');
+const {
+    authenticate,
+    authorizeAdmin,
+    authorizeTTE,
+    authorizeDealer,
+    authorizeAll,
+    authorizeAdminTTE,
+    authorizeAdminDealer,
+    authorizeTTEDealer,
+} = require('../middleware/middleware');
 var multer = require('multer');
 var upload = multer(); // for parsing multipart/form-data
 
@@ -15,7 +25,7 @@ router.post('/', upload.array(), /*auth.isAuthenticated,*/ State.createState);
 router.get('/:state_id' , State.getState);
 
 /*Get all States.*/
-router.get('/' , State.getAllStates);
+router.get('/' , authenticate, State.getAllStates);
 
 /*Update an State record*/
 router.post('/:state_id', upload.array(), /*auth.isAuthenticated,*/ State.updateState);
