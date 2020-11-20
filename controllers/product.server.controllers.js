@@ -110,7 +110,8 @@ exports.getProduct = function (req, res) {
         raw: true
     }).then(function (product) {
         // TODO:: handle no pincode
-        ProductMRP.findOne({
+        if(product != null){
+            ProductMRP.findOne({
                 attributes: ['price'],
                 where: {
                     productcode: product.productcode,
@@ -143,6 +144,7 @@ exports.getProduct = function (req, res) {
                             data: product,
                             error: {}
                         });
+                        return;
                     })
                     .catch(function (err) {
                         console.log('could not fetch product');
@@ -171,6 +173,25 @@ exports.getProduct = function (req, res) {
                 });
                 return;
             });
+        }else{
+            res.status(200).jsonp({
+                status: 200,
+                data: {},
+                error: {}
+            });
+        }
+    }).catch(function (err) {
+        console.log('could not fetch product price');
+        console.log('err: %j', err);
+        res.status(500).jsonp({
+            status: 500,
+            data: {},
+            error: {
+                msg: 'pincode is required to fetch product price',
+                err: err
+            }
+        });
+        return;
     })
 } /*End of getProduct*/
 
@@ -203,26 +224,45 @@ exports.importProductPriceCSV = function (req, res) {
                 .pipe(csv.parse({
                     headers: true
                 }))
-            .on("data", function (data) {
-                console.log('csv data: ')
-                if (data) {
-                    let pincode = data.Pincode
-                    products.forEach((item) => {
-                        let product_name = item.title
-                        if (data.hasOwnProperty(`${product_name}`)) {
-                            if(!uniquePincode.includes(pincode)){
-                                uniquePincode.push(pincode)
-                            }
-                            if(pincodeArray.includes(pincode)){ // checking for same pincode exists in the pincode array
-                                // console.log('pinocde exists')
-                                let count = 0
-                                pincodeArray.forEach((item) => { // getting same pincode count 
-                                    if(item == pincode){
-                                        count++
+                .on("data", function (data) {
+                    console.log('csv data: ')
+                    if (data) {
+                        let pincode = data.Pincode
+                        products.forEach((item) => {
+                            let product_name = item.title
+                            if (data.hasOwnProperty(`${product_name}`)) {
+                                if (!uniquePincode.includes(pincode)) {
+                                    uniquePincode.push(pincode)
+                                }
+                                if (pincodeArray.includes(pincode)) { // checking for same pincode exists in the pincode array
+                                    // console.log('pinocde exists')
+                                    let count = 0
+                                    pincodeArray.forEach((item) => { // getting same pincode count 
+                                        if (item == pincode) {
+                                            count++
+                                        }
+                                    })
+                                    if (count < products.length) { // checking pincode code < products length
+                                        console.log('count of pincode ', data.Pincode, count + 1)
+                                        let slug = slugify(`${uuidv4().slice(4, 12)}`)
+                                        let obj = {
+                                            product_name: item.title,
+                                            productcode: item.productcode,
+                                            price: parseFloat(data[`${product_name}`]),
+                                            postal_office: data.Taluk[0].toUpperCase() + data.PostalOffice.substr(1, data.PostalOffice.length).toLowerCase(),
+                                            taluk: data.Taluk[0].toUpperCase() + data.Taluk.substr(1, data.Taluk.length).toLowerCase(),
+                                            city: data['City/District'][0].toUpperCase() + data['City/District'].substr(1, data['City/District'].length).toLowerCase(),
+                                            state: data.State[0].toUpperCase() + data.State.substr(1, data['City/District'].length).toLowerCase(),
+                                            pincode: data.Pincode,
+                                            slug: slug,
+                                            created: NOW,
+                                            updated: NOW
+                                        }
+                                        pincodeArray.push(pincode)
+                                        product_price.push(obj)
                                     }
-                                })
-                                if(count < products.length){ // checking pincode code < products length
-                                    console.log('count of pincode ',data.Pincode, count + 1)
+                                } else {
+                                    console.log('no pincode found in pincode array', data.Pincode, 1)
                                     let slug = slugify(`${uuidv4().slice(4, 12)}`)
                                     let obj = {
                                         product_name: item.title,
@@ -230,7 +270,7 @@ exports.importProductPriceCSV = function (req, res) {
                                         price: parseFloat(data[`${product_name}`]),
                                         postal_office: data.Taluk[0].toUpperCase() + data.PostalOffice.substr(1, data.PostalOffice.length).toLowerCase(),
                                         taluk: data.Taluk[0].toUpperCase() + data.Taluk.substr(1, data.Taluk.length).toLowerCase(),
-                                        city:  data['City/District'][0].toUpperCase() + data['City/District'].substr(1, data['City/District'].length).toLowerCase(),
+                                        city: data['City/District'][0].toUpperCase() + data['City/District'].substr(1, data['City/District'].length).toLowerCase(),
                                         state: data.State[0].toUpperCase() + data.State.substr(1, data['City/District'].length).toLowerCase(),
                                         pincode: data.Pincode,
                                         slug: slug,
@@ -240,63 +280,44 @@ exports.importProductPriceCSV = function (req, res) {
                                     pincodeArray.push(pincode)
                                     product_price.push(obj)
                                 }
-                            }else{
-                                console.log('no pincode found in pincode array',data.Pincode, 1)
-                                let slug = slugify(`${uuidv4().slice(4, 12)}`)
-                                let obj = {
-                                    product_name: item.title,
-                                    productcode: item.productcode,
-                                    price: parseFloat(data[`${product_name}`]),
-                                    postal_office: data.Taluk[0].toUpperCase() + data.PostalOffice.substr(1, data.PostalOffice.length).toLowerCase(),
-                                    taluk: data.Taluk[0].toUpperCase() + data.Taluk.substr(1, data.Taluk.length).toLowerCase(),
-                                    city:  data['City/District'][0].toUpperCase() + data['City/District'].substr(1, data['City/District'].length).toLowerCase(),
-                                    state: data.State[0].toUpperCase() + data.State.substr(1, data['City/District'].length).toLowerCase(),
-                                    pincode: data.Pincode,
-                                    slug: slug,
-                                    created: NOW,
-                                    updated: NOW
-                                }
-                                pincodeArray.push(pincode)
-                                product_price.push(obj)
-                            }    
-                        }
-                    })
-                }
-            })
-            .on("end", function () {
-                fs.unlinkSync(req.file.path); // remove temp file
-                console.log('end of csv')
-                console.log('sample object in product_price array', product_price[0])
-                console.log('prices array length', product_price.length)
-                if(product_price.length > 0){
-                    ProductMRP.bulkCreate(product_price, {
-                        updateOnDuplicate: ["postal_office", "taluk", "price", "state", "city"]
-                    })
-                    .then(function (prices) {
-                        console.log('created bulkdata length',prices.length)
-                        console.log('pincodeArray', pincodeArray.length)
-                        console.log('unique pincode', uniquePincode.length)
-                        res.status(200).jsonp({
-                            status: 200,
-                            data: {
-                                msg: `Successfully created ${prices.length} price records for ${products.length} products`
-                            },
-                            error: {}
+                            }
+                        })
+                    }
+                })
+                .on("end", function () {
+                    fs.unlinkSync(req.file.path); // remove temp file
+                    console.log('end of csv')
+                    console.log('sample object in product_price array', product_price[0])
+                    console.log('prices array length', product_price.length)
+                    if (product_price.length > 0) {
+                        ProductMRP.bulkCreate(product_price, {
+                                updateOnDuplicate: ["postal_office", "taluk", "price", "state", "city"]
+                            })
+                            .then(function (prices) {
+                                console.log('created bulkdata length', prices.length)
+                                console.log('pincodeArray', pincodeArray.length)
+                                console.log('unique pincode', uniquePincode.length)
+                                res.status(200).jsonp({
+                                    status: 200,
+                                    data: {
+                                        msg: `Successfully created ${prices.length} price records for ${products.length} products`
+                                    },
+                                    error: {}
+                                });
+                                return;
+                            })
+                    } else {
+                        res.status(400).jsonp({
+                            status: 400,
+                            data: {},
+                            error: {
+                                msg: `No data found to price records for ${products.length} products`
+                            }
                         });
                         return;
-                    })
-                }else{
-                    res.status(400).jsonp({
-                        status: 400,
-                        data: {},
-                        error: {
-                            msg: `No data found to price records for ${products.length} products`
-                        }
-                    });
-                    return;
-                }
-            })
-        }else{
+                    }
+                })
+        } else {
             res.status(400).jsonp({
                 status: 400,
                 data: {},
