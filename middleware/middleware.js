@@ -14,18 +14,18 @@ exports.authenticate = (req, res, next) => {
     console.log('req headers', req.headers)
 
     const token = req.headers.token;
-    if (!token) {
-        res.status(401).jsonp({
-            status: 401,
-            data: {},
-            error: {
-                msg: message.authorization_not_found
-            }
-        });
-        return;
-    }
     let flag = false;
     if(flag){
+        if (!token) {
+            res.status(401).jsonp({
+                status: 401,
+                data: {},
+                error: {
+                    msg: message.authorization_not_found
+                }
+            });
+            return;
+        }
         if(token == 'user-qwert'){
             console.log('user role no session validation is required')
             next()
@@ -83,6 +83,7 @@ exports.authenticate = (req, res, next) => {
             })
         }
     }else{
+        console.log('skipping authentication')
         next()
     }
 }
