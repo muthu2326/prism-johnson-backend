@@ -163,6 +163,44 @@ exports.login = function (req, res) {
                 dealer.dataValues.cities = [];
                 dealer.dataValues.cities.push(thisDealerCities);
                 if (check_password) {
+                    let NOW = new Date()
+                    let currentDatetime = new Date()
+                    let token = uuidv4(12);
+                    let expiry = currentDatetime.setDate(currentDatetime.getDate() + 2)
+                    let session = {
+                        user_id: dealer.dataValues.id,
+                        email: dealer.dataValues.email,
+                        role: dealer.dataValues.role,
+                        token: token,
+                        exipry_date: expiry,
+                        created: NOW,
+                        updated: NOW
+                    }
+                    Session.create(session)
+                        .then((session) => {
+                            console.log('session created')
+                            console.log(session.dataValues)
+                            dealer.dataValues.token = session.dataValues.token
+                            res.status(200).jsonp({
+                                status: 200,
+                                data: user,
+                                message: message.success
+                            });
+                            return;
+                        })
+                        .catch(function (err) {
+                            console.log('could not create session');
+                            console.log('err:', err);
+                            res.status(500).jsonp({
+                                status: 500,
+                                data: {},
+                                error: {
+                                    msg: message.something_went_wrong,
+                                    err: err
+                                }
+                            });
+                            return;
+                        })
                     res.status(200).jsonp({
                         status: 200,
                         data: dealer,
