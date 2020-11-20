@@ -49,7 +49,7 @@ app.use(function(req, res, next) {
         res.setHeader('Access-Control-Allow-Origin', origin);
     //}
     res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
-    res.header('Access-Control-Allow-Headers', 'Origin, Content-Type, Authorization, Accept,Content-Length, X-Requested-With, X-PINGOTHER', 'token');
+    res.header('Access-Control-Allow-Headers', 'Origin, Content-Type, Authorization, Accept,Content-Length, X-Requested-With, X-PINGOTHER, token');
     res.header('Access-Control-Expose-Headers', 'X-Total-Count');
     res.header('X-Total-Count', 5000);
     
