@@ -180,8 +180,8 @@ exports.userRegistration = function (req, res) {
             }).then(function (user) {
                 console.log('created user', user);
                 delete user.dataValues.password
-                res.status(200).jsonp({
-                    status: 200,
+                res.status(201).jsonp({
+                    status: 201,
                     data: user,
                     error: {},
                 });
