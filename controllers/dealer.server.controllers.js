@@ -207,7 +207,7 @@ exports.importDealersDataCSV = function (req, res) {
             let password;
             let dealer_code = data['Dealer Code'];
             console.log('setting dealer_code as password for :: ', dealer_code)
-            
+
             password = bcrypt.hashSync(dealer_code, saltRounds);
 
             let obj = {
@@ -234,16 +234,22 @@ exports.importDealersDataCSV = function (req, res) {
         .on("end", function () {
             fs.unlinkSync(req.file.path);
             if (dealers_list.length > 0) {
+                res.status(200).jsonp({
+                    status: 200,
+                    data: dealers_list.length,
+                    error: {}
+                });
                 Dealer.bulkCreate(dealers_list, {
                         updateOnDuplicate: ["dealer_code", "name", "region", "branch", "territory", "pincode", "address", "email", "lang", "contact_no", "state", "cities"]
                     })
                     .then(function (dealersResponse) {
-                        res.status(200).jsonp({
-                            status: 200,
-                            data: dealersResponse.length,
-                            error: {}
-                        });
-                        return;
+                        // res.status(200).jsonp({
+                        //     status: 200,
+                        //     data: dealersResponse.length,
+                        //     error: {}
+                        // });
+                        console.log('dealersResponse created', dealersResponse.length)
+                        // return;
                     }).catch((err) => {
                         console.log('could not fetch all dealers');
                         console.log('err:', err);
