@@ -60,6 +60,7 @@ exports.createArticle = function(req, res) {
                     media_url: item.value.media_url,
                     sub_title: item.value.title,
                     description: item.value.description,
+                    descriptions: item.value.descriptions,
                     features: item.value.features,
                     lang: item.value.lang ? item.value.lang: 'en',
                     slug: item.value.slug? item.value.slug : slug,
@@ -334,13 +335,14 @@ exports.updateArticle = function(req, res) {
                     media_type: item.value.media_type,
                     sub_title: item.value.title,
                     description: item.value.description,
+                    descriptions : item.value.descriptions,
                     features: item.value.features,
                     lang: item.value.lang,
                     updated: NOW
                 }
             })
             console.log('sections', sections.length)
-            Section.bulkCreate(sections, {updateOnDuplicate: ["type", "media_type", "media_url", "sub_title", "description", "features", "lang", "updated"]})
+            Section.bulkCreate(sections, {updateOnDuplicate: ["type", "media_type", "media_url", "sub_title", "descriptions", "description", "features", "lang", "updated"]})
             .then(function(data){
                 console.log(data.length)
                 res.jsonp({

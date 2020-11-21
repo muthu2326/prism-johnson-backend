@@ -42,6 +42,10 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.TEXT,
       allowNull: true
     },
+    descriptions: {
+      type: DataTypes.JSON,
+      allowNull: true
+    },
     lang: {
       type: DataTypes.STRING(100),
       allowNull: true

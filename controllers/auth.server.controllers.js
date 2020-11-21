@@ -420,8 +420,8 @@ var admin = require("firebase-admin");
 var serviceAccount = require("../config/firebase.json");
 
 admin.initializeApp({
-  credential: admin.credential.cert(serviceAccount),
-  databaseURL: "https://firestore-demo-23.firebaseio.com"
+    credential: admin.credential.cert(serviceAccount),
+    databaseURL: "https://myproject-2728b.firebaseio.com"
 });
 
 
