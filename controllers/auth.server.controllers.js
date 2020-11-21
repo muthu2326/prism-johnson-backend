@@ -67,6 +67,7 @@ exports.login = function (req, res) {
                 role: role
             }
         }).then(function (user) {
+            console.log('user response', user)
             if (user != null) {
                 console.log(user.dataValues);
                 let check_password = bcrypt.compareSync(req.body.password, user.password);
@@ -275,7 +276,7 @@ exports.forgotPassword = function (req, res) {
             let NOW = new Date()
             let currentDatetime = new Date()
             let token = uuidv4(12);
-            let expiry = currentDatetime.setDate(currentDatetime.getHours() + 1)
+            let expiry = new Date(currentDatetime.setHours(currentDatetime.getHours() + 1))
             let session = {
                 user_id: user.dataValues.id,
                 email: user.dataValues.email,
@@ -293,14 +294,23 @@ exports.forgotPassword = function (req, res) {
                     let body = `<html><body>Hi ${name}, <br><br>Please click here to reset your password <a href="http://45.56.64.148:9192/auth/reset-pass?token=${tokenValue}">Click here</a><br><br>The link is valid for 1 hour</body></html>`
                     sendEmail(email, "Reset Password", body)
                     console.log('sent email')
-                    res.status(200).jsonp({
-                        status: 200,
-                        data: {
-                            msg: `Successfully sent reset password link to your email ${email}`
-                        },
-                        error: {}
-                    });
-                    return;
+                    User.update({
+                        reset_pasword_link_sent: 1
+                    }, {
+                        where: {
+                            id: user.dataValues.id
+                        }
+                    }).then((useResponse) => {
+                        console.log('user forgot password', useResponse)
+                        res.status(200).jsonp({
+                            status: 200,
+                            data: {
+                                msg: `Successfully sent reset password link to your email ${email}`
+                            },
+                            error: {}
+                        });
+                        return;
+                    })                   
                 })
                 .catch(function (err) {
                     console.log('could not create session');
@@ -345,14 +355,23 @@ exports.forgotPassword = function (req, res) {
                             let body = `<html><body>Hi ${name}, <br><br>Please click here to reset your password <a href="http://45.56.64.148:9192/auth/reset-pass?token=${tokenValue}">Click here</a><br><br>The link is valid for 1 hour</body></html>`
                             sendEmail(email, "Reset Password", body)
                             console.log('sent email')
-                            res.status(200).jsonp({
-                                status: 200,
-                                data: {
-                                    msg: `Successfully sent reset password link to your email ${email}`
-                                },
-                                error: {}
-                            });
-                            return;
+                            Dealer.update({
+                                reset_pasword_link_sent: 1
+                            }, {
+                                where: {
+                                    id: dealer.dataValues.id
+                                }
+                            }).then((dealerResponse) => {
+                                console.log('dealer forgot password', dealerResponse)
+                                res.status(200).jsonp({
+                                    status: 200,
+                                    data: {
+                                        msg: `Successfully sent reset password link to your email ${email}`
+                                    },
+                                    error: {}
+                                });
+                                return;
+                            })
                         })
                         .catch(function (err) {
                             console.log('could not create session');
@@ -441,7 +460,132 @@ exports.resetPassword = function (req, res) {
     console.log('request params :: ', req.params)
     console.log('request query :: ', req.query)
 
-    let user_id = req.user_id;
+    /**
+     * Check token validity from session table
+     * Get the user Id and fetch the user
+     * Encrypt the password
+     * Update the password and responsed back
+     *  */
 
-    
+    let token = req.headers.token
+
+    if (!token) {
+        res.status(401).jsonp({
+            status: 401,
+            data: {},
+            error: {
+                msg: message.authorization_not_found
+            }
+        });
+        return;
+    }
+
+    let user_id;
+    let role;
+    Session.findOne({
+        where: {
+            token: token
+        }
+    })
+    .then((session) => {
+        if(session != null){
+            console.log('token found for reset password')
+            let NOW = new Date()
+            console.log('checking current time with token expiry time')
+            console.log('NOW ', NOW, 'token expiry date time', session.dataValues.exipry_date )
+            console.log('result :: ', NOW < session.dataValues.exipry_date)
+            if(NOW < session.dataValues.exipry_date){
+                console.log('token is valid')
+                console.log(JSON.stringify(session.dataValues))
+                user_id = session.dataValues.user_id
+                role = session.dataValues.role
+                let password = req.body.password
+                let confirmPassword = req.body.confirmPassword
+                if(password != confirmPassword){
+                    res.status(400).jsonp({
+                        status: 40,
+                        data: {},
+                        error: {
+                            msg: message.password_not_matched
+                        }
+                    });
+                    return;
+                }else{
+                    let password = bcrypt.hashSync(req.body.password, saltRounds);
+                    if(role != 'dealer'){
+                        console.log(`changing password for ${role}`)
+                        User.update({
+                            password: password,
+                            reset_pasword_link_sent: 0
+                        }, {
+                            where: {
+                                id: user_id
+                            }
+                        }).then((user) => {
+                            console.log('user reset password', user)
+                            res.status(200).jsonp({
+                                status: 200,
+                                data: {
+                                    msg: `Successfully changed password`
+                                },
+                                error: {}
+                            });
+                            return;
+                        })
+                    }else{
+                        console.log(`changing password for ${role}`)
+                        Dealer.update({
+                            password: password,
+                            reset_pasword_link_sent: 0
+                        }, {
+                            where: {
+                                id: user_id
+                            }
+                        }).then((user) => {
+                            console.log('user reset password', user)
+                            res.status(200).jsonp({
+                                status: 200,
+                                data: {
+                                    msg: `Successfully changed password`
+                                },
+                                error: {}
+                            });
+                            return;
+                        })
+                    }
+                }
+            }else{
+                res.status(401).jsonp({
+                    status: 401,
+                    data: {},
+                    error: {
+                        msg: message.reset_link_expired
+                    }
+                });
+                return;
+            }
+        }else{
+            res.status(401).jsonp({
+                status: 401,
+                data: {},
+                error: {
+                    msg: message.invalid_authorization
+                }
+            });
+            return;
+        }
+    })
+    .catch((err) => {
+        console.log('Could not find session');
+        console.log('err:', err);
+        res.status(500).jsonp({
+            status: 500,
+            data: {},
+            error: {
+                msg: message.something_went_wrong,
+                err: err
+            }
+        });
+        return;
+    })
 }

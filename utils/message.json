@@ -41,5 +41,7 @@
     "session_expired": "Your session is expired, please re-login",
     "authorization_not_found": "Authentication error. Token required.",
     "invalid_authorization": "Authentication error. Token not found.",
-    "forbidden": "Your not authorized to perform this action"
+    "forbidden": "Your not authorized to perform this action",
+    "password_not_matched": "Password and Confirm password did not match",
+    "reset_link_expired": "Reset password link expired"
 }
