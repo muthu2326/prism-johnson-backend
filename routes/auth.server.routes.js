@@ -12,4 +12,6 @@ router.post('/forgotPassword', upload.array(), /*auth.isAuthenticated,*/ Auth.fo
 
 router.post('/resetPassword', upload.array(), /*auth.isAuthenticated,*/ Auth.resetPassword);
 
+router.post('/push-notification', upload.array(), /*auth.isAuthenticated,*/ Auth.sendSinglenotification);
+
 module.exports = router;

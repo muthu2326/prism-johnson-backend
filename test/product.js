@@ -30,7 +30,7 @@ module.exports = function(sequelize, DataTypes) {
       allowNull: true
     },
     description: {
-      type: DataTypes.TEXT,
+      type: DataTypes.JSON,
       allowNull: true
     },
     lang: {

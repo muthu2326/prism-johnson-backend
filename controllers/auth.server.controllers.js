@@ -415,32 +415,83 @@ exports.forgotPassword = function (req, res) {
 }
 
 
-  
-  
-    // useEffect(() => {
-    // const msg = firebase.messaging();
-  
-    //   msg
-    //     .requestPermission()
-    //     .then(() => {
-    //       return msg.getToken();
-    //     })
-    //     .then((data) => {
-    //       console.warn("token", data);
-    //     });
-    // });
+var admin = require("firebase-admin");
 
-exports.sendSinglenotification=function(token,topic){
+var serviceAccount = require("../config/firebase.json");
+
+admin.initializeApp({
+  credential: admin.credential.cert(serviceAccount),
+  databaseURL: "https://firestore-demo-23.firebaseio.com"
+});
+
+
+exports.sendSinglenotification = (req, res) =>{
+    console.log('Auth controller:: entering sendSinglenotification')
+
+    var tokenlist = req.body.token;
+    var content = req.body.msg
+
+    if(tokenlist.length==0){
+        res.status(400).jsonp({
+            status: 400,
+            data: {
+                msg: "Token must be provided!!"
+            },
+            error: {}
+        });
+        return;
+    }else if(tokenlist.length==1){
+      //Send Single Notification
+      
+        res.status(200).jsonp({
+            status: 200,
+            data: {
+                msg: "Notification sent"
+            },
+            error: {}
+        });
+      sendSinglenotification(tokenlist[0],content);
+    }else{
+      //Send multiple Notification
+      try {
+        res.status(200).jsonp({
+            status: 200,
+            data: {
+                msg: "Multiple Notification sent!!"
+            },
+            error: {}
+        });
+  
+        for(i=0;i<tokenlist.length;i++){
+          console.log("tokenlist:: "+tokenlist[i]);
+          sendSinglenotification(tokenlist[i],content);
+        }
+      } catch (err) {
+        console.log(error);
+        res.status(500).jsonp({
+            status: 500,
+            data: {},
+            error: {
+                msg: message.something_went_wrong,
+                err: err
+            }
+        });
+        return;
+      }
+    }
+  }
+
+  sendSinglenotification=function(token,topic){
     var registrationToken = token;
     var message = {
       webpush: {
         notification: {
           title:"New Message!",
           body:topic
-        },
-        fcm_options: {
-          link:"https://zero1-477bf.firebaseapp.com/users/my-account"
         }
+        // fcm_options: {
+        //   link:"https://firestore-demo-23.firebaseapp.com/users/my-account"
+        // }
       },
       token: registrationToken
     };

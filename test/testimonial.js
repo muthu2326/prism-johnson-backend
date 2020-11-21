@@ -45,6 +45,11 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.STRING(255),
       allowNull: true
     },
+    display_in_home_page: {
+      type: DataTypes.INTEGER(4),
+      allowNull: true,
+      defaultValue: 0
+    },
     created: {
       type: DataTypes.DATE,
       allowNull: true,
@@ -58,11 +63,6 @@ module.exports = function(sequelize, DataTypes) {
     avatar_img_url: {
       type: DataTypes.TEXT,
       allowNull: true
-    },
-    display_in_home_page: {
-      type: DataTypes.INTEGER(4),
-      allowNull: true,
-      defaultValue: 0
     }
   }, {
     sequelize,
