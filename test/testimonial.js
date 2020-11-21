@@ -58,6 +58,11 @@ module.exports = function(sequelize, DataTypes) {
     avatar_img_url: {
       type: DataTypes.TEXT,
       allowNull: true
+    },
+    display_in_home_page: {
+      type: DataTypes.INTEGER(4),
+      allowNull: true,
+      defaultValue: 0
     }
   }, {
     sequelize,
