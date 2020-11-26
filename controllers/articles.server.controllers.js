@@ -163,6 +163,7 @@ exports.getArticle = function(req, res) {
                 obj.value = section.dataValues
                 delete article.dataValues.sections[j].dataValues
                 article.dataValues.sections[j].dataValues = obj
+                article.dataValues.deleted_sections = [];
             })
             res.jsonp({
                 status: 200,
