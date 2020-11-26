@@ -76,25 +76,34 @@ exports.getAllProductMRPs = function (req, res) {
     /* Query DB using sequelize api for all ProductMRPs*/
 
     let limit = Number(req.query.limit ? req.query.limit : 0);
+    let page = 0;
+    if(req.query.page !== undefined) {
+        page = Number(req.query.page)*limit;
+    }
+    console.log(`>>>>> Page ${page}`);
+    console.log(`>>>>> Limit ${limit}`);
+    
     let state = req.query.state ? req.query.state : null
     let condition;
 
-    if(state != null & limit > 0){
+    if(state != null && limit > 0){
         condition = {
             where : {
                 state: state,
             },
-            limit: limit
+            limit: limit,
+            offset: page
         }
-    }else if(state != null& limit == 0){
+    }else if(state != null && limit == 0){
         condition = {
             where : {
                 state: state
             }
         }
-    }else if(state == null & limit > 0){
+    }else if(state == null && limit > 0){
         condition = {
-            limit : limit
+            limit : limit,
+            offset: page
         }
     }else{
         condition = {
@@ -102,15 +111,16 @@ exports.getAllProductMRPs = function (req, res) {
         }
     }
 
-    ProductMRP.findAll(condition)
+    ProductMRP.findAndCountAll(condition)
     .then(function (ProductMRPs) {
         /*Return an array of ProductMRPs */
-        if (ProductMRPs.length > 0) {
+        // console.log(ProductMRPs);
+        if (ProductMRPs.rows.length > 0) {
             res.status(200).jsonp({
                 status: 200,
                 data: {
-                    count: ProductMRPs.length,
-                    prices_list: ProductMRPs
+                    count: ProductMRPs.count,
+                    prices_list: ProductMRPs.rows
                 },
                 error: {}
             });
