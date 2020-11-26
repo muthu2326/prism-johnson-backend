@@ -144,7 +144,8 @@ exports.getTestimonial = function(req, res) {
 exports.getAllTestimonials = function(req, res) {
     console.log('Testimonial Controller: entering getAllTestimonials');
     console.log('req params :: ', req.params)
-    console.log('req query :: ', req.query)
+    console.log('req query :: ', req.query);
+    let queryFilter = {};
 
     /* Query DB using sequelize api for all Testimonials*/
 
@@ -158,12 +159,20 @@ exports.getAllTestimonials = function(req, res) {
         });
         return;
     }
+    let lang = req.query.lang;
+    if(req.query.homepage && req.query.homepage === "true") {
+        queryFilter.where = {
+            lang: lang,
+            display_in_home_page: true    
+        }
+    } else {
+        queryFilter.where = {
+            lang: lang
+        }
+    }
+    // console.log(`queryFilter: ${JSON.stringify(queryFilter)}`);
 
-    let lang = req.query.lang
-
-    Testimonial.findAll({
-        lang: lang
-    }).then(function(testimonials) {
+    Testimonial.findAll(queryFilter).then(function(testimonials) {
         /*Return an array of Testimonials */
         if (testimonials.length > 0) {
             res.status(200).jsonp({
