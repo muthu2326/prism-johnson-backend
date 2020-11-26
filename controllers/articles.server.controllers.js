@@ -307,6 +307,21 @@ exports.updateArticle = function(req, res) {
         });
         return;
     }
+    if(req.body.deleted_sections) {
+        /* Delete sections of an article */
+        Section.destroy({
+            where: {
+                id: req.body.deleted_sections,
+                lang: req.query.lang
+            }
+        })
+        .then((sectionsDestroyed) => {
+            console.log(`sectionsDestroyed result ${JSON.stringify(sectionsDestroyed)}`);
+        }).catch((err) => {
+            console.log('err in deleting sections for article_id', articles_id);
+            console.log(err);
+        })
+    }
 
     Article.update({
         type : req.body.type,
