@@ -551,7 +551,7 @@ exports.getAllUsersAndOrdersCount = function (req, res) {
     async.parallel({
         one: function (cb){
             User.findAll({
-                role: 'user'
+                where: {role: 'user'}
             })
             .then((users) => {
                 console.log('users found async', users.length)
