@@ -7,7 +7,7 @@ const log = require('./utils/logger').get();
 const nodemailer = require("nodemailer");
 var allowlist = ['http://localhost:3000', 'http://prism-johnson.digiapt.com']
 
-// var indexRouter = require('./routes-old/index');
+var indexRouter = require('./routes/index');
 // var authRouter = require('./routes-old/auth');
 // var usersRouter = require('./routes-old/users');
 // var pagesRouter = require('./routes-old/pages');
@@ -70,7 +70,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-// app.use('/', indexRouter);
+app.use('/', indexRouter);
 // app.use('/users', usersRouter);
 // app.use('/auth', authRouter);
 // app.use('/pages', pagesRouter);
