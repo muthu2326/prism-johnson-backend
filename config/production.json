@@ -2,11 +2,11 @@
     "env":"production",
     "log_level":"info",
     "db": {
-        "database": "prism_johnson",
-        "host": "localhost",
+        "database": "consumerapp",
+        "host": "consumerapp.cbo4wn4xa8wg.ap-south-1.rds.amazonaws.com",
         "port": 3306,
-        "user": "prism_johnson",
-        "password": "pri5wj0hns0N"
+        "user": "admin",
+        "password": "PrismCon#app321"
     },
     "sequelize": {
         "operatorsAliases": {
