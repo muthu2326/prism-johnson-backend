@@ -93,27 +93,42 @@ exports.getServiceProvider = function(req, res) {
 exports.getAllServiceProviders = function(req, res) {
     console.log('ServiceProvider Controller: entering getAllServiceProviders');
     /* Query DB using sequelize api for all ServiceProviders*/
-    let fetchQuery = `SELECT * FROM prismjohnson.service_providers`;
+    let apiResponse = {};
+    let fetchAllQuery = 'SELECT * ';
+    let countQuery = 'SELECT count(*) as count ';
+    let fetchQuery = `FROM prismjohnson.service_providers`;
     if(req.query.role && req.query.city && req.query.state) {
         console.log(`req.query.role: ${req.query.role}`);
         console.log(`req.query.state: ${req.query.state}`);
         console.log(`req.query.city: ${req.query.city}`);
-        fetchQuery = `SELECT * FROM prismjohnson.service_providers where roles like '%${req.query.role}%' and state='${req.query.state}' and city='${req.query.city}'`;
+        fetchQuery = `FROM prismjohnson.service_providers where roles like '%${req.query.role}%' and state='${req.query.state}' and city='${req.query.city}'`;
     } else if(req.query.role && req.query.pincode) {
         console.log(`req.query.role: ${req.query.role}`);
         console.log(`req.query.pincode: ${req.query.pincode}`);
-        fetchQuery = `SELECT * FROM prismjohnson.service_providers where roles like '%${req.query.role}%' and pin_code like '%${req.query.pincode}%'`;
+        fetchQuery = `FROM prismjohnson.service_providers where roles like '%${req.query.role}%' and pin_code like '%${req.query.pincode}%'`;
     } else if(req.query.role) {
         console.log(`req.query.role: ${req.query.role}`);
-        fetchQuery = `SELECT * FROM prismjohnson.service_providers where roles like '%${req.query.role}%'`;
+        fetchQuery = `FROM prismjohnson.service_providers where roles like '%${req.query.role}%'`;
     }
-    console.log(`fetchQuery: ${fetchQuery}`);
-    db.query(fetchQuery)
+    // constrcuting query without limit
+    countQuery = countQuery + fetchQuery;
+    if(req.query.limit >0 && req.query.page >=0) {
+        console.log(`Page & limit are found`);
+        fetchQuery = fetchQuery + ` limit ${req.query.limit} offset ${req.query.page * req.query.limit}`;
+    }
+    fetchAllQuery = fetchAllQuery + fetchQuery;
+    console.log(`fetchQuery: ${fetchAllQuery}`);
+    console.log(`countQuery: ${countQuery}`);
+    db.query(fetchAllQuery  )
     .then(result => {
-        let apiResponse = {};
-        apiResponse.status = 200;
-        apiResponse.data = result[0];
-        res.send(apiResponse);
+        db.query(countQuery)
+        .then(count => {
+            console.log(`>>>>>> Count = ${count}`);
+            apiResponse.status = 200;
+            apiResponse.count = count[0][0].count;
+            apiResponse.data = result[0];
+            res.send(apiResponse);
+        })
     })
     // ServiceProvider.findAll().then(function(serviceProviders) {
     //     /*Return an array of ServiceProviders */
