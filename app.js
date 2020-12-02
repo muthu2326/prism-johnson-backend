@@ -32,6 +32,7 @@ var productRouter = require('./routes/product.server.routes')
 var orderRouter = require('./routes/orders.server.routes')
 var testimonialRouter = require('./routes/testimonial.server.routes')
 var credentialsRouter = require('./routes/credentials.server.routes')
+var serviceProvidersRouter = require('./routes/service_providers.server.routes')
 
 var config = require('config');
 var app = express();
@@ -95,6 +96,7 @@ app.use('/api/v1/products', productRouter);
 app.use('/api/v1/orders', orderRouter);
 app.use('/api/v1/testimonials', testimonialRouter);
 app.use('/api/v1/credentials', credentialsRouter);
+app.use('/api/v1/service-providers', serviceProvidersRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
