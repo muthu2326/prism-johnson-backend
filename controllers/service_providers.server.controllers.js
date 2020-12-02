@@ -98,19 +98,19 @@ exports.getAllServiceProviders = function(req, res) {
     let apiResponse = {};
     let fetchAllQuery = 'SELECT * ';
     let countQuery = 'SELECT count(*) as count ';
-    let fetchQuery = `FROM prismjohnson.service_providers`;
+    let fetchQuery = `FROM prismjohnson.service_providers order by name`;
     if(req.query.role && req.query.city && req.query.state) {
         console.log(`req.query.role: ${req.query.role}`);
         console.log(`req.query.state: ${req.query.state}`);
         console.log(`req.query.city: ${req.query.city}`);
-        fetchQuery = `FROM prismjohnson.service_providers where roles like '%${req.query.role}%' and state='${req.query.state}' and city='${req.query.city}'`;
+        fetchQuery = `FROM prismjohnson.service_providers where roles like '%${req.query.role}%' and state='${req.query.state}' and city='${req.query.city}' order by name`;
     } else if(req.query.role && req.query.pincode) {
         console.log(`req.query.role: ${req.query.role}`);
         console.log(`req.query.pincode: ${req.query.pincode}`);
-        fetchQuery = `FROM prismjohnson.service_providers where roles like '%${req.query.role}%' and pin_code like '%${req.query.pincode}%'`;
+        fetchQuery = `FROM prismjohnson.service_providers where roles like '%${req.query.role}%' and pin_code like '%${req.query.pincode}%' order by name`;
     } else if(req.query.role) {
         console.log(`req.query.role: ${req.query.role}`);
-        fetchQuery = `FROM prismjohnson.service_providers where roles like '%${req.query.role}%'`;
+        fetchQuery = `FROM prismjohnson.service_providers where roles like '%${req.query.role}%' order by name`;
     }
     // constrcuting query without limit
     countQuery = countQuery + fetchQuery;
@@ -348,19 +348,19 @@ exports.importServiceProvidersDataCSV = function (req, res) {
             password = bcrypt.hashSync('service@123', saltRounds);
 
             let obj = {
-                name : data['Technocrat Name'],
-                email : data['Mail id'] === 'N/A' ? `noemail_${count}@example.com` : data['Mail id'],
-                mobile_number : data['Mobile Number'],
-                address : data['Address'],
-                pin_code : data['Pin Code'],
-                state : data['State'],
-                city : data['District'],
-                region : data['Region'],
-                branch : data['Branch'],
-                territory : data['Territory'],
-                tehsil : data['Tehsil'],
-                firm_name : data['Firm Name'],
-                office_phone_with_STD_code : data['Office Phone with STD Code'],
+                name : data['Technocrat Name'].trim(),
+                email : data['Mail id'] === 'N/A' ? `noemail_${count}@example.com` : data['Mail id'].trim(),
+                mobile_number : data['Mobile Number'].trim(),
+                address : data['Address'].trim(),
+                pin_code : data['Pin Code'].trim(),
+                state : data['State'].trim(),
+                city : data['District'].trim(),
+                region : data['Region'].trim(),
+                branch : data['Branch'].trim(),
+                territory : data['Territory'].trim(),
+                tehsil : data['Tehsil'].trim(),
+                firm_name : data['Firm Name'].trim(),
+                office_phone_with_STD_code : data['Office Phone with STD Code'].trim(),
                 roles : roles,
                 created : NOW,
                 updated : NOW
