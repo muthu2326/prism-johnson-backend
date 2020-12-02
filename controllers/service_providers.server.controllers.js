@@ -365,3 +365,26 @@ exports.importServiceProvidersDataCSV = function (req, res) {
             }
         })
 }
+
+/*Get all ServiceProviders state & cities*/
+exports.getAllServiceProvidersStateAndCities = function(req, res, callback) {
+    console.log('ServiceProvider Controller: entering getAllServiceProviders');
+    /* Query DB using sequelize api for all ServiceProviders*/
+    ServiceProvider.findAll({
+        attributes : ['state', 'city']
+    }).then(function(serviceProviders) {
+        /*Return an array of ServiceProviders */
+        if(callback) {
+            callback(null, serviceProviders);
+        } else {
+            res.jsonp(serviceProviders);
+        }
+        
+    }).catch(function(err) {
+        console.log('could not fetch all serviceProviders');
+        console.log('err: %j', err);
+        if(callback) {
+            callback(err, null);
+        }
+    });
+}; /*End of getAllServiceProviders*/

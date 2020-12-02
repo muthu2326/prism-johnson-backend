@@ -10,7 +10,7 @@ var message = require('../utils/message.json');
 /* var EntityModel = require('../models/init-models'); 
  * var Entity = EntityModel.initModels(db.getDbConnection())
  */
-
+var ServiceProviderController = require('./service_providers.server.controllers');
 var StateModel = require('../models/init-models');
 var State = StateModel.initModels(db).state
 
@@ -79,40 +79,53 @@ exports.getState = function (req, res) {
 exports.getAllStates = function (req, res) {
     console.log('State Controller: entering getAllStates');
     /* Query DB using sequelize api for all states*/
-    State.findAll({
-        include: City
-    }).then(function (states) {
-        /*Return an array of states */
-        if (states.length > 0) {
-            res.status(200).jsonp({
-                status: 200,
-                data: states,
-                error: {}
-            });
-            return;
-        } else {
-            res.status(400).jsonp({
-                status: 400,
-                data: [],
+    if(req.query.type === 'serviceproviders') {
+        ServiceProviderController.getAllServiceProvidersStateAndCities(req, res, (error, result) => {
+            if(error) {
+                res.status(500).send(error);
+            } else {
+                let apiResponse = {};
+                apiResponse.status = 200;
+                apiResponse.data = result;
+                res.send(apiResponse);
+            }
+        })
+    } else {
+        State.findAll({
+            include: City
+        }).then(function (states) {
+            /*Return an array of states */
+            if (states.length > 0) {
+                res.status(200).jsonp({
+                    status: 200,
+                    data: states,
+                    error: {}
+                });
+                return;
+            } else {
+                res.status(400).jsonp({
+                    status: 400,
+                    data: [],
+                    error: {
+                        msg: message.no_states_found
+                    }
+                });
+                return;
+            }
+        }).catch(function (err) {
+            console.log('could not fetch all states');
+            console.log('err: %j', err);
+            res.status(500).jsonp({
+                status: 500,
+                data: {},
                 error: {
-                    msg: message.no_states_found
+                    msg: message.something_went_wrong,
+                    err: err
                 }
             });
             return;
-        }
-    }).catch(function (err) {
-        console.log('could not fetch all states');
-        console.log('err: %j', err);
-        res.status(500).jsonp({
-            status: 500,
-            data: {},
-            error: {
-                msg: message.something_went_wrong,
-                err: err
-            }
         });
-        return;
-    });
+    }
 }; /*End of getAllStates*/
 
 
