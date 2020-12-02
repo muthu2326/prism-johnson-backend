@@ -30,12 +30,11 @@ const SERVICE_PROVIDER_ROLES = {
 exports.createServiceProvider = function(req, res) {
     // Log entry.
     console.log('ServiceProvider Controller: entering createServiceProvider ');
-
-    var v = new lib.Validator ("name:string,email:string,pin_code:string,state:string,district:string");
-
-    if (!v.run(req.body)) {
+    console.log(`req body : ${JSON.stringify(req.body)}`);
+    if (!req.body.name || !req.body.email || !req.body.pin_code || !req.body.city || !req.body.state) {
         return res.status(400).send({
-            error: v.errors
+            error: 'mandatory fields are missing',
+            message: 'email, name, state, district & pincode fields are mandatory'
         });
     }
 
@@ -47,20 +46,23 @@ exports.createServiceProvider = function(req, res) {
 				address : req.body.address,
 				pin_code : req.body.pin_code,
 				state : req.body.state,
-				district : req.body.district,
+				city : req.body.city,
 				region : req.body.region,
 				branch : req.body.branch,
 				territory : req.body.territory,
 				tehsil : req.body.tehsil,
 				firm_name : req.body.firm_name,
 				office_phone_with_STD_code : req.body.office_phone_with_STD_code,
-				roles : req.body.roles
+                roles : req.body.roles,
+                created : new Date(),
+                updated : new Date()
     }).then(function(result) {
         console.log('created service_providers', result);
         res.jsonp(result);
     }).catch(function(err) {
         console.log('Could not create service_providers record');
         console.log('err: %j', err);
+        res.jsonp(err);
     });
 
 } /*End of createServiceProvider*/
@@ -154,14 +156,15 @@ exports.updateServiceProvider = function(req, res) {
 				address : req.body.address,
 				pin_code : req.body.pin_code,
 				state : req.body.state,
-				district : req.body.district,
+				city : req.body.city,
 				region : req.body.region,
 				branch : req.body.branch,
 				territory : req.body.territory,
 				tehsil : req.body.tehsil,
 				firm_name : req.body.firm_name,
 				office_phone_with_STD_code : req.body.office_phone_with_STD_code,
-				roles : req.body.roles
+                roles : req.body.roles,
+                updated : new Date()
     }, {
         where: {
             /* service_providers table primary key */
