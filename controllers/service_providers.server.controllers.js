@@ -94,7 +94,16 @@ exports.getAllServiceProviders = function(req, res) {
     console.log('ServiceProvider Controller: entering getAllServiceProviders');
     /* Query DB using sequelize api for all ServiceProviders*/
     let fetchQuery = `SELECT * FROM prismjohnson.service_providers`;
-    if(req.query.role) {
+    if(req.query.role && req.query.city && req.query.state) {
+        console.log(`req.query.role: ${req.query.role}`);
+        console.log(`req.query.state: ${req.query.state}`);
+        console.log(`req.query.city: ${req.query.city}`);
+        fetchQuery = `SELECT * FROM prismjohnson.service_providers where roles like '%${req.query.role}%' and state='${req.query.state}' and city='${req.query.city}'`;
+    } else if(req.query.role && req.query.pincode) {
+        console.log(`req.query.role: ${req.query.role}`);
+        console.log(`req.query.pincode: ${req.query.pincode}`);
+        fetchQuery = `SELECT * FROM prismjohnson.service_providers where roles like '%${req.query.role}%' and pin_code like '%${req.query.pincode}%'`;
+    } else if(req.query.role) {
         console.log(`req.query.role: ${req.query.role}`);
         fetchQuery = `SELECT * FROM prismjohnson.service_providers where roles like '%${req.query.role}%'`;
     }
