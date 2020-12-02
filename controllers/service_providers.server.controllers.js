@@ -8,6 +8,7 @@ const bcrypt = require('bcrypt');
 const saltRounds = 10;
 
 var ServiceProviderModel = require('../models/init-models');
+var rawSeq = ServiceProviderModel.initModels(db);
 var ServiceProvider = ServiceProviderModel.initModels(db).service_providers
 var message = require('../utils/message.json');
 
@@ -92,13 +93,26 @@ exports.getServiceProvider = function(req, res) {
 exports.getAllServiceProviders = function(req, res) {
     console.log('ServiceProvider Controller: entering getAllServiceProviders');
     /* Query DB using sequelize api for all ServiceProviders*/
-    ServiceProvider.findAll().then(function(serviceProviders) {
-        /*Return an array of ServiceProviders */
-        res.jsonp(serviceProviders);
-    }).catch(function(err) {
-        console.log('could not fetch all serviceProviders');
-        console.log('err: %j', err);
-    });
+    let fetchQuery = `SELECT * FROM prismjohnson.service_providers`;
+    if(req.query.role) {
+        console.log(`req.query.role: ${req.query.role}`);
+        fetchQuery = `SELECT * FROM prismjohnson.service_providers where roles like '%${req.query.role}%'`;
+    }
+    console.log(`fetchQuery: ${fetchQuery}`);
+    db.query(fetchQuery)
+    .then(result => {
+        let apiResponse = {};
+        apiResponse.status = 200;
+        apiResponse.data = result[0];
+        res.send(apiResponse);
+    })
+    // ServiceProvider.findAll().then(function(serviceProviders) {
+    //     /*Return an array of ServiceProviders */
+    //     res.jsonp(serviceProviders);
+    // }).catch(function(err) {
+    //     console.log('could not fetch all serviceProviders');
+    //     console.log('err: %j', err);
+    // });
 }; /*End of getAllServiceProviders*/
 
 
@@ -284,14 +298,15 @@ exports.importServiceProvidersDataCSV = function (req, res) {
     }
 
     let service_providers_list = []
-
+    let count=0;
     fs.createReadStream(req.file.path)
         .pipe(csv.parse({
             headers: true
         }))
         .on("data", function (data) {
-            console.log('csv data: service provider');
-            console.log(data);
+            // console.log('csv data: service provider');
+            // console.log(data);
+            count++;
 
             //let slug = slugify(`${uuidv4().slice(4, 15)}`);
             //let password;
@@ -307,7 +322,7 @@ exports.importServiceProvidersDataCSV = function (req, res) {
 
             let obj = {
                 name : data['Technocrat Name'],
-                email : data['Mail id'],
+                email : data['Mail id'] === 'N/A' ? `noemail_${count}@example.com` : data['Mail id'],
                 mobile_number : data['Mobile Number'],
                 address : data['Address'],
                 pin_code : data['Pin Code'],
@@ -326,7 +341,8 @@ exports.importServiceProvidersDataCSV = function (req, res) {
             service_providers_list.push(obj)
         })
         .on("end", function () {
-            console.log(`service_providers_list : ${JSON.stringify(service_providers_list)}`);
+            // console.log(`service_providers_list : ${JSON.stringify(service_providers_list)}`);
+            console.log(`>>>>>>>>>>>>>>> service_providers_list ${service_providers_list.length}`);
             fs.unlinkSync(req.file.path);
             if (service_providers_list.length > 0) {
                 ServiceProvider.bulkCreate(service_providers_list, {
