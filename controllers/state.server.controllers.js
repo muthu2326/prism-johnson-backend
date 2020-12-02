@@ -84,9 +84,57 @@ exports.getAllStates = function (req, res) {
             if(error) {
                 res.status(500).send(error);
             } else {
+                let all_state_cities = []
+                let state = {};
+                let city = {};
+                let rawCities = [];
+                let stateId = 1;
+                let count = 0;
+                rawCities = result;
+                rawCities.forEach((element, index) => {
+                    if(index !== 0) {
+                        //console.log(`${count++} => element.state:${element.state} === rawCities[index-1].state:${rawCities[index-1].state}`);
+                        if(element.state === rawCities[index-1].state){
+                            //console.log(`same state`);
+                            city = {};
+                            city.name = element.city;
+                            city.id = index+1;
+                            state.cities.push(city);
+                        } else if(element.state !== rawCities[index-1].state){
+                            //console.log(`different state`);
+                            // console.log(`\n\n >>>>>>>> State: ${JSON.stringify(state)} >>>>>>>>`)
+                            all_state_cities.push(state);
+                            state = {};
+                            state.id = stateId;
+                            state.name = element.state;
+                            stateId ++;
+                            state.cities = [];
+                            city = {};
+                            city.name = element.city;
+                            city.id = index+1;
+                            state.cities.push(city);
+                        }
+                    } else if(index === 0){
+                        state.id = stateId;
+                        state.name = element.state;
+                        stateId ++;
+                        state.cities = [];
+                        city.name = element.city;
+                        city.id = index+1;
+                        state.cities.push(city);
+                        if(rawCities.count === 1) {
+                            all_state_cities.push(state);
+                        }
+                    }
+                    // console.log(`rawCities.length-1(${rawCities.length-1}) === index(${index})`);
+                    if(rawCities.length-1 === index) {
+                        console.log(`last index found `);
+                        all_state_cities.push(state);
+                    }
+                });
                 let apiResponse = {};
                 apiResponse.status = 200;
-                apiResponse.data = result;
+                apiResponse.data = all_state_cities;
                 res.send(apiResponse);
             }
         })

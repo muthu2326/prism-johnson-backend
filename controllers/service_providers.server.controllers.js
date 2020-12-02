@@ -371,7 +371,8 @@ exports.getAllServiceProvidersStateAndCities = function(req, res, callback) {
     console.log('ServiceProvider Controller: entering getAllServiceProviders');
     /* Query DB using sequelize api for all ServiceProviders*/
     ServiceProvider.findAll({
-        attributes : ['state', 'city']
+        attributes: [[Sequelize.fn('DISTINCT', Sequelize.col('city')), 'city'],'state'],
+        order : ['state']
     }).then(function(serviceProviders) {
         /*Return an array of ServiceProviders */
         if(callback) {
@@ -383,6 +384,7 @@ exports.getAllServiceProvidersStateAndCities = function(req, res, callback) {
     }).catch(function(err) {
         console.log('could not fetch all serviceProviders');
         console.log('err: %j', err);
+        console.log(err);
         if(callback) {
             callback(err, null);
         }
