@@ -102,18 +102,39 @@ exports.getAllServiceProviders = function(req, res) {
     let fetchQuery = `FROM prismjohnson.service_providers`;
     let orderByQuery = ` order by name`;
     let limitQuery = '';
-    if(req.query.role && req.query.city && req.query.state) {
-        console.log(`req.query.role: ${req.query.role}`);
-        console.log(`req.query.state: ${req.query.state}`);
-        console.log(`req.query.city: ${req.query.city}`);
-        fetchQuery = `FROM prismjohnson.service_providers where roles like '%${req.query.role}%' and state='${req.query.state}' and city='${req.query.city}'`;
-    } else if(req.query.role && req.query.pincode) {
-        console.log(`req.query.role: ${req.query.role}`);
-        console.log(`req.query.pincode: ${req.query.pincode}`);
-        fetchQuery = `FROM prismjohnson.service_providers where roles like '%${req.query.role}%' and pin_code like '%${req.query.pincode}%'`;
-    } else if(req.query.role) {
-        console.log(`req.query.role: ${req.query.role}`);
-        fetchQuery = `FROM prismjohnson.service_providers where roles like '%${req.query.role}%'`;
+    // for admin panel search
+    if(req.query.action === 'search') {
+        let position = 0;
+       for(key in req.query)  {
+            position ++;
+            console.log(`Key: ${key} and position:${position}`);
+            if(position ===4) {
+                if(key === 'role') {
+                    fetchQuery += ` where JSON_CONTAINS(lower(roles), lower('"${req.query[key].trim()}"'))`;
+                } else {
+                    fetchQuery += ` where lower(${key}) like lower('%${req.query[key].trim()}%')`;
+                }
+            }
+       }
+    } else {
+        // for consumer app filter
+        if(req.query.role && req.query.city && req.query.state) {
+            console.log(`req.query.role: ${req.query.role}`);
+            console.log(`req.query.state: ${req.query.state}`);
+            console.log(`req.query.city: ${req.query.city}`);
+            fetchQuery += ` where lower(roles) like lower('%${req.query.role}%') and state='${req.query.state}' and city='${req.query.city}'`;
+        }
+        // for consumer app filter 
+        else if(req.query.role && req.query.pincode) {
+            console.log(`req.query.role: ${req.query.role}`);
+            console.log(`req.query.pincode: ${req.query.pincode}`);
+            fetchQuery += ` where lower(roles) like lower('%${req.query.role}%') and pin_code like '%${req.query.pincode}%'`;
+        } 
+        // for admin panel
+        else if(req.query.role) {
+            console.log(`req.query.role: ${req.query.role}`);
+            fetchQuery += ` where lower(roles) like lower('%${req.query.role}%')`;
+        }
     }
     // constrcuting query without limit
     countQuery = countQuery + fetchQuery;
