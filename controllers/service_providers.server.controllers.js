@@ -13,13 +13,13 @@ var ServiceProvider = ServiceProviderModel.initModels(db).service_providers
 var message = require('../utils/message.json');
 
 const SERVICE_PROVIDER_ROLES = {
-    ARCHITECT : 'architect',
-    ENGINEER : 'engineer',
-    STRUCTURAL_ENGINEER : 'structural engineer',
-    INTERIOR_DESINER : 'interior designer',
-    VASTU_EXPERT : 'vastu expert',
-    CONTRACTOR : 'contractor',
-    MASON : 'mason'
+    ARCHITECT : 'Architect',
+    ENGINEER : 'Engineer',
+    STRUCTURAL_ENGINEER : 'Structural Engineer',
+    INTERIOR_DESINER : 'Interior Designer',
+    VASTU_EXPERT : 'Vastu Expert',
+    CONTRACTOR : 'Contractor',
+    MASON : 'Mason'
 }
 
 /*
@@ -94,32 +94,35 @@ exports.getServiceProvider = function(req, res) {
 /*Get all ServiceProviders */
 exports.getAllServiceProviders = function(req, res) {
     console.log('ServiceProvider Controller: entering getAllServiceProviders');
+    console.log(`req.query >>> ${JSON.stringify(req.query)}`);
     /* Query DB using sequelize api for all ServiceProviders*/
     let apiResponse = {};
     let fetchAllQuery = 'SELECT * ';
     let countQuery = 'SELECT count(*) as count ';
-    let fetchQuery = `FROM prismjohnson.service_providers order by name`;
+    let fetchQuery = `FROM prismjohnson.service_providers`;
+    let orderByQuery = ` order by name`;
+    let limitQuery = '';
     if(req.query.role && req.query.city && req.query.state) {
         console.log(`req.query.role: ${req.query.role}`);
         console.log(`req.query.state: ${req.query.state}`);
         console.log(`req.query.city: ${req.query.city}`);
-        fetchQuery = `FROM prismjohnson.service_providers where roles like '%${req.query.role}%' and state='${req.query.state}' and city='${req.query.city}' order by name`;
+        fetchQuery = `FROM prismjohnson.service_providers where roles like '%${req.query.role}%' and state='${req.query.state}' and city='${req.query.city}'`;
     } else if(req.query.role && req.query.pincode) {
         console.log(`req.query.role: ${req.query.role}`);
         console.log(`req.query.pincode: ${req.query.pincode}`);
-        fetchQuery = `FROM prismjohnson.service_providers where roles like '%${req.query.role}%' and pin_code like '%${req.query.pincode}%' order by name`;
+        fetchQuery = `FROM prismjohnson.service_providers where roles like '%${req.query.role}%' and pin_code like '%${req.query.pincode}%'`;
     } else if(req.query.role) {
         console.log(`req.query.role: ${req.query.role}`);
-        fetchQuery = `FROM prismjohnson.service_providers where roles like '%${req.query.role}%' order by name`;
+        fetchQuery = `FROM prismjohnson.service_providers where roles like '%${req.query.role}%'`;
     }
     // constrcuting query without limit
     countQuery = countQuery + fetchQuery;
     if(req.query.limit >0 && req.query.page >=0) {
         console.log(`Page & limit are found`);
-        fetchQuery = fetchQuery + ` limit ${req.query.limit} offset ${req.query.page * req.query.limit}`;
+        limitQuery = ` limit ${req.query.limit} offset ${req.query.page * req.query.limit}`;
     }
-    fetchAllQuery = fetchAllQuery + fetchQuery;
-    console.log(`fetchQuery: ${fetchAllQuery}`);
+    fetchAllQuery = fetchAllQuery + fetchQuery + orderByQuery + limitQuery;
+    console.log(`fetchAllQuery: ${fetchAllQuery}`);
     console.log(`countQuery: ${countQuery}`);
     db.query(fetchAllQuery  )
     .then(result => {
