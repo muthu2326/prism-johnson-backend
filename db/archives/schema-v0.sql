@@ -1,8 +1,8 @@
 -- MySQL dump 10.13  Distrib 5.7.32, for Linux (x86_64)
 --
--- Host: localhost    Database: prismjohnson
+-- Host: localhost    Database: prism_johnson
 -- ------------------------------------------------------
--- Server version	5.7.32-0ubuntu0.16.04.1
+-- Server version	5.7.32-0ubuntu0.18.04.1
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -36,7 +36,7 @@ CREATE TABLE `articles` (
   `created` datetime DEFAULT NULL,
   `updated` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=122 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -78,7 +78,7 @@ CREATE TABLE `city` (
   PRIMARY KEY (`id`),
   KEY `fk_state_id_idx` (`state_id`),
   CONSTRAINT `fk_state_id` FOREIGN KEY (`state_id`) REFERENCES `state` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=161 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -107,7 +107,7 @@ CREATE TABLE `content` (
   `updated_by` int(11) DEFAULT NULL,
   `order_how_it_works` json DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -120,11 +120,10 @@ DROP TABLE IF EXISTS `credentials`;
 CREATE TABLE `credentials` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `type` varchar(200) CHARACTER SET utf8 DEFAULT NULL,
-  `value` json DEFAULT NULL,
-  `created` datetime DEFAULT CURRENT_TIMESTAMP,
-  `updated` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `field_name` varchar(200) CHARACTER SET utf8 DEFAULT NULL,
+  `value` text CHARACTER SET utf8,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -148,14 +147,14 @@ CREATE TABLE `dealer` (
   `reset_pasword_link_sent` tinyint(4) DEFAULT '0',
   `lang` varchar(100) CHARACTER SET utf8 DEFAULT NULL,
   `slug` varchar(200) CHARACTER SET utf8 DEFAULT NULL,
-  `created` datetime DEFAULT CURRENT_TIMESTAMP,
-  `updated` datetime DEFAULT CURRENT_TIMESTAMP,
+  `created` datetime DEFAULT NULL,
+  `updated` datetime DEFAULT NULL,
   `contact_no` varchar(100) DEFAULT NULL,
   `state` varchar(200) DEFAULT NULL,
   `cities` varchar(200) DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `dealer_code_UNIQUE` (`dealer_code`)
-) ENGINE=InnoDB AUTO_INCREMENT=5604 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -215,7 +214,7 @@ CREATE TABLE `product` (
   `media_url` text CHARACTER SET utf8,
   `title` text CHARACTER SET utf8,
   `short_description` text CHARACTER SET utf8,
-  `description` json DEFAULT NULL,
+  `description` text CHARACTER SET utf8,
   `lang` varchar(100) CHARACTER SET utf8 DEFAULT NULL,
   `slug` varchar(200) CHARACTER SET utf8 DEFAULT NULL,
   `created` datetime DEFAULT CURRENT_TIMESTAMP,
@@ -238,19 +237,23 @@ DROP TABLE IF EXISTS `product_mrp_list`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `product_mrp_list` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `product_name` text CHARACTER SET utf8,
-  `productcode` text CHARACTER SET utf8,
+  `product_id` int(11) DEFAULT NULL,
+  `productcode` varchar(100) CHARACTER SET utf8 DEFAULT NULL,
+  `branch` varchar(200) CHARACTER SET utf8 DEFAULT NULL,
+  `region` varchar(200) CHARACTER SET utf8 DEFAULT NULL,
+  `state` varchar(200) CHARACTER SET utf8 DEFAULT NULL,
+  `territory` varchar(255) CHARACTER SET utf8 DEFAULT NULL,
   `price` float DEFAULT NULL,
-  `postal_office` text CHARACTER SET utf8,
-  `taluk` text CHARACTER SET utf8,
-  `city` varchar(255) CHARACTER SET utf8 DEFAULT NULL,
-  `state` varchar(255) CHARACTER SET utf8 DEFAULT NULL,
   `pincode` varchar(255) CHARACTER SET utf8 DEFAULT NULL,
+  `city` varchar(200) CHARACTER SET utf8 DEFAULT NULL,
+  `lang` varchar(100) CHARACTER SET utf8 DEFAULT NULL,
   `slug` varchar(200) CHARACTER SET utf8 DEFAULT NULL,
-  `created` datetime DEFAULT CURRENT_TIMESTAMP,
-  `updated` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=76967 DEFAULT CHARSET=latin1;
+  `created` datetime DEFAULT NULL,
+  `updated` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `fk_product_mrp_list_product_id_idx` (`product_id`),
+  CONSTRAINT `fk_product_mrp_list_product_id` FOREIGN KEY (`product_id`) REFERENCES `product` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -309,7 +312,6 @@ CREATE TABLE `sections` (
   `sub_title` text CHARACTER SET utf8,
   `sub_description` text CHARACTER SET utf8,
   `description` text CHARACTER SET utf8,
-  `descriptions` json DEFAULT NULL,
   `lang` varchar(100) CHARACTER SET utf8 DEFAULT NULL,
   `slug` varchar(200) CHARACTER SET utf8 DEFAULT NULL,
   `created` datetime DEFAULT NULL,
@@ -318,58 +320,7 @@ CREATE TABLE `sections` (
   PRIMARY KEY (`id`),
   KEY `fk_article_id_idx` (`article_id`),
   CONSTRAINT `fk_article_id` FOREIGN KEY (`article_id`) REFERENCES `articles` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=9918 DEFAULT CHARSET=latin1;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Table structure for table `service_providers`
---
-
-DROP TABLE IF EXISTS `service_providers`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `service_providers` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(255) NOT NULL,
-  `email` varchar(255) NOT NULL,
-  `mobile_number` varchar(50) DEFAULT NULL,
-  `address` varchar(1024) DEFAULT NULL,
-  `pin_code` varchar(6) NOT NULL,
-  `state` varchar(45) NOT NULL,
-  `city` varchar(45) NOT NULL,
-  `region` varchar(45) DEFAULT NULL,
-  `branch` varchar(45) DEFAULT NULL,
-  `territory` varchar(45) DEFAULT NULL,
-  `tehsil` varchar(45) DEFAULT NULL,
-  `firm_name` varchar(255) DEFAULT NULL,
-  `office_phone_with_STD_code` varchar(50) DEFAULT NULL,
-  `roles` json DEFAULT NULL,
-  `created` datetime DEFAULT CURRENT_TIMESTAMP,
-  `updated` datetime DEFAULT CURRENT_TIMESTAMP,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `email_UNIQUE` (`email`),
-  UNIQUE KEY `mobile_number_UNIQUE` (`mobile_number`)
-) ENGINE=InnoDB AUTO_INCREMENT=1344 DEFAULT CHARSET=latin1;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Table structure for table `session`
---
-
-DROP TABLE IF EXISTS `session`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `session` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `user_id` int(11) DEFAULT NULL,
-  `email` varchar(255) CHARACTER SET utf8 DEFAULT NULL,
-  `role` varchar(255) CHARACTER SET utf8 DEFAULT NULL,
-  `token` text CHARACTER SET utf8,
-  `created` datetime DEFAULT CURRENT_TIMESTAMP,
-  `exipry_date` datetime DEFAULT NULL,
-  `updated` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=53 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -392,29 +343,32 @@ CREATE TABLE `state` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Table structure for table `testimonial`
+-- Table structure for table `sub_description`
 --
 
-DROP TABLE IF EXISTS `testimonial`;
+DROP TABLE IF EXISTS `sub_description`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `testimonial` (
+CREATE TABLE `sub_description` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` text CHARACTER SET utf8,
-  `media_url` text CHARACTER SET utf8,
-  `media_type` varchar(255) CHARACTER SET utf8 DEFAULT NULL,
-  `profession` text CHARACTER SET utf8,
-  `testimonial` text CHARACTER SET utf8,
-  `email` varchar(255) CHARACTER SET utf8 DEFAULT NULL,
-  `slug` varchar(45) CHARACTER SET utf8 DEFAULT NULL,
-  `lang` varchar(100) DEFAULT NULL,
-  `mobile` varchar(255) CHARACTER SET utf8 DEFAULT NULL,
-  `display_in_home_page` tinyint(1) DEFAULT NULL,
-  `created` datetime DEFAULT CURRENT_TIMESTAMP,
-  `updated` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  `avatar_img_url` text,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=latin1;
+  `type` varchar(200) CHARACTER SET utf8 DEFAULT NULL,
+  `value` text CHARACTER SET utf8,
+  `section_id` int(11) DEFAULT NULL,
+  `product_id` int(11) DEFAULT NULL,
+  `productcode` varchar(100) CHARACTER SET utf8 DEFAULT NULL,
+  `content_id` int(11) DEFAULT NULL,
+  `lang` varchar(100) CHARACTER SET utf8 DEFAULT NULL,
+  `slug` varchar(200) CHARACTER SET utf8 DEFAULT NULL,
+  `created` datetime DEFAULT NULL,
+  `updated` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `fk_sub_content_id_idx` (`content_id`),
+  KEY `fk_sub_product_id_idx` (`product_id`),
+  KEY `fk_sub_section_id_idx` (`section_id`),
+  CONSTRAINT `fk_sub_content_id` FOREIGN KEY (`content_id`) REFERENCES `content` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `fk_sub_product_id` FOREIGN KEY (`product_id`) REFERENCES `product` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `fk_sub_section_id` FOREIGN KEY (`section_id`) REFERENCES `sections` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -436,13 +390,13 @@ CREATE TABLE `user` (
   `role` varchar(100) CHARACTER SET utf8 DEFAULT NULL,
   `slug` varchar(200) CHARACTER SET utf8 DEFAULT NULL,
   `lang` varchar(100) CHARACTER SET utf8 DEFAULT NULL,
-  `state` varchar(255) DEFAULT NULL,
-  `cities` json DEFAULT NULL,
+  `state_id` int(11) DEFAULT NULL,
+  `city_id` text CHARACTER SET utf8,
   `created` datetime DEFAULT NULL,
   `updated` datetime DEFAULT NULL,
   `password` varchar(200) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=90 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=35 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -454,4 +408,4 @@ CREATE TABLE `user` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-12-08  9:56:40
+-- Dump completed on 2020-11-13 19:57:13
