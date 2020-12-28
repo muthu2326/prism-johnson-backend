@@ -72,7 +72,7 @@ DROP DATABASE prism_johnson;
 
 CREATE DATABASE prism_johnson;
 
-CREATE USER 'prism_johnson'@'localhost' IDENTIFIED BY 'pr!5wj0hns0N';
+CREATE USER 'prism_johnson'@'localhost' IDENTIFIED BY 'prism123!';
 
 GRANT ALL ON prism_johnson.* TO 'prism_johnson'@'localhost';
 
@@ -117,6 +117,8 @@ mysql -u prism_johnson -p -h localhost prism_johnson < db/schema.sql
 ```
 #!shell
 
-mysql -u prism_johnson -p -h localhost prism_johnson < db/data_dump.sql
+# import db & data
+
+mysql -u prism_johnson -p -h localhost prism_johnson < db/dumps/dev_dump_28_Dec_20.sql
 
 ```
