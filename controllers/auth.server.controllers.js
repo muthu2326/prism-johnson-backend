@@ -73,7 +73,7 @@ exports.login = function (req, res) {
                 let check_password = bcrypt.compareSync(req.body.password, user.password);
                 console.log('check password', check_password)
                 delete user.dataValues.password
-                user.dataValues.cities = user.dataValues.city_id ? user.dataValues.city_id.split(",") : [];
+                //user.dataValues.cities = user.dataValues.cities.length > 0 ? user.dataValues.city_id.split(",") : [];
                 if (check_password) {
                     let NOW = new Date()
                     let currentDatetime = new Date()
@@ -163,6 +163,7 @@ exports.login = function (req, res) {
                 delete dealer.dataValues.cities;
                 dealer.dataValues.cities = [];
                 dealer.dataValues.cities.push(thisDealerCities);
+                //console.log("dealers city", thisDealerCities)
                 if (check_password) {
                     let NOW = new Date()
                     let currentDatetime = new Date()
