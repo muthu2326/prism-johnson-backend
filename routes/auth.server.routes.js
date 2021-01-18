@@ -8,6 +8,8 @@ var upload = multer(); // for parsing multipart/form-data
 /*user login*/
 router.post('/login', upload.array(), /*auth.isAuthenticated,*/ Auth.login);
 
+router.post('/changePassword', upload.array(), Auth.changePassword)
+
 router.post('/forgotPassword', upload.array(), /*auth.isAuthenticated,*/ Auth.forgotPassword);
 
 router.post('/resetPassword', upload.array(), /*auth.isAuthenticated,*/ Auth.resetPassword);
