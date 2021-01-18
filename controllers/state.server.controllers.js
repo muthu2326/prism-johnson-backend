@@ -140,7 +140,8 @@ exports.getAllStates = function (req, res) {
         })
     } else {
         State.findAll({
-            include: City
+            include: City,
+            order: [['name','ASC'],['cities','name','ASC']]
         }).then(function (states) {
             /*Return an array of states */
             if (states.length > 0) {
