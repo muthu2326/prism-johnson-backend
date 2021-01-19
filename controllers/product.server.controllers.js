@@ -17,7 +17,13 @@ const csv = require('fast-csv');
 var ProductModel = require('../models/init-models');
 var Product = ProductModel.initModels(db).product
 
+var UserModel = require('../models/init-models');
+var User = UserModel.initModels(db).user
+
 var ProductMRPModel = require('../models/init-models');
+const dealer = require('../models/dealer');
+const bcrypt = require('bcrypt');
+const saltRounds = 10;
 var ProductMRP = ProductMRPModel.initModels(db).product_mrp_list;
 
 /*
@@ -620,3 +626,103 @@ exports.getAllProductsBySearchText = function (req, res) {
         console.log('err: %j', err);
     });
 }; /*End of getAllProductsBySearchText*/
+
+//Import TTE Data CSV 
+exports.importTteDataCSV = function(req,res){
+    console.log('TTE Controller: entering importTteDataCSV');
+    let NOW = new Date()
+    console.log('req.file', req.file)
+
+    if (!req.file) {
+        res.status(400).jsonp({
+            status: 400,
+            data: {},
+            error: {
+                msg: message.invalid_get_request
+            }
+        });
+        return;
+    }
+
+    let tte_list = []
+    let lang = 'en';
+
+    res.status(201).jsonp({
+        status: 201,
+        data: {
+            msg: 'Your request is accepted'
+        },
+        error: {}
+    });
+
+    fs.createReadStream(req.file.path)
+        .pipe(csv.parse({
+            headers: true
+        }))
+        .on("data", function (data) {
+            console.log('csv data: tte')
+            console.log("data",data)
+
+            let slug = slugify(`${uuidv4().slice(4, 15)}`)
+            let password;
+            let tte_code = data['Email'];
+            console.log('setting tte_code as password for :: ', tte_code)
+
+            password = bcrypt.hashSync(tte_code, saltRounds);
+
+            let obj = {
+                name: data['Name'],
+                mobile: data['Mobile'],
+                address: data['Address'],
+                cities: data['Cities'],
+                state: data['State'],
+                pincode: data['Pincode'],
+                email: data['Email'],
+                password: password,
+                reset_pasword_link_sent: 0,
+                lang: lang,
+                slug: slug,
+                created: NOW,
+                updated: NOW
+            }
+            tte_list.push(obj)
+        })
+        .on("end", function () {
+            fs.unlinkSync(req.file.path);
+            if (tte_list.length > 0) {
+                User.bulkCreate(tte_list, {
+                        updateOnDuplicate: ["name", "pincode", "address", "email", "lang", "contact_no", "state", "cities", "password"]
+                    })
+                    .then(function (tteResponse) {
+                        // res.status(200).jsonp({
+                        //     status: 200,
+                        //     data: dealersResponse.length,
+                        //     error: {}
+                        // });
+                        console.log('dealersResponse created', tteResponse.length)
+                        // return;
+                    }).catch((err) => {
+                        console.log('could not fetch all dealers');
+                        console.log('err:', err);
+                        res.status(500).jsonp({
+                            status: 500,
+                            data: {},
+                            error: {
+                                msg: message.something_went_wrong,
+                                err: err
+                            }
+                        });
+                        return;
+                    })
+            } else {
+                res.status(400).jsonp({
+                    status: 400,
+                    data: {},
+                    error: {
+                        msg: `No tte data found for creation`
+                    }
+                });
+                return;
+            }
+        })
+}

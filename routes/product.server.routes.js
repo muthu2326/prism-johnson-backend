@@ -31,6 +31,9 @@ router.get('/' ,authenticate, Product.getAllProducts);
 /*Update an product record*/
 router.post('/upload/price', authenticate, upload.single('file'),  Product.importProductPriceCSV);
 
+/*Bulk import tte*/
+router.post('/upload/tte', authenticate, upload.single('file'), Product.importTteDataCSV);
+
 /* Get all products mrp */
 router.get('/prices/list', authenticate, ProductsMRP.getAllProductMRPs);
 
