@@ -27,6 +27,8 @@ router.post('/register', authenticate, upload.array(), User.userRegistration);
 
 router.get('/count/orders', authenticate, User.getAllUsersAndOrdersCount);
 
+router.get('/count/orders/fordealers', authenticate, User.getAllUsersAndOrdersCountDealer);
+
 /*Get single user*/
 router.get('/:user_id', authenticate, User.getUser);
 

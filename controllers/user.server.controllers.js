@@ -606,6 +606,73 @@ exports.getAllUsersAndOrdersCount = function (req, res) {
     })
 }
 
+exports.getAllUsersAndOrdersCountDealer= function(req,res){
+    console.log('request body :: ', req.query)
+    console.log('request body :: ', req.params)
+
+    let countObj = {};
+
+    async.parallel({
+        one: function (cb){
+            User.findAll({
+                where: {role: 'user'}
+            })
+            .then((users) => {
+                console.log('users found async', users.length)
+                cb(null, users)
+            }).catch((err) => {
+                console.log('err:', err);
+                cb(err, null)
+            })
+        },
+        two: function(cb){
+            Order.findAll({
+                where:{dealer_id: req.query.id}
+            })
+            .then((orders) => {
+                    console.log('orders found async', orders.length)
+                    cb(null, orders)
+            }).catch((err) => {
+                console.log('err:', err);
+                cb(err, null)
+            })
+        }
+    }, function(err, result){
+        if(err){
+            console.log('err in async parallel: ', err);
+            res.status(500).jsonp({
+                status: 500,
+                data: {},
+                error: {
+                    msg: message.something_went_wrong,
+                    err: err
+                }
+            });
+            return
+        }else{
+
+            let usersCount = result.one.length
+            let ordersSummited = result.two.filter((order) => order.status == 'Submitted')
+            let ordersAssigned = result.two.filter((order) => order.status == 'Assigned')
+            let ordersCompleted = result.two.filter((order) => order.status == 'Completed')
+            let ordersCancelled = result.two.filter((order) => order.status == 'Cancelled')
+
+            countObj.usersCount = usersCount
+            countObj.ordersPlaced = ordersSummited.length
+            countObj.ordersAssigned = ordersAssigned.length
+            countObj.ordersCompleted = ordersCompleted.length
+            countObj.ordersCancelled = ordersCancelled.length
+
+            res.status(200).jsonp({
+                status: 200,
+                data: countObj,
+                error: {}
+            });
+        }
+    })
+}
+
+
 /*Get all Users for pagination */
 exports.getAllUsersForPagination = function (req, res) {
     console.log('User Controller: entering getAllUsersForPagination');
@@ -706,3 +773,7 @@ exports.getAllUsersBySearchText = function (req, res) {
         console.log('err: %j', err);
     });
 }; /*End of getAllUsersBySearchText*/
+
+//To get the count of all users visited the site
+
+exports.getAllUsers
