@@ -337,7 +337,8 @@ exports.updateArticle = function(req, res) {
     }, {
         where: {
             /* articles table primary key */
-            id: articles_id
+            id: articles_id,
+            //order:[['articles','ASC']]
         }
     }).then(function(result) {
         console.log('updated articles', result);

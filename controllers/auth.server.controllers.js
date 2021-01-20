@@ -293,7 +293,7 @@ exports.forgotPassword = function (req, res) {
                     console.log(session.dataValues)
                     let tokenValue = session.dataValues.token
                     console.log("token value", tokenValue)
-                    let body = `<html><body>Hi ${name}, <br><br>Please click here to reset your password <a href="http://45.56.64.148:9192/auth/reset-pass?token=${tokenValue}">Click here</a><br><br>The link is valid for 1 hour</body></html>`
+                    let body = `<html><body>Hi ${name}, <br><br>Please click here to reset your password <a href="http://45.56.64.148:9192/auth/reset-pass/token=${tokenValue}">Click here</a><br><br>The link is valid for 1 hour</body></html>`
                     sendEmail(email, "Reset Password", body)
                     console.log('sent email')
                     User.update({
@@ -683,6 +683,9 @@ exports.changePassword =  function(req, res){
             }
         }).then(function(user){
             if(user != null){
+
+                console.log("req body old password", req.body.oldPassword)
+                console.log("user.password", user.password)
                 let check_password = bcrypt.compareSync(req.body.oldPassword, user.password)
                 console.log("check password", check_password)
 
@@ -692,7 +695,7 @@ exports.changePassword =  function(req, res){
                     if(password != confirmPassword)
                     {
                         res.status(400).jsonp({
-                            status: 40,
+                            status: 400,
                             data: {},
                             error:{
                                 msg: message.password_not_matched
@@ -722,7 +725,7 @@ exports.changePassword =  function(req, res){
                     }
                 }else{
                     res.status(400).jsonp({
-                        status: 40,
+                        status: 400,
                         data: {},
                         error:{
                             msg: message.password_not_matched
