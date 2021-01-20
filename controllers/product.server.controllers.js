@@ -647,8 +647,8 @@ exports.importTteDataCSV = function(req,res){
     let tte_list = []
     let lang = 'en';
 
-    res.status(201).jsonp({
-        status: 201,
+    res.status(200).jsonp({
+        status: 200,
         data: {
             msg: 'Your request is accepted'
         },
