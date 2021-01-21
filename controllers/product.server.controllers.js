@@ -687,7 +687,10 @@ exports.importTteDataCSV = function(req,res){
                 created: NOW,
                 updated: NOW
             }
-            tte_list.push(obj)
+            if(obj.email !== ''){
+                tte_list.push(obj)
+            }
+            
         })
         .on("end", function () {
             fs.unlinkSync(req.file.path);
