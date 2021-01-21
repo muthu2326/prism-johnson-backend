@@ -239,8 +239,7 @@ exports.getAllArticles = function(req, res) {
         include: [{
             model: Section,
             where: {
-                lang: lang,
-                order:[['created','ASC']]
+                lang: lang
             }
         }]
     }).then(function(articles) {
@@ -338,7 +337,7 @@ exports.updateArticle = function(req, res) {
     }, {
         where: {
             /* articles table primary key */
-            id: articles_id,
+            id: articles_id
         }
     }).then(function(result) {
         console.log('updated articles', result);
@@ -356,11 +355,10 @@ exports.updateArticle = function(req, res) {
                     features: item.value.features,
                     lang: item.value.lang,
                     created: item.value.created,
-                    updated: NOW  
-                }  
+                    updated: NOW
+                }
             })
             console.log('sections', sections.length)
-            console.log('sections', sections)
             Section.bulkCreate(sections, {updateOnDuplicate: ["type", "media_type", "media_url", "sub_title", "descriptions", "description", "features", "lang", "updated"]})
             .then(function(data){
                 console.log(data.length)
