@@ -355,6 +355,7 @@ exports.updateArticle = function(req, res) {
                     descriptions : item.value.descriptions,
                     features: item.value.features,
                     lang: item.value.lang,
+                    created: item.value.created,
                     updated: NOW  
                 }  
             })

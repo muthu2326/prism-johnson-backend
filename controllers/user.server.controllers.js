@@ -610,6 +610,11 @@ exports.getAllUsersAndOrdersCountDealer= function(req,res){
     console.log('request body :: ', req.query)
     console.log('request body :: ', req.params)
 
+   /* let dealer_id = req.query.id
+    let lang = req.query.lang ? req.query.lang.toLowerCase() : 'en';
+    let cities = req.query.cities
+    let where_condition;*/
+
     let countObj = {};
 
     async.parallel({
@@ -626,6 +631,21 @@ exports.getAllUsersAndOrdersCountDealer= function(req,res){
             })
         },
         two: function(cb){
+           /* if(dealer_id){
+                where_condition = {
+                    dealer_id: dealer_id,
+                    lang: lang
+                }
+            }else if(cities){
+                where_condition = {
+                    city: cities.split(','),
+                    lang: lang
+                }
+            }else{
+                where_condition = {
+                    lang: lang
+                }
+            }*/
             Order.findAll({
                 where:{dealer_id: req.query.id}
             })
@@ -636,6 +656,94 @@ exports.getAllUsersAndOrdersCountDealer= function(req,res){
                 console.log('err:', err);
                 cb(err, null)
             })
+        }
+    }, function(err, result){
+        if(err){
+            console.log('err in async parallel: ', err);
+            res.status(500).jsonp({
+                status: 500,
+                data: {},
+                error: {
+                    msg: message.something_went_wrong,
+                    err: err
+                }
+            });
+            return
+        }else{
+
+            let usersCount = result.one.length
+            let ordersSummited = result.two.filter((order) => order.status == 'Submitted')
+            let ordersAssigned = result.two.filter((order) => order.status == 'Assigned')
+            let ordersCompleted = result.two.filter((order) => order.status == 'Completed')
+            let ordersCancelled = result.two.filter((order) => order.status == 'Cancelled')
+
+            countObj.usersCount = usersCount
+            countObj.ordersPlaced = ordersSummited.length
+            countObj.ordersAssigned = ordersAssigned.length
+            countObj.ordersCompleted = ordersCompleted.length
+            countObj.ordersCancelled = ordersCancelled.length
+
+            res.status(200).jsonp({
+                status: 200,
+                data: countObj,
+                error: {}
+            });
+        }
+    })
+}
+
+exports.getAllUsersAndOrdersCountTte= function (req,res){
+    console.log('request query :: ', req.query.cities)
+    console.log('request length:: ', req.query.cities.length)
+    console.log('request split value :: ', req.query.cities.split(','))
+    console.log('request body :: ', req.params)
+
+    let countObj = {};
+
+    let cities = req.query.cities 
+
+    async.parallel({
+        one: function (cb){
+            User.findAll({
+                where: {
+                    role: 'user',        
+            }
+            })
+            .then((users) => {
+                console.log('users found async', users.length)
+                cb(null, users)
+            }).catch((err) => {
+                console.log('err:', err);
+                cb(err, null)
+            })
+        },
+        two: function(cb){
+            if(cities){
+                //match the city and send back the order count
+                Order.findAll({
+                    where:{
+                        city: cities.split(',')
+                    }
+                })
+                .then((orders) => {
+                        console.log('orders found async', orders.length)
+                        cb(null, orders)
+                }).catch((err) => {
+                    console.log('err:', err);
+                    cb(err, null)
+                })
+            }else{
+                //send all the order counts
+                Order.findAll()
+            .then((orders) => {
+                    console.log('orders found async', orders.length)
+                    cb(null, orders)
+            }).catch((err) => {
+                console.log('err:', err);
+                cb(err, null)
+            })
+            }
+            
         }
     }, function(err, result){
         if(err){
