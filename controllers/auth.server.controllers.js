@@ -266,10 +266,12 @@ exports.forgotPassword = function (req, res) {
     }
 
     let email = req.body.email
+    let role= req.body.role
 
     User.findOne({
         where: {
-            email: email
+            email: email,
+            role: role
         }
     }).then(function (user) {
         if (user != null) {
@@ -515,6 +517,7 @@ exports.resetPassword = function (req, res) {
     console.log('request body :: ', req.body)
     console.log('request params :: ', req.params)
     console.log('request query :: ', req.query)
+    console.log('req', req)
 
     /**
      * Check token validity from session table
@@ -551,7 +554,7 @@ exports.resetPassword = function (req, res) {
                 console.log('NOW ', NOW, 'token expiry date time', session.dataValues.exipry_date)
                 console.log('result :: ', NOW < session.dataValues.exipry_date)
                 if (NOW < session.dataValues.exipry_date) {
-                    console.log('token is valid')
+                    console.log('token is valid', session.dataValues)
                     console.log(JSON.stringify(session.dataValues))
                     user_id = session.dataValues.user_id
                     role = session.dataValues.role
