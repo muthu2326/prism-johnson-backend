@@ -356,7 +356,7 @@ exports.updateArticle = function(req, res) {
                     features: item.value.features,
                     lang: item.value.lang,
                     updated: NOW  
-                }   
+                }  
             })
             console.log('sections', sections.length)
             console.log('sections', sections)

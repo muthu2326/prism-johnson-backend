@@ -646,6 +646,7 @@ exports.importTteDataCSV = function(req,res){
 
     let tte_list = []
     let lang = 'en';
+    let role = 'tte';
 
     res.status(200).jsonp({
         status: 200,
@@ -674,13 +675,14 @@ exports.importTteDataCSV = function(req,res){
                 name: data['Name'],
                 mobile: data['Mobile'],
                 address: data['Address'],
-                cities: data['Cities'],
+                cities: data['Cities'] ? [data['Cities']]: [],
                 state: data['State'],
                 pincode: data['Pincode'],
                 email: data['Email'],
                 password: password,
                 reset_pasword_link_sent: 0,
                 lang: lang,
+                role:role,
                 slug: slug,
                 created: NOW,
                 updated: NOW
