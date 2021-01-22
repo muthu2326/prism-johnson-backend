@@ -661,6 +661,7 @@ exports.getAllUsersAndOrdersCountDealer = function (req, res) {
     let where_condition;*/
 
   let countObj = {};
+  let cities = req.query.cities
 
   async.parallel(
     {
@@ -668,9 +669,25 @@ exports.getAllUsersAndOrdersCountDealer = function (req, res) {
         User.findAll({
           where: { role: "user" },
         })
-          .then((users) => {
-            console.log("users found async", users.length);
-            cb(null, users);
+        .then((users) => {
+            console.log("users found async", users);
+                const arrCities = cities ? cities.toLowerCase().split(","): []
+                if(arrCities.length > 0){
+                const filteredUser = users.filter((val) => {
+                  let userCities = val.dataValues.cities;
+                  if (userCities) {
+                    console.log("user cities", userCities[0].toLowerCase())
+                    return arrCities.includes(userCities[0].toLowerCase())
+                  } else {
+                    return false;
+                  }
+                });
+            cb(null, filteredUser) 
+            } else {
+              cb(null, users);
+            }
+            console.log("arrcities", arrCities);
+            console.log("arrcities length", arrCities.length)
           })
           .catch((err) => {
             console.log("err:", err);
@@ -678,21 +695,6 @@ exports.getAllUsersAndOrdersCountDealer = function (req, res) {
           });
       },
       two: function (cb) {
-        /* if(dealer_id){
-                where_condition = {
-                    dealer_id: dealer_id,
-                    lang: lang
-                }
-            }else if(cities){
-                where_condition = {
-                    city: cities.split(','),
-                    lang: lang
-                }
-            }else{
-                where_condition = {
-                    lang: lang
-                }
-            }*/
         Order.findAll({
           where: { dealer_id: req.query.id },
         })
