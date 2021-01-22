@@ -163,6 +163,7 @@ exports.getArticle = function(req, res) {
                 obj.value = section.dataValues
                 delete article.dataValues.sections[j].dataValues
                 article.dataValues.sections[j].dataValues = obj
+                console.log("obj", obj)
                 article.dataValues.deleted_sections = [];
             })
             res.jsonp({
@@ -298,6 +299,7 @@ exports.updateArticle = function(req, res) {
 
     var articles_id = req.params.articles_id;
 
+
     if (!req.params.articles_id) {
         res.status(400).jsonp({
             status: 400,
@@ -343,25 +345,45 @@ exports.updateArticle = function(req, res) {
         console.log('updated articles', result);
         if(req.body.sections.length > 0){
             let sections = req.body.sections.map((item) => {
-                return {
-                    id: item.id,
-                    type: item.value.type,
-                    article_id: item.value.article_id,
-                    media_url: item.value.media_url,
-                    media_type: item.value.media_type,
-                    sub_title: item.value.sub_title,
-                    description: item.value.description,
-                    descriptions : item.value.descriptions,
-                    features: item.value.features,
-                    lang: item.value.lang,
-                    created: item.value.created,
-                    updated: NOW
+                console.log("item", !item.value.updated, item.value.updated === undefined, item.value.updated === null)
+                if(!item.value.updated){
+                    return {
+                        // id: item.id,
+                         type: item.value.type,
+                         article_id: item.value.article_id,
+                         media_url: item.value.media_url,
+                         media_type: item.value.media_type,
+                         sub_title: item.value.sub_title,
+                         description: item.value.description,
+                         descriptions : item.value.descriptions,
+                         features: item.value.features,
+                         lang: item.value.lang,
+                         created: item.value.created,
+                         updated: NOW
+                     }
+                }else{
+                    return {
+                         id: item.id,
+                         type: item.value.type,
+                         article_id: item.value.article_id,
+                         media_url: item.value.media_url,
+                         media_type: item.value.media_type,
+                         sub_title: item.value.sub_title,
+                         description: item.value.description,
+                         descriptions : item.value.descriptions,
+                         features: item.value.features,
+                         lang: item.value.lang,
+                         created: item.value.created,
+                         updated: NOW
+                     }
+
                 }
+                
             })
-            console.log('sections', sections.length)
-            Section.bulkCreate(sections, {updateOnDuplicate: ["type", "media_type", "media_url", "sub_title", "descriptions", "description", "features", "lang", "updated"]})
+            console.log('sections', sections)
+            Section.bulkCreate(sections, {updateOnDuplicate: ["type", "media_type", "media_url", "sub_title", "descriptions", "description", "features", "lang" , "updated"]})
             .then(function(data){
-                console.log(data.length)
+                console.log("data",data)
                 res.jsonp({
                     status: 200,
                     data: {
