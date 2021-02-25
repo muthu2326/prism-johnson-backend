@@ -128,7 +128,7 @@ exports.getProduct = function (req, res) {
                 if (p) {
                     product.price = p.price;
                 } else {
-                    product.price = 450;
+                    product.price = "Price not found for this pincode";
                 }
                 Product.findAll({
                         where: {

@@ -99,7 +99,7 @@ exports.getAllServiceProviders = function(req, res) {
     let apiResponse = {};
     let fetchAllQuery = 'SELECT * ';
     let countQuery = 'SELECT count(*) as count ';
-    let fetchQuery = `FROM prismjohnson.service_providers`;
+    let fetchQuery = `FROM prism_johnson.service_providers`;
     let orderByQuery = ` order by name`;
     let limitQuery = '';
     // for admin panel search
